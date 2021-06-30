@@ -12,3 +12,6 @@
   - 04_量子ボリュームを計算する
 <br>[04_QuantumVolume.ipynb](./04_QuantumVolume.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=04_QuantumVolume.ipynb) 
+
+- 量子アルゴリズムの基礎
+  - オブザーバブルのサンプリングによる推定
