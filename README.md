@@ -15,3 +15,5 @@
 
 - 量子アルゴリズムの基礎
   - オブザーバブルのサンプリングによる推定
+<br>[05_sample_observable.ipynb](./05_sample_observable)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=05_sample_observable.ipynb) 
