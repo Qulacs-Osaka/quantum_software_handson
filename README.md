@@ -14,12 +14,12 @@
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=04_QuantumVolume.ipynb) 
 
 - (NISQ) 量子アルゴリズムの基礎
-  - オブザーバブルのサンプリングによる推定
+  - 05_オブザーバブルのサンプリングによる推定
 <br>[05_sample_observable.ipynb](./05_sample_observable.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=05_sample_observable.ipynb) 
-  - パラメータシフト法による勾配最適化
+  - 06_パラメータシフト法による勾配最適化
 <br>[06_parameter_shift_rule.ipynb](./06_parameter_shift_rule.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=06_parameter_shift_rule.ipynb) 
-  - エラー補償法を学ぶ
+  - 07_エラー補償法を学ぶ
 <br>[07_error_mitigation.ipynb](./07_error_mitigation.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=07_error_mitigation.ipynb) 
