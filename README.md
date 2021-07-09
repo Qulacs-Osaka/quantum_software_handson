@@ -23,3 +23,11 @@
   - 07_エラー補償法を学ぶ
 <br>[07_error_mitigation.ipynb](./07_error_mitigation.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=07_error_mitigation.ipynb) 
+
+- 量子機械学習
+  - 08_簡単な量子回路学習を実行してみる
+<br>[08_QCL.ipynb](./08_QCL.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=08_QCL.ipynb) 
+  - 09_量子カーネル法を試してみる
+<br>[09_quantum_kernel.ipynb](./09_quantum_kernel.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=09_quantum_kernel.ipynb) 
