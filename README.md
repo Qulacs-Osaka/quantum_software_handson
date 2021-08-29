@@ -31,3 +31,14 @@
   - 09_量子カーネル法を試してみる
 <br>[09_quantum_kernel.ipynb](./09_quantum_kernel.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=09_quantum_kernel.ipynb) 
+
+- 量子化学
+ - 10_古典コンピュータを使った量子化学計算を実行してみる
+<br> [10_conventional_quantum_chemical_calculations.ipynb]
+ - 11_量子コンピュータに量子化学の問題をマッピングしてみる
+<br> [11.fermion_qubit_mapping.ipynb]
+ - 12_水素分子中の電子の量子ダイナミクス
+<br> [12.quantum_dynamics_of_electrons_in_hydrogen_molecule.ipynb]
+ - 13_変分量子固有値法（VQE)を実行して分子の基底状態を計算してみる
+<br> [13.compute_groud_state_of_molecule_using_vqe.ipynb]
+
