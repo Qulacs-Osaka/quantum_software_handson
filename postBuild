@@ -1,5 +1,5 @@
-jupyter nbextension install --py --symlink --sys-prefix pythreejs
-jupyter nbextension enable --py --sys-prefix pythreejs
-jupyter labextension install @jupyter-widgets/jupyterlab-manager 
-jupyter labextension install jupyter-threejs
-jupyter labextension install jupyterlab_3dmol
+#jupyter nbextension install --py --symlink --sys-prefix pythreejs
+#jupyter nbextension enable --py --sys-prefix pythreejs
+#jupyter labextension install @jupyter-widgets/jupyterlab-manager 
+#jupyter labextension install jupyter-threejs
+#jupyter labextension install jupyterlab_3dmol
