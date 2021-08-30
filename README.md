@@ -39,8 +39,10 @@
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=10_conventional_quantum_chemical_calculations.ipynb)
    - 11_量子コンピュータに量子化学の問題をマッピングしてみる
 <br> [11_fermion_qubit_mapping.ipynb](./11_fermion_qubit_mapping.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=11_fermion_qubit_mapping.ipynb)
     - 12_水素分子中の電子の量子ダイナミクス
 <br> [12_quantum_dynamics_of_electrons_in_hydrogen_molecule.ipynb](./12_quantum_dynamics_of_electrons_in_hydrogen_molecule.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=12_quantum_dynamics_of_electrons_in_hydrogen_molecule.ipynb)
     - 13_変分量子固有値法（VQE)を実行して分子の基底状態を計算してみる
 <br> [13_compute_groud_state_of_molecule_using_vqe.ipynb](./13_compute_groud_state_of_molecule_using_vqe.ipynb)
-
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=13_compute_groud_state_of_molecule_using_vqe.ipynb)
