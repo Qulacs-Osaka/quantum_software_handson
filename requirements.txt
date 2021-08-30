@@ -1,1 +1,2 @@
 py3Dmol
+pythreejs
