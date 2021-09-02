@@ -1,4 +1,5 @@
 # 量子ソフトウェア勉強会ハンズオン
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD)
 - 量子計算の基礎
   - 01_qulacsの使い方 
 <br> [01_how_to_use_qulacs.ipynb](./01_how_to_use_qulacs.ipynb) 
@@ -31,3 +32,14 @@
   - 09_量子カーネル法を試してみる
 <br>[09_quantum_kernel.ipynb](./09_quantum_kernel.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=09_quantum_kernel.ipynb) 
+
+- 量子化学
+   - 10_古典コンピュータを使った量子化学計算を実行してみる
+<br> [10_conventional_quantum_chemical_calculations.ipynb](./10_conventional_quantum_chemical_calculations.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=10_conventional_quantum_chemical_calculations.ipynb)
+   - 11_量子コンピュータに量子化学の問題をマッピングしてみる
+<br> [11_fermion_qubit_mapping.ipynb](./11_fermion_qubit_mapping.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=11_fermion_qubit_mapping.ipynb)
+   - 12_変分量子固有値法（VQE)を実行して分子の基底状態を計算してみる
+<br> [12_compute_groud_state_of_molecule_using_vqe.ipynb](./12_compute_groud_state_of_molecule_using_vqe.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/wmizukami/quantum_software_handson/HEAD?filepath=12_compute_groud_state_of_molecule_using_vqe.ipynb)
