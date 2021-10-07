@@ -49,3 +49,6 @@
 <br> [13_quantum_phase_estimation.ipynb](./13_quantum_phase_estimation.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=13_quantum_phase_estimation.ipynb)
    - 14_グローバー量子探索アルゴリズム
+<br> [14_grover_search.ipynb](./14_grover_search.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=14_grover_search.ipynb)
+
