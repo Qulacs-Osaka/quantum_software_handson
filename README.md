@@ -52,3 +52,7 @@
 <br> [14_grover_search.ipynb](./14_grover_search.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=14_grover_search.ipynb)
 
+- 金融への応用
+   - 15_QAEを用いた信用ポートフォリオリスク計測
+<br> [15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb](./15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=15_CreditPortfolioRisk%2FCreditPortfolioRiskMeasurement_blank.ipynb)
