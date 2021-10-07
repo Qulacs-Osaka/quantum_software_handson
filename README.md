@@ -43,3 +43,9 @@
    - 12_変分量子固有値法（VQE)を実行して分子の基底状態を計算してみる
 <br> [12_compute_groud_state_of_molecule_using_vqe.ipynb](./12_compute_groud_state_of_molecule_using_vqe.ipynb)
 <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=12_compute_groud_state_of_molecule_using_vqe.ipynb)
+
+- 量子アルゴリズム
+   - 13_量子位相推定
+<br> [13_quantum_phase_estimation.ipynb](./13_quantum_phase_estimation.ipynb)
+<br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?filepath=13_quantum_phase_estimation.ipynb)
+   - 14_グローバー量子探索アルゴリズム
