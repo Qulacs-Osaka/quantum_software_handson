@@ -1,0 +1,670 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>古典コンピュータを使った量子化学計算を実行してみる &#8212; Quantum Software Handson  ドキュメント</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"CommonHTML": {"undefinedFamily": "\"Source Serif Pro\", \"Yakumono\", \"Noto Serif JP\", \"Hiragino Mincho ProN\", \"STIXGeneral\", \"Arial Unicode MS\", serif"}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="量子コンピュータ上に量子化学の問題をマッピングする" href="11_fermion_qubit_mapping.html" />
+    <link rel="prev" title="量子カーネル法を使ってみる" href="09_quantum_kernel.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>!echo y | pip uninstall h5py
+!pip install h5py==2.9.0
+!pip install pyscf
+!pip install matplotlib
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found existing installation: h5py 3.4.0
+Uninstalling h5py-3.4.0:
+  Would remove:
+    /usr/local/lib/python3.9/site-packages/h5py-3.4.0.dist-info/*
+    /usr/local/lib/python3.9/site-packages/h5py/*
+Proceed (y/n)?   Successfully uninstalled h5py-3.4.0
+Requirement already satisfied: pyscf in /usr/local/lib/python3.9/site-packages (1.7.6)
+Collecting h5py&gt;2.2
+  Using cached h5py-3.4.0-cp39-cp39-macosx_10_9_x86_64.whl (3.0 MB)
+Requirement already satisfied: numpy!=1.16,!=1.17,&gt;1.8 in /usr/local/lib/python3.9/site-packages (from pyscf) (1.20.3)
+Requirement already satisfied: scipy!=1.5.0,!=1.5.1 in /usr/local/lib/python3.9/site-packages (from pyscf) (1.6.3)
+Installing collected packages: h5py
+Successfully installed h5py-3.4.0
+<span class="ansi-yellow-fg">WARNING: You are using pip version 21.1.3; however, version 21.2.4 is available.
+You should consider upgrading via the &#39;/usr/local/opt/python@3.9/bin/python3.9 -m pip install --upgrade pip&#39; command.</span>
+Requirement already satisfied: matplotlib in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (3.4.1)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from matplotlib) (1.3.1)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from matplotlib) (2.8.1)
+Requirement already satisfied: pillow&gt;=6.2.0 in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from matplotlib) (8.2.0)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from matplotlib) (2.4.7)
+Requirement already satisfied: cycler&gt;=0.10 in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied: numpy&gt;=1.16 in /usr/local/lib/python3.9/site-packages (from matplotlib) (1.20.3)
+Requirement already satisfied: six in /Users/yuichiro/Library/Python/3.9/lib/python/site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.15.0)
+<span class="ansi-yellow-fg">WARNING: You are using pip version 21.1.3; however, version 21.2.4 is available.
+You should consider upgrading via the &#39;/usr/local/opt/python@3.9/bin/python3.9 -m pip install --upgrade pip&#39; command.</span>
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>import numpy as np
+import matplotlib.pyplot as plt
+from pyscf import gto, scf
+from pyscf import fci
+from pyscf import cc, mp, dft
+</pre></div>
+</div>
+</div>
+<section id="古典コンピュータを使った量子化学計算を実行してみる">
+<h1>古典コンピュータを使った量子化学計算を実行してみる<a class="headerlink" href="#古典コンピュータを使った量子化学計算を実行してみる" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>本勉強会の受講者には、量子化学計算に馴染みがない方も多いと思います。 そこで、まずは、「従来型」の量子化学計算に触れていただきます。</p>
+<section id="水素分子の計算（平均場近似と厳密対角化）">
+<h2>水素分子の計算（平均場近似と厳密対角化）<a class="headerlink" href="#水素分子の計算（平均場近似と厳密対角化）" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ここでは、最も単純な分子である、水素分子(H<span class="math notranslate nohighlight">\(_2\)</span>)の基底状態を求めてみます。 ソフトウェアには、PySCFというプログラムを用います。 計算方法は、平均場近似（Hartree-Fock)法と、厳密対角化（化学ではFull CIという）をそれぞれ実行してみます。</p>
+<p>また、通常の量子化学計算では、有限個のGauss型原子基底関数の線形結合で１電子波動関数（軌道）を記述します (Linear combination of atomic orbitals method, LCAO)。</p>
+<div class="math notranslate nohighlight">
+\[\psi_i(r) = \sum_{p} C_{ip}\xi_p(r)\]</div>
+<p>この有限個の原子基底関数は、既に標準的に使われているものがいくつもあります。 今回は、その中でも最も単純な、STO-3Gという基底関数を使います。 STO-3Gでは、各水素原子にはそれぞれ１つのｓ型の軌道が使われています。 水素分子としては、２つの「空間」軌道があることになります。</p>
+<div class="math notranslate nohighlight">
+\[\xi_{1s}(r) = \sum_{i=1}^3 d_{i,1s}g_{1s}(a_i,r)\]</div>
+<p>さて、電子にはスピンの自由度があるので、↑と↓のスピンの自由度ごとに空間軌道に電子が入ります。 スピンの自由度がごとに入る軌道をスピン軌道といいます。</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\chi(x) =
+\begin{cases}
+\psi(r)\alpha(\omega) \\
+\textrm{or} \\
+\psi(r)\beta(\omega)
+\end{cases}\end{split}\]</div>
+<p>スピン軌道は空間軌道の２倍の数があります。STO-3G基底関数を使った場合、 水素分子には4つのスピン軌道があることになります。 水素には電子が２つあるので、電子があるスピンに存在する場合を１、しない場合を０としましょう。 すると、電子の詰まり方（電子配置は）、0011, 0101, 1001, 1100, 1010, 0110 の6パターンが存在することがわかります。</p>
+<p>平均場近似では、電子の波動関数は一つのSlater行列式（一つの電子配置）であらわされます。 つまり、先程の６パターンうち１つの電子配置しか取らないと仮定して（例えば、0011)、 その仮定のもとでエネルギーが最小化される軌道を見つけます。</p>
+<p>厳密対角化（Full CI)では、全ての取りうる電子配置を考えて、その重ね合わせで、 波動関数を表現します。</p>
+<div class="math notranslate nohighlight">
+\[|\Phi_{\textrm{CI}}\rangle = c_{0011}|\Psi_{0011}\rangle + c_{0101}|\Psi_{0101}\rangle + c_{1001}|\Psi_{1001}\rangle + c_{1100}|\Psi_{1100}\rangle + c_{1010}|\Psi_{1010}\rangle + c_{0110}|\Psi_{0110}\rangle\]</div>
+<p>今回の例では電子配置の数は少ないですが、電子配置の数は組み合わせ爆発をおこしますので、 計算コストは指数関数的に増大します。</p>
+<p>さて、まず平均場（Hartree-Fock）計算を実行してみましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。
+mol_h2 = gto.M(atom = &#39;H 0 0 0; H 0 0 0.74&#39;, basis = &#39;sto-3g&#39;)
+# この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。
+mean_filed_wavefunction = scf.RHF(mol_h2)
+mean_filed_wavefunction.verbose = 0
+hf_energy = mean_filed_wavefunction.kernel()
+print (&quot;Hartree-Fock Energy in (hartree)&quot;, hf_energy)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Hartree-Fock Energy in (hartree) -1.1167593073964248
+</pre></div></div>
+</div>
+<p>次に、厳密対角化（Full CI)の計算をおこないます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>full_ci_wavefunciton = fci.FCI(mean_filed_wavefunction)
+fci_energy, fci_eigenvector = full_ci_wavefunciton.kernel()
+print (&quot;Full CI Energy (in hartree)&quot;, fci_energy)
+print (&quot;Hartree Fock/Full CI Energy (in %)&quot;, hf_energy/fci_energy*100)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Full CI Energy (in hartree) -1.1372838344885023
+Hartree Fock/Full CI Energy (in %) 98.19530301322638
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="電子相関と電子相関エネルギー">
+<h1>電子相関と電子相関エネルギー<a class="headerlink" href="#電子相関と電子相関エネルギー" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>与えられたハミルトニアンに対する厳密解（Full CI)と平均場で解いたときのエネルギー（Hartree-Fockエネルギー）は、非常に近いことがわかる。平均場という単純な近似で、Full CIエネルギーの98.2%を再現している。一般におおよそ、Hartree-Fockは、全エネルギーの約99%を再現できると言われている。残りの約1%を電子相関エネルギーと呼ぶ。</p>
+<p>この電子相関エネルギー(Electron Correlation Energy)を見てみよう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>electron_correlation_energy = fci_energy - hf_energy
+print (&quot;Electron Correlation Energy in (hartree)&quot;, electron_correlation_energy)
+print (&quot;Electron Correlation Energy in (eV)&quot;, electron_correlation_energy*27.2114)
+print (&quot;Electron Correlation Energy in (kcal/mol)&quot;, electron_correlation_energy*23.0605*27.2114)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Electron Correlation Energy in (hartree) -0.020524527092077527
+Electron Correlation Energy in (eV) -0.5585011165133584
+Electron Correlation Energy in (kcal/mol) -12.879314997356303
+</pre></div></div>
+</div>
+</section>
+<section id="電子相関エネルギーと化学的精度">
+<h1>電子相関エネルギーと化学的精度<a class="headerlink" href="#電子相関エネルギーと化学的精度" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>電子相関は、約0.56eV（13 kcal/mol)となっている。 さて、熱エネルギー（ボルツマン因子の逆数 <span class="math notranslate nohighlight">\(1/\beta = k_bT\)</span>; <span class="math notranslate nohighlight">\(k_b\)</span>はボルツマン定数）は、室温298.15Kで約0.026eV (0.59kcal/mol)である。 熱エネルギーと比べると、電子相関のエネルギーは非常に大きい値であることがわかる。</p>
+<p>分子の安定性（存在比）や、化学反応速度は、状態間のエネルギー差を<span class="math notranslate nohighlight">\(\Delta E\)</span>とするとボルツマン分布<span class="math notranslate nohighlight">\(e^{-\beta \Delta E}\)</span>に比例し、エネルギー差に対して指数的に減少（増大）する。 +/- 0.56eV (13kcal/mol)ほど、<span class="math notranslate nohighlight">\(\Delta E\)</span>に誤差があるとすれば、正解となる反応速度を１としたときに、誤差に応じて以下のように大きく変動する。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print (&quot;誤差が 0.56eVあったときの反応速度 %1.1e&quot; %np.exp(-0.56/0.026))
+print (&quot;誤差が-0.56eVあったときの反応速度 %1.1e&quot; %np.exp(0.56/0.026))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+誤差が 0.56eVあったときの反応速度 4.4e-10
+誤差が-0.56eVあったときの反応速度 2.3e+09
+</pre></div></div>
+</div>
+<p>さて、誤差が 1kca/mol (約0.043eV)以下であった場合はどうだろう？</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>print (&quot;誤差が1kcal/mol(0.043eV)あったときの反応速度 %1.1e&quot; %np.exp(-0.043/0.026))
+print (&quot;誤差が1kcal/mol(-0.043V)あったときの反応速度 %1.1e&quot; %np.exp(0.043/0.026))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+誤差が1kcal/mol(0.043eV)あったときの反応速度 1.9e-01
+誤差が1kcal/mol(-0.043V)あったときの反応速度 5.2e+00
+</pre></div></div>
+</div>
+<p>反応速度は、室温の場合、おおよそオーダーではあうことがわかる。 少なくとも、「反応速度（や存在比）のオーダーは予測できること」＝「化学における定量的計算」とするならば、量子化学の計算において目指すべき誤差はこの「1kcal/mol」となることがわかる。</p>
+</section>
+<section id="代表的なその他の量子化学計算手法">
+<h1>代表的なその他の量子化学計算手法<a class="headerlink" href="#代表的なその他の量子化学計算手法" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>さて、では、計算の定量性を増すにはどうすればいいのだろうか？ 厳密にハミルトニアンを解く方法 Full CIは指数関数的な計算コストが必要となる。 このコストを下げるために、量子化学では、様々な近似理論が開発されてきた。 ここでは、計算コストが<span class="math notranslate nohighlight">\(O(N^5)\)</span>の二次の摂動論MP2、 現在の量子化学の「Golden standard」と称される<span class="math notranslate nohighlight">\(O(N^7)\)</span>の CCSD(T)、 そして、計算コストが<span class="math notranslate nohighlight">\(O(N^3)\)</span>で業界標準の方法となっているDFTという3つの手法を、 厳密な方法(Full CI)と比較してみよう。</p>
+<p>水素分子は簡単過ぎるので、H<span class="math notranslate nohighlight">\(_4\)</span>という系を考えてみる。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>%%capture
+hf_energies = []
+mp2_energies = []
+ccsdt_energies = []
+fci_energies = []
+dft_energies = []
+r_list = []
+for i in range(15):
+  # H4、H-H距離を変化。STO-3GというGaussian型の原子基底関数を使用。
+  r=0.5+i*0.15
+  mol_h4 = gto.M(atom = &#39;H 0 0 0; H 0 0 %f; H 0 0 %f; H 0 0 %f&#39; %(r,r*2,r*3),
+  basis = &#39;sto-3g&#39;)
+  # この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。
+  mean_filed_wavefunction = scf.RHF(mol_h4)
+  mean_filed_wavefunction.verbose = 0
+  hf_energy = mean_filed_wavefunction.kernel()
+  dft_wavefunction = dft.RKS(mol_h4)
+  dft_wavefunction.verbose = 0
+  dft_wavefunction.xc = &#39;B3LYP&#39;
+  dft_energy = dft_wavefunction.kernel()
+  mp2_energy = mp.MP2(mean_filed_wavefunction).kernel()[0] + hf_energy
+  ccsd_wavefunction = cc.RCCSD(mean_filed_wavefunction)
+  ccsd_wavefunction.kernel()
+  ccsdt_energy = ccsd_wavefunction.ccsd_t() + ccsd_wavefunction.e_tot
+  full_ci_wavefunciton = fci.FCI(mean_filed_wavefunction)
+  fci_energy, fci_eigenvector = full_ci_wavefunciton.kernel()
+  hf_energies.append(hf_energy)
+  mp2_energies.append(mp2_energy)
+  ccsdt_energies.append(ccsdt_energy)
+  fci_energies.append(fci_energy)
+  dft_energies.append(dft_energy)
+  r_list.append(r)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>plt.plot(r_list, hf_energies, label=&quot;HF&quot;)
+plt.plot(r_list, mp2_energies, label=&quot;MP2&quot;)
+plt.plot(r_list, ccsdt_energies, label=&quot;CCSD(T)&quot;)
+plt.plot(r_list, fci_energies, label=&quot;Full CI&quot;)
+plt.plot(r_list, dft_energies, label=&quot;DFT(B3LYP)&quot;)
+plt.ylabel(&quot;Energy in hartree&quot;)
+plt.xlabel(&quot;H-H distance in angstrom&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/10_conventional_quantum_chemical_calculations_15_0.png" src="_images/10_conventional_quantum_chemical_calculations_15_0.png" />
+</div>
+</div>
+<p>DFTは、電子密度に依存する’ad hoc’なポテンシャルをHatree-Fockに導入した理論と捉えることができる。DFT自体は変分法であるが、この追加したポテンシャルのために、DFTのエネルギーの絶対値はFull CIの解よりも低いエネルギーを与えうる。</p>
+<p>CCSD(T)は、H-Hの距離が長くなるところ（強相関領域）では、厳密解との乖離が大きくなるが、H-H距離が短いところではFull CIと良好な一致をしめしていることがわかる。</p>
+<p>CCSD(T)は優れた理論であり、それ故に’Golden standard’と称されるわけだが、電子相関が強い領域で破綻する（もしくは精度が低下する）ことが知られている。 一般に電子相関が強い領域を定量的に記述することは大変であり、 満足のいく量子化学理論は未だに存在しない。</p>
+<p>これが量子コンピュータに期待が集まる背景である。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Quantum Software Handson</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html#Identity-$"><code class="docutils literal notranslate"><span class="pre">Identity</span></code> $</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html#H-$"><code class="docutils literal notranslate"><span class="pre">H</span></code> $</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_sample_observable.html">サンプリングによってオブザーバブルの期待値を推定する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_parameter_shift_rule.html">パラメータシフト法による勾配最適化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_error_mitigation.html">エラー補償手法について学ぶ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_QCL.html">簡単な量子回路学習を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">古典コンピュータを使った量子化学計算を実行してみる</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#水素分子の計算（平均場近似と厳密対角化）">水素分子の計算（平均場近似と厳密対角化）</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#電子相関と電子相関エネルギー">電子相関と電子相関エネルギー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#電子相関エネルギーと化学的精度">電子相関エネルギーと化学的精度</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#代表的なその他の量子化学計算手法">代表的なその他の量子化学計算手法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#1.-計算する分子の構造や電荷など入力する">1. 計算する分子の構造や電荷など入力する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html#波動関数を表す量子回路U(\theta)の用意">波動関数を表す量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>の用意</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="09_quantum_kernel.html" title="前の章へ">量子カーネル法を使ってみる</a></li>
+      <li>Next: <a href="11_fermion_qubit_mapping.html" title="次の章へ">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Quantum Software Handson Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/10_conventional_quantum_chemical_calculations.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>簡単な量子回路学習を実行してみる &#8212; Quantum Software Handson  ドキュメント</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/translations.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"CommonHTML": {"undefinedFamily": "\"Source Serif Pro\", \"Yakumono\", \"Noto Serif JP\", \"Hiragino Mincho ProN\", \"STIXGeneral\", \"Arial Unicode MS\", serif"}, "tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="量子カーネル法を使ってみる" href="09_quantum_kernel.html" />
+    <link rel="prev" title="エラー補償手法について学ぶ" href="07_error_mitigation.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>#!pip install qulacs
+#!pip install matplotlib
+#!pip install numpy
+#!pip install scipy
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>from qulacs import Observable, QuantumState, QuantumCircuit, ParametricQuantumCircuit
+import numpy as np
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+</pre></div>
+</div>
+</div>
+<section id="簡単な量子回路学習を実行してみる">
+<h1>簡単な量子回路学習を実行してみる<a class="headerlink" href="#簡単な量子回路学習を実行してみる" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>今回は簡単な量子回路学習をシミュレートしてみます。</p>
+<section id="回路作成と出力の定義">
+<h2>回路作成と出力の定義<a class="headerlink" href="#回路作成と出力の定義" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>回路を以下のように作ります。可視化しやすいように、訓練できるパラメータを 2 パラメータだけ入れた回路です。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>n_qubits = 2
+circuit = ParametricQuantumCircuit(n_qubits)
+
+# add input gate
+circuit.add_parametric_RY_gate(0, 0.0)
+circuit.add_parametric_RY_gate(1, 0.0)
+
+# add parametrized circuit
+circuit.add_parametric_RY_gate(0, 0.0)
+circuit.add_CNOT_gate(0,1)
+circuit.add_parametric_RY_gate(0, 0.0)
+</pre></div>
+</div>
+</div>
+<p>出力 (予測値) は 1 qubit 目の <span class="math notranslate nohighlight">\(Z\)</span> 期待値を取ることにします。1次元 (スカラー) の入力データと、パラメータ <span class="math notranslate nohighlight">\(\theta = (\theta_0, \theta_1)\)</span> を受け取って、サンプリングによって出力を返す関数を作ります。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>state = QuantumState(n_qubits)
+observable = Observable(n_qubits)
+observable.add_operator(1., &quot;Z 0&quot;)
+def predict(x, theta, n_shots=1000):
+
+    # the first two parameters are the input gates
+    circuit.set_parameter(0, x)
+    circuit.set_parameter(1, x)
+
+    # the next two parameters are the parametric (trainable) gates
+    circuit.set_parameter(2, theta[0])
+    circuit.set_parameter(3, theta[1])
+
+    # run circuit and sample
+    state.set_zero_state()
+    circuit.update_quantum_state(state)
+
+    # if n_shots is inf, return exact expectation value
+    if n_shots == np.inf:
+        return observable.get_expectation_value(state)
+
+    # else perform sampling
+    else:
+        samples = np.array(state.sampling(n_shots))
+        # the first qubit is the output qubit
+        return np.sum((-1)**(samples%2))/n_shots
+</pre></div>
+</div>
+</div>
+</section>
+<section id="データの用意">
+<h2>データの用意<a class="headerlink" href="#データの用意" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>今回のモデルは <span class="math notranslate nohighlight">\(\sin^2 x\)</span> を完璧に表現することのできるモデルになっています。そこで教師データとして <span class="math notranslate nohighlight">\(\sin^2 x\)</span> にノイズを加えたものを用意して、それを学習させることにします。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>n_data = 32
+X = np.linspace(-np.pi, np.pi,n_data)
+y_clean = np.sin(X)**2
+y = y_clean + np.random.randn(n_data)*0.1
+plt.scatter(X,y)
+plt.plot(X, y_clean, color=&quot;black&quot;, linestyle=&quot;dashed&quot;)
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_9_0.png" src="_images/08_QCL_9_0.png" />
+</div>
+</div>
+</section>
+<section id="コスト関数の定義と可視化">
+<h2>コスト関数の定義と可視化<a class="headerlink" href="#コスト関数の定義と可視化" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>コスト関数を定義します。ここではコスト関数として 2 乗誤差</p>
+<div class="math notranslate nohighlight">
+\[L(\theta) = \sum_i (y_i - \langle Z(x_i,\theta)\rangle)^2\]</div>
+<p>を使います。入力データ <span class="math notranslate nohighlight">\(x_i\)</span> と教師データ <span class="math notranslate nohighlight">\(y_i\)</span> のセット <span class="math notranslate nohighlight">\(\{(x_i, y_i)\}\)</span> とパラメータ <span class="math notranslate nohighlight">\(\theta\)</span> を与えると、コスト関数の値を返すような関数を定義します。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>def get_cost(X, y, theta, n_shots=1000):
+    predictions = np.zeros_like(X)
+    for i, x in enumerate(X):
+        predictions[i] = predict(x, theta, n_shots)
+    return np.sum((predictions - y)**2)
+</pre></div>
+</div>
+</div>
+<p>このコスト関数がどのような形をしているか、可視化してみましょう。正確なコスト関数の値を知りたいので、ここでは <code class="docutils literal notranslate"><span class="pre">n_shots=np.inf</span></code> として、厳密な期待値をプロットします</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>theta0 = np.linspace(-np.pi, 5*np.pi/2, 50)
+theta1 = np.linspace(-np.pi, 5*np.pi/2, 50)
+theta0, theta1 = np.meshgrid(theta0, theta1)
+cost_grid = np.zeros_like(theta0)
+n_shots = 1000
+for i in range(50):
+    for j in range(50):
+        cost_grid[i,j] = get_cost(X, y, [theta0[i,j], theta1[i,j]], n_shots=np.inf)
+plt.pcolor(theta0, theta1, cost_grid, shading=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+plt.xlabel(r&quot;$\theta_0$&quot;)
+plt.ylabel(r&quot;$\theta_1$&quot;)
+plt.colorbar()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_13_0.png" src="_images/08_QCL_13_0.png" />
+</div>
+</div>
+</section>
+<section id="勾配を計算する関数を準備する">
+<h2>勾配を計算する関数を準備する<a class="headerlink" href="#勾配を計算する関数を準備する" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a> を使った勾配最適化を行いたいので、そのための関数を準備します。コスト関数の勾配は</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial L}{\partial \theta} &amp;= \frac{\partial }{\partial \theta} \sum_i (y_i - \langle Z(x_i,\theta)\rangle)^2 \\
+&amp;= \sum_i 2(\langle Z(x_i,\theta)-y_i\rangle)\frac{\partial \langle Z(x_i,\theta)\rangle}{\partial \theta}
+\end{align}\end{split}\]</div>
+<p>と書けることに注意します。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># calculate d&lt;Z&gt;/d\theta
+def get_prediction_grad(x, theta, n_shots=1000):
+    grad_vector = np.zeros_like(theta)
+    tmp_theta = np.copy(theta)
+    for i in range(len(theta)):
+        tmp_theta[i] += np.pi/2
+        plus = predict(x, tmp_theta, n_shots)
+        tmp_theta[i] -= np.pi
+        minus = predict(x, tmp_theta, n_shots)
+        grad_vector[i] = (plus-minus)/2
+        tmp_theta[i] = theta[i]
+    return grad_vector
+
+# calculate dL/d\theta
+def get_cost_gradient(X, y, theta, n_shots=1000):
+    predictions = np.zeros_like(X)
+    prediction_grads = np.zeros((len(X),len(theta)))
+    cost_gradient = np.zeros_like(theta)
+    for i, x in enumerate(X):
+        predictions[i] = predict(x, theta, n_shots)
+        prediction_grads[i] = get_prediction_grad(x, theta, n_shots)
+    return np.sum(2*(predictions-y)*prediction_grads.T, axis=1)
+</pre></div>
+</div>
+</div>
+<p>正しく計算できていることを、有限差分と比較して確認しましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span># get gradient of general function f(\theta) by finite difference
+def get_gradient_by_finite_diff(f, params, eps=1e-6):
+    grad_vector = np.zeros_like(params)
+    tmp_params = np.copy(params)
+    for i in range(len(params)):
+        tmp_params[i] += eps
+        plus = f(tmp_params)
+        tmp_params[i] -= 2*eps
+        minus = f(tmp_params)
+        grad_vector[i] = (plus-minus)/2/eps
+        tmp_params[i] = params[i]
+    return grad_vector
+
+print(get_gradient_by_finite_diff(lambda theta: get_cost(X,y,theta,n_shots=np.inf), [0.3, 0.4]))
+print(get_cost_gradient(X,y,[0.3,0.4],n_shots=np.inf))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[  0.86217926 -23.8334368 ]
+[  0.86217927 -23.8334368 ]
+</pre></div></div>
+</div>
+<p>パラメータシフト法による勾配が正しく書けていることがわかりました。いよいよパラメータの訓練に進みます。</p>
+</section>
+<section id="勾配法による学習">
+<h2>勾配法による学習<a class="headerlink" href="#勾配法による学習" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>上のカラープロットから、学習の初期パラメータ <span class="math notranslate nohighlight">\(\theta_{\mathrm{init}}\)</span> として良さげな (見栄えが良くなりそうな) 点を選びます。ここでは <span class="math notranslate nohighlight">\(\theta=(3.1,2.0)\)</span> を取ることにします。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>theta_init = np.array([3.1, 2.0])
+plt.pcolor(theta0, theta1, cost_grid, shading=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+plt.colorbar()
+plt.scatter(*theta_init, color=&quot;red&quot;, label=r&quot;$\theta_{\mathrm{init}}$&quot;)
+plt.xlabel(r&quot;$\theta_0$&quot;)
+plt.ylabel(r&quot;$\theta_1$&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_20_0.png" src="_images/08_QCL_20_0.png" />
+</div>
+</div>
+<p>単純な勾配降下法によって学習して、その様子を可視化しましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>tmp_theta = np.copy(theta_init)
+n_steps = 100
+rate = 0.01
+n_shots = 1000
+theta_history_naive_gd = np.zeros((n_steps+1, 2))
+theta_history_naive_gd[0] = theta_init
+for i in range(n_steps):
+    tmp_theta -= rate*get_cost_gradient(X, y, tmp_theta, n_shots)
+    theta_history_naive_gd[i+1] = tmp_theta
+plt.pcolor(theta0, theta1, cost_grid, shading=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+plt.plot(theta_history_naive_gd[:,0], theta_history_naive_gd[:,1], label=&quot;GD&quot;)
+plt.colorbar()
+plt.scatter(*theta_init, color=&quot;red&quot;, label=r&quot;$\theta_{\mathrm{init}}$&quot;)
+plt.xlabel(r&quot;$\theta_0$&quot;)
+plt.ylabel(r&quot;$\theta_1$&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_22_0.png" src="_images/08_QCL_22_0.png" />
+</div>
+</div>
+<p>うまく最適化できていそうに見えます。学習結果もプロットしてみます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>X_verify = np.linspace(-np.pi, np.pi, 100)
+prediction = [predict(x, tmp_theta, n_shots=np.inf) for x in X_verify]
+plt.scatter(X, y, label=&quot;traning data&quot;)
+plt.plot(X_verify, prediction, color=&quot;orange&quot;, label=&quot;prediction&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_24_0.png" src="_images/08_QCL_24_0.png" />
+</div>
+</div>
+<p>きれいにフィッティングすることができました。</p>
+</section>
+<section id="確率的勾配降下法による学習">
+<h2>確率的勾配降下法による学習<a class="headerlink" href="#確率的勾配降下法による学習" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a>でも見たように、確率的勾配降下法はそもそも出力が確率的である量子回路と相性が良いです。ここでは色々な確率的勾配降下法を試してみます。</p>
+<section id="Shot-数を減らした学習">
+<h3>Shot 数を減らした学習<a class="headerlink" href="#Shot-数を減らした学習" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a>でもやりましたが、確率的勾配降下法の精神に乗っ取ると、各ステップにおけるサンプリングの数が 1 であっても学習できます。ここではこれを試してみます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>n_steps = 100
+rate = 0.01
+n_shots_list = [1, 10, 100]
+theta_history_list = []
+for n_shots in n_shots_list:
+    tmp_theta = np.copy(theta_init)
+    theta_history = np.zeros((n_steps+1, 2))
+    theta_history[0] = theta_init
+    for i in range(n_steps):
+        tmp_theta -= rate*get_cost_gradient(X, y, tmp_theta, n_shots)
+        theta_history[i+1] = tmp_theta
+    theta_history_list.append(theta_history)
+plt.pcolor(theta0, theta1, cost_grid, shading=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+plt.colorbar()
+for i, n_shots in enumerate(n_shots_list):
+    plt.plot(theta_history_list[i][:,0], theta_history_list[i][:,1], label=r&quot;$n_{\mathrm{shots}}=$&quot;+str(n_shots))
+plt.scatter(*theta_init, color=&quot;red&quot;, label=r&quot;$\theta_{\mathrm{init}}$&quot;)
+plt.xlabel(r&quot;$\theta_0$&quot;)
+plt.ylabel(r&quot;$\theta_1$&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_29_0.png" src="_images/08_QCL_29_0.png" />
+</div>
+</div>
+<p>ノイズが大きくなるにつれてたどる経路もジグサグしてしまいますが、一応ちゃんと学習できています。</p>
+</section>
+<section id="入力データも確率的に選ぶ">
+<h3>入力データも確率的に選ぶ<a class="headerlink" href="#入力データも確率的に選ぶ" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>機械学習の分野で確率的勾配降下法といえば、普通は最適化の各ステップにおいて、ランダムに選んだ一部の訓練データのみを使ってパラメータを更新していくものを指します。これもやってみましょう。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>n_epochs = 100
+rate = 0.01
+n_shots = 1
+tmp_theta = np.copy(theta_init)
+theta_history = np.zeros((n_steps+1, 2))
+theta_history[0] = theta_init
+
+# numpy の permutation 機能のための random number generator
+rng = np.random.default_rng()
+
+# Xをランダムに並び替えて更新を n_epoch 回繰り返す
+for i in range(n_epochs):
+    # ランダムに並び替えられた X, y を生成
+    permuted_index = rng.permutation(len(X))
+    X_permuted = X[permuted_index]
+    y_permuted = y[permuted_index]
+
+    # 並び替えたデータを順に使って学習
+    for x, t in zip(X_permuted, y_permuted):
+        tmp_theta -= rate*get_cost_gradient([x,], [t,], tmp_theta, n_shots)
+        theta_history[i+1] = tmp_theta
+
+plt.pcolor(theta0, theta1, cost_grid, shading=&quot;nearest&quot;, cmap=&quot;gray&quot;)
+plt.colorbar()
+plt.plot(theta_history_list[0][:,0], theta_history_list[0][:,1], label=&quot;All data&quot;)
+plt.plot(theta_history[:,0], theta_history[:,1], label=&quot;Stochastic data&quot;)
+plt.scatter(*theta_init, color=&quot;red&quot;, label=r&quot;$\theta_{\mathrm{init}}$&quot;)
+plt.xlabel(r&quot;$\theta_0$&quot;)
+plt.ylabel(r&quot;$\theta_1$&quot;)
+plt.legend()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/08_QCL_32_0.png" src="_images/08_QCL_32_0.png" />
+</div>
+</div>
+<p>この場合、量子コンピュータは各更新において 4 shot しか動かしていないため、各更新において得られている情報はたったの 4 ビットだけです。それでもそれなりに学習ができることがわかります。</p>
+</section>
+<section id="発展編">
+<h3>発展編<a class="headerlink" href="#発展編" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>まだ確率的にしてしまえるところとして、 - 更新するパラメータをランダムに選ぶ - パラメータシフト法の <span class="math notranslate nohighlight">\(\pm \pi/2\)</span> のどちらかをランダムに選ぶ</p>
+<p>が残っています。これらもやってみると面白いかもしれません。</p>
+<p>また、上では単純な勾配降下法しか扱いませんでしたが、 - AdaGrad - Adam - RMSprop - …</p>
+<p>などのモダンな最適化法を組み合わせるのも面白いと思います。</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Quantum Software Handson</a></h1>
+
+
+
+
+
+
+
+
+<h3>ナビゲーション</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html#Identity-$"><code class="docutils literal notranslate"><span class="pre">Identity</span></code> $</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_how_to_use_qulacs.html#H-$"><code class="docutils literal notranslate"><span class="pre">H</span></code> $</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_sample_observable.html">サンプリングによってオブザーバブルの期待値を推定する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_parameter_shift_rule.html">パラメータシフト法による勾配最適化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_error_mitigation.html">エラー補償手法について学ぶ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">簡単な量子回路学習を実行してみる</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#回路作成と出力の定義">回路作成と出力の定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#データの用意">データの用意</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#コスト関数の定義と可視化">コスト関数の定義と可視化</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#勾配を計算する関数を準備する">勾配を計算する関数を準備する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#勾配法による学習">勾配法による学習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#確率的勾配降下法による学習">確率的勾配降下法による学習</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="09_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conventional_quantum_chemical_calculations.html#電子相関と電子相関エネルギー">電子相関と電子相関エネルギー</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conventional_quantum_chemical_calculations.html#電子相関エネルギーと化学的精度">電子相関エネルギーと化学的精度</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_conventional_quantum_chemical_calculations.html#代表的なその他の量子化学計算手法">代表的なその他の量子化学計算手法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#1.-計算する分子の構造や電荷など入力する">1. 計算する分子の構造や電荷など入力する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="11_fermion_qubit_mapping.html#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html#波動関数を表す量子回路U(\theta)の用意">波動関数を表す量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>の用意</a></li>
+<li class="toctree-l1"><a class="reference internal" href="13_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="14_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="07_error_mitigation.html" title="前の章へ">エラー補償手法について学ぶ</a></li>
+      <li>Next: <a href="09_quantum_kernel.html" title="次の章へ">量子カーネル法を使ってみる</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">クイック検索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="検索" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Quantum Software Handson Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/08_QCL.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
