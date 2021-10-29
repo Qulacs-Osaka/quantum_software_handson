@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath("../.."))
 
 # -- Project information -----------------------------------------------------
 
-project = "project_name"
+project = "Quantum Software Hands on"
 copyright = "2021, Qulacs-Osaka"
 author = "Qulacs-Osaka"
 
