@@ -562,7 +562,7 @@ You should consider upgrading via the &#39;/usr/local/opt/python@3.9/bin/python3
 <p>本勉強会の受講者には、量子化学計算に馴染みがない方も多いと思います。 そこで、まずは、「従来型」の量子化学計算に触れていただきます。</p>
 <div class="section" id="水素分子の計算（平均場近似と厳密対角化）">
 <h2>水素分子の計算（平均場近似と厳密対角化）<a class="headerlink" href="#水素分子の計算（平均場近似と厳密対角化）" title="Permalink to this headline">¶</a></h2>
-<p>ここでは、最も単純な分子である、水素分子(H<span class="math notranslate nohighlight">\(_2\)</span>)の基底状態を求めてみます。 ソフトウェアには、PySCFというプログラムを用います。 計算方法は、平均場近似（Hartree-Fock)法と、厳密対角化（化学ではFull CIという）をそれぞれ実行してみます。</p>
+<p>ここでは、最も単純な分子である、水素分子(<span class="math notranslate nohighlight">\(H_2\)</span>)の基底状態を求めてみます。 ソフトウェアには、PySCFというプログラムを用います。 計算方法は、平均場近似（Hartree-Fock)法と、厳密対角化（化学ではFull CIという）をそれぞれ実行してみます。</p>
 <p>また、通常の量子化学計算では、有限個のGauss型原子基底関数の線形結合で１電子波動関数（軌道）を記述します (Linear combination of atomic orbitals method, LCAO)。</p>
 <div class="math notranslate nohighlight">
 \[\psi_i(r) = \sum_{p} C_{ip}\xi_p(r)\]</div>
@@ -706,7 +706,7 @@ Electron Correlation Energy in (kcal/mol) -12.879314997356303
 <div class="section" id="代表的なその他の量子化学計算手法">
 <h1>代表的なその他の量子化学計算手法<a class="headerlink" href="#代表的なその他の量子化学計算手法" title="Permalink to this headline">¶</a></h1>
 <p>さて、では、計算の定量性を増すにはどうすればいいのだろうか？ 厳密にハミルトニアンを解く方法 Full CIは指数関数的な計算コストが必要となる。 このコストを下げるために、量子化学では、様々な近似理論が開発されてきた。 ここでは、計算コストが<span class="math notranslate nohighlight">\(O(N^5)\)</span>の二次の摂動論MP2、 現在の量子化学の「Golden standard」と称される<span class="math notranslate nohighlight">\(O(N^7)\)</span>の CCSD(T)、 そして、計算コストが<span class="math notranslate nohighlight">\(O(N^3)\)</span>で業界標準の方法となっているDFTという3つの手法を、 厳密な方法(Full CI)と比較してみよう。</p>
-<p>水素分子は簡単過ぎるので、H<span class="math notranslate nohighlight">\(_4\)</span>という系を考えてみる。</p>
+<p>水素分子は簡単過ぎるので、<span class="math notranslate nohighlight">\(H_4\)</span>という系を考えてみる。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>

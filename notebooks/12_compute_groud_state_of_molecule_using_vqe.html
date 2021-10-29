@@ -649,7 +649,7 @@ Successfully installed cirq-0.11.1 cirq-core-0.11.1 cirq-google-0.11.1 deprecati
 <div class="math notranslate nohighlight">
 \[H\Psi = E\Psi\]</div>
 <p>この方法もハミルトニアンの変換法と同様に複数存在する。 将来的にどの計算法がデファクトスタンダードとなるかは、まだ未知数であるが、 代表的なものは位相推定法（Phase Estimation Algorithm, PEA)と変分量子固有値法(Variational Quantum Eigensolver, VQE)の２つである。 PEAは厳密解を多項式時間で解くことができるアルゴリズムであり、 古典アルゴリズムに対する優位性が保証された方法となっている。 しかし、PEAの量子回路は非常に深くなるため、水素分子のようなミニマルな系以外では、NISQ上で動作することは望めない。</p>
-<p>これに対して、VQEは量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>を使って、求めたい量子状態の近似波動関数<span class="math notranslate nohighlight">\(\Psi_T(\theta)\)</span>を表現し、量子回路のパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は、$E_T(<span class="math">\theta</span>) = &lt;<span class="math">\Phi</span>_T(<span class="math">\theta</span>) | H | <span class="math">\Phi</span>_T(<span class="math">\theta</span>) &gt; <span class="math notranslate nohighlight">\(が最小化されるように古典コンピュータ上で決定する。VQEで用いる\)</span>U(<span class="math">\theta</span>)は$PEAに比べて浅い回路で良く、NISQでも（ある程度）動作する。</p>
+<p>これに対して、VQEは量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>を使って、求めたい量子状態の近似波動関数<span class="math notranslate nohighlight">\(\Psi_T(\theta)\)</span>を表現し、量子回路のパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は、<span class="math notranslate nohighlight">\(E_T(\theta) = \langle \Phi_T(\theta) | H | \Phi_T(\theta) \rangle\)</span>が最小化されるように古典コンピュータ上で決定する。VQEで用いる<span class="math notranslate nohighlight">\(U(\theta)は\)</span>PEAに比べて浅い回路で良く、NISQでも（ある程度）動作する。</p>
 <p>「03_量子演算を変分的に分解する」や「08_簡単な量子回路学習を実行してみる 」では、コスト関数の最小化をおこなったが、VQEもコスト関数にエネルギーを使って同様のことをおこなっている。</p>
 <div class="section" id="復習:-水素分子のハミルトニアンをqubit表現で用意">
 <h2>復習: 水素分子のハミルトニアンをqubit表現で用意<a class="headerlink" href="#復習:-水素分子のハミルトニアンをqubit表現で用意" title="Permalink to this headline">¶</a></h2>
@@ -701,9 +701,9 @@ Parsing fcidump.rhf
 </div>
 <div class="section" id="量子回路上でのHartree-Fock状態の用意">
 <h2>量子回路上でのHartree-Fock状態の用意<a class="headerlink" href="#量子回路上でのHartree-Fock状態の用意" title="Permalink to this headline">¶</a></h2>
-<p>さて、VQEの量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>は、何かしらの初期波動関数<span class="math notranslate nohighlight">\(|\Psi_0&gt;\)</span>に作用して、近似波動関数を生成する。</p>
+<p>さて、VQEの量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>は、何かしらの初期波動関数<span class="math notranslate nohighlight">\(|\Psi_0\rangle\)</span>に作用して、近似波動関数を生成する。</p>
 <div class="math notranslate nohighlight">
-\[|\Psi(\theta)_T&gt; = U(\theta) |\Psi_0&gt;\]</div>
+\[|\Psi(\theta)_T\rangle = U(\theta) |\Psi_0\rangle\]</div>
 <p>初期波動関数をどうするかは難しい問題であるが、Hartree-Fock波動関数は重ね合わせがない状態のため、簡単に用意でき、かつ既にみたように化学の問題においては99%程度の精度を持っている、という点で優れている。</p>
 <p>では、qulacsを使って、Hartree-Fock状態を用意しよう。</p>
 <div class="nbinput nblast docutils container">
