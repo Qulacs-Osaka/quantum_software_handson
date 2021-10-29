@@ -1,0 +1,6 @@
+alabaster
+sphinx
+sphinx-notfound-page
+ipykernel
+nbsphinx
+
