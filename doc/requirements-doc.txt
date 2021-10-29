@@ -1,6 +1,7 @@
 alabaster
 sphinx
 sphinx-notfound-page
+sphinx-book-theme
 ipykernel
 nbsphinx
 
