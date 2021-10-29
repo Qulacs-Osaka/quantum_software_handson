@@ -1,0 +1,36 @@
+name: "Build and Deploy Documentation"
+
+on:
+  push:
+    branches:
+      - "sphinx"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install -r doc/requirements-doc.txt
+
+      # nbsphinx needs pandoc.
+      - name: Install pandoc
+        run: sudo apt install -y pandoc
+
+      - name: Build documentation
+        run: |
+          cd doc
+          make html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3.7.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doc/build/html
