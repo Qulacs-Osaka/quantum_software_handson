@@ -22,7 +22,7 @@ jobs:
 
       # nbsphinx needs pandoc.
       - name: Install pandoc
-        run: sudo apt install -y pandoc
+        run: sudo apt-get install -y pandoc
 
       - name: Build documentation
         run: |
