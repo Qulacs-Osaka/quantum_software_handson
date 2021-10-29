@@ -1,0 +1,802 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&lt;no title&gt; &#8212; Quantum Software Hands on  documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="CreditPortfolioRiskMeasurement.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07_error_mitigation.html">
+   エラー補償手法について学ぶ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../12_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>pip install numpy
+<span class="o">!</span>pip install matplotlib
+<span class="o">!</span>pip install qulacs
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Observable</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span>
+<span class="kn">from</span> <span class="nn">Adder</span> <span class="kn">import</span> <span class="n">adder_gate</span>
+<span class="kn">from</span> <span class="nn">ConstSetter</span> <span class="kn">import</span> <span class="n">const_setter_gate</span><span class="p">,</span> <span class="n">ctrl_const_setter_gate</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#乱数のseedを設定</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 債務者数</span>
+<span class="n">numObl</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># 各債務者のデフォルト確率を表すqubitのインデックス</span>
+<span class="n">oblIds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># 各債務者のデフォルト確率</span>
+<span class="n">pds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+
+<span class="c1"># 各債務者の債務額</span>
+<span class="n">exposures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># 損失額の閾値</span>
+<span class="n">lossTh</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># 計算に要する桁数</span>
+<span class="n">digit</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># 損失額を保持するレジスタのqubitのインデックス</span>
+<span class="c1"># digitに加え一桁余分に確保しておく（last qubit（最上位ビット）がQAEのターゲットになる）</span>
+<span class="n">lossResIdStart</span> <span class="o">=</span> <span class="n">oblIds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">lossResIdEnd</span> <span class="o">=</span> <span class="n">lossResIdStart</span> <span class="o">+</span> <span class="n">digit</span>
+<span class="n">lossResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lossResIdStart</span><span class="p">,</span> <span class="n">lossResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">qaeTargetId</span> <span class="o">=</span> <span class="n">lossResIdEnd</span>
+
+<span class="c1"># 損失額レジスタに加える値を一時的に保持するレジスタ</span>
+<span class="n">tempResIdStart</span> <span class="o">=</span> <span class="n">lossResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">tempResIdEnd</span> <span class="o">=</span> <span class="n">tempResIdStart</span> <span class="o">+</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">tempResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">tempResIdStart</span><span class="p">,</span> <span class="n">tempResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 可算の繰り上がり用レジスタ</span>
+<span class="n">carryResIdStart</span> <span class="o">=</span> <span class="n">tempResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">carryResIdEnd</span> <span class="o">=</span> <span class="n">carryResIdStart</span> <span class="o">+</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">carryResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">carryResIdStart</span><span class="p">,</span> <span class="n">carryResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># 総qubit数</span>
+<span class="n">totQubitNum</span> <span class="o">=</span> <span class="n">carryResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># 全qubit index</span>
+<span class="n">idsAll</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">totQubitNum</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### 損失額を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく</span>
+
+<span class="c1">### 各債務者のデフォルト確率を指定のqubitの|1&gt;のamplitudeとして埋め込み</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">問１</span><span class="c1"># 注：債務者1,2のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]</span>
+
+<span class="c1">### i番目の債務者がデフォルトしていれば、その債務額をtemporary registerにセットし、損失額レジスタに足す</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
+    <span class="n">setter</span> <span class="o">=</span> <span class="n">ctrl_const_setter_gate</span><span class="p">(</span><span class="n">exposures</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">oblIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tempResIds</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># 債務額をtemporary registerにセット</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">lossResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 債務額を損失額レジスタに加える</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># temporary registerをリセット</span>
+
+<span class="c1">### 総損失額が閾値以上となっているか否かのチェック</span>
+<span class="c1"># 閾値の2の補数（損失額レジスタにこれを足して最上位ビットが1となる⇔損失額が閾値以上）</span>
+<span class="n">twosComplLossTh</span> <span class="o">=</span> <span class="p">(</span><span class="n">lossTh</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">const_setter_gate</span><span class="p">(</span><span class="n">twosComplLossTh</span><span class="p">,</span> <span class="n">tempResIds</span><span class="p">))</span> <span class="c1"># temporary registerに閾値の2の補数をセット</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">lossResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 閾値の2の補数を損失額レジスタに足す</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### gの逆回路</span>
+<span class="c1"># g.get_matrix()によりgに対応するユニタリ行列を得て、</span>
+<span class="c1"># それのエルミート共役に対応する回路（QuantumGate）をDenseMatrixで生成</span>
+<span class="n">gInv</span> <span class="o">=</span> <span class="n">DenseMatrix</span><span class="p">(</span><span class="n">idsAll</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">get_matrix</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### QAEに必要なゲート</span>
+<span class="c1"># QAE target qubitが|1&gt;なら-1倍するゲート</span>
+<span class="n">targetStateFlip</span> <span class="o">=</span> <span class="n">問２</span> <span class="c1"># 注：target qubitのインデックスはqaeTargetId</span>
+
+<span class="c1"># |0...0&gt;を-1倍するゲート</span>
+<span class="c1"># DenseMatrixで生成</span>
+<span class="n">flipIfAll0</span> <span class="o">=</span> <span class="n">DenseMatrix</span><span class="p">(</span><span class="n">idsAll</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">totQubitNum</span><span class="p">)]))</span>
+
+<span class="c1"># Grover operator</span>
+<span class="n">grover</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">targetStateFlip</span><span class="p">,</span> <span class="n">gInv</span><span class="p">,</span> <span class="n">flipIfAll0</span><span class="p">,</span> <span class="n">g</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### QAEの設定</span>
+<span class="n">mMax</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># Grover operatorを2^mMax回まで作用</span>
+<span class="n">groverNums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">2</span> <span class="o">**</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mMax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span> <span class="c1"># Grover operatorの作用回数(0, 2^1, 2^2,...)</span>
+<span class="n">nShot</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># 1つの作用回数のパターンに対する観測回数</span>
+
+<span class="c1"># 尤度関数の最大点候補（[0, 0.5]を100000等分して網羅探索）</span>
+<span class="n">numPoints</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">thetas</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">/</span> <span class="n">numPoints</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">numPoints</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### QAE</span>
+<span class="c1"># オブサーバブルの定義</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">totQubitNum</span><span class="p">)</span>
+<span class="n">obs</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Z &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">qaeTargetId</span><span class="p">))</span>
+
+<span class="c1"># 状態の生成・初期化</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">totQubitNum</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+
+<span class="c1"># gを一回作用させた状態|Ψ&gt;</span>
+<span class="c1"># これのtarget qubitを測定して1を得る確率 ＝ 求めたい確率（「損失額≧3」となる確率）</span>
+<span class="n">g</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1"># Groverの作用回数を色々と変えたとき、それぞれの下で「1を得る回数」のサンプル値を格納するリスト</span>
+<span class="n">n1s</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groverNums</span><span class="p">)):</span>
+    <span class="n">groverNumAdd</span> <span class="o">=</span> <span class="n">groverNums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">groverNums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">groverNums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="c1"># 追加の作用回数</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">groverNumAdd</span><span class="p">):</span> <span class="n">grover</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="c1"># その回数だけGrover operatorを作用</span>
+    <span class="n">prob1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">obs</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">state</span><span class="p">))</span> <span class="c1"># target qubitに1を得る確率</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">binomial</span><span class="p">(</span><span class="n">nShot</span><span class="p">,</span> <span class="n">prob1</span><span class="p">)</span> <span class="c1"># 1を得る回数のサンプル値</span>
+    <span class="n">n1s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### 対数尤度関数の定義</span>
+<span class="k">def</span> <span class="nf">liklihood</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span> <span class="c1"># i: Groverの作用回数m0,m1,...,miに対する試行を勘案</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">pSq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">((</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">groverNums</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">pSq</span> <span class="o">*</span> <span class="n">pSq</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="n">n1s</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">nShot</span> <span class="o">-</span> <span class="n">n1s</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### 各試行における最尤点</span>
+<span class="n">thetaMaxLiks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">thetas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">liklihood</span><span class="p">(</span><span class="n">th</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">thetas</span><span class="p">])]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groverNums</span><span class="p">))])</span>
+
+<span class="c1">### 各試行における求めたい確率の推定値</span>
+<span class="n">estimates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">thetaMaxLiks</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+&lt;ipython-input-11-964349f68839&gt;:9: RuntimeWarning: divide by zero encountered in log
+  ret += n1s[j] * np.log(p) + (nShot - n1s[j]) * np.log(1.0 - p)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">### Groverの作用回数と誤差のグラフ</span>
+<span class="n">pTrue</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="c1"># 求めたい確率の真の値</span>
+<span class="n">errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">-</span> <span class="n">pTrue</span><span class="p">)</span> <span class="c1"># 推定値との真の値の乖離</span>
+<span class="n">gCallNums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">accumulate</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">groverNums</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nShot</span><span class="p">))</span> <span class="c1"># 回路gおよびその逆を呼んだ回数</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;number of calls to g&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
+
+<span class="c1"># 描画</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gCallNums</span><span class="p">,</span> <span class="n">errs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+
+<span class="c1"># 比較のためにy=1/xを書く</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gCallNums</span><span class="p">,</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gCallNums</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;∝ 1/x for comparison&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x1caebdfc760&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/notebooks_15_CreditPortfolioRisk_CreditPortfolioRiskMeasurement_blank_12_1.png" src="../../_images/notebooks_15_CreditPortfolioRisk_CreditPortfolioRiskMeasurement_blank_12_1.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="CreditPortfolioRiskMeasurement.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">&lt;no title&gt;</p>
+            </div>
+        </a>
+    </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Qulacs-Osaka<br/>
+        
+            &copy; Copyright 2021, Qulacs-Osaka.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

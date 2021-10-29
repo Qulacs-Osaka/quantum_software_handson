@@ -1,0 +1,1002 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#!pip install qulacs\n",
+    "#!pip install matplotlib\n",
+    "#!pip install numpy\n",
+    "#!pip install scipy\n",
+    "from utility import *"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import matplotlib.pyplot as plt\n",
+    "import numpy as np\n",
+    "import time \n",
+    "import random\n",
+    "from qulacs import QuantumState\n",
+    "from qulacs import QuantumCircuit\n",
+    "from qulacs.gate import DenseMatrix\n",
+    "from qulacs.circuit import QuantumCircuitOptimizer"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#  Qulacsの基本的な使い方\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "## QuantumStateクラス：量子状態の取扱\n",
+    "\n",
+    "- 量子状態の確保\n",
+    "- 初期化：`set_zero_state()`\n",
+    "- 状態ベクトルをarrayとして書き出し：`get_vecot()`\n",
+    "- 状態のコピー：`copy()`\n",
+    "- 計算基底でのサンプリング：`sampling()`"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 量子ビットの確保"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from qulacs import QuantumState\n",
+    "nqubits = 5\n",
+    "state = QuantumState(nqubits)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "また、確保した量子ビットをすべて0状態、$|00...0\\rangle$へと初期化は `set_zero_state()`で行うことができる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "state.set_zero_state()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 状態ベクトルを `array` として書き出し\n",
+    "量子状態を取得し、`array`として格納するには、`get_vector()`を使う。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[1.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j\n",
+      " 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j\n",
+      " 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j\n",
+      " 0.+0.j 0.+0.j]\n"
+     ]
+    }
+   ],
+   "source": [
+    "state_array = state.get_vector()\n",
+    "print(state_array)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "逆に`array`から状態をロードすることも可能"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      " *** Quantum State ***\n",
+      " * Qubit Count : 5\n",
+      " * Dimension   : 32\n",
+      " * State vector : \n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "(1.2345,0)\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "my_vector = [ 1.2345 for i in range(2**nqubits)]\n",
+    "state.load(my_vector)\n",
+    "print(state)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 特殊な初期状態の指定\n",
+    "ゼロ状態への初期化以外にも、ビット列を指定した初期化、`set_computational_basis()`、や、ランダムな量子状態の準備、`set_Haar_random_state()`、などの準備を行う関数も用意されている。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(1+0j)\n"
+     ]
+    }
+   ],
+   "source": [
+    "state.set_computational_basis(0b10101)\n",
+    "print(state.get_vector()[0b10101])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`utility.py` （いつも使う便利な関数）にある確率分布を表示させる関数 `show_distribution` を使ってみよう。計算基底に関する測定確率の分布は、"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "show_distribution(state)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "seed = 0\n",
+    "state.set_Haar_random_state(seed)\n",
+    "show_distribution(state)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 計算基底でのサンプリング\n",
+    "`sampling(shots)` で `shots` 回の計算基底でのサンプリングを実行できる。実行結果はサンプリング結果のビット列を整数化したリストとして得られる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[13, 29, 15, 3, 24, 17, 14, 1, 7, 31]"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "shots = 10\n",
+    "state.sampling(shots)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "　量子状態のために確保したメモリの解放は、`del`から行うことができる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "NameError",
+     "evalue": "name 'state' is not defined",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-16-435276040a36>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0;32mdel\u001b[0m \u001b[0mstate\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0mstate\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;31mNameError\u001b[0m: name 'state' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "del state\n",
+    "state"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 状態のコピーと内積\n",
+    "qulacsには他にも、量子状態のコピーや、"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "state = QuantumState(nqubits)\n",
+    "copied_state = state.copy()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "２つの量子状態の内積の計算、"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(1+0j)"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "from qulacs.state import inner_product\n",
+    "inner_product(copied_state,state)\n",
+    "#同じ状態の内積なので1になる。"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 量子演算とその実行\n",
+    "- 様々な量子演算\n",
+    "- 量子演算による状態の更新：`update_quantum_state()`"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "　量子演算の生成は、`gate`に関するモジュールを用いて実行する。パウリ演算やアダマール演算、CNOT演算など、よく使う基本演算はあらかじめ定義されている。また、自分で定義した配列から、量子演算を生成することもできる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from qulacs import QuantumState\n",
+    "from qulacs.gate import Identity, X,Y,Z #パウリ演算子\n",
+    "from qulacs.gate import H,S,Sdag, sqrtX,sqrtXdag,sqrtY,sqrtYdag #1量子ビット Clifford演算\n",
+    "from qulacs.gate import T,Tdag #1量子ビット 非Clifford演算\n",
+    "from qulacs.gate import RX,RY,RZ #パウリ演算子についての回転演算\n",
+    "from qulacs.gate import CNOT, CZ, SWAP #2量子ビット演算"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`Identity` $\n",
+    "=\n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & 1\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`X` $\n",
+    "= \n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "0 & 1\n",
+    "\\\\\n",
+    "1 & 0\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`Y` $\n",
+    "=\n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "0 & -i\n",
+    "\\\\\n",
+    "i & 0\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`Z` $\n",
+    "=\n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & -1\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "\n",
+    "\n",
+    "`H` $\n",
+    "=\n",
+    "\\frac{1}{\\sqrt{2}}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 1\n",
+    "\\\\\n",
+    "1 & -1\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`S` $\n",
+    "=\n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$,\n",
+    "`Sdag` $\n",
+    "=\n",
+    "\\frac{1}{\\sqrt{2}}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & -i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$,\n",
+    "\n",
+    "\n",
+    "`sqrtX` $\n",
+    "=\\sqrt{X}=\n",
+    "\\frac{1}{2}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1+i & 1-i\n",
+    "\\\\\n",
+    "1-i & 1+i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`sqrtXdag` $\n",
+    "=\\sqrt{X}^{\\dagger}=\n",
+    "\\frac{1}{2}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1-i & 1+i\n",
+    "\\\\\n",
+    "1+i & 1-i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "\n",
+    "`sqrtY` $\n",
+    "=\\sqrt{Y}=\n",
+    "\\frac{1}{2}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1+i & -1-i\n",
+    "\\\\\n",
+    "1+i & 1+i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`sqrtYdag` $\n",
+    "=\\sqrt{Y}^{\\dagger}=\n",
+    "\\frac{1}{2}\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1-i & -1+i\n",
+    "\\\\\n",
+    "1-i & 1-i\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`T` \n",
+    "$\n",
+    "= \n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & e^{i \\pi/4}\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$, \n",
+    "`Tdag` \n",
+    "$=\n",
+    "\\left(\n",
+    "\\begin{array}{cc}\n",
+    "1 & 0\n",
+    "\\\\\n",
+    "0 & e^{-i \\pi/4}\n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`RX` $= e^{i (\\theta/2) X}$, `RY` $= e^{i (\\theta/2) Y}$, `RZ` $= e^{i (\\theta/2) Z}$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`CNOT` $= \\left(\n",
+    "\\begin{array}{cccc}\n",
+    "    1 & 0& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 1& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 0& 0& 1\n",
+    "    \\\\\n",
+    "    0 & 0& 1& 0    \n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$,\n",
+    "`CZ` $= \\left(\n",
+    "\\begin{array}{cccc}\n",
+    "    1 & 0& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 1& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 0& 1& 0\n",
+    "    \\\\\n",
+    "    0 & 0& 0& -1    \n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$,\n",
+    "`SWAP` $= \\left(\n",
+    "\\begin{array}{cccc}\n",
+    "    1 & 0& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 0& 1& 0\n",
+    "    \\\\\n",
+    "    0 & 1& 0& 0\n",
+    "    \\\\\n",
+    "    0 & 0& 0& 1    \n",
+    "\\end{array}\n",
+    "\\right)\n",
+    "$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "他にも、多体のパウリ演算、`Pauli`、多体パウリ演算による回転、`PauliRotation`、IBMQで利用されている`U1`,`U2`,`U3`演算や、測定、`Measurement`、ノイズ（確率的な演算）、 `BitFlipNoise`、`DephasingNoise`、 `IndepenedentXZNoise`、`DepolarizingNoise`なども用意されている。これらの事前に定義された演算に対して、量子ビットのインデックスや、回転演算の角度など必要な情報を引数として指定することによってが`gate`が生成される。生成された演算を状態に作用させ状態`state`を更新するときは、`gate.update_quantum_state(state)`が利用できる。"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 量子状態の更新の例"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[1.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j]\n",
+      "[0.+0.j 1.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j]\n",
+      "[0.+0.j 0.+0.j 0.+0.j 1.+0.j 0.+0.j 0.+0.j 0.+0.j 0.+0.j]\n",
+      "[0.        +0.j 0.        +0.j 0.        +0.j 0.70710678+0.j\n",
+      " 0.        +0.j 0.        +0.j 0.        +0.j 0.70710678+0.j]\n",
+      "[0.        +0.j 0.        +0.j 0.        +0.j 0.70710678+0.j\n",
+      " 0.        +0.j 0.70710678+0.j 0.        +0.j 0.        +0.j]\n"
+     ]
+    }
+   ],
+   "source": [
+    "state = QuantumState(3) #量子ビットの状態確保\n",
+    "state.set_zero_state() #状態をすべてゼロに初期化\n",
+    "print(state.get_vector()) #状態の情報を取得\n",
+    "\n",
+    "X(0).update_quantum_state(state) #0番目の量子ビットにXを作用させ状態をアップデート\n",
+    "print(state.get_vector())\n",
+    "\n",
+    "gate = X(1) #1番目の量子ビットに作用するX演算を生成\n",
+    "gate.update_quantum_state(state) #生成した演算を作用させて状態をアップデート\n",
+    "print(state.get_vector())\n",
+    "\n",
+    "H(2).update_quantum_state(state) #2番目の量子ビットにHを作用させ状態をアップデート\n",
+    "print(state.get_vector())\n",
+    "\n",
+    "CNOT(2,1).update_quantum_state(state) #2番目から1番目の量子ビットへのCNOTを作用させ状態をアップデート\n",
+    "print(state.get_vector())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 回転演算\n",
+    "`RX`、`RY`,`RZ`などの回転演算は、作用する量子ビットのインデックスと回転角を与えて定義する。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ 0.92387953+0.j -0.38268343+0.j]\n"
+     ]
+    }
+   ],
+   "source": [
+    "state = QuantumState(1)\n",
+    "state.set_zero_state()\n",
+    "RY(0,np.pi/4.0).update_quantum_state(state) #0番目の量子ビットをY軸に pi/4 回転させる\n",
+    "print(state.get_vector())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 自分で定義した演算を実行\n",
+    "`DenseMatrix`を用いて、自分で定義した一般の行列から演算を作ることもできる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[[     0.          17458.4664275 ]\n",
+      " [139674.80248778      0.        ]]\n",
+      "[12345.+0.j 98765.+0.j]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from qulacs.gate import DenseMatrix\n",
+    "import numpy as np\n",
+    "state = QuantumState(1)\n",
+    "state.set_zero_state()\n",
+    "H(0).update_quantum_state(state)\n",
+    "\n",
+    "my_matrix = np.array([[0,12345*np.sqrt(2)],[98765*np.sqrt(2),0]]) #任意の行列要素を自分で定義\n",
+    "print(my_matrix)\n",
+    "\n",
+    "gate = DenseMatrix(0,my_matrix) #定義した行列から演算を生成\n",
+    "gate.update_quantum_state(state)\n",
+    "\n",
+    "print(state.get_vector())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "複数の量子ビットに作用する演算を定義したければ、`DenseMatrix(\"作用する量子ビットのインデックスリスト\",\"行列の配列\")`とすればよい。"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 量子回路の構成"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "上で説明したように、各演算ごとに実行して量子状態を更新することもできるが、複雑な量子回路を構成する場合には、実行する前に量子回路を構成できると便利であろう。qulacsでは、`QuantumCircuit`クラスを用いて、演算の集合からなる回路`circuit`を定義することができる。定義した回路をprintすると、構成された回路の詳細データを得ることができる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "*** Quantum Circuit Info ***\n",
+      "# of qubit: 2\n",
+      "# of step : 0\n",
+      "# of gate : 0\n",
+      "Clifford  : yes\n",
+      "Gaussian  : yes\n",
+      "\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "from qulacs import QuantumCircuit\n",
+    "nqubits = 2\n",
+    "state = QuantumState(nqubits)\n",
+    "state.set_zero_state()\n",
+    "circuit = QuantumCircuit(nqubits)\n",
+    "print(circuit)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "回路への、演算の追加は、以下のような方法で行うことができる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "*** Quantum Circuit Info ***\n",
+      "# of qubit: 2\n",
+      "# of step : 1\n",
+      "# of gate : 2\n",
+      "# of 1 qubit gate: 2\n",
+      "Clifford  : yes\n",
+      "Gaussian  : no\n",
+      "\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "circuit.add_H_gate(0) # 0番目の量子ビットに作用するHを追加\n",
+    "circuit.add_gate(H(1)) # 1番目の量子ビットに作用するHを追加\n",
+    "print(circuit)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "このようにして構成された`circuit`を実行して`state`の更新を行いたければ、`gate`の場合と同様に、\n",
+    "`circuit.update_quantum_state(state)`とすればよい。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0.5+0.j 0.5+0.j 0.5+0.j 0.5+0.j]\n"
+     ]
+    }
+   ],
+   "source": [
+    "circuit.update_quantum_state(state) #構成されたcircuitを実行して状態を更新\n",
+    "print(state.get_vector())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Qulacsの計算速度を体感\n",
+    "    一通り、導入が終わったので、qulacsの実行速度を計測してみよう。まずは、一量子ビットの実行時間を計測してみる。"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "number of qubit:5 time:2.172984801057809e-07[sec]\n",
+      "number of qubit:6 time:1.7427662999189265e-07[sec]\n",
+      "number of qubit:7 time:1.8076524072416723e-07[sec]\n",
+      "number of qubit:8 time:2.0360660597560956e-07[sec]\n",
+      "number of qubit:9 time:2.7935781110913224e-07[sec]\n",
+      "number of qubit:10 time:4.3130724483577093e-07[sec]\n",
+      "number of qubit:11 time:7.87291810727391e-07[sec]\n",
+      "number of qubit:12 time:1.4506750582445072e-06[sec]\n",
+      "number of qubit:13 time:5.11568204275715e-05[sec]\n",
+      "number of qubit:14 time:5.282040143790863e-05[sec]\n",
+      "number of qubit:15 time:5.432670201851413e-05[sec]\n",
+      "number of qubit:16 time:5.792603380045922e-05[sec]\n",
+      "number of qubit:17 time:6.405983540111884e-05[sec]\n",
+      "number of qubit:18 time:7.460760945797322e-05[sec]\n",
+      "number of qubit:19 time:9.78415083731254e-05[sec]\n",
+      "number of qubit:20 time:0.00042180293748358716[sec]\n",
+      "number of qubit:21 time:0.0022063115974525352[sec]\n",
+      "number of qubit:22 time:0.0052310300595832596[sec]\n",
+      "number of qubit:23 time:0.010901946088542109[sec]\n",
+      "number of qubit:24 time:0.02248343328634898[sec]\n",
+      "number of qubit:25 time:0.045208797454833985[sec]\n"
+     ]
+    }
+   ],
+   "source": [
+    "import time\n",
+    "\n",
+    "for i in range(21):\n",
+    "    nqubits = i+5\n",
+    "    state = QuantumState(nqubits)\n",
+    "    state.set_zero_state()\n",
+    "    circuit = QuantumCircuit(nqubits)\n",
+    "    for j in range(nqubits):\n",
+    "        circuit.add_gate(H(j)) #全部の量子ビットにHを作用させる回路を構成\n",
+    "    \n",
+    "    count = 0\n",
+    "    \n",
+    "    #計測スタート\n",
+    "    start = time.time()\n",
+    "    while time.time() - start < 1:\n",
+    "        count = count+1\n",
+    "        circuit.update_quantum_state(state)\n",
+    "    elapsed_time = (time.time() - start)/(count*nqubits)\n",
+    "    #計測終了\n",
+    "    \n",
+    "    print (\"number of qubit:{0}\".format(nqubits)+\" time:{0}\".format(elapsed_time) + \"[sec]\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Observable クラス\n",
+    "`add_operator`で係数とパウリ演算子のタイプ、そして量子ビットのindexを指定して追加"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(1+0j) Z0\n"
+     ]
+    }
+   ],
+   "source": [
+    "measurement = Observable(nqubits)\n",
+    "measurement.add_operator(1.0,\"Z 0\")\n",
+    "# utility.pyにある関数をつかって中身を表示\n",
+    "show_observable(measurement)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "期待値の計算は、`get_expectation_value(state)`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1.0"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "nqubits = 1\n",
+    "state = QuantumState(nqubits)\n",
+    "measurement.get_expectation_value(state)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(1+0j) Z0 Z1 Z2 Z3 Z4 Z5 Z6 Z7 Z8 Z9\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "-0.01902484063143186"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "nqubits = 10\n",
+    "state =QuantumState(nqubits)\n",
+    "state.set_Haar_random_state()\n",
+    "\n",
+    "measurement = Observable(nqubits)\n",
+    "measurement.add_operator(1.0,\"Z 0 Z 1 Z 2 Z 3 Z 4 Z 5 Z 6 Z 7 Z 8 Z 9\")\n",
+    "show_observable(measurement)\n",
+    "\n",
+    "measurement.get_expectation_value(state)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.4"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>グローバー探索量子アルゴリズムをとことん実装する &#8212; Quantum Software Hands on  documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement.html" />
+    <link rel="prev" title="位相推定アルゴリズム" href="13_quantum_phase_estimation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_error_mitigation.html">
+   エラー補償手法について学ぶ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/14_grover_search.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="グローバー探索量子アルゴリズムをとことん実装する">
+<h1>グローバー探索量子アルゴリズムをとことん実装する<a class="headerlink" href="#グローバー探索量子アルゴリズムをとことん実装する" title="Permalink to this headline">¶</a></h1>
+<p>グローバー探索アルゴリズムは、ソートされていないN個のデータがあったときに、<span class="math notranslate nohighlight">\(O(\sqrt N)\)</span>回のクエリで目的のデータにアクセスするための方法である。古典コンピュータでは<span class="math notranslate nohighlight">\(O(N)\)</span>回のクエリが必要であるので、<span class="math notranslate nohighlight">\(N\)</span>が<span class="math notranslate nohighlight">\(n\)</span>ビットのランダムアクセスメモリ（<span class="math notranslate nohighlight">\(N=2^n\)</span>）のような場合には指数的な加速を可能とする。例えば、ある効率よく計算できるブール関数<span class="math notranslate nohighlight">\(f:\{0,1\}^n \rightarrow \{ 0,1\}\)</span>に対して、<span class="math notranslate nohighlight">\(f(x)=0\)</span>となる<span class="math notranslate nohighlight">\(x \in \{0,1\}^n\)</span>を見つけるような場合に利用できる。古典アルゴリズムの全探索部分をすべからく平方根（quadratic）に高速化してくれるので、SAT問題など古典ベストアルゴリズムを量子を用いてさらに加速することができる。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span>
+<span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DenseMatrix</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">to_matrix_gate</span>
+<span class="kn">from</span> <span class="nn">qulacs.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuitOptimizer</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span> <span class="c1">#パウリ演算子</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">H</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">Sdag</span><span class="p">,</span> <span class="n">sqrtX</span><span class="p">,</span><span class="n">sqrtXdag</span><span class="p">,</span><span class="n">sqrtY</span><span class="p">,</span><span class="n">sqrtYdag</span> <span class="c1">#1量子ビット Clifford演算</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">T</span><span class="p">,</span><span class="n">Tdag</span> <span class="c1">#1量子ビット 非Clifford演算</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">RX</span><span class="p">,</span><span class="n">RY</span><span class="p">,</span><span class="n">RZ</span> <span class="c1">#パウリ演算子についての回転演算</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">CNOT</span><span class="p">,</span> <span class="n">CZ</span><span class="p">,</span> <span class="n">SWAP</span> <span class="c1">#2量子ビット演算</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DephasingNoise</span><span class="p">,</span><span class="n">DepolarizingNoise</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">nqubits</span><span class="p">))],</span><span class="nb">abs</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>初期状態としてすべてのビット列が重ね合わさった状態を準備する。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+
+<span class="n">Hadamard</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">Hadamard</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="c1">#state.get_vector()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_6_0.png" src="../_images/notebooks_14_grover_search_6_0.png" />
+</div>
+</div>
+<p>グローバーアルゴリズムでは、特定の target 状態の係数に-1を付けるフリップ演算子 target_flip と、初期状態のすべてのビット列が重ね合わさった状態（<span class="math notranslate nohighlight">\(|+\rangle ^{\otimes n}\)</span>）に-1をつけるフリップ演算子 initial_flip を繰り返し作用させることによって初期状態から終状態の２状態間の回転を誘導することになる。ここでは target 状態としてすべて1の状態 <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> を選んだ。実際には <span class="math notranslate nohighlight">\(f(x)=0\)</span> を満たすような状態を取り出すといった場合に利用されることになり、このような場合には、関数
+<span class="math notranslate nohighlight">\(f\)</span> を量子コンピュータ上で実行し、$:nbsphinx-math:<cite>sum `_x |x:nbsphinx-math:</cite>rangle  <cite>:nbsphinx-math:</cite>rightarrow <cite>:nbsphinx-math:</cite>sum <cite>_x (-1)^{f(x) :nbsphinx-math:</cite>oplus <cite>1}|x:nbsphinx-math:</cite>rangle <cite>:math:`のような量子演算がフリップ演算子となる。</cite>f<span class="math notranslate nohighlight">\(を構成するところは\)</span>n<span class="math notranslate nohighlight">\(に対して多項式（\)</span>N=2^n$に対しては対数多項式）であるとしているので本質ではないため今回は <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> をターゲットとする。</p>
+<p>qulacsの特殊ゲート <code class="docutils literal notranslate"><span class="pre">to_matrix_gate</span></code> を使うと好きな <code class="docutils literal notranslate"><span class="pre">control_index</span></code> の量子ビットが好きなビット値 <code class="docutils literal notranslate"><span class="pre">control_with_value</span></code> の場合に作用する制御量子演算を実現できる。今回は、nqubits-1番目までの量子ビットがすべて1の場合にnqubits番目の量子ビットにZを作用させる（<span class="math notranslate nohighlight">\(|111...1 \rangle\)</span>のみ-1をつけるフリップ演算子を定義する）。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">target_flip</span> <span class="o">=</span> <span class="n">to_matrix_gate</span><span class="p">(</span><span class="n">Z</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># 1st-qubitが0の場合だけゲートを作用</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">control_index</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">control_with_value</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">target_flip</span><span class="o">.</span><span class="n">add_control_qubit</span><span class="p">(</span><span class="n">control_index</span><span class="p">,</span> <span class="n">control_with_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>実際そのような作用になっていることを確認しておく。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hoge</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">hoge</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hoge</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ 0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j
+  0.1767767+0.j  0.1767767+0.j  0.1767767+0.j -0.1767767+0.j]
+</pre></div></div>
+</div>
+<p>同様にして、初期状態のフリップ演算子を作る。すべての量子ビットにアダマール演算とパウリX演算を作用（target_flipの前後に共役に作用）させることで初期状態のフリップ演算子が作れる。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">initial_flip</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">target_flip</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<p>フリップ演算子を作用させて確率分布の変化を見よう。全部1の状態（一番右側）の確率が大きくなっている。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#初期状態の準備</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+<span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="c1">#フリップ演算子を作用</span>
+<span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">initial_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_15_0.png" src="../_images/notebooks_14_grover_search_15_0.png" />
+</div>
+</div>
+<p>これを何回か繰り返して、target状態の確率がどのように変化するか見ておく。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+
+<span class="c1">#内積を評価するために target stateを作っておく</span>
+<span class="n">target_state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">target_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">target_state</span><span class="p">)</span>
+
+<span class="c1">#すべての計算基底の重ね合わせ状態を作る</span>
+<span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="n">show_distribution</span><span class="p">(</span><span class="n">target_state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_17_0.png" src="../_images/notebooks_14_grover_search_17_0.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_17_1.png" src="../_images/notebooks_14_grover_search_17_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5082329989778311
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_17_3.png" src="../_images/notebooks_14_grover_search_17_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.776160177786797
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_17_5.png" src="../_images/notebooks_14_grover_search_17_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.9470673343724136
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_17_7.png" src="../_images/notebooks_14_grover_search_17_7.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.9995910741614789
+</pre></div></div>
+</div>
+<p>4回ほどでほぼ確率１で target 状態を得ることができた。</p>
+<p>前準備ができたので、量子ビット数を変えて、target状態が得られるのに必要な繰り返し回数を計算してみる</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+
+<span class="c1"># transversal Hadamard gateを定義する</span>
+<span class="n">Hadamard</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">Hadamard</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="c1">#initial_flipとtarget_flipを定義する。</span>
+<span class="n">target_flip</span> <span class="o">=</span> <span class="n">to_matrix_gate</span><span class="p">(</span><span class="n">Z</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># 1st-qubitが0の場合だけゲートを作用</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">control_index</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="n">control_with_value</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">target_flip</span><span class="o">.</span><span class="n">add_control_qubit</span><span class="p">(</span><span class="n">control_index</span><span class="p">,</span> <span class="n">control_with_value</span><span class="p">)</span>
+
+<span class="n">initial_flip</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">target_flip</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+
+
+<span class="c1">#内積を評価するために target stateを作っておく</span>
+<span class="n">target_state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<span class="n">target_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">target_state</span><span class="p">)</span>
+
+<span class="c1">#すべての計算基底の重ね合わせ状態を作る</span>
+<span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x105a11128&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_20_1.png" src="../_images/notebooks_14_grover_search_20_1.png" />
+</div>
+</div>
+<p>約25回くらいでほぼ確率1でtarget状態が得られている。確率の増加は、サイン関数の２乗のような振る舞いになっている。これは、グローバー探索が、初期状態とtarget状態の間を一定の角度で回転している操作になっているからである。</p>
+<p>量子ビット数を増やして、target状態の得られる確率が最大となるステップ数を調べよう。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">num_samp</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">):</span>
+    <span class="n">nqubits</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">5</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+
+    <span class="c1"># transversal Hadamard gateを定義する</span>
+    <span class="n">Hadamard</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">Hadamard</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+    <span class="c1">#initial_flipとtarget_flipを定義する。</span>
+    <span class="n">target_flip</span> <span class="o">=</span> <span class="n">to_matrix_gate</span><span class="p">(</span><span class="n">Z</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># 1st-qubitが0の場合だけゲートを作用</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">control_index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">control_with_value</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">target_flip</span><span class="o">.</span><span class="n">add_control_qubit</span><span class="p">(</span><span class="n">control_index</span><span class="p">,</span> <span class="n">control_with_value</span><span class="p">)</span>
+
+    <span class="n">initial_flip</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+    <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">target_flip</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">initial_flip</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+
+
+    <span class="c1">#内積を評価するために target stateを作っておく</span>
+    <span class="n">target_state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+    <span class="n">target_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+        <span class="n">X</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">target_state</span><span class="p">)</span>
+
+    <span class="c1">#すべての計算基底の重ね合わせ状態を作る</span>
+    <span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+    <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">num_iter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">flag</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">num_iter</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="n">num_iter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">initial_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+        <span class="n">suc_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">tmp</span> <span class="o">&lt;</span> <span class="n">suc_prob</span><span class="p">:</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">suc_prob</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_iter</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1">#計算結果</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],</span><span class="n">result</span><span class="p">)</span>
+<span class="c1">#2^n でスケール</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)])</span>
+<span class="c1">#2^(n/2)でスケール</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,(</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_14_grover_search_23_0.png" src="../_images/notebooks_14_grover_search_23_0.png" />
+</div>
+</div>
+<p>ステップ数が<span class="math notranslate nohighlight">\(2^{n/2}\)</span>でスケールしていることがわかった。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="13_quantum_phase_estimation.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">位相推定アルゴリズム</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">&lt;no title&gt;</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Qulacs-Osaka<br/>
+        
+            &copy; Copyright 2021, Qulacs-Osaka.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
