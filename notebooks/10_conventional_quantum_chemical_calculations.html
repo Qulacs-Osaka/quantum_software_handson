@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>古典コンピュータを使った量子化学計算を実行してみる &#8212; Quantum Software Hands on  documentation</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -33,14 +33,17 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="量子コンピュータ上に量子化学の問題をマッピングする" href="11_fermion_qubit_mapping.html" />
     <link rel="prev" title="量子カーネル法を使ってみる" href="09_quantum_kernel.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -67,7 +70,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption" role="heading">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Contents:
  </span>
@@ -214,29 +217,22 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   古典コンピュータを使った量子化学計算を実行してみる
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#水素分子の計算（平均場近似と厳密対角化）">
+   水素分子の計算（平均場近似と厳密対角化）
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#水素分子の計算（平均場近似と厳密対角化）">
-     水素分子の計算（平均場近似と厳密対角化）
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#電子相関と電子相関エネルギー">
    電子相関と電子相関エネルギー
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#電子相関エネルギーと化学的精度">
    電子相関エネルギーと化学的精度
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#代表的なその他の量子化学計算手法">
    代表的なその他の量子化学計算手法
   </a>
@@ -630,9 +626,8 @@ Hartree Fock/Full CI Energy (in %) 98.19530301322638
 </pre></div></div>
 </div>
 </div>
-</div>
 <div class="section" id="電子相関と電子相関エネルギー">
-<h1>電子相関と電子相関エネルギー<a class="headerlink" href="#電子相関と電子相関エネルギー" title="Permalink to this headline">¶</a></h1>
+<h2>電子相関と電子相関エネルギー<a class="headerlink" href="#電子相関と電子相関エネルギー" title="Permalink to this headline">¶</a></h2>
 <p>与えられたハミルトニアンに対する厳密解（Full CI)と平均場で解いたときのエネルギー（Hartree-Fockエネルギー）は、非常に近いことがわかる。平均場という単純な近似で、Full CIエネルギーの98.2%を再現している。一般におおよそ、Hartree-Fockは、全エネルギーの約99%を再現できると言われている。残りの約1%を電子相関エネルギーと呼ぶ。</p>
 <p>この電子相関エネルギー(Electron Correlation Energy)を見てみよう。</p>
 <div class="nbinput docutils container">
@@ -659,7 +654,7 @@ Electron Correlation Energy in (kcal/mol) -12.879314997356303
 </div>
 </div>
 <div class="section" id="電子相関エネルギーと化学的精度">
-<h1>電子相関エネルギーと化学的精度<a class="headerlink" href="#電子相関エネルギーと化学的精度" title="Permalink to this headline">¶</a></h1>
+<h2>電子相関エネルギーと化学的精度<a class="headerlink" href="#電子相関エネルギーと化学的精度" title="Permalink to this headline">¶</a></h2>
 <p>電子相関は、約0.56eV（13 kcal/mol)となっている。 さて、熱エネルギー（ボルツマン因子の逆数 <span class="math notranslate nohighlight">\(1/\beta = k_bT\)</span>; <span class="math notranslate nohighlight">\(k_b\)</span>はボルツマン定数）は、室温298.15Kで約0.026eV (0.59kcal/mol)である。 熱エネルギーと比べると、電子相関のエネルギーは非常に大きい値であることがわかる。</p>
 <p>分子の安定性（存在比）や、化学反応速度は、状態間のエネルギー差を<span class="math notranslate nohighlight">\(\Delta E\)</span>とするとボルツマン分布<span class="math notranslate nohighlight">\(e^{-\beta \Delta E}\)</span>に比例し、エネルギー差に対して指数的に減少（増大）する。 +/- 0.56eV (13kcal/mol)ほど、<span class="math notranslate nohighlight">\(\Delta E\)</span>に誤差があるとすれば、正解となる反応速度を１としたときに、誤差に応じて以下のように大きく変動する。</p>
 <div class="nbinput docutils container">
@@ -704,7 +699,7 @@ Electron Correlation Energy in (kcal/mol) -12.879314997356303
 <p>反応速度は、室温の場合、おおよそオーダーではあうことがわかる。 少なくとも、「反応速度（や存在比）のオーダーは予測できること」＝「化学における定量的計算」とするならば、量子化学の計算において目指すべき誤差はこの「1kcal/mol」となることがわかる。</p>
 </div>
 <div class="section" id="代表的なその他の量子化学計算手法">
-<h1>代表的なその他の量子化学計算手法<a class="headerlink" href="#代表的なその他の量子化学計算手法" title="Permalink to this headline">¶</a></h1>
+<h2>代表的なその他の量子化学計算手法<a class="headerlink" href="#代表的なその他の量子化学計算手法" title="Permalink to this headline">¶</a></h2>
 <p>さて、では、計算の定量性を増すにはどうすればいいのだろうか？ 厳密にハミルトニアンを解く方法 Full CIは指数関数的な計算コストが必要となる。 このコストを下げるために、量子化学では、様々な近似理論が開発されてきた。 ここでは、計算コストが<span class="math notranslate nohighlight">\(O(N^5)\)</span>の二次の摂動論MP2、 現在の量子化学の「Golden standard」と称される<span class="math notranslate nohighlight">\(O(N^7)\)</span>の CCSD(T)、 そして、計算コストが<span class="math notranslate nohighlight">\(O(N^3)\)</span>で業界標準の方法となっているDFTという3つの手法を、 厳密な方法(Full CI)と比較してみよう。</p>
 <p>水素分子は簡単過ぎるので、<span class="math notranslate nohighlight">\(H_4\)</span>という系を考えてみる。</p>
 <div class="nbinput nblast docutils container">
@@ -786,36 +781,28 @@ Electron Correlation Energy in (kcal/mol) -12.879314997356303
 </div>
 </div>
 </div>
+</div>
 
 
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="09_quantum_kernel.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">量子カーネル法を使ってみる</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="09_quantum_kernel.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">量子カーネル法を使ってみる</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="11_fermion_qubit_mapping.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">量子コンピュータ上に量子化学の問題をマッピングする</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="11_fermion_qubit_mapping.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">量子コンピュータ上に量子化学の問題をマッピングする</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -836,8 +823,7 @@ Electron Correlation Energy in (kcal/mol) -12.879314997356303
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>

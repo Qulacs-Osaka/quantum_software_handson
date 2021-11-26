@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>量子コンピュータ上に量子化学の問題をマッピングする &#8212; Quantum Software Hands on  documentation</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -33,14 +33,17 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="量子変分固有値法（VQE)を用いた基底状態計算" href="12_compute_groud_state_of_molecule_using_vqe.html" />
     <link rel="prev" title="古典コンピュータを使った量子化学計算を実行してみる" href="10_conventional_quantum_chemical_calculations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
@@ -67,7 +70,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption" role="heading">
+        <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Contents:
  </span>
@@ -214,62 +217,57 @@
             </div>
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#H_{qubit}を用意する手順">
-     <span class="math notranslate nohighlight">
-      \(H_{qubit}\)
-     </span>
-     を用意する手順
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#1.-計算する分子の構造や電荷など入力する">
-   1. 計算する分子の構造や電荷など入力する
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">
-   2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">
-   3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン
-   <span class="math notranslate nohighlight">
-    \(H_{electron}\)
-   </span>
-   を構築する
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">
-   4. OpenFermionなどを使って、
-   <span class="math notranslate nohighlight">
-    \(H_{electron}\)
-   </span>
-   を
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#H_{qubit}を用意する手順">
    <span class="math notranslate nohighlight">
     \(H_{qubit}\)
    </span>
-   に変換する
+   を用意する手順
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Jordan-Wigner-変換">
-     Jordan-Wigner 変換
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#1.-計算する分子の構造や電荷など入力する">
+     1. 計算する分子の構造や電荷など入力する
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#Bravyi-Kitaev">
-     Bravyi-Kitaev
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">
+     2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る
     </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">
+     3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン
+     <span class="math notranslate nohighlight">
+      \(H_{electron}\)
+     </span>
+     を構築する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">
+     4. OpenFermionなどを使って、
+     <span class="math notranslate nohighlight">
+      \(H_{electron}\)
+     </span>
+     を
+     <span class="math notranslate nohighlight">
+      \(H_{qubit}\)
+     </span>
+     に変換する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#Jordan-Wigner-変換">
+       Jordan-Wigner 変換
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#Bravyi-Kitaev">
+       Bravyi-Kitaev
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -640,10 +638,8 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <p><span class="math notranslate nohighlight">\(H_{electron}\)</span>から<span class="math notranslate nohighlight">\(H_{qubit}\)</span>への変換法は、複数存在する。 実は、この変換は、今日では、既にオープンソースのソフトウェアを用いて簡単におこなえるようになっている。 そうしたソフトウェアとしては、IBMのQiskitやGoogleのチームが中心に開発しているOpenFermionが挙げられる。 このチュートリアルでは、OpenFermionを使うこととする。</p>
 <p>量子コンピュータ用ハミルトニアンの用意は以下のステップでおこなわれる。 1. 計算する分子の構造や電荷など入力する （通常の量子化学計算と同じ） 2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る 3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する 4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する</p>
 <p>この各ステップについて以下で順に見ていきたい。</p>
-</div>
-</div>
 <div class="section" id="1.-計算する分子の構造や電荷など入力する">
-<h1>1. 計算する分子の構造や電荷など入力する<a class="headerlink" href="#1.-計算する分子の構造や電荷など入力する" title="Permalink to this headline">¶</a></h1>
+<h3>1. 計算する分子の構造や電荷など入力する<a class="headerlink" href="#1.-計算する分子の構造や電荷など入力する" title="Permalink to this headline">¶</a></h3>
 <p>この部分については、通常の量子化学計算と同じである。 10_conventional_quantum_chemical_calculations で実行したのと同様に、 まずは水素分子を用意する。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -657,7 +653,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 </div>
 </div>
 <div class="section" id="2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">
-<h1>2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る<a class="headerlink" href="#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る" title="Permalink to this headline">¶</a></h1>
+<h3>2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る<a class="headerlink" href="#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る" title="Permalink to this headline">¶</a></h3>
 <p>この部分については、通常の量子化学計算と同じである。 量子化学計算では、</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -706,7 +702,7 @@ C1 [ 1.21245192 -1.21245192] Energy of the 2nd MO 0.6711434919142547
 </div>
 </div>
 <div class="section" id="3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">
-<h1>3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する<a class="headerlink" href="#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する" title="Permalink to this headline">¶</a></h1>
+<h3>3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する<a class="headerlink" href="#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する" title="Permalink to this headline">¶</a></h3>
 <p>この部分については、通常の量子化学計算と同じである。 量子化学計算では、</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
@@ -814,10 +810,10 @@ Parsing fcidump.rhf
 </div>
 </div>
 <div class="section" id="4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">
-<h1>4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する<a class="headerlink" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する" title="Permalink to this headline">¶</a></h1>
+<h3>4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する<a class="headerlink" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する" title="Permalink to this headline">¶</a></h3>
 <p>ここまでで、<span class="math notranslate nohighlight">\(H_{electron}\)</span>が計算できたので、最後に<span class="math notranslate nohighlight">\(H_{qubit}\)</span>への変換をおこなう。 この変換方法はいくつかある。代表的なものを３つあげよう。 1. Jordan-Wigner変換 2. Parity変換 3. Bravyi-Kitaev変換 本演習では、以下で1と3の2つの変換法を見てみる。</p>
 <div class="section" id="Jordan-Wigner-変換">
-<h2>Jordan-Wigner 変換<a class="headerlink" href="#Jordan-Wigner-変換" title="Permalink to this headline">¶</a></h2>
+<h4>Jordan-Wigner 変換<a class="headerlink" href="#Jordan-Wigner-変換" title="Permalink to this headline">¶</a></h4>
 <p>Jordan-Wigner変換は、最も直感的な変換である。 一つ一つの量子ビットをスピン分子軌道に対応させ、0だと、電子が詰まっておらず、1だと電子が詰まっていると考える。例えば、0011 だと、右から1番目の軌道と、右から2番目の軌道に電子が入っている電子状態を示している。</p>
 <p>この占有数の情報を変更するのが、<span class="math notranslate nohighlight">\(c^\dagger_i\)</span>、<span class="math notranslate nohighlight">\(c_i\)</span>なのだから、同じことをパウリ演算子で、できるようになれば良い。パウリ演算子を使って定義される以下の演算子は、あるqubit（=軌道）の値を0から1に、1から0に変更できる</p>
 <div class="math notranslate nohighlight">
@@ -866,7 +862,7 @@ Parsing fcidump.rhf
 <p>Jordan-Wigner変換のメリットは、占有数表示という我々の理解しやすい描像を保ったまま、Hamiltonianを変換できる点にある。 デメリットとしては、<span class="math notranslate nohighlight">\(O(N)\)</span>の長さを持つパウリ演算子の積が現れることである。 <span class="math notranslate nohighlight">\(H_{electron}\)</span>は<span class="math notranslate nohighlight">\(O(N^4)\)</span>のタームがあるため、<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に現れるハミルトニアンをパウリ演算子の数は<span class="math notranslate nohighlight">\(O(N^5)\)</span>となる。</p>
 </div>
 <div class="section" id="Bravyi-Kitaev">
-<h2>Bravyi-Kitaev<a class="headerlink" href="#Bravyi-Kitaev" title="Permalink to this headline">¶</a></h2>
+<h4>Bravyi-Kitaev<a class="headerlink" href="#Bravyi-Kitaev" title="Permalink to this headline">¶</a></h4>
 <p>詳細は省くが、Bravyi-Kitaev変換は、我々の理解しやすい占有数表示から離れることで、 フェルミオンの演算子を表すのに必要なパウリ演算子の数を<span class="math notranslate nohighlight">\(O(logN)\)</span>に減らすことができる方法となっている。 このBravyi-Kitaev変換を実行してみよう。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
@@ -946,36 +942,29 @@ Parsing fcidump.rhf
 </div>
 </div>
 </div>
+</div>
+</div>
 
 
               </div>
               
         
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="10_conventional_quantum_chemical_calculations.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title">古典コンピュータを使った量子化学計算を実行してみる</p>
-            </div>
-        </a>
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="10_conventional_quantum_chemical_calculations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">古典コンピュータを使った量子化学計算を実行してみる</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="12_compute_groud_state_of_molecule_using_vqe.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">量子変分固有値法（VQE)を用いた基底状態計算</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="12_compute_groud_state_of_molecule_using_vqe.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title">量子変分固有値法（VQE)を用いた基底状態計算</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
         
         </div>
@@ -996,8 +985,7 @@ Parsing fcidump.rhf
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
-  
   </body>
 </html>
