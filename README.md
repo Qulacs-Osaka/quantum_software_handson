@@ -62,4 +62,4 @@
 - 金融への応用
   - 15_QAE を用いた信用ポートフォリオリスク計測
     <br> [15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb](./doc/source/notebooks/15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb)
-    <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?filepath=15_CreditPortfolioRisk%2FCreditPortfolioRiskMeasurement_blank.ipynb)
+    <br> [[mybindで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?filepath=doc/source/notebooks/15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb)
