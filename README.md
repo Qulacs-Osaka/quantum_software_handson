@@ -2,6 +2,8 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD)
 
+[ホームページ](https://qulacs-osaka.github.io/quantum_software_handson/)からウェブサイト版の資料がありますので、合わせてご利用ください。
+
 - 量子計算の基礎
 
   - 01_qulacs の使い方
