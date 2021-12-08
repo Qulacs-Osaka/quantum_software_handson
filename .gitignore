@@ -1,5 +1,4 @@
-.ipynb_checkpoints
-.png
-.vscode
-__pycache__
-
+.ipynb_checkpoints/
+.vscode/
+__pycache__/
+/doc/build/
