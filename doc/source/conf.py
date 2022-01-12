@@ -48,6 +48,9 @@ exclude_patterns = ["**.ipynb_checkpoints"]
 
 # -- Options for HTML output -------------------------------------------------
 
+# The base url which points to the root of the HTML documentation.
+html_baseurl = 'https://qulacs-osaka.github.io/quantum_software_handson/'
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
