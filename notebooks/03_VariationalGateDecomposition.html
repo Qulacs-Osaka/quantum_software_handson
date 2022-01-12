@@ -32,7 +32,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -197,7 +197,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -215,7 +215,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -250,7 +250,45 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>変分法を用いて量子演算を特定の演算で分解する</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#最大エンタングル状態の生成">
+   最大エンタングル状態の生成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エンタングルメント忠実度を計算する">
+   エンタングルメント忠実度を計算する
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#忠実度を最適化することで、演算の分解を見つける">
+   忠実度を最適化することで、演算の分解を見つける
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#応用編：CNOT演算を分解する">
+   応用編：CNOT演算を分解する
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   
@@ -463,7 +501,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -505,8 +543,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="ch">#!pip install qulacs</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
 <span class="c1">#!pip install matplotlib</span>
 <span class="c1">#!pip install numpy</span>
 <span class="c1">#!pip install scipy</span>
@@ -518,8 +555,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">random</span>
@@ -541,8 +577,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig01.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -561,8 +596,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -578,8 +612,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">mes</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
 <span class="n">H</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 <span class="n">CNOT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
@@ -591,8 +624,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">show_distribution</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_distribution</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,8 +640,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">H</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 <span class="n">H</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 <span class="n">show_distribution</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 </pre></div>
@@ -627,8 +658,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">maximally_entangled_state</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">maximally_entangled_state</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">nqubits</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
         <span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -641,8 +671,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">four_qubit_mes</span> <span class="o">=</span> <span class="n">maximally_entangled_state</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">four_qubit_mes</span> <span class="o">=</span> <span class="n">maximally_entangled_state</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">show_distribution</span><span class="p">(</span><span class="n">four_qubit_mes</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -662,8 +691,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02b.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02b.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -679,8 +707,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">RandomUnitary</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">RandomUnitary</span>
 <span class="n">target_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">target_unitary</span> <span class="o">=</span> <span class="n">RandomUnitary</span><span class="p">(</span><span class="n">target_list</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">target_unitary</span><span class="p">)</span>
@@ -713,8 +740,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[106]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 2qubitの空間考えているので2qubit分確保しておく</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 2qubitの空間考えているので2qubit分確保しておく</span>
 
 <span class="c1">#パラメータ付きの量子回路クラス</span>
 <span class="n">ansatz</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
@@ -734,8 +760,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[107]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">mes</span> <span class="o">=</span> <span class="n">maximally_entangled_state</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mes</span> <span class="o">=</span> <span class="n">maximally_entangled_state</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">mes_copy</span> <span class="o">=</span> <span class="n">mes</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">ansatz</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">mes</span><span class="p">)</span>
 
@@ -758,8 +783,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[108]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
 
 <span class="k">def</span> <span class="nf">entanglement_fidelity</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span><span class="n">nqubits</span><span class="p">):</span>
     <span class="n">mes</span> <span class="o">=</span> <span class="n">maximally_entangled_state</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">nqubits</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
@@ -775,8 +799,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[109]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">entanglement_fidelity</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">entanglement_fidelity</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -796,8 +819,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02c.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig02c.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -814,8 +836,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[110]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cost</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">num_paras</span> <span class="o">=</span> <span class="n">ansatz</span><span class="o">.</span><span class="n">get_parameter_count</span><span class="p">()</span>
 
     <span class="c1">#パラメータを変更</span>
@@ -830,8 +851,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[111]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cost</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost</span><span class="p">([</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
@@ -849,8 +869,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[112]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span>
 
 <span class="n">cost_history</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -884,10 +903,8 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[113]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fidelity&quot;</span><span class="p">,</span><span class="n">opt</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span><span class="s2">&quot;parameters&quot;</span><span class="p">,</span><span class="n">opt</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
-
-</pre></div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fidelity&quot;</span><span class="p">,</span><span class="n">opt</span><span class="o">.</span><span class="n">fun</span><span class="p">,</span><span class="s2">&quot;parameters&quot;</span><span class="p">,</span><span class="n">opt</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+<br/></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -902,8 +919,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[114]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">cost</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1523479</span>  <span class="p">,</span> <span class="mf">2.03515578</span><span class="p">,</span><span class="o">-</span><span class="mf">2.1503557</span> <span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1523479</span>  <span class="p">,</span> <span class="mf">2.03515578</span><span class="p">,</span><span class="o">-</span><span class="mf">2.1503557</span> <span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -923,8 +939,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[115]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">1</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">state0</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
 <span class="n">state0</span><span class="o">.</span><span class="n">set_Haar_random_state</span><span class="p">()</span>
 <span class="n">state1</span> <span class="o">=</span> <span class="n">state0</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -936,8 +951,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <span class="n">RZ</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">opt</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state1</span><span class="p">)</span>
 
 <span class="nb">abs</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state0</span><span class="p">,</span><span class="n">state1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
-
-</pre></div>
+<br/></pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -958,8 +972,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig03.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;./fujii_fig03.png&quot;</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">600</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -975,8 +988,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[116]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># 4qubitの空間考えているので4qubit分確保しておく</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># 4qubitの空間考えているので4qubit分確保しておく</span>
 
 <span class="c1">#パラメータ付きの量子回路クラス</span>
 <span class="n">ansatz</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
@@ -995,9 +1007,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[119]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-
-<span></span><span class="n">cost_history</span> <span class="o">=</span> <span class="p">[]</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="n">cost_history</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1">#パラメータの初期値</span>
 <span class="n">init_theta_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ansatz</span><span class="o">.</span><span class="n">get_parameter_count</span><span class="p">())]</span>
@@ -1029,8 +1039,7 @@ fidelity 1.6365353516789582e-11 parameters [-0.15233116  2.03516357 -2.15034665]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[120]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">opt</span><span class="o">.</span><span class="n">x</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1049,8 +1058,8 @@ array([-1.57079668,  1.57079738, -1.5707957 ])
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="02_Ramsay.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1067,19 +1076,17 @@ array([-1.57079668,  1.57079738, -1.5707957 ])
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Qulacs-Osaka<br/>
-        
-            &copy; Copyright 2021, Qulacs-Osaka.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Qulacs-Osaka<br/>
+    
+        &copy; Copyright 2021, Qulacs-Osaka.<br/>
+  </p>
+</footer>
 </main>
 
 

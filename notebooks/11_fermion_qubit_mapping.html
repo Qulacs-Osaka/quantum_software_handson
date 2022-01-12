@@ -32,7 +32,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -197,7 +197,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -215,7 +215,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -284,7 +284,79 @@
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>量子コンピュータ上に量子化学の問題をマッピングする</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#H_{qubit}を用意する手順">
+   <span class="math notranslate nohighlight">
+    \(H_{qubit}\)
+   </span>
+   を用意する手順
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#1.-計算する分子の構造や電荷など入力する">
+     1. 計算する分子の構造や電荷など入力する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#2.-平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る">
+     2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#3.-得られた分子軌道から、第二量子化表現の電子のハミルトニアンH_{electron}を構築する">
+     3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン
+     <span class="math notranslate nohighlight">
+      \(H_{electron}\)
+     </span>
+     を構築する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">
+     4. OpenFermionなどを使って、
+     <span class="math notranslate nohighlight">
+      \(H_{electron}\)
+     </span>
+     を
+     <span class="math notranslate nohighlight">
+      \(H_{qubit}\)
+     </span>
+     に変換する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#Jordan-Wigner-変換">
+       Jordan-Wigner 変換
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#Bravyi-Kitaev">
+       Bravyi-Kitaev
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   
@@ -497,7 +569,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt a.copybtn {
+.prompt .copybtn {
     display: none;
 }
 
@@ -539,8 +611,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span>!echo y | pip uninstall h5py
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>!echo y | pip uninstall h5py
 !pip install h5py==2.9.0
 !pip install openfermion openfermionpyscf
 </pre></div>
@@ -610,8 +681,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">openfermion.chem</span> <span class="kn">import</span> <span class="n">MolecularData</span>
 <span class="kn">from</span> <span class="nn">openfermion.transforms</span> <span class="kn">import</span> <span class="n">get_fermion_operator</span><span class="p">,</span> <span class="n">jordan_wigner</span><span class="p">,</span> <span class="n">bravyi_kitaev</span><span class="p">,</span> <span class="n">symmetry_conserving_bravyi_kitaev</span>
@@ -650,8 +720,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。</span>
 <span class="n">mol_h2</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span> <span class="o">=</span> <span class="s1">&#39;H 0 0 0; H 0 0 0.74&#39;</span><span class="p">,</span> <span class="n">basis</span> <span class="o">=</span> <span class="s1">&#39;sto-3g&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -664,8 +733,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。</span>
 <span class="n">mean_field_wavefunction</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol_h2</span><span class="p">)</span>
 <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">hf_energy</span> <span class="o">=</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
@@ -690,8 +758,7 @@ Hartree-Fock Energy in (hartree) -1.1167593073964248
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Energy of the 1st MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Energy of the 1st MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Energy of the 2nd MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -713,8 +780,7 @@ C1 [ 1.21245192 -1.21245192] Energy of the 2nd MO 0.6711434919142547
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span>from qchem_util import get_molecular_hamiltonian_from_fcidump
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>from qchem_util import get_molecular_hamiltonian_from_fcidump
 # 第二量子化された電子のハミルトニアンを構築し、fcidump 形式で保存
 tools.fcidump.from_scf(mean_field_wavefunction, &#39;fcidump.rhf&#39;)
 #　保存した第二量子化ハミルトニアンを確認
@@ -761,8 +827,7 @@ tools.fcidump.from_scf(mean_field_wavefunction, &#39;fcidump.rhf&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="n">fermion_hamiltonian</span> <span class="o">=</span> <span class="n">get_molecular_hamiltonian_from_fcidump</span><span class="p">(</span><span class="s1">&#39;fcidump.rhf&#39;</span><span class="p">)</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fermion_hamiltonian</span> <span class="o">=</span> <span class="n">get_molecular_hamiltonian_from_fcidump</span><span class="p">(</span><span class="s1">&#39;fcidump.rhf&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -836,8 +901,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="n">jw_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">jordan_wigner</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jw_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">jordan_wigner</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">jw_qubit_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -873,8 +937,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="n">bk_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bk_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">bk_qubit_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -907,8 +970,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">active_fermions</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">active_fermions</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">symmetry_conserving_bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">),</span><span class="n">active_orbitals</span><span class="p">,</span><span class="n">active_fermions</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -931,8 +993,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -940,8 +1001,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre>
-<span></span>
+<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -953,8 +1013,8 @@ Parsing fcidump.rhf
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="10_conventional_quantum_chemical_calculations.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -971,19 +1031,17 @@ Parsing fcidump.rhf
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Qulacs-Osaka<br/>
-        
-            &copy; Copyright 2021, Qulacs-Osaka.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Qulacs-Osaka<br/>
+    
+        &copy; Copyright 2021, Qulacs-Osaka.<br/>
+  </p>
+</footer>
 </main>
 
 
