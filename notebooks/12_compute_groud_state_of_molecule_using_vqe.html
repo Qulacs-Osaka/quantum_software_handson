@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>量子変分固有値法（VQE)を用いた基底状態計算 &#8212; Quantum Software Hands on  documentation</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,23 +20,20 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/12_compute_groud_state_of_molecule_using_vqe.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -47,7 +46,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -56,9 +69,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -155,12 +169,17 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -168,61 +187,117 @@
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+    <div class="header-article row sticky-top noprint">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/12_compute_groud_state_of_molecule_using_vqe.ipynb.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/12_compute_groud_state_of_molecule_using_vqe.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-            <!-- Source interaction buttons -->
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    量子変分固有値法（VQE)を用いた基底状態計算
@@ -251,12 +326,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>量子変分固有値法（VQE)を用いた基底状態計算</h1>
@@ -301,7 +375,8 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
   
@@ -519,6 +594,7 @@ div.nboutput.container div.output_area > div[class^='highlight']{
 }
 
 /* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
 div.rendered_html table {
   border: none;
   border-collapse: collapse;
@@ -527,10 +603,14 @@ div.rendered_html table {
   font-size: 12px;
   table-layout: fixed;
 }
+.jp-RenderedHTMLCommon thead,
 div.rendered_html thead {
   border-bottom: 1px solid black;
   vertical-align: bottom;
 }
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
 div.rendered_html tr,
 div.rendered_html th,
 div.rendered_html td {
@@ -542,12 +622,15 @@ div.rendered_html td {
   max-width: none;
   border: none;
 }
+.jp-RenderedHTMLCommon th,
 div.rendered_html th {
   font-weight: bold;
 }
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
 div.rendered_html tbody tr:nth-child(odd) {
   background: #f5f5f5;
 }
+.jp-RenderedHTMLCommon tbody tr:hover,
 div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
@@ -694,16 +777,16 @@ Successfully installed cirq-0.11.1 cirq-core-0.11.1 cirq-google-0.11.1 deprecati
 </pre></div>
 </div>
 </div>
-<div class="section" id="量子変分固有値法（VQE)を用いた基底状態計算">
-<h1>量子変分固有値法（VQE)を用いた基底状態計算<a class="headerlink" href="#量子変分固有値法（VQE)を用いた基底状態計算" title="Permalink to this headline">¶</a></h1>
+<section id="量子変分固有値法（VQE)を用いた基底状態計算">
+<h1>量子変分固有値法（VQE)を用いた基底状態計算<a class="headerlink" href="#量子変分固有値法（VQE)を用いた基底状態計算" title="Permalink to this headline">#</a></h1>
 <p>さて、ここまでで、量子コンピュータ上に電子の波動関数やハミルトニアンを載せる方法を学んだ。 分子のエネルギー計算を量子コンピュータで実行するには、あとは、 量子コンピュータを使って、以下の固有値問題をどう解くかがわかれば良い。</p>
 <div class="math notranslate nohighlight">
 \[H\Psi = E\Psi\]</div>
 <p>この方法もハミルトニアンの変換法と同様に複数存在する。 将来的にどの計算法がデファクトスタンダードとなるかは、まだ未知数であるが、 代表的なものは位相推定法（Phase Estimation Algorithm, PEA)と変分量子固有値法(Variational Quantum Eigensolver, VQE)の２つである。 PEAは厳密解を多項式時間で解くことができるアルゴリズムであり、 古典アルゴリズムに対する優位性が保証された方法となっている。 しかし、PEAの量子回路は非常に深くなるため、水素分子のようなミニマルな系以外では、NISQ上で動作することは望めない。</p>
 <p>これに対して、VQEは量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>を使って、求めたい量子状態の近似波動関数<span class="math notranslate nohighlight">\(\Psi_T(\theta)\)</span>を表現し、量子回路のパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は、<span class="math notranslate nohighlight">\(E_T(\theta) = \langle \Phi_T(\theta) | H | \Phi_T(\theta) \rangle\)</span>が最小化されるように古典コンピュータ上で決定する。VQEで用いる<span class="math notranslate nohighlight">\(U(\theta)は\)</span>PEAに比べて浅い回路で良く、NISQでも（ある程度）動作する。</p>
 <p>「03_量子演算を変分的に分解する」や「08_簡単な量子回路学習を実行してみる 」では、コスト関数の最小化をおこなったが、VQEもコスト関数にエネルギーを使って同様のことをおこなっている。</p>
-<div class="section" id="復習:-水素分子のハミルトニアンをqubit表現で用意">
-<h2>復習: 水素分子のハミルトニアンをqubit表現で用意<a class="headerlink" href="#復習:-水素分子のハミルトニアンをqubit表現で用意" title="Permalink to this headline">¶</a></h2>
+<section id="復習:-水素分子のハミルトニアンをqubit表現で用意">
+<h2>復習: 水素分子のハミルトニアンをqubit表現で用意<a class="headerlink" href="#復習:-水素分子のハミルトニアンをqubit表現で用意" title="Permalink to this headline">#</a></h2>
 <p>さて、これまでの復習になるが、水素分子のハミルトニアンを用意してみる。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -748,9 +831,9 @@ Parsing fcidump.rhf
 (-0.2234315369081355+0j) [Z3]
 </pre></div></div>
 </div>
-</div>
-<div class="section" id="量子回路上でのHartree-Fock状態の用意">
-<h2>量子回路上でのHartree-Fock状態の用意<a class="headerlink" href="#量子回路上でのHartree-Fock状態の用意" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="量子回路上でのHartree-Fock状態の用意">
+<h2>量子回路上でのHartree-Fock状態の用意<a class="headerlink" href="#量子回路上でのHartree-Fock状態の用意" title="Permalink to this headline">#</a></h2>
 <p>さて、VQEの量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>は、何かしらの初期波動関数<span class="math notranslate nohighlight">\(|\Psi_0\rangle\)</span>に作用して、近似波動関数を生成する。</p>
 <div class="math notranslate nohighlight">
 \[|\Psi(\theta)_T\rangle = U(\theta) |\Psi_0\rangle\]</div>
@@ -794,10 +877,10 @@ Parsing fcidump.rhf
 </pre></div></div>
 </div>
 <p>この値は、PySCFで計算した、Hartree-Fock Energy -1.1167593073964248 と一致していることが見て取れる。</p>
-</div>
-</div>
-<div class="section" id="波動関数を表す量子回路U(\theta)の用意">
-<h1>波動関数を表す量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>の用意<a class="headerlink" href="#波動関数を表す量子回路U(\theta)の用意" title="Permalink to this headline">¶</a></h1>
+</section>
+</section>
+<section id="波動関数を表す量子回路U(\theta)の用意">
+<h1>波動関数を表す量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>の用意<a class="headerlink" href="#波動関数を表す量子回路U(\theta)の用意" title="Permalink to this headline">#</a></h1>
 <p>波動関数のモデルのことを物理では、ansatzと呼ぶ。 このansatzが、VQEの場合、量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>となっている。 どういった 分子の波動関数に対してどういった<span class="math notranslate nohighlight">\(U(\theta)\)</span>がいいかは今も研究がおこなわれている最中であり、決定打となるようなものはまだ存在しない（と少なくとも思われている）。</p>
 <p>ここでは、Gard et al. による粒子数を保存する回路を用いることにしよう。 （<a class="reference external" href="https://www.nature.com/articles/s41534-019-0240-1">https://www.nature.com/articles/s41534-019-0240-1</a>)</p>
 <div class="nbinput nblast docutils container">
@@ -921,14 +1004,16 @@ c.f., Full CI Energy (in hartree)  -1.1372838344885023
 </div>
 </div>
 <p>VQE Energyが 0.001 hartree以下の誤差で、Full CIのエネルギーを再現していることが見て取れる。n_repeatの数を増やして、もっと深い量子回路にすれば、Full CIと厳密に一致する解を得ることができる。逆に、n_repeatの数を減らすと(i.e., 1)、精度が低下することが確認できるので、実行してみよう。</p>
-</div>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="11_fermion_qubit_mapping.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -944,24 +1029,28 @@ c.f., Full CI Energy (in hartree)  -1.1372838344885023
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
     
-      By Qulacs-Osaka<br/>
-    
-        &copy; Copyright 2021, Qulacs-Osaka.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
