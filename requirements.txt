@@ -1,9 +1,9 @@
 #py3Dmol
 #pythreejs
 #fortecubeview
-qulacs
-qulacsvis
-matplotlib
-numpy
-scipy
-tqdm
+#qulacs
+#qulacsvis
+#matplotlib
+#numpy
+#scipy
+#tqdm
