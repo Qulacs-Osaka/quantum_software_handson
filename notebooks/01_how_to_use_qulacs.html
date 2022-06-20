@@ -734,7 +734,7 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
@@ -746,7 +746,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -774,7 +774,7 @@ div.rendered_html tbody tr:hover {
 <section id="量子ビットの確保">
 <h3>量子ビットの確保<a class="headerlink" href="#量子ビットの確保" title="Permalink to this headline">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span>
@@ -785,7 +785,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>また、確保した量子ビットをすべて0状態、<span class="math notranslate nohighlight">\(|00...0\rangle\)</span>へと初期化は <code class="docutils literal notranslate"><span class="pre">set_zero_state()</span></code>で行うことができる。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
@@ -797,7 +797,7 @@ div.rendered_html tbody tr:hover {
 <h3>状態ベクトルを <code class="docutils literal notranslate"><span class="pre">array</span></code> として書き出し<a class="headerlink" href="#状態ベクトルを-array-として書き出し" title="Permalink to this headline">#</a></h3>
 <p>量子状態を取得し、<code class="docutils literal notranslate"><span class="pre">array</span></code>として格納するには、<code class="docutils literal notranslate"><span class="pre">get_vector()</span></code>を使う。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_array</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()</span>
@@ -818,7 +818,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>逆に<code class="docutils literal notranslate"><span class="pre">array</span></code>から状態をロードすることも可能</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_vector</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">1.2345</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nqubits</span><span class="p">)]</span>
@@ -876,7 +876,7 @@ div.rendered_html tbody tr:hover {
 <h3>特殊な初期状態の指定<a class="headerlink" href="#特殊な初期状態の指定" title="Permalink to this headline">#</a></h3>
 <p>ゼロ状態への初期化以外にも、ビット列を指定した初期化、<code class="docutils literal notranslate"><span class="pre">set_computational_basis()</span></code>、や、ランダムな量子状態の準備、<code class="docutils literal notranslate"><span class="pre">set_Haar_random_state()</span></code>、などの準備を行う関数も用意されている。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">set_computational_basis</span><span class="p">(</span><span class="mb">0b10101</span><span class="p">)</span>
@@ -894,7 +894,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">utility.py</span></code> （いつも使う便利な関数）にある確率分布を表示させる関数 <code class="docutils literal notranslate"><span class="pre">show_distribution</span></code> を使ってみよう。計算基底に関する測定確率の分布は、</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -909,7 +909,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed</span> <span class="o">=</span> <span class="mi">0</span>
@@ -930,7 +930,7 @@ div.rendered_html tbody tr:hover {
 <h3>計算基底でのサンプリング<a class="headerlink" href="#計算基底でのサンプリング" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sampling(shots)</span></code> で <code class="docutils literal notranslate"><span class="pre">shots</span></code> 回の計算基底でのサンプリングを実行できる。実行結果はサンプリング結果のビット列を整数化したリストとして得られる。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shots</span> <span class="o">=</span> <span class="mi">10</span>
@@ -939,17 +939,17 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[13, 29, 15, 3, 24, 17, 14, 1, 7, 31]
+[7, 13, 2, 15, 19, 24, 1, 4, 15, 29]
 </pre></div></div>
 </div>
 <p>　量子状態のために確保したメモリの解放は、<code class="docutils literal notranslate"><span class="pre">del</span></code>から行うことができる。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">state</span>
@@ -964,7 +964,7 @@ div.rendered_html tbody tr:hover {
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-16-435276040a36&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">/tmp/ipykernel_62/2357366042.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">del</span> state
 <span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>state
 
@@ -976,7 +976,7 @@ div.rendered_html tbody tr:hover {
 <h3>状態のコピーと内積<a class="headerlink" href="#状態のコピーと内積" title="Permalink to this headline">#</a></h3>
 <p>qulacsには他にも、量子状態のコピーや、</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
@@ -986,7 +986,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>２つの量子状態の内積の計算、</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
@@ -996,7 +996,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1038,7 +1038,7 @@ div.rendered_html tbody tr:hover {
 <section id="量子状態の更新の例">
 <h3>量子状態の更新の例<a class="headerlink" href="#量子状態の更新の例" title="Permalink to this headline">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#量子ビットの状態確保</span>
@@ -1079,7 +1079,7 @@ div.rendered_html tbody tr:hover {
 <h3>回転演算<a class="headerlink" href="#回転演算" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">RX</span></code>、<code class="docutils literal notranslate"><span class="pre">RY</span></code>、<code class="docutils literal notranslate"><span class="pre">RZ</span></code>などの回転演算は、作用する量子ビットのインデックスと回転角を与えて定義する。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1102,7 +1102,7 @@ div.rendered_html tbody tr:hover {
 <h3>自分で定義した演算を実行<a class="headerlink" href="#自分で定義した演算を実行" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">DenseMatrix</span></code>を用いて、自分で定義した一般の行列から演算を作ることもできる。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DenseMatrix</span>
@@ -1138,7 +1138,7 @@ div.rendered_html tbody tr:hover {
 <h2>量子回路の構成<a class="headerlink" href="#量子回路の構成" title="Permalink to this headline">#</a></h2>
 <p>上で説明したように、各演算ごとに実行して量子状態を更新することもできるが、複雑な量子回路を構成する場合には、実行する前に量子回路を構成できると便利であろう。qulacsでは、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>クラスを用いて、演算の集合からなる回路<code class="docutils literal notranslate"><span class="pre">circuit</span></code>を定義することができる。定義した回路をprintすると、構成された回路の詳細データを得ることができる。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
@@ -1167,7 +1167,7 @@ Gaussian  : yes
 </div>
 <p>回路への、演算の追加は、以下のような方法で行うことができる。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">add_H_gate</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 0番目の量子ビットに作用するHを追加</span>
@@ -1194,7 +1194,7 @@ Gaussian  : no
 </div>
 <p>このようにして構成された<code class="docutils literal notranslate"><span class="pre">circuit</span></code>を実行して<code class="docutils literal notranslate"><span class="pre">state</span></code>の更新を行いたければ、<code class="docutils literal notranslate"><span class="pre">gate</span></code>の場合と同様に、 <code class="docutils literal notranslate"><span class="pre">circuit.update_quantum_state(state)</span></code>とすればよい。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="c1">#構成されたcircuitを実行して状態を更新</span>
@@ -1217,7 +1217,7 @@ Gaussian  : no
 </pre></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -1249,27 +1249,27 @@ Gaussian  : no
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-number of qubit:5 time:2.172984801057809e-07[sec]
-number of qubit:6 time:1.7427662999189265e-07[sec]
-number of qubit:7 time:1.8076524072416723e-07[sec]
-number of qubit:8 time:2.0360660597560956e-07[sec]
-number of qubit:9 time:2.7935781110913224e-07[sec]
-number of qubit:10 time:4.3130724483577093e-07[sec]
-number of qubit:11 time:7.87291810727391e-07[sec]
-number of qubit:12 time:1.4506750582445072e-06[sec]
-number of qubit:13 time:5.11568204275715e-05[sec]
-number of qubit:14 time:5.282040143790863e-05[sec]
-number of qubit:15 time:5.432670201851413e-05[sec]
-number of qubit:16 time:5.792603380045922e-05[sec]
-number of qubit:17 time:6.405983540111884e-05[sec]
-number of qubit:18 time:7.460760945797322e-05[sec]
-number of qubit:19 time:9.78415083731254e-05[sec]
-number of qubit:20 time:0.00042180293748358716[sec]
-number of qubit:21 time:0.0022063115974525352[sec]
-number of qubit:22 time:0.0052310300595832596[sec]
-number of qubit:23 time:0.010901946088542109[sec]
-number of qubit:24 time:0.02248343328634898[sec]
-number of qubit:25 time:0.045208797454833985[sec]
+number of qubit:5 time:1.8655394224002872e-07[sec]
+number of qubit:6 time:1.867558148394678e-07[sec]
+number of qubit:7 time:2.3269196980180398e-07[sec]
+number of qubit:8 time:3.530456801482361e-07[sec]
+number of qubit:9 time:5.599655307421179e-07[sec]
+number of qubit:10 time:9.847663793669309e-07[sec]
+number of qubit:11 time:1.847524847645688e-06[sec]
+number of qubit:12 time:4.03560324867409e-06[sec]
+number of qubit:13 time:0.0013933640259962815[sec]
+number of qubit:14 time:0.0009282394061012873[sec]
+number of qubit:15 time:0.001679897705713908[sec]
+number of qubit:16 time:0.0022918179631233214[sec]
+number of qubit:17 time:0.002821945676616594[sec]
+number of qubit:18 time:0.007113221618864272[sec]
+number of qubit:19 time:0.004515068572864198[sec]
+number of qubit:20 time:0.01006901462872823[sec]
+number of qubit:21 time:0.014185351984841483[sec]
+number of qubit:22 time:0.01543073220686479[sec]
+number of qubit:23 time:0.034288945405379585[sec]
+number of qubit:24 time:0.06265690922737122[sec]
+number of qubit:25 time:0.12326583862304688[sec]
 </pre></div></div>
 </div>
 </section>
@@ -1277,10 +1277,11 @@ number of qubit:25 time:0.045208797454833985[sec]
 <h2>Observable クラス<a class="headerlink" href="#Observable-クラス" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add_operator</span></code>で係数とパウリ演算子のタイプ、そして量子ビットのindexを指定して追加</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurement</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">measurement</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
 <span class="n">measurement</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span><span class="s2">&quot;Z 0&quot;</span><span class="p">)</span>
 <span class="c1"># utility.pyにある関数をつかって中身を表示</span>
 <span class="n">show_observable</span><span class="p">(</span><span class="n">measurement</span><span class="p">)</span>
@@ -1297,17 +1298,16 @@ number of qubit:25 time:0.045208797454833985[sec]
 </div>
 <p>期待値の計算は、<code class="docutils literal notranslate"><span class="pre">get_expectation_value(state)</span></code></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
 <span class="n">measurement</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1316,7 +1316,7 @@ number of qubit:25 time:0.045208797454833985[sec]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">10</span>
@@ -1340,12 +1340,12 @@ number of qubit:25 time:0.045208797454833985[sec]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--0.01902484063143186
+0.00464979951617712
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
