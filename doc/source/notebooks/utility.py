@@ -3,6 +3,7 @@ from qulacs import ParametricQuantumCircuit
 #import scipy.optimize
 import matplotlib.pyplot as plt
 #import numpy as np
+import numpy.testing as npt
 #import time 
 #import random
 #import scipy.linalg
@@ -69,7 +70,7 @@ def add_parametric_gates_from_observable(parametric_circuit,layer_observable):
 
 def show_distribution(state):
     nqubits = state.get_qubit_count()
-    plt.bar([i for i in range(pow(2,nqubits))],pow(abs(state.get_vector()),2), tick_label=[bin(i) for i in range(pow(2,nqubits))])
+    plt.bar([i for i in range(pow(2,nqubits))],pow(abs(state.get_vector()),2), tick_label=[format(i, "b").zfill(nqubits) for i in range(pow(2,nqubits))])
     plt.xticks(rotation=90)
     plt.show()
 
@@ -183,3 +184,17 @@ def get_matrix(obs):
             pauli_string[target] = sigma_list[pauli_id_list[j]]
         result += pauli.get_coef()*_kron_n(*(pauli_string[::-1]))
     return result
+
+
+def initialize_circuit(nqubits: int) -> QuantumCircuit:
+    circuit = QuantumCircuit(nqubits)
+    return circuit
+
+
+def evaluate_solution(actual, desired):
+    try:
+        npt.assert_almost_equal(actual, desired)
+        print("正解です🎉")
+    except Exception as e:
+        print("不正解です😨")
+        print(e)
