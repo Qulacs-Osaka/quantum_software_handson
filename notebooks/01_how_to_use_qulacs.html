@@ -364,6 +364,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#量子回路の可視化">
+   量子回路の可視化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Qulacsの計算速度を体感">
    Qulacsの計算速度を体感
   </a>
@@ -455,6 +460,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#量子回路の構成">
    量子回路の構成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#量子回路の可視化">
+   量子回路の可視化
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -738,6 +748,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install qulacsvis</span>
 <span class="c1">#!pip install matplotlib</span>
 <span class="c1">#!pip install numpy</span>
 <span class="c1">#!pip install scipy</span>
@@ -757,6 +768,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
 <span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DenseMatrix</span>
 <span class="kn">from</span> <span class="nn">qulacs.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuitOptimizer</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
 </pre></div>
 </div>
 </div>
@@ -944,7 +956,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[7, 13, 2, 15, 19, 24, 1, 4, 15, 29]
+[4, 13, 15, 1, 10, 1, 4, 25, 22, 14]
 </pre></div></div>
 </div>
 <p>　量子状態のために確保したメモリの解放は、<code class="docutils literal notranslate"><span class="pre">del</span></code>から行うことができる。</p>
@@ -964,7 +976,7 @@ div.rendered_html tbody tr:hover {
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-fg">/tmp/ipykernel_62/2357366042.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">/tmp/ipykernel_109/2357366042.py</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
 <span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">del</span> state
 <span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>state
 
@@ -1211,13 +1223,59 @@ Gaussian  : no
 </pre></div></div>
 </div>
 </section>
+<section id="量子回路の可視化">
+<h2>量子回路の可視化<a class="headerlink" href="#量子回路の可視化" title="Permalink to this headline">#</a></h2>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">qulacsvis</span></code>モジュールの<code class="docutils literal notranslate"><span class="pre">circuit_drawer</span></code>関数の引数に量子回路を渡すと可視化できる。</div>
+<div class="line">量子回路だけ渡した場合、ASCIIアートで可視化する。</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+   ___
+  | H |
+--|   |--
+  |___|
+   ___
+  | H |
+--|   |--
+  |___|
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">circuit_drawer</span></code>関数の2番目の引数に“mpl”を指定すると、matplotlibを使って可視化する。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_01_how_to_use_qulacs_49_0.png" src="../_images/notebooks_01_how_to_use_qulacs_49_0.png" />
+</div>
+</div>
+</section>
 <section id="Qulacsの計算速度を体感">
 <h2>Qulacsの計算速度を体感<a class="headerlink" href="#Qulacsの計算速度を体感" title="Permalink to this headline">#</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>一通り、導入が終わったので、qulacsの実行速度を計測してみよう。まずは、一量子ビットの実行時間を計測してみる。
 </pre></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -1249,27 +1307,27 @@ Gaussian  : no
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-number of qubit:5 time:1.8655394224002872e-07[sec]
-number of qubit:6 time:1.867558148394678e-07[sec]
-number of qubit:7 time:2.3269196980180398e-07[sec]
-number of qubit:8 time:3.530456801482361e-07[sec]
-number of qubit:9 time:5.599655307421179e-07[sec]
-number of qubit:10 time:9.847663793669309e-07[sec]
-number of qubit:11 time:1.847524847645688e-06[sec]
-number of qubit:12 time:4.03560324867409e-06[sec]
-number of qubit:13 time:0.0013933640259962815[sec]
-number of qubit:14 time:0.0009282394061012873[sec]
-number of qubit:15 time:0.001679897705713908[sec]
-number of qubit:16 time:0.0022918179631233214[sec]
-number of qubit:17 time:0.002821945676616594[sec]
-number of qubit:18 time:0.007113221618864272[sec]
-number of qubit:19 time:0.004515068572864198[sec]
-number of qubit:20 time:0.01006901462872823[sec]
-number of qubit:21 time:0.014185351984841483[sec]
-number of qubit:22 time:0.01543073220686479[sec]
-number of qubit:23 time:0.034288945405379585[sec]
-number of qubit:24 time:0.06265690922737122[sec]
-number of qubit:25 time:0.12326583862304688[sec]
+number of qubit:5 time:1.91528180866146e-07[sec]
+number of qubit:6 time:1.9932193651380468e-07[sec]
+number of qubit:7 time:2.5147298998442286e-07[sec]
+number of qubit:8 time:3.7056330903698653e-07[sec]
+number of qubit:9 time:6.208468575557389e-07[sec]
+number of qubit:10 time:1.1492763580313848e-06[sec]
+number of qubit:11 time:2.2952838552087693e-06[sec]
+number of qubit:12 time:5.205756532099373e-06[sec]
+number of qubit:13 time:0.009219458979419153[sec]
+number of qubit:14 time:0.010235871587480818[sec]
+number of qubit:15 time:0.0021463403514787264[sec]
+number of qubit:16 time:0.001693744584918022[sec]
+number of qubit:17 time:0.0006709525522511355[sec]
+number of qubit:18 time:0.0007638593786927663[sec]
+number of qubit:19 time:0.0015139031230955195[sec]
+number of qubit:20 time:0.0030001514098223518[sec]
+number of qubit:21 time:0.009526865822928292[sec]
+number of qubit:22 time:0.022560126853711678[sec]
+number of qubit:23 time:0.03963954034058944[sec]
+number of qubit:24 time:0.0747258464495341[sec]
+number of qubit:25 time:0.11182180404663086[sec]
 </pre></div></div>
 </div>
 </section>
@@ -1277,7 +1335,7 @@ number of qubit:25 time:0.12326583862304688[sec]
 <h2>Observable クラス<a class="headerlink" href="#Observable-クラス" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add_operator</span></code>で係数とパウリ演算子のタイプ、そして量子ビットのindexを指定して追加</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1298,7 +1356,7 @@ number of qubit:25 time:0.12326583862304688[sec]
 </div>
 <p>期待値の計算は、<code class="docutils literal notranslate"><span class="pre">get_expectation_value(state)</span></code></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
@@ -1307,7 +1365,7 @@ number of qubit:25 time:0.12326583862304688[sec]
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1316,7 +1374,7 @@ number of qubit:25 time:0.12326583862304688[sec]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">10</span>
@@ -1340,12 +1398,12 @@ number of qubit:25 time:0.12326583862304688[sec]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.00464979951617712
+-0.006621512824246478
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
