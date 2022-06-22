@@ -43,7 +43,7 @@
 
 - 04\_量子エラー補償の基礎
 
-- 05\_量子化学の基礎
+- 05\_量子コンピュータと量子化学の基礎
 
   - 01\_古典コンピュータを使った量子化学計算を実行してみる
     <br> [05_01_conventional_quantum_chemical_calculations.ipynb](./doc/source/notebooks/05_01_conventional_quantum_chemical_calculations.ipynb)
@@ -64,9 +64,9 @@
     <br> [06_02_grover_search.ipynb](./doc/source/notebooks/06_02_grover_search.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/06_02_grover_search.ipynb)
 
-- 07\_金融実務計算
+- 07\_量子コンピュータと金融実務計算
   - 01_QAE を用いた信用ポートフォリオリスク計測
-    <br> [07_01_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank.ipynb](./doc/source/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb)
+    <br> [07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb](./doc/source/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb)
 
 - 08\_量子インスパイアード古典アルゴリズム
