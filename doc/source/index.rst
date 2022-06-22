@@ -10,22 +10,21 @@ Welcome to Quautum Software Hands on's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   notebooks/01_how_to_use_qulacs
-   notebooks/02_Ramsay
-   notebooks/03_VariationalGateDecomposition
-   notebooks/04_QuantumVolume
-   notebooks/05_sample_observable
-   notebooks/06_parameter_shift_rule
-   notebooks/07_error_mitigation
-   notebooks/08_QCL
-   notebooks/09_quantum_kernel
-   notebooks/10_conventional_quantum_chemical_calculations
-   notebooks/11_fermion_qubit_mapping
-   notebooks/12_compute_groud_state_of_molecule_using_vqe
-   notebooks/13_quantum_phase_estimation
-   notebooks/14_grover_search
-   notebooks/15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement
-   notebooks/15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement_blank
+   notebooks/01_01_how_to_use_qulacs
+   notebooks/01_02_Ramsay
+   notebooks/01_03_VariationalGateDecomposition
+   notebooks/01_04_QuantumVolume
+   notebooks/02_01_sample_observable
+   notebooks/02_02_parameter_shift_rule
+   notebooks/02_03_error_mitigation
+   notebooks/03_01_QCL
+   notebooks/03_02_quantum_kernel
+   notebooks/05_01_conventional_quantum_chemical_calculations
+   notebooks/05_02_fermion_qubit_mapping
+   notebooks/05_03_compute_groud_state_of_molecule_using_vqe
+   notebooks/06_01_quantum_phase_estimation
+   notebooks/06_02_grover_search
+   notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank
 
 
 
