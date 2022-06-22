@@ -676,10 +676,11 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install circuit_drawer</span>
 <span class="c1">#!pip install matplotlib</span>
 <span class="c1">#!pip install numpy</span>
 <span class="c1">#!pip install scipy</span>
@@ -691,6 +692,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span><span class="p">,</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
@@ -723,7 +725,7 @@ div.rendered_html tbody tr:hover {
 <section id="適当な状態を準備する">
 <h2>適当な状態を準備する<a class="headerlink" href="#適当な状態を準備する" title="Permalink to this headline">#</a></h2>
 <p>期待値測定をする対象として、適当な回路を通した状態を準備します。</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
@@ -737,7 +739,16 @@ div.rendered_html tbody tr:hover {
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">//</span><span class="mi">2</span><span class="p">):</span>
         <span class="n">circuit</span><span class="o">.</span><span class="n">add_CZ_gate</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="n">d</span><span class="o">%</span><span class="k">2</span>)%n_qubits, (i+1+d%2)%n_qubits)
 <span class="n">circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+
+<span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_05_sample_observable_8_0.png" src="../_images/notebooks_05_sample_observable_8_0.png" />
 </div>
 </div>
 <p>厳密な期待値を計算すると以下のようになります。これをサンプリングによって再現するのが目標です。</p>
@@ -755,7 +766,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--0.37299366575662657
+-0.37299366575662646
 </pre></div></div>
 </div>
 </section>
@@ -763,9 +774,12 @@ div.rendered_html tbody tr:hover {
 <h2>サンプリングをしてみる。<a class="headerlink" href="#サンプリングをしてみる。" title="Permalink to this headline">#</a></h2>
 <section id="Z-のサンプリング">
 <h3><span class="math notranslate nohighlight">\(Z\)</span> のサンプリング<a class="headerlink" href="#Z-のサンプリング" title="Permalink to this headline">#</a></h3>
-<p><span class="math notranslate nohighlight">\(H_{ZZ} = \sum_i J_i Z_iZ_{i+1}\)</span> の期待値 <span class="math notranslate nohighlight">\(\langle H \rangle\)</span> を求めよう。<span class="math notranslate nohighlight">\(Z\)</span> の固有ベクトルは <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> なので、そのままサンプリングすれば OK です</p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(H_{ZZ} = \sum_i J_i Z_iZ_{i+1}\)</span> の期待値 <span class="math notranslate nohighlight">\(\langle H \rangle\)</span> を求めよう。<span class="math notranslate nohighlight">\(Z\)</span> の固有ベクトルは <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> なので、そのままサンプリングすれば OK です。</div>
+<div class="line">変数<code class="docutils literal notranslate"><span class="pre">mask_list</span></code>の中身はそれぞれ、<span class="math notranslate nohighlight">\(Z_0 Z_1, Z_1 Z_2, Z_2 Z_3, Z_3 Z_0\)</span>に対応しています。(<span class="math notranslate nohighlight">\(Z_i\)</span>を使う場合、<code class="docutils literal notranslate"><span class="pre">0bxxxx</span></code>の右からi番目を1にする)</div>
+</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_ZZ</span><span class="p">(</span><span class="n">_n_shots</span><span class="p">):</span>
@@ -784,7 +798,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>1000個のビット列のサンプリングを1000回繰り返してヒストグラムに表示します</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_test</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -792,7 +806,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">result_list_ZZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_test</span><span class="p">):</span>
     <span class="n">result_list_ZZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sample_ZZ</span><span class="p">(</span><span class="n">n_shots</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">result_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">result_list_ZZ</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">hamiltonian_ZZ</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
     <span class="n">hamiltonian_ZZ</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;Z </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> Z </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">n_qubits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -813,7 +827,7 @@ div.rendered_html tbody tr:hover {
 <h3><span class="math notranslate nohighlight">\(X\)</span> のサンプリング<a class="headerlink" href="#X-のサンプリング" title="Permalink to this headline">#</a></h3>
 <p><span class="math notranslate nohighlight">\(X\)</span> のサンプリングはそのままではできないです。<span class="math notranslate nohighlight">\(X=HZH\)</span> を使って期待値を推定します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 演習</span>
@@ -849,7 +863,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 演習</span>
-<span class="k">def</span> <span class="nf">sample_XX</span><span class="p">(</span><span class="n">_n_shots</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">sample_YY</span><span class="p">(</span><span class="n">_n_shots</span><span class="p">):</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
