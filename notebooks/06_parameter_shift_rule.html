@@ -648,10 +648,11 @@ div.rendered_html tbody tr:hover {
 }
 </style>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install qulacsvis</span>
 <span class="c1">#!pip install matplotlib</span>
 <span class="c1">#!pip install numpy</span>
 <span class="c1">#!pip install scipy</span>
@@ -664,6 +665,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span><span class="p">,</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
@@ -677,7 +679,7 @@ div.rendered_html tbody tr:hover {
 \[H = \sum_{i} J_{i} (X_iX_{i+1} + Y_iY_{1+1} + Z_iZ_{i+1})\]</div>
 <p>に対する VQE を行います。</p>
 <p>まずハミルトニアンと適当なパラメータ付き量子回路を定義します。</p>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
@@ -700,7 +702,16 @@ div.rendered_html tbody tr:hover {
     <span class="n">hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;X </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> X </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">n_qubits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;Y </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> Y </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">n_qubits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;Z </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> Z </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">n_qubits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_06_parameter_shift_rule_4_0.png" src="../_images/notebooks_06_parameter_shift_rule_4_0.png" />
 </div>
 </div>
 <p>道具として、与えられたパラメータにおけるコスト関数 (この場合はエネルギー期待値) を返す関数を作っておきます。</p>
@@ -724,7 +735,7 @@ div.rendered_html tbody tr:hover {
 \[\frac{\partial \langle H(\theta)\rangle}{\partial \theta_i} = \frac{1}{2}\left(\left\langle H\left(\theta+\frac{\pi}{2}e_i\right)\right)-\left\langle H\left(\theta-\frac{\pi}{2}e_i\right)\right\rangle\right)\]</div>
 <p>ここで <span class="math notranslate nohighlight">\(e_i\)</span> は <span class="math notranslate nohighlight">\(i\)</span> 番目の成分だけ 1 でそれ以外はゼロのベクトルです。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># パラメータシフト法によって、あるパラメータ params における勾配ベクトルを求めるコードを書いてください。</span>
@@ -744,7 +755,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>正しく書けているか、有限差分による微分の近似値と比較しましょう。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
@@ -762,7 +773,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">get_parameter_count</span><span class="p">())</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
@@ -795,7 +806,7 @@ div.rendered_html tbody tr:hover {
 <h2>最適化<a class="headerlink" href="#最適化" title="Permalink to this headline">#</a></h2>
 <p>勾配降下法によって最適化しますが、先に答えを知っておきたいので、基底状態のエネルギーを得ておきましょう</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utility</span> <span class="kn">import</span> <span class="n">get_matrix</span>
@@ -815,7 +826,7 @@ ground state energy is: -2.2830906123847066
 </div>
 <p>単純な勾配降下法によって最適化を行います。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -833,11 +844,11 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 1000/1000 [00:11&lt;00:00, 90.10it/s]
+100%|██████████| 1000/1000 [01:33&lt;00:00, 10.64it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span>
@@ -862,7 +873,7 @@ ground state energy is: -2.2830906123847066
 <p>前回行ったように、実際の実験では必ずサンプリングに伴う統計ノイズが発生します。統計ノイズのもとでも勾配降下法が機能するか見てみましょう。</p>
 <p>まずは統計ノイズを含むコスト関数を定義します。前回のサンプリングコードを流用します。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_ZZ</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
@@ -915,7 +926,7 @@ ground state energy is: -2.2830906123847066
 </div>
 <p>一応正しくサンプリングできていることを確認しておきます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_tests</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -933,7 +944,7 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 1000/1000 [00:16&lt;00:00, 60.49it/s]
+100%|██████████| 1000/1000 [00:12&lt;00:00, 79.96it/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -948,7 +959,7 @@ ground state energy is: -2.2830906123847066
 <h3>有限差分による最適化<a class="headerlink" href="#有限差分による最適化" title="Permalink to this headline">#</a></h3>
 <p>まずは有限差分で最適化してみましょう。サンプリングをすると少し時間がかかるので、100 step だけやります。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
@@ -978,11 +989,11 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 100/100 [01:41&lt;00:00,  1.02s/it]
+100%|██████████| 100/100 [01:18&lt;00:00,  1.28it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cost_history_fd</span><span class="p">)</span>
@@ -1006,7 +1017,7 @@ ground state energy is: -2.2830906123847066
 <h3>パラメータシフト法による最適化<a class="headerlink" href="#パラメータシフト法による最適化" title="Permalink to this headline">#</a></h3>
 <p>次にパラメータシフト法によって最適化してみましょう。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_gradient_by_parameter_shift</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
@@ -1037,11 +1048,11 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 100/100 [01:41&lt;00:00,  1.02s/it]
+100%|██████████| 100/100 [01:16&lt;00:00,  1.31it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cost_history_fd</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;FD&quot;</span><span class="p">)</span>
@@ -1070,7 +1081,7 @@ ground state energy is: -2.2830906123847066
 \[\theta \to \theta - \alpha \hat{g}\]</div>
 <p>と更新することによって最適化する方法を一般に確率的勾配降下法といいます。統計誤差付きのパラメータシフト法もこれと同じことをしているとみなせます。確率的勾配降下法では、<span class="math notranslate nohighlight">\(\hat{g}\)</span> が <span class="math notranslate nohighlight">\(\nabla f\)</span> の不偏推定量になっていさえいれば良いので、原理的には <code class="docutils literal notranslate"><span class="pre">n_shots</span></code> をどれだけ減らしてもパラメータシフト法は動くはずです。試しに <code class="docutils literal notranslate"><span class="pre">n_shots=1</span></code> でやってみましょう。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -1090,11 +1101,11 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 10000/10000 [00:40&lt;00:00, 249.96it/s]
+100%|██████████| 10000/10000 [03:24&lt;00:00, 48.85it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cost_history_ps_1shot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PS-1shot&quot;</span><span class="p">)</span>
@@ -1116,7 +1127,7 @@ ground state energy is: -2.2830906123847066
 </div>
 <p>全然だめですね。確率的勾配降下法を収束させるためにはステップ幅 <span class="math notranslate nohighlight">\(\alpha\)</span> を小さくしていかないといけないからです。そこで次は <span class="math notranslate nohighlight">\(\alpha = \alpha_0/(\text{number of steps})\)</span> で変化させていきます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[69]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">10000</span>
@@ -1136,11 +1147,11 @@ ground state energy is: -2.2830906123847066
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-100%|██████████| 10000/10000 [00:39&lt;00:00, 256.30it/s]
+100%|██████████| 10000/10000 [03:05&lt;00:00, 53.81it/s]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[70]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cost_history_ps_1shot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PS-1shot&quot;</span><span class="p">)</span>
