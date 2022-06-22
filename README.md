@@ -7,6 +7,9 @@
 
 - 01\_量子計算の基礎
 
+  - 00_量子計算の基礎 1000本ノック
+    <br> [01_00_quantum_computation_1000practices.ipynb](./doc/source/notebooks/01_00_quantum_computation_1000practices.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/01_00_quantum_computation_1000practices.ipynb)
   - 01_qulacs の使い方
     <br> [01_01_how_to_use_qulacs.ipynb](./doc/source/notebooks/01_01_how_to_use_qulacs.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/01_01_how_to_use_qulacs.ipynb)
