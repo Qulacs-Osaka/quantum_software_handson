@@ -34,11 +34,9 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/03_VariationalGateDecomposition.html" />
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/01_03_VariationalGateDecomposition.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ランダム量子回路と量子ボリューム" href="04_QuantumVolume.html" />
-    <link rel="prev" title="ラムゼイ干渉をプロットする" href="02_Ramsay.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -90,84 +88,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_how_to_use_qulacs.html">
-   Qulacsの基本的な使い方
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Ramsay.html">
-   ラムゼイ干渉をプロットする
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   変分法を用いて量子演算を特定の演算で分解する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_QuantumVolume.html">
-   ランダム量子回路と量子ボリューム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_sample_observable.html">
-   サンプリングによってオブザーバブルの期待値を推定する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_parameter_shift_rule.html">
-   パラメータシフト法による勾配最適化
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_error_mitigation.html">
-   エラー補償手法について学ぶ
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_QCL.html">
-   簡単な量子回路学習を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_quantum_kernel.html">
-   量子カーネル法を使ってみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_conventional_quantum_chemical_calculations.html">
-   古典コンピュータを使った量子化学計算を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_fermion_qubit_mapping.html">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">
-   量子変分固有値法（VQE)を用いた基底状態計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_quantum_phase_estimation.html">
-   位相推定アルゴリズム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_grover_search.html">
-   グローバー探索量子アルゴリズムをとことん実装する
-  </a>
- </li>
-</ul>
-
+        
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -239,7 +160,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebooks/03_VariationalGateDecomposition.ipynb.txt"
+        <a href="../_sources/notebooks/01_03_VariationalGateDecomposition.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -673,7 +594,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_3_0.png" class="no-scaled-link" src="../_images/notebooks_03_VariationalGateDecomposition_3_0.png" style="width: 600px;" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_3_0.png" class="no-scaled-link" src="../_images/notebooks_01_03_VariationalGateDecomposition_3_0.png" style="width: 600px;" />
 </div>
 </div>
 <section id="最大エンタングル状態の生成">
@@ -691,7 +612,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_5_0.png" class="no-scaled-link" src="../_images/notebooks_03_VariationalGateDecomposition_5_0.png" style="width: 600px;" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_5_0.png" class="no-scaled-link" src="../_images/notebooks_01_03_VariationalGateDecomposition_5_0.png" style="width: 600px;" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -718,7 +639,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_8_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_8_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_8_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_8_0.png" />
 </div>
 </div>
 <p>${ |+:nbsphinx-math:<cite>rangle `, |-:nbsphinx-math:</cite>rangle <cite>} :math:`基底での測定は、</cite>H$を作用させてから0,1測定すればいいので</p>
@@ -736,7 +657,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_10_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_10_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_10_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_10_0.png" />
 </div>
 </div>
 <p>基底を変えても完全相関があることがわかる。2n qubitの最大エンタングル状態を生成する関数を作っておく。</p>
@@ -766,7 +687,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_13_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_13_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_13_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_13_0.png" />
 </div>
 </div>
 </section>
@@ -786,7 +707,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_16_0.png" class="no-scaled-link" src="../_images/notebooks_03_VariationalGateDecomposition_16_0.png" style="width: 600px;" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_16_0.png" class="no-scaled-link" src="../_images/notebooks_01_03_VariationalGateDecomposition_16_0.png" style="width: 600px;" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -848,7 +769,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_19_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_19_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_19_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_19_0.png" />
 </div>
 </div>
 <p>エンタングルメント忠実度を計算する。<code class="docutils literal notranslate"><span class="pre">mes_copy</span></code> = <span class="math notranslate nohighlight">\(\langle \text{MES}|\)</span>, <code class="docutils literal notranslate"><span class="pre">mes</span></code> = <span class="math notranslate nohighlight">\(I \otimes (U^{\dagger} R_z(\alpha) R_x(\beta) R_z(\gamma))|\text{MES}\rangle\)</span>として、<code class="docutils literal notranslate"><span class="pre">inner_product</span></code>関数を実行</p>
@@ -924,7 +845,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_26_0.png" class="no-scaled-link" src="../_images/notebooks_03_VariationalGateDecomposition_26_0.png" style="width: 600px;" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_26_0.png" class="no-scaled-link" src="../_images/notebooks_01_03_VariationalGateDecomposition_26_0.png" style="width: 600px;" />
 </div>
 </div>
 <p>パラメータ付き回路のパラメータを変化させて、ターゲットの量子演算となるパラメータを見つけよう。i番目のパラメータの変更は、<code class="docutils literal notranslate"><span class="pre">set_parameter(i,new_parameter)</span></code></p>
@@ -992,7 +913,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_31_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_31_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_31_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_31_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1077,7 +998,7 @@ fidelity 1.6134626967811982e-10 parameters [1.46307216 2.52614294 0.36000115]
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_38_0.png" class="no-scaled-link" src="../_images/notebooks_03_VariationalGateDecomposition_38_0.png" style="width: 600px;" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_38_0.png" class="no-scaled-link" src="../_images/notebooks_01_03_VariationalGateDecomposition_38_0.png" style="width: 600px;" />
 </div>
 </div>
 <div class="line-block">
@@ -1138,7 +1059,7 @@ fidelity 1.6134626967811982e-10 parameters [1.46307216 2.52614294 0.36000115]
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_03_VariationalGateDecomposition_41_0.png" src="../_images/notebooks_03_VariationalGateDecomposition_41_0.png" />
+<img alt="../_images/notebooks_01_03_VariationalGateDecomposition_41_0.png" src="../_images/notebooks_01_03_VariationalGateDecomposition_41_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -1169,20 +1090,6 @@ array([ 1.57079627, -1.57079605,  1.57079619])
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_Ramsay.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">ラムゼイ干渉をプロットする</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="04_QuantumVolume.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">ランダム量子回路と量子ボリューム</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

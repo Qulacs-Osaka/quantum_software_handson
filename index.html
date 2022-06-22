@@ -35,7 +35,6 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Qulacsの基本的な使い方" href="notebooks/01_how_to_use_qulacs.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -87,84 +86,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/01_how_to_use_qulacs.html">
-   Qulacsの基本的な使い方
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/02_Ramsay.html">
-   ラムゼイ干渉をプロットする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html">
-   変分法を用いて量子演算を特定の演算で分解する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/04_QuantumVolume.html">
-   ランダム量子回路と量子ボリューム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/05_sample_observable.html">
-   サンプリングによってオブザーバブルの期待値を推定する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/06_parameter_shift_rule.html">
-   パラメータシフト法による勾配最適化
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/07_error_mitigation.html">
-   エラー補償手法について学ぶ
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/08_QCL.html">
-   簡単な量子回路学習を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/09_quantum_kernel.html">
-   量子カーネル法を使ってみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html">
-   古典コンピュータを使った量子化学計算を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/11_fermion_qubit_mapping.html">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/12_compute_groud_state_of_molecule_using_vqe.html">
-   量子変分固有値法（VQE)を用いた基底状態計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/13_quantum_phase_estimation.html">
-   位相推定アルゴリズム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks/14_grover_search.html">
-   グローバー探索量子アルゴリズムをとことん実装する
-  </a>
- </li>
-</ul>
-
+        
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -347,96 +269,6 @@ title="Print to PDF"
   <section id="welcome-to-quautum-software-hands-on-s-documentation">
 <h1>Welcome to Quautum Software Hands on’s documentation!<a class="headerlink" href="#welcome-to-quautum-software-hands-on-s-documentation" title="Permalink to this headline">#</a></h1>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#QuantumStateクラス：量子状態の取扱">QuantumStateクラス：量子状態の取扱</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#量子演算とその実行">量子演算とその実行</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#量子回路の構成">量子回路の構成</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#量子回路の可視化">量子回路の可視化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#Qulacsの計算速度を体感">Qulacsの計算速度を体感</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/01_how_to_use_qulacs.html#Observable-クラス">Observable クラス</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/02_Ramsay.html">ラムゼイ干渉をプロットする</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/02_Ramsay.html#直接期待値を計算する">直接期待値を計算する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/02_Ramsay.html#サンプリングで期待値を推定する">サンプリングで期待値を推定する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/02_Ramsay.html#ノイズありのラムゼイ干渉">ノイズありのラムゼイ干渉</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html#最大エンタングル状態の生成">最大エンタングル状態の生成</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html#エンタングルメント忠実度を計算する">エンタングルメント忠実度を計算する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html#忠実度を最適化することで、演算の分解を見つける">忠実度を最適化することで、演算の分解を見つける</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/03_VariationalGateDecomposition.html#応用編：CNOT演算を分解する">応用編：CNOT演算を分解する</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/04_QuantumVolume.html#ランダム量子回路">ランダム量子回路</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/04_QuantumVolume.html#Heavy-Output-を生成する">Heavy Output を生成する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/04_QuantumVolume.html#実際にサンプリングをして、heavy-outputを得る確率を推定してみよう">実際にサンプリングをして、heavy outputを得る確率を推定してみよう</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/05_sample_observable.html">サンプリングによってオブザーバブルの期待値を推定する</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/05_sample_observable.html#オブザーバブルを定義する">オブザーバブルを定義する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/05_sample_observable.html#適当な状態を準備する">適当な状態を準備する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/05_sample_observable.html#サンプリングをしてみる。">サンプリングをしてみる。</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/06_parameter_shift_rule.html">パラメータシフト法による勾配最適化</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/06_parameter_shift_rule.html#パラメータシフト法による勾配">パラメータシフト法による勾配</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/06_parameter_shift_rule.html#最適化">最適化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/06_parameter_shift_rule.html#発展編：統計ノイズのもとでの勾配降下法">発展編：統計ノイズのもとでの勾配降下法</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/07_error_mitigation.html">エラー補償手法について学ぶ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/07_error_mitigation.html#量子状態に対するエラー">量子状態に対するエラー</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/07_error_mitigation.html#エラー補償法を試してみる。">エラー補償法を試してみる。</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/08_QCL.html">簡単な量子回路学習を実行してみる</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#回路作成と出力の定義">回路作成と出力の定義</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#データの用意">データの用意</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#コスト関数の定義と可視化">コスト関数の定義と可視化</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#勾配を計算する関数を準備する">勾配を計算する関数を準備する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#勾配法による学習">勾配法による学習</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/08_QCL.html#確率的勾配降下法による学習">確率的勾配降下法による学習</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/09_quantum_kernel.html">量子カーネル法を使ってみる</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/09_quantum_kernel.html#IBM-から提案されたカーネル">IBM から提案されたカーネル</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/09_quantum_kernel.html#カーネル法の準備">カーネル法の準備</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/09_quantum_kernel.html#簡単な回帰問題を解く">簡単な回帰問題を解く</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/09_quantum_kernel.html#分類問題を解く">分類問題を解く</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html#水素分子の計算（平均場近似と厳密対角化）">水素分子の計算（平均場近似と厳密対角化）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html#電子相関と電子相関エネルギー">電子相関と電子相関エネルギー</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html#電子相関エネルギーと化学的精度">電子相関エネルギーと化学的精度</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/10_conventional_quantum_chemical_calculations.html#代表的なその他の量子化学計算手法">代表的なその他の量子化学計算手法</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/11_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/11_fermion_qubit_mapping.html#H_{qubit}を用意する手順"><span class="math notranslate nohighlight">\(H_{qubit}\)</span>を用意する手順</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/12_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/12_compute_groud_state_of_molecule_using_vqe.html#復習:-水素分子のハミルトニアンをqubit表現で用意">復習: 水素分子のハミルトニアンをqubit表現で用意</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/12_compute_groud_state_of_molecule_using_vqe.html#量子回路上でのHartree-Fock状態の用意">量子回路上でのHartree-Fock状態の用意</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/12_compute_groud_state_of_molecule_using_vqe.html#波動関数を表す量子回路U(\theta)の用意">波動関数を表す量子回路<span class="math notranslate nohighlight">\(U(\theta)\)</span>の用意</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html">位相推定アルゴリズム</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html#ハミルトニアンの定義">ハミルトニアンの定義</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html#ハミルトニアンダイナミクスの定義">ハミルトニアンダイナミクスの定義</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html#１つの補助量子ビットを導入しアダマールテストを繰り返す">１つの補助量子ビットを導入しアダマールテストを繰り返す</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html#量子位相推定の実装">量子位相推定の実装</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks/13_quantum_phase_estimation.html#発展編">発展編</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/14_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
-</ul>
 </div>
 </section>
 <section id="indices-and-tables">
@@ -456,13 +288,6 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="notebooks/01_how_to_use_qulacs.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Qulacsの基本的な使い方</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

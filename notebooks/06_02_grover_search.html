@@ -34,11 +34,9 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/14_grover_search.html" />
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/06_02_grover_search.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement.html" />
-    <link rel="prev" title="位相推定アルゴリズム" href="13_quantum_phase_estimation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -90,84 +88,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_how_to_use_qulacs.html">
-   Qulacsの基本的な使い方
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Ramsay.html">
-   ラムゼイ干渉をプロットする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_VariationalGateDecomposition.html">
-   変分法を用いて量子演算を特定の演算で分解する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_QuantumVolume.html">
-   ランダム量子回路と量子ボリューム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_sample_observable.html">
-   サンプリングによってオブザーバブルの期待値を推定する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_parameter_shift_rule.html">
-   パラメータシフト法による勾配最適化
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_error_mitigation.html">
-   エラー補償手法について学ぶ
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_QCL.html">
-   簡単な量子回路学習を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_quantum_kernel.html">
-   量子カーネル法を使ってみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_conventional_quantum_chemical_calculations.html">
-   古典コンピュータを使った量子化学計算を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_fermion_qubit_mapping.html">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">
-   量子変分固有値法（VQE)を用いた基底状態計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_quantum_phase_estimation.html">
-   位相推定アルゴリズム
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   グローバー探索量子アルゴリズムをとことん実装する
-  </a>
- </li>
-</ul>
-
+        
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -239,7 +160,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebooks/14_grover_search.ipynb.txt"
+        <a href="../_sources/notebooks/06_02_grover_search.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -626,7 +547,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_6_0.png" src="../_images/notebooks_14_grover_search_6_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_6_0.png" src="../_images/notebooks_06_02_grover_search_6_0.png" />
 </div>
 </div>
 <p>グローバーアルゴリズムでは、特定の target 状態の係数に-1を付けるフリップ演算子 target_flip と、初期状態のすべてのビット列が重ね合わさった状態（<span class="math notranslate nohighlight">\(|+\rangle ^{\otimes n}\)</span>）に-1をつけるフリップ演算子 initial_flip を繰り返し作用させることによって初期状態から終状態の２状態間の回転を誘導することになる。ここでは target 状態としてすべて1の状態 <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> を選んだ。実際には <span class="math notranslate nohighlight">\(f(x)=0\)</span> を満たすような状態を取り出すといった場合に利用されることになり、このような場合には、関数
@@ -710,7 +631,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_15_0.png" src="../_images/notebooks_14_grover_search_15_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_15_0.png" src="../_images/notebooks_06_02_grover_search_15_0.png" />
 </div>
 </div>
 <p>これを何回か繰り返して、target状態の確率がどのように変化するか見ておく。</p>
@@ -742,14 +663,14 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_17_0.png" src="../_images/notebooks_14_grover_search_17_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_0.png" src="../_images/notebooks_06_02_grover_search_17_0.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_17_1.png" src="../_images/notebooks_14_grover_search_17_1.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_1.png" src="../_images/notebooks_06_02_grover_search_17_1.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -764,7 +685,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_17_3.png" src="../_images/notebooks_14_grover_search_17_3.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_3.png" src="../_images/notebooks_06_02_grover_search_17_3.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -779,7 +700,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_17_5.png" src="../_images/notebooks_14_grover_search_17_5.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_5.png" src="../_images/notebooks_06_02_grover_search_17_5.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -794,7 +715,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_17_7.png" src="../_images/notebooks_14_grover_search_17_7.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_7.png" src="../_images/notebooks_06_02_grover_search_17_7.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -875,7 +796,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_20_1.png" src="../_images/notebooks_14_grover_search_20_1.png" />
+<img alt="../_images/notebooks_06_02_grover_search_20_1.png" src="../_images/notebooks_06_02_grover_search_20_1.png" />
 </div>
 </div>
 <p>約25回くらいでほぼ確率1でtarget状態が得られている。確率の増加は、サイン関数の２乗のような振る舞いになっている。これは、グローバー探索が、初期状態とtarget状態の間を一定の角度で回転している操作になっているからである。</p>
@@ -963,7 +884,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_14_grover_search_23_0.png" src="../_images/notebooks_14_grover_search_23_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_23_0.png" src="../_images/notebooks_06_02_grover_search_23_0.png" />
 </div>
 </div>
 <p>ステップ数が<span class="math notranslate nohighlight">\(2^{n/2}\)</span>でスケールしていることがわかった。</p>
@@ -985,20 +906,6 @@ div.rendered_html tbody tr:hover {
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="13_quantum_phase_estimation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">位相推定アルゴリズム</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="15_CreditPortfolioRisk/CreditPortfolioRiskMeasurement.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>

@@ -34,11 +34,9 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_QCL.html" />
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/03_01_QCL.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="量子カーネル法を使ってみる" href="09_quantum_kernel.html" />
-    <link rel="prev" title="エラー補償手法について学ぶ" href="07_error_mitigation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -90,84 +88,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_how_to_use_qulacs.html">
-   Qulacsの基本的な使い方
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_Ramsay.html">
-   ラムゼイ干渉をプロットする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_VariationalGateDecomposition.html">
-   変分法を用いて量子演算を特定の演算で分解する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_QuantumVolume.html">
-   ランダム量子回路と量子ボリューム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_sample_observable.html">
-   サンプリングによってオブザーバブルの期待値を推定する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_parameter_shift_rule.html">
-   パラメータシフト法による勾配最適化
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_error_mitigation.html">
-   エラー補償手法について学ぶ
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   簡単な量子回路学習を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="09_quantum_kernel.html">
-   量子カーネル法を使ってみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="10_conventional_quantum_chemical_calculations.html">
-   古典コンピュータを使った量子化学計算を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11_fermion_qubit_mapping.html">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12_compute_groud_state_of_molecule_using_vqe.html">
-   量子変分固有値法（VQE)を用いた基底状態計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13_quantum_phase_estimation.html">
-   位相推定アルゴリズム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14_grover_search.html">
-   グローバー探索量子アルゴリズムをとことん実装する
-  </a>
- </li>
-</ul>
-
+        
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -239,7 +160,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebooks/08_QCL.ipynb.txt"
+        <a href="../_sources/notebooks/03_01_QCL.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -779,7 +700,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_9_0.png" src="../_images/notebooks_08_QCL_9_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_9_0.png" src="../_images/notebooks_03_01_QCL_9_0.png" />
 </div>
 </div>
 </section>
@@ -826,13 +747,13 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_13_0.png" src="../_images/notebooks_08_QCL_13_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_13_0.png" src="../_images/notebooks_03_01_QCL_13_0.png" />
 </div>
 </div>
 </section>
 <section id="勾配を計算する関数を準備する">
 <h2>勾配を計算する関数を準備する<a class="headerlink" href="#勾配を計算する関数を準備する" title="Permalink to this headline">#</a></h2>
-<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a> を使った勾配最適化を行いたいので、そのための関数を準備します。コスト関数の勾配は</p>
+<p><a class="reference external" href="./06_parameter_shift_rule.ipynb">パラメータシフト法</a> を使った勾配最適化を行いたいので、そのための関数を準備します。コスト関数の勾配は</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \frac{\partial L}{\partial \theta} &amp;= \frac{\partial }{\partial \theta} \sum_i (y_i - \langle Z(x_i,\theta)\rangle)^2 \\
@@ -924,7 +845,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_20_0.png" src="../_images/notebooks_08_QCL_20_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_20_0.png" src="../_images/notebooks_03_01_QCL_20_0.png" />
 </div>
 </div>
 <p>単純な勾配降下法によって学習して、その様子を可視化しましょう。</p>
@@ -956,7 +877,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_22_0.png" src="../_images/notebooks_08_QCL_22_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_22_0.png" src="../_images/notebooks_03_01_QCL_22_0.png" />
 </div>
 </div>
 <p>うまく最適化できていそうに見えます。学習結果もプロットしてみます。</p>
@@ -977,17 +898,17 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_24_0.png" src="../_images/notebooks_08_QCL_24_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_24_0.png" src="../_images/notebooks_03_01_QCL_24_0.png" />
 </div>
 </div>
 <p>きれいにフィッティングすることができました。</p>
 </section>
 <section id="確率的勾配降下法による学習">
 <h2>確率的勾配降下法による学習<a class="headerlink" href="#確率的勾配降下法による学習" title="Permalink to this headline">#</a></h2>
-<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a>でも見たように、確率的勾配降下法はそもそも出力が確率的である量子回路と相性が良いです。ここでは色々な確率的勾配降下法を試してみます。</p>
+<p><a class="reference external" href="./06_parameter_shift_rule.ipynb">パラメータシフト法</a>でも見たように、確率的勾配降下法はそもそも出力が確率的である量子回路と相性が良いです。ここでは色々な確率的勾配降下法を試してみます。</p>
 <section id="Shot-数を減らした学習">
 <h3>Shot 数を減らした学習<a class="headerlink" href="#Shot-数を減らした学習" title="Permalink to this headline">#</a></h3>
-<p><a class="reference internal" href="06_parameter_shift_rule.html"><span class="doc">パラメータシフト法</span></a>でもやりましたが、確率的勾配降下法の精神に乗っ取ると、各ステップにおけるサンプリングの数が 1 であっても学習できます。ここではこれを試してみます。</p>
+<p><a class="reference external" href="./06_parameter_shift_rule.ipynb">パラメータシフト法</a>でもやりましたが、確率的勾配降下法の精神に乗っ取ると、各ステップにおけるサンプリングの数が 1 であっても学習できます。ここではこれを試してみます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1020,7 +941,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_29_0.png" src="../_images/notebooks_08_QCL_29_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_29_0.png" src="../_images/notebooks_03_01_QCL_29_0.png" />
 </div>
 </div>
 <p>ノイズが大きくなるにつれてたどる経路もジグサグしてしまいますが、一応ちゃんと学習できています。</p>
@@ -1070,7 +991,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_08_QCL_32_0.png" src="../_images/notebooks_08_QCL_32_0.png" />
+<img alt="../_images/notebooks_03_01_QCL_32_0.png" src="../_images/notebooks_03_01_QCL_32_0.png" />
 </div>
 </div>
 <p>この場合、量子コンピュータは各更新において 4 shot しか動かしていないため、各更新において得られている情報はたったの 4 ビットだけです。それでもそれなりに学習ができることがわかります。</p>
@@ -1093,20 +1014,6 @@ div.rendered_html tbody tr:hover {
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="07_error_mitigation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">エラー補償手法について学ぶ</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="09_quantum_kernel.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">量子カーネル法を使ってみる</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
