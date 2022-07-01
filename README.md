@@ -20,31 +20,32 @@
     <br> [01_03_VariationalGateDecomposition.ipynb](./doc/source/notebooks/01_03_VariationalGateDecomposition.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/01_03_VariationalGateDecomposition.ipynb)
   - 04\_量子ボリュームを計算する
-    <br>[01_04_QuantumVolume.ipynb](./doc/source/notebooks/01_04_QuantumVolume.ipynb)
+    <br> [01_04_QuantumVolume.ipynb](./doc/source/notebooks/01_04_QuantumVolume.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/01_04_QuantumVolume.ipynb)
 
 - 02\_(NISQ)量子アルゴリズムの基礎
 
   - 01\_オブザーバブルのサンプリングによる推定
-    <br>[02_01_sample_observable.ipynb](./doc/source/notebooks/02_01_sample_observable.ipynb)
+    <br> [02_01_sample_observable.ipynb](./doc/source/notebooks/02_01_sample_observable.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/02_01_sample_observable.ipynb)
   - 02\_パラメータシフト法による勾配最適化
-    <br>[02_02_parameter_shift_rule.ipynb](./doc/source/notebooks/02_02_parameter_shift_rule.ipynb)
+    <br> [02_02_parameter_shift_rule.ipynb](./doc/source/notebooks/02_02_parameter_shift_rule.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/02_02_parameter_shift_rule.ipynb)
-  - 03\_エラー補償法を学ぶ
-    <br>[02_03_error_mitigation.ipynb](./doc/source/notebooks/02_03_error_mitigation.ipynb)
-    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/02_03_error_mitigation.ipynb)
 
 - 03\_量子機械学習の基礎
 
   - 01\_簡単な量子回路学習を実行してみる
-    <br>[03_01_QCL.ipynb](./doc/source/notebooks/03_01_QCL.ipynb)
+    <br> [03_01_QCL.ipynb](./doc/source/notebooks/03_01_QCL.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/03_01_QCL.ipynb)
   - 02\_量子カーネル法を試してみる
-    <br>[03_02_quantum_kernel.ipynb](./doc/source/notebooks/03_02_quantum_kernel.ipynb)
+    <br> [03_02_quantum_kernel.ipynb](./doc/source/notebooks/03_02_quantum_kernel.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/03_02_quantum_kernel.ipynb)
 
 - 04\_量子エラー補償の基礎
+
+  - 01\_エラー補償法を学ぶ
+    <br> [04_01_error_mitigation.ipynb](./doc/source/notebooks/04_01_error_mitigation.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/04_01_error_mitigation.ipynb)
 
 - 05\_量子コンピュータと量子化学の基礎
 
