@@ -34,11 +34,11 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/02_03_error_mitigation.html" />
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/04_01_error_mitigation.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="簡単な量子回路学習を実行してみる" href="03_01_QCL.html" />
-    <link rel="prev" title="パラメータシフト法による勾配最適化" href="02_02_parameter_shift_rule.html" />
+    <link rel="next" title="古典コンピュータを使った量子化学計算を実行してみる" href="05_01_conventional_quantum_chemical_calculations.html" />
+    <link rel="prev" title="量子カーネル法を使ってみる" href="03_02_quantum_kernel.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -126,11 +126,6 @@
    パラメータシフト法による勾配最適化
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   エラー補償手法について学ぶ
-  </a>
- </li>
  <li class="toctree-l1">
   <a class="reference internal" href="03_01_QCL.html">
    簡単な量子回路学習を実行してみる
@@ -139,6 +134,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="03_02_quantum_kernel.html">
    量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   エラー補償手法について学ぶ
   </a>
  </li>
  <li class="toctree-l1">
@@ -244,7 +244,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/notebooks/02_03_error_mitigation.ipynb.txt"
+        <a href="../_sources/notebooks/04_01_error_mitigation.ipynb.txt"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -723,7 +723,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_03_error_mitigation_8_0.png" src="../_images/notebooks_02_03_error_mitigation_8_0.png" />
+<img alt="../_images/notebooks_04_01_error_mitigation_8_0.png" src="../_images/notebooks_04_01_error_mitigation_8_0.png" />
 </div>
 </div>
 <p>ノイズ強度が強くなるほどに、振幅が小さくなっていくことが確認できます。</p>
@@ -758,7 +758,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_03_error_mitigation_14_0.png" src="../_images/notebooks_02_03_error_mitigation_14_0.png" />
+<img alt="../_images/notebooks_04_01_error_mitigation_14_0.png" src="../_images/notebooks_04_01_error_mitigation_14_0.png" />
 </div>
 </div>
 <p>かなりうまく補償できていることがわかります。</p>
@@ -784,7 +784,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_03_error_mitigation_17_0.png" src="../_images/notebooks_02_03_error_mitigation_17_0.png" />
+<img alt="../_images/notebooks_04_01_error_mitigation_17_0.png" src="../_images/notebooks_04_01_error_mitigation_17_0.png" />
 </div>
 </div>
 <p>これもうまくできていますね。</p>
@@ -853,7 +853,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_03_error_mitigation_22_0.png" src="../_images/notebooks_02_03_error_mitigation_22_0.png" />
+<img alt="../_images/notebooks_04_01_error_mitigation_22_0.png" src="../_images/notebooks_04_01_error_mitigation_22_0.png" />
 </div>
 </div>
 </section>
@@ -879,7 +879,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_03_error_mitigation_25_0.png" src="../_images/notebooks_02_03_error_mitigation_25_0.png" />
+<img alt="../_images/notebooks_04_01_error_mitigation_25_0.png" src="../_images/notebooks_04_01_error_mitigation_25_0.png" />
 </div>
 </div>
 <p>今回の場合、確率的エラー消去法が最も統計誤差を少なくエラー補償できていました。</p>
@@ -895,17 +895,17 @@ div.rendered_html tbody tr:hover {
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_02_parameter_shift_rule.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="03_02_quantum_kernel.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">パラメータシフト法による勾配最適化</p>
+            <p class="prev-next-title">量子カーネル法を使ってみる</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="03_01_QCL.html" title="next page">
+    <a class='right-next' id="next-link" href="05_01_conventional_quantum_chemical_calculations.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">簡単な量子回路学習を実行してみる</p>
+        <p class="prev-next-title">古典コンピュータを使った量子化学計算を実行してみる</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
