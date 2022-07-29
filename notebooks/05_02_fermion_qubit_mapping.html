@@ -700,9 +700,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>!echo y | pip uninstall h5py
-!pip install h5py==2.9.0
-!pip install openfermion openfermionpyscf
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nb">echo</span> y <span class="p">|</span> pip uninstall h5py
+<span class="o">!</span>pip install <span class="nv">h5py</span><span class="o">==</span><span class="m">2</span>.9.0
+<span class="o">!</span>pip install openfermion openfermionpyscf
 </pre></div>
 </div>
 </div>
@@ -770,7 +770,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">openfermion.chem</span> <span class="kn">import</span> <span class="n">MolecularData</span>
 <span class="kn">from</span> <span class="nn">openfermion.transforms</span> <span class="kn">import</span> <span class="n">get_fermion_operator</span><span class="p">,</span> <span class="n">jordan_wigner</span><span class="p">,</span> <span class="n">bravyi_kitaev</span><span class="p">,</span> <span class="n">symmetry_conserving_bravyi_kitaev</span>
@@ -804,12 +804,12 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <p>この各ステップについて以下で順に見ていきたい。</p>
 <section id="1.-計算する分子の構造や電荷など入力する">
 <h3>1. 計算する分子の構造や電荷など入力する<a class="headerlink" href="#1.-計算する分子の構造や電荷など入力する" title="Permalink to this headline">#</a></h3>
-<p>この部分については、通常の量子化学計算と同じである。 10_conventional_quantum_chemical_calculations で実行したのと同様に、 まずは水素分子を用意する。</p>
+<p>この部分については、通常の量子化学計算と同じである。 <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html"><span class="doc">05_01_conventional_quantum_chemical_calculations</span></a> で実行したのと同様に、 まずは水素分子を用意する。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。</span>
 <span class="n">mol_h2</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span> <span class="o">=</span> <span class="s1">&#39;H 0 0 0; H 0 0 0.74&#39;</span><span class="p">,</span> <span class="n">basis</span> <span class="o">=</span> <span class="s1">&#39;sto-3g&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -822,7 +822,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。</span>
 <span class="n">mean_field_wavefunction</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol_h2</span><span class="p">)</span>
 <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">hf_energy</span> <span class="o">=</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
@@ -847,7 +847,7 @@ Hartree-Fock Energy in (hartree) -1.1167593073964248
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Energy of the 1st MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;Energy of the 1st MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Energy of the 2nd MO&quot;</span><span class="p">,</span> <span class="n">mean_field_wavefunction</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -869,11 +869,11 @@ C1 [ 1.21245192 -1.21245192] Energy of the 2nd MO 0.6711434919142547
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>from qchem_util import get_molecular_hamiltonian_from_fcidump
-# 第二量子化された電子のハミルトニアンを構築し、fcidump 形式で保存
-tools.fcidump.from_scf(mean_field_wavefunction, &#39;fcidump.rhf&#39;)
-#　保存した第二量子化ハミルトニアンを確認
-!cat fcidump.rhf
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qchem_util</span> <span class="kn">import</span> <span class="n">get_molecular_hamiltonian_from_fcidump</span>
+<span class="c1"># 第二量子化された電子のハミルトニアンを構築し、fcidump 形式で保存</span>
+<span class="n">tools</span><span class="o">.</span><span class="n">fcidump</span><span class="o">.</span><span class="n">from_scf</span><span class="p">(</span><span class="n">mean_field_wavefunction</span><span class="p">,</span> <span class="s1">&#39;fcidump.rhf&#39;</span><span class="p">)</span>
+<span class="c1">#　保存した第二量子化ハミルトニアンを確認</span>
+<span class="o">!</span>cat fcidump.rhf
 </pre></div>
 </div>
 </div>
@@ -916,7 +916,7 @@ tools.fcidump.from_scf(mean_field_wavefunction, &#39;fcidump.rhf&#39;)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fermion_hamiltonian</span> <span class="o">=</span> <span class="n">get_molecular_hamiltonian_from_fcidump</span><span class="p">(</span><span class="s1">&#39;fcidump.rhf&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fermion_hamiltonian</span> <span class="o">=</span> <span class="n">get_molecular_hamiltonian_from_fcidump</span><span class="p">(</span><span class="s1">&#39;fcidump.rhf&#39;</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -982,7 +982,7 @@ Parsing fcidump.rhf
 <p>しかしながら、この２つの演算子はフェルミオン（電子）の演算子の交換関係<span class="math notranslate nohighlight">\([c^\dagger_p,c_q]=\delta_{pq}\)</span>を満たさない。これは、<span class="math notranslate nohighlight">\(P_{+/-}\)</span>にフェルミンの特徴である、粒子の交換に対する反対称性がエンコードされていないためである。フェルミオンの波動関数はよく知らているように、粒子の交換に対して符号が変わるという性質を持っている。この性質は、<span class="math notranslate nohighlight">\(P_{+/-,i}\)</span>が作用するサイト（軌道）より前にいくつ電子があるかを数えればわかる。これは、<span class="math notranslate nohighlight">\(i\)</span>より前のサイトに<span class="math notranslate nohighlight">\(Z\)</span>をかけていけばわかる。</p>
 <div class="math notranslate nohighlight">
 \[Q_i=\prod_{j &lt; i} Z_j\]</div>
-<p><span class="math notranslate nohighlight">\(Q_i\)</span>は、電子が<span class="math notranslate nohighlight">\(i\)</span>より前に偶数個あれば、交換を偶数会繰り返すので、符号は変えず、奇数個であれば、符号を変化させる。この<span class="math notranslate nohighlight">\(Q_i\)</span>と、<span class="math notranslate nohighlight">\(P_{+/-}\)</span>を組み合わせれば、<span class="math notranslate nohighlight">\(c^{\dagger}_p\)</span>,<span class="math notranslate nohighlight">\(c_p\)</span>と一対一で対応する演算子をパウリ演算子を使って構築できる。</p>
+<p><span class="math notranslate nohighlight">\(Q_i\)</span>は、電子が<span class="math notranslate nohighlight">\(i\)</span>より前に偶数個あれば、交換を偶数回繰り返すので、符号は変えず、奇数個であれば、符号を変化させる。この<span class="math notranslate nohighlight">\(Q_i\)</span>と、<span class="math notranslate nohighlight">\(P_{+/-}\)</span>を組み合わせれば、<span class="math notranslate nohighlight">\(c^{\dagger}_p\)</span>,<span class="math notranslate nohighlight">\(c_p\)</span>と一対一で対応する演算子をパウリ演算子を使って構築できる。</p>
 <div class="math notranslate nohighlight">
 \[c^{\dagger}_p = P_{+,i}Q_{i}\]</div>
 <p>では、この変換をOpenFermionを使って実行してみよう。</p>
@@ -990,7 +990,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jw_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">jordan_wigner</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">jw_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">jordan_wigner</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">jw_qubit_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1017,7 +1017,7 @@ Parsing fcidump.rhf
 (-0.2234315369081355+0j) [Z3]
 </pre></div></div>
 </div>
-<p>Jordan-Wigner変換のメリットは、占有数表示という我々の理解しやすい描像を保ったまま、Hamiltonianを変換できる点にある。 デメリットとしては、<span class="math notranslate nohighlight">\(O(N)\)</span>の長さを持つパウリ演算子の積が現れることである。 <span class="math notranslate nohighlight">\(H_{electron}\)</span>は<span class="math notranslate nohighlight">\(O(N^4)\)</span>のタームがあるため、<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に現れるハミルトニアンをパウリ演算子の数は<span class="math notranslate nohighlight">\(O(N^5)\)</span>となる。</p>
+<p>Jordan-Wigner変換のメリットは、占有数表示という我々の理解しやすい描像を保ったまま、Hamiltonianを変換できる点にある。 デメリットとしては、<span class="math notranslate nohighlight">\(O(N)\)</span>の長さを持つパウリ演算子の積が現れることである。 <span class="math notranslate nohighlight">\(H_{electron}\)</span>は<span class="math notranslate nohighlight">\(O(N^4)\)</span>のタームがあるため、<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に現れるハミルトニアンのパウリ演算子の数は<span class="math notranslate nohighlight">\(O(N^5)\)</span>となる。</p>
 </section>
 <section id="Bravyi-Kitaev">
 <h4>Bravyi-Kitaev<a class="headerlink" href="#Bravyi-Kitaev" title="Permalink to this headline">#</a></h4>
@@ -1026,7 +1026,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bk_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bk_qubit_hamiltonian</span> <span class="o">=</span> <span class="n">bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">))</span>
 <span class="nb">print</span> <span class="p">(</span><span class="n">bk_qubit_hamiltonian</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1059,7 +1059,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">active_fermions</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">active_orbitals</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">active_fermions</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">symmetry_conserving_bravyi_kitaev</span><span class="p">(</span><span class="n">get_fermion_operator</span><span class="p">(</span><span class="n">fermion_hamiltonian</span><span class="p">),</span><span class="n">active_orbitals</span><span class="p">,</span><span class="n">active_fermions</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1082,7 +1082,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1090,7 +1090,7 @@ Parsing fcidump.rhf
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
 </pre></div>
 </div>
-<div class="input_area highlight-python notranslate"><div class="highlight"><pre><span></span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
