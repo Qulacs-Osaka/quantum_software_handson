@@ -695,7 +695,7 @@ You should consider upgrading via the &#39;/usr/local/opt/python@3.9/bin/python3
 <p>この有限個の原子基底関数は、既に標準的に使われているものがいくつもあります。 今回は、その中でも最も単純な、STO-3Gという基底関数を使います。 STO-3Gでは、各水素原子にはそれぞれ１つのｓ型の軌道が使われています。 水素分子としては、２つの「空間」軌道があることになります。</p>
 <div class="math notranslate nohighlight">
 \[\xi_{1s}(r) = \sum_{i=1}^3 d_{i,1s}g_{1s}(a_i,r)\]</div>
-<p>さて、電子にはスピンの自由度があるので、↑と↓のスピンの自由度ごとに空間軌道に電子が入ります。 スピンの自由度がごとに入る軌道をスピン軌道といいます。</p>
+<p>さて、電子にはスピンの自由度があるので、↑と↓のスピンの自由度ごとに空間軌道に電子が入ります。 スピンの自由度ごとに入る軌道をスピン軌道といいます。</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\chi(x) =
 \begin{cases}
@@ -715,6 +715,7 @@ You should consider upgrading via the &#39;/usr/local/opt/python@3.9/bin/python3
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 水素分子、H-H距離は0.74Å と設定。STO-3GというGaussian型の原子基底関数を使用。</span>
+<span class="c1"># 3次元座標が(0, 0, 0)のHと、(0, 0, 0.74)のHを利用。</span>
 <span class="n">mol_h2</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span> <span class="o">=</span> <span class="s1">&#39;H 0 0 0; H 0 0 0.74&#39;</span><span class="p">,</span> <span class="n">basis</span> <span class="o">=</span> <span class="s1">&#39;sto-3g&#39;</span><span class="p">)</span>
 <span class="c1"># この水素分子の基底状態を平均場近似（Hartree-Fock theory)で計算してみる。</span>
 <span class="n">mean_filed_wavefunction</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol_h2</span><span class="p">)</span>
