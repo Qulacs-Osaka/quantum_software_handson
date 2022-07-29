@@ -736,7 +736,11 @@ div.rendered_html tbody tr:hover {
 <div class="math notranslate nohighlight">
 \[P_1(p) = P_1(0) + \sum_{k=1}^{N} a_k p^N + O(p^{N+1})\]</div>
 <p>のように書けることを仮定して、<span class="math notranslate nohighlight">\(P_1(0)\)</span> を求めます。<span class="math notranslate nohighlight">\(p\)</span> が十分小さいならば、最初の数項でうまい近似ができるはずです。</p>
-<p><span class="math notranslate nohighlight">\(p=0.1\)</span>, <span class="math notranslate nohighlight">\(p=0.2\)</span> のデータを利用して、線形外挿 (<span class="math notranslate nohighlight">\(N=1\)</span>) によってエラー補償をしてみましょう。関数形を求めるのには、numpy に入っている <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html">polyfit 関数</a>を使います。</p>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(p=0.1\)</span>, <span class="math notranslate nohighlight">\(p=0.2\)</span> のデータを利用して、線形外挿 (<span class="math notranslate nohighlight">\(N=1\)</span>) によってエラー補償をしてみましょう。関数形を求めるのには、numpy に入っている <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html">polyfit 関数</a>を使います。</div>
+<div class="line">polyfit関数は多項式の係数をリストで返します。係数のリストは次数の高い順に並んでいるため、[-1]で定数項(<span class="math notranslate nohighlight">\(=P_1(0)\)</span>)を参照できます。</div>
+<div class="line">この処理を<code class="docutils literal notranslate"><span class="pre">theta_list</span></code>の1000個の点で実行します。</div>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
