@@ -1,0 +1,1043 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>&lt;no title&gt; &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/04_01_Density_Matrix_and_Error.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="リチャードソン外挿法と指数関数外挿法を実装してみる" href="04_02_Extrapolation.html" />
+    <link rel="prev" title="量子カーネル法を使ってみる" href="03_02_quantum_kernel.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_02_Extrapolation.html">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/04_01_Density_Matrix_and_Error.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><no title></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <dl>
+<dt>{</dt><dd><dl>
+<dt>“cells”: [</dt><dd><dl>
+<dt>{</dt><dd><p>“cell_type”: “code”,
+“execution_count”: 1,
+“id”: “4992a35f”,
+“metadata”: {},
+“outputs”: [],
+“source”: [</p>
+<blockquote>
+<div><p>“#!pip install qulacsn”,
+“#!pip install qulacsvisn”,
+“#!pip install matplotlibn”,
+“#!pip install numpyn”,
+“#!pip install scipy”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 2,
+“id”: “37b774db”,
+“metadata”: {},
+“outputs”: [],
+“source”: [</p>
+<blockquote>
+<div><p>“import matplotlib.pyplot as pltn”,
+“import numpy as npn”,
+“from qulacs import Observable, QuantumState, DensityMatrixn”,
+“from qulacs.gate import  X, H, Z, DepolarizingNoise, DephasingNoise, AmplitudeDampingNoise, TwoQubitDepolarizingNoise”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “2d9c21ef”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“#  Qulacsでの混合状態n”,
+“## DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱いn”,
+“n”,
+“- 量子状態（密度演算子）の準備n”,
+“- 密度演算子をnumpyのarrayに変換、あるいはその逆：<cite>get_matrix()</cite>, <cite>load()</cite>n”,
+“- いくつかのエラー：<cite>DepolarizingNoise`などn”,
+“- 計算基底でのサンプリング：`sampling()</cite>”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “050c3505”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## 量子状態（密度演算子）の準備”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 3,
+“id”: “1cb204ce”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(1,0) (0,0)n”,
+“(0,0) (0,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#密度演算子を準備n”,
+“n_qubits = 1n”,
+“density_matrix = DensityMatrix(n_qubits)n”,
+“print(density_matrix)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “6fb7b21e”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## 密度演算子をnumpyのarrayに変換、あるいはその逆：<cite>get_matrix()</cite>, <cite>load()</cite>”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 4,
+“id”: “e17f3229”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.5,0) (0.5,0)n”,
+“(0.5,0) (0.5,0)n”,
+“n”,
+“[[0.5+0.j 0.5+0.j]n”,
+” [0.5+0.j 0.5+0.j]]n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#numpy arrayからqulacsのDensityMatrixへ変換n”,
+“mat = np.array([[0.5, 0.5], [0.5, 0.5]])n”,
+“density_matrix.load(mat)n”,
+“print(density_matrix)n”,
+“n”,
+“dm = density_matrix.get_matrix()n”,
+“print(dm)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “2a44e446”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“※上の量子状態は、実は$|+\rangle$である。”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “f735ef7b”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## いくつかのエラー：<a href="#id1"><span class="problematic" id="id2">`</span></a>DepolarizingNoise`など”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “9511e727”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“Depolarizing noise: $\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)$ ($0\le p \le 0.75$)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 5,
+“id”: “eafa1ac0”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.5,0) (0.4,0)n”,
+“(0.4,0) (0.5,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#depolarizing noiseを作用n”,
+“p = 0.15n”,
+“gate = DepolarizingNoise(0, p)n”,
+“gate.update_quantum_state(density_matrix)n”,
+“print(density_matrix)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “c0199382”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“Dephasing noise: $\mathcal{E}[\rho]=(1-p)\rho +p Z\rho Z$ ($0\le p \le 0.5$)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 6,
+“id”: “22f538bc”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.5,0) (0.2,0)n”,
+“(0.2,0) (0.5,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#dephasing noiseを作用n”,
+“density_matrix.load(mat)n”,
+“n”,
+“p=0.3n”,
+“gate = DephasingNoise(0, p)n”,
+“gate.update_quantum_state(density_matrix)n”,
+“print(density_matrix)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “0be5f6f4”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“密度演算子で期待値を求めたい場合は、状態ベクトルの場合と同じく`get_expectation_value(state)`を使えばOK”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 7,
+“id”: “0dc67480”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+”   (0.575,0) (0.460977,0)n”,
+“(0.460977,0)    (0.425,0)n”,
+“n”,
+“0.1499999999999999n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#Amplitude damping noiseを作用させた後、Zの期待値を計算n”,
+“density_matrix.load(mat)n”,
+“n”,
+“#Amplitude damping noiseを作用n”,
+“p=0.15n”,
+“gate = AmplitudeDampingNoise(0, p)n”,
+“gate.update_quantum_state(density_matrix)n”,
+“n”,
+“#Zの期待値を計算n”,
+“Z0 = Observable(n_qubits)n”,
+“Z0.add_operator(1.0, &quot;Z 0&quot;)n”,
+“expec = Z0.get_expectation_value(density_matrix)n”,
+“print(density_matrix)n”,
+“print(expec)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “f7703d01”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“Depolarizing noiseのようなエラーを表す操作を、qulacs上で状態ベクトル（純粋状態）に作用させると、確率的にエラーが作用した状態ベクトルを返す。n”,
+“例えば、Depolarizing noiseだと、確率$(1-p)$で入力した状態をそのまま返し、確率$p/3$でそれぞれX、Y、Zゲートが作用した状態が確率的に得られる。n”,
+“実行するたびにランダムに状態ベクトルが選ばれることに注意。”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 8,
+“id”: “f3fb7bb7”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>“[0.+0.j 1.+0.j]n”,
+“[ 0.-1.j -0.+0.j]n”,
+“[ 0.+0.j -1.-0.j]n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#状態ベクトルにDepolarizingNoiseなどを作用させると、確率的に状態ベクトルが得られるn”,
+“state = QuantumState(n_qubits)n”,
+“vec = np.array([0.0,1.0])n”,
+“n”,
+“p=0.5n”,
+“gate = DepolarizingNoise(0, p)n”,
+“n”,
+“#状態ベクトルvecを用意→DepolarizingNoiseを複数回作用させてみるn”,
+“for i in range(3):n”,
+”    state.load(vec)n”,
+”    gate.update_quantum_state(state)n”,
+”    print(state.get_vector())”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “163f25cc”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## 計算基底でのサンプリング：<cite>sampling()</cite>”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 9,
+“id”: “7d7f5cc7”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>“0.5600000000000003n”,
+“0.6n”,
+” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.8,0)   (0,0)n”,
+”  (0,0) (0.2,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>},
+{</p>
+<blockquote>
+<div><dl>
+<dt>“data”: {</dt><dd><p>“image/png”: “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”,
+“text/plain”: [</p>
+<blockquote>
+<div><p>“&lt;Figure size 432x288 with 1 Axes&gt;”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>},
+“metadata”: {</p>
+<blockquote>
+<div><p>“needs_background”: “light”</p>
+</div></blockquote>
+<p>},
+“output_type”: “display_data”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“#サンプリングにより物理量の平均値を求めるn”,
+“shots = 100n”,
+“mat2 = np.array([[1.0, 0.0], [0.0, 0.0]])n”,
+“density_matrix.load(mat2)n”,
+“n”,
+“p = 0.3n”,
+“gate = DepolarizingNoise(0, p)n”,
+“gate.update_quantum_state(density_matrix)n”,
+“noise_sampling = density_matrix.sampling(shots)n”,
+“n”,
+“estimated_Z_average = 0.0n”,
+“#物理量Zのサンプリングからの平均値は、測定結果がゼロのときは＋１、測定結果が１のときは－１を加える→サンプリング回数で割る、のようにして求めるn”,
+“for i in range(shots):n”,
+”    estimated_Z_average += (-2*noise_sampling[i]+1)/shotsn”,
+“n”,
+“#物理量Zの期待値とサンプリングからの平均値を比較してみるn”,
+“print(estimated_Z_average)n”,
+“print(Z0.get_expectation_value(density_matrix))n”,
+“n”,
+“#サンプリング結果のヒストグラムを書いてみるn”,
+“fig, ax = plt.subplots(constrained_layout=True)n”,
+“ax.hist(noise_sampling, bins=2, range=(-0.5, 1.5), rwidth=0.4, density=True)n”,
+“print(density_matrix)n”
+“plt.show()”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “af196ef3”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“計算基底でサンプリングした結果、0, 1が出る割合は密度演算子の対角項に近いことが分かります。サンプリングする回数を増やしていけば、より値が近くなっていきます。”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “bdaba8bf”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## 練習n”,
+“- ２つの量子状態（純粋状態$|\psi\rangle=\sqrt{\frac{3}{4}}|0\rangle+\sqrt{\frac{1}{4}}|1\rangle$、混合状態$\rho=\frac{3}{4}|0\rangle\langle0|+\frac{1}{4}|1\rangle\langle1|$）に対して、物理量の期待値XとZを求めてみましょう。n”,
+“- これまではすべて１量子ビットの場合の例でした。２量子ビットの場合で、ノイズが作用した状態（密度演算子）を作成してみましょう。<a href="#id3"><span class="problematic" id="id4">`</span></a>DepolarizingNoise`が１量子ビット目と２量子ビット目に作用した状態と、<a href="#id5"><span class="problematic" id="id6">`</span></a>TwoQubitDepolarizingNoise`が作用した状態が一般に異なることを確認してください。”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “markdown”,
+“id”: “ad837111”,
+“metadata”: {},
+“source”: [</p>
+<blockquote>
+<div><p>“## 補足：変分量子アルゴリズムなどでは、<a href="#id7"><span class="problematic" id="id8">`</span></a>QuantumCircuit,  ParametricQuantumCircuit`を使いますが、このとき`circuit.add_gate(DepolarizingNoise(0, 0.15))`のように使えばOK。”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 13,
+“id”: “14535b04”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.5,0) (0.4,0)n”,
+“(0.4,0) (0.5,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“from qulacs import QuantumCircuit,  ParametricQuantumCircuitn”,
+“n”,
+“n_qubits = 1n”,
+“p = 0.15n”,
+“density_matrix.load(mat)n”,
+“circuit = QuantumCircuit(n_qubits)n”,
+“circuit.add_gate(DepolarizingNoise(0, p))n”,
+“circuit.update_quantum_state(density_matrix)n”,
+“print(density_matrix)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: 14,
+“id”: “049c1f86”,
+“metadata”: {},
+“outputs”: [</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><p>“name”: “stdout”,
+“output_type”: “stream”,
+“text”: [</p>
+<blockquote>
+<div><p>” <strong>* Density Matrix *</strong>n”,
+” * Qubit Count : 1n”,
+” * Dimension   : 2n”,
+” * Density matrix : n”,
+“(0.5,0) (0.4,0)n”,
+“(0.4,0) (0.5,0)n”,
+“n”</p>
+</div></blockquote>
+<p>]</p>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+<p>],
+“source”: [</p>
+<blockquote>
+<div><p>“density_matrix.load(mat)n”,
+“n_qubits = 1n”,
+“p = 0.15n”,
+“Parametric_circuit = ParametricQuantumCircuit(n_qubits)n”,
+“Parametric_circuit.add_gate(DepolarizingNoise(0, 0.15))n”,
+“Parametric_circuit.update_quantum_state(density_matrix)n”,
+“print(density_matrix)”</p>
+</div></blockquote>
+<p>]</p>
+</div></blockquote>
+<p>},
+{</p>
+<blockquote>
+<div><p>“cell_type”: “code”,
+“execution_count”: null,
+“id”: “b022adfa”,
+“metadata”: {},
+“outputs”: [],
+“source”: []</p>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>],
+“metadata”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“kernelspec”: {</dt><dd><p>“display_name”: “Python 3 (ipykernel)”,
+“language”: “python”,
+“name”: “python3”</p>
+</dd>
+</dl>
+<p>},
+“language_info”: {</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“codemirror_mode”: {</dt><dd><p>“name”: “ipython”,
+“version”: 3</p>
+</dd>
+</dl>
+<p>},
+“file_extension”: “.py”,
+“mimetype”: “text/x-python”,
+“name”: “python”,
+“nbconvert_exporter”: “python”,
+“pygments_lexer”: “ipython3”,
+“version”: “3.9.7”</p>
+</div></blockquote>
+<p>}</p>
+</div></blockquote>
+<p>},
+“nbformat”: 4,
+“nbformat_minor”: 5</p>
+</dd>
+</dl>
+<p>}</p>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_02_quantum_kernel.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">量子カーネル法を使ってみる</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_02_Extrapolation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">リチャードソン外挿法と指数関数外挿法を実装してみる</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

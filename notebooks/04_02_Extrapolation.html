@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>リチャードソン外挿法と指数関数外挿法を実装してみる &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/04_02_Extrapolation.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="擬確率法を実装してみる" href="04_03_Probabilistic_error_cancellation.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="04_01_Density_Matrix_and_Error.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/04_02_Extrapolation.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーなしの場合">
+   エラーなしの場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーありの場合">
+   エラーありの場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーを変化させた場合">
+   エラーを変化させた場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#外装法（リチャードソン外挿）の実装">
+   外装法（リチャードソン外挿）の実装
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#練習">
+   練習
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>リチャードソン外挿法と指数関数外挿法を実装してみる</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーなしの場合">
+   エラーなしの場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーありの場合">
+   エラーありの場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#エラーを変化させた場合">
+   エラーを変化させた場合
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#外装法（リチャードソン外挿）の実装">
+   外装法（リチャードソン外挿）の実装
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#練習">
+   練習
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install qulacsvis</span>
+<span class="c1">#!pip install matplotlib</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install scipy</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span><span class="p">,</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">ParametricQuantumCircuit</span><span class="p">,</span> <span class="n">DensityMatrix</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span>  <span class="n">X</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">DepolarizingNoise</span><span class="p">,</span> <span class="n">DephasingNoise</span><span class="p">,</span> <span class="n">AmplitudeDampingNoise</span><span class="p">,</span> <span class="n">TwoQubitDepolarizingNoise</span>
+</pre></div>
+</div>
+</div>
+<section id="リチャードソン外挿法と指数関数外挿法を実装してみる">
+<h1>リチャードソン外挿法と指数関数外挿法を実装してみる<a class="headerlink" href="#リチャードソン外挿法と指数関数外挿法を実装してみる" title="Permalink to this headline">#</a></h1>
+<section id="エラーなしの場合">
+<h2>エラーなしの場合<a class="headerlink" href="#エラーなしの場合" title="Permalink to this headline">#</a></h2>
+<p>１次元横磁場イジング模型（４サイト）の基底状態をVQEで求める。ハミルトニアンは以下の通り。 <span class="math">\begin{align}
+H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
+\end{align}</span></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#１次元横磁場イジング模型のハミルトニアンを定義</span>
+<span class="n">n_qubits</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">transverse_Ising_hamiltonian</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+<span class="n">J</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="n">h</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+    <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Z </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> Z </span><span class="si">{</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="n">n_qubits</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;X </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## まずはエラーなしの場合</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+
+<span class="c1">#状態ベクトル、ansatz回路を定義</span>
+<span class="n">n_qubits</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+<span class="n">circuit_depth</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+
+<span class="c1">#ansatz回路を指定</span>
+<span class="k">def</span> <span class="nf">Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span><span class="n">circuit_depth</span><span class="p">):</span>
+    <span class="n">circuit</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">circuit_depth</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">add_parametric_RY_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">circuit</span><span class="o">.</span><span class="n">add_CZ_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">n_qubits</span>)
+    <span class="k">return</span> <span class="n">circuit</span>
+<span class="n">circuit</span> <span class="o">=</span> <span class="n">Circuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">,</span><span class="n">circuit_depth</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">circuit</span><span class="o">.</span><span class="n">get_parameter_count</span><span class="p">())</span>
+
+<span class="c1">#ansatz回路を表示</span>
+<span class="n">circuit_drawer</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_6_0.png" src="../_images/notebooks_04_02_Extrapolation_6_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#コスト関数を定義。ここではエネルギー期待値がコスト関数。</span>
+<span class="k">def</span> <span class="nf">get_cost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">circuit</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#上で定義したansatz回路のもとで、コスト関数を最小化する。</span>
+<span class="n">params_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="n">minimized_costfunction</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">get_cost</span><span class="p">,</span> <span class="n">params_initial</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">)</span>
+
+<span class="c1">#コスト関数の最小値を表示</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-5.072893485688391
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラーがない場合のansatz回路のパラメータを取得</span>
+<span class="n">params_true</span> <span class="o">=</span> <span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="エラーありの場合">
+<h2>エラーありの場合<a class="headerlink" href="#エラーありの場合" title="Permalink to this headline">#</a></h2>
+<p>各ゲートに以下のエラーを作用させます。</p>
+<p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## 次にdepolarizing noiseありの場合（１次元横磁場イジング模型）</span>
+
+<span class="c1">#密度演算子、ansatz回路を定義</span>
+<span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+<span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="c1">#ansatz回路を指定</span>
+<span class="k">def</span> <span class="nf">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">):</span>
+    <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">ParametricQuantumCircuit</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">circuit_depth</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_parametric_RY_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">DepolarizingNoise</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">error_rate</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_CZ_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">n_qubits</span>)
+            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">DepolarizingNoise</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">error_rate</span><span class="p">))</span>
+            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">DepolarizingNoise</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">n_qubits</span>, error_rate))
+    <span class="k">return</span> <span class="n">noisy_circuit</span>
+
+<span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#コスト関数を定義。ここではエネルギー期待値がコスト関数。</span>
+<span class="k">def</span> <span class="nf">noisy_get_cost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_state</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_state</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラーなし、エラーありの場合で期待値を計算</span>
+<span class="n">minimized_costfunction_noiseless</span> <span class="o">=</span> <span class="n">get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
+<span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
+
+<span class="c1">#コスト関数の最小値を表示</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-5.072893485688391
+-3.8479646433405885
+</pre></div></div>
+</div>
+<p>エラーの影響により、コスト関数の最小値が理想的な場合から遠ざかっていることが確認できます。</p>
+</section>
+<section id="エラーを変化させた場合">
+<h2>エラーを変化させた場合<a class="headerlink" href="#エラーを変化させた場合" title="Permalink to this headline">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_cost_depolarizingnoise</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_noise_strength</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_error_rate_per_gate</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1">#エラー率を少しずつ変化させて、コスト関数を求める。</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span>
+    <span class="n">total_error_rate</span> <span class="o">=</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mf">3.0</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">*</span> <span class="n">circuit_depth</span>
+    <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+    <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
+    <span class="n">data_cost_depolarizingnoise</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+    <span class="n">data_noise_strength</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_error_rate</span><span class="p">)</span>
+    <span class="n">data_error_rate_per_gate</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#コスト関数 vs エラー率のグラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;expectation value with error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error strength&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#（全ゲート数）×（エラー率） vs エラー率のグラフ</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_error_rate_per_gate</span><span class="p">,</span><span class="n">data_noise_strength</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;total error strength&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;error per gate&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_18_0.png" src="../_images/notebooks_04_02_Extrapolation_18_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_18_1.png" src="../_images/notebooks_04_02_Extrapolation_18_1.png" />
+</div>
+</div>
+</section>
+<section id="外装法（リチャードソン外挿）の実装">
+<h2>外装法（リチャードソン外挿）の実装<a class="headerlink" href="#外装法（リチャードソン外挿）の実装" title="Permalink to this headline">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##error mitigation（外挿法）を実行する。リチャードソン外挿のうち、線形外挿をやってみる。</span>
+<span class="c1">## ノイズに関するコスト関数のグラフ</span>
+
+<span class="n">data_cost_depolarizingnoise_alpha</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_cost_depolarizingnoise_linear_extrapolation</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.5</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">alpha</span>
+    <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+    <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
+    <span class="n">data_cost_depolarizingnoise_alpha</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">linear_extrapolation</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span><span class="o">*</span><span class="n">data_cost_depolarizingnoise</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">data_cost_depolarizingnoise_alpha</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">linear_extrapolation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#線形外挿の結果を表示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no error boost&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_alpha</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha=1.5&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear extrapolation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error strength&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_21_0.png" src="../_images/notebooks_04_02_Extrapolation_21_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##error mitigation（外挿法）を実行する　その２（２次多項式で外挿）</span>
+<span class="c1">## ノイズに関するコスト関数のグラフ</span>
+<span class="n">data_cost_depolarizingnoise_alpha2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_cost_depolarizingnoise_Richardson_extrapolation</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">alpha1</span> <span class="o">=</span> <span class="n">alpha</span>
+<span class="n">alpha2</span> <span class="o">=</span> <span class="mf">2.0</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="o">*</span><span class="n">alpha2</span>
+    <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+    <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
+    <span class="n">data_cost_depolarizingnoise_alpha2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">beta0</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha1</span><span class="o">/</span><span class="p">(</span><span class="n">alpha1</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">alpha2</span><span class="o">/</span><span class="p">(</span><span class="n">alpha2</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">))</span>
+    <span class="n">beta1</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">alpha1</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">alpha2</span><span class="o">/</span><span class="p">(</span><span class="n">alpha2</span> <span class="o">-</span> <span class="n">alpha1</span><span class="p">))</span>
+    <span class="n">beta2</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">alpha2</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="n">alpha1</span><span class="o">/</span><span class="p">(</span><span class="n">alpha1</span> <span class="o">-</span> <span class="n">alpha2</span><span class="p">))</span>
+    <span class="n">Richardson_extrapolation</span> <span class="o">=</span> <span class="n">beta0</span><span class="o">*</span><span class="n">data_cost_depolarizingnoise</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">beta1</span><span class="o">*</span><span class="n">data_cost_depolarizingnoise_alpha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">beta2</span><span class="o">*</span><span class="n">data_cost_depolarizingnoise_alpha2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">data_cost_depolarizingnoise_Richardson_extrapolation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Richardson_extrapolation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#実線が外挿した結果、点線はmitigationしていない結果</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no error boost&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_alpha</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha1=1.5&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_alpha2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha2=2.0&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Richardson_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Quadratic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error strength&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_23_0.png" src="../_images/notebooks_04_02_Extrapolation_23_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##error mitigation（指数関数外挿法）を実行する　その３</span>
+<span class="c1">## ノイズに関するコスト関数のグラフ</span>
+<span class="c1">##指数関数外挿とリチャードソン外挿は測定後のデータ処理の違いのみであることに注意</span>
+
+<span class="n">data_cost_depolarizingnoise_Exponential_extrapolation</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_cost_depolarizingnoise_Exponential_extrapolation_alpha2</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">Exponential_extrapolation</span> <span class="o">=</span> <span class="n">data_cost_depolarizingnoise</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="n">alpha1</span><span class="o">/</span><span class="p">(</span><span class="n">alpha1</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">))</span> <span class="o">*</span> <span class="n">data_cost_depolarizingnoise_alpha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">alpha1</span><span class="p">))</span>
+    <span class="n">data_cost_depolarizingnoise_Exponential_extrapolation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Exponential_extrapolation</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">Exponential_extrapolation</span> <span class="o">=</span> <span class="n">data_cost_depolarizingnoise</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">data_cost_depolarizingnoise_alpha2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">data_cost_depolarizingnoise_Exponential_extrapolation_alpha2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Exponential_extrapolation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#それぞれ外挿した結果を表示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Richardson_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Quadratic&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Exponential_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exponential&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Exponential_extrapolation_alpha2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exponential alpha2&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error strength&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_04_02_Extrapolation_25_0.png" src="../_images/notebooks_04_02_Extrapolation_25_0.png" />
+</div>
+</div>
+<p>上の例では、指数関数外挿が最も良い結果になっていました。</p>
+</section>
+<section id="練習">
+<h2>練習<a class="headerlink" href="#練習" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>の値を変えてみて、どの程度ノイズが緩和されるかを見てみましょう。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_expectation_value</span></code>で期待値を求める代わりに、<code class="docutils literal notranslate"><span class="pre">sampling()</span></code>を使って期待値を求め、その結果を利用して外挿を実装してみてください（物理量のサンプリングに関しては、以下を使ってください）。</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shots</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="k">def</span> <span class="nf">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+        <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_state</span><span class="p">)</span>
+    <span class="n">density_copy_ZZ</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">density_copy_X</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">density_copy_ZZ</span> <span class="o">=</span> <span class="n">density_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">density_copy_X</span> <span class="o">=</span> <span class="n">density_state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">mask_list_ZZ</span> <span class="o">=</span> <span class="p">[</span><span class="mb">0b1100</span><span class="p">,</span><span class="mb">0b0110</span><span class="p">,</span><span class="mb">0b0011</span><span class="p">,</span><span class="mb">0b1001</span><span class="p">]</span>
+    <span class="n">mask_list_X</span> <span class="o">=</span> <span class="p">[</span><span class="mb">0b1000</span><span class="p">,</span><span class="mb">0b0100</span><span class="p">,</span><span class="mb">0b0010</span><span class="p">,</span><span class="mb">0b0001</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">gate</span> <span class="o">=</span> <span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_copy_X</span><span class="p">)</span>
+    <span class="n">noise_sampling_ZZ</span> <span class="o">=</span> <span class="n">density_copy_ZZ</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
+    <span class="n">noise_sampling_X</span> <span class="o">=</span> <span class="n">density_copy_X</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
+    <span class="n">estimated_ZZ_average</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">estimated_X_average</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">noise_sampling_ZZ</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">mask_list_ZZ</span><span class="p">:</span>
+            <span class="n">bitcount</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">s</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+            <span class="n">estimated_ZZ_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">shots</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">noise_sampling_X</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="n">mask_list_X</span><span class="p">:</span>
+            <span class="n">bitcount</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">s</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+            <span class="n">estimated_X_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">shots</span>
+    <span class="n">data_sampling_average</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">estimated_X_average</span> <span class="o">+</span> <span class="n">J</span> <span class="o">*</span> <span class="n">estimated_ZZ_average</span>
+    <span class="k">return</span> <span class="n">data_sampling_average</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="04_01_Density_Matrix_and_Error.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">&lt;no title&gt;</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_03_Probabilistic_error_cancellation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">擬確率法を実装してみる</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
