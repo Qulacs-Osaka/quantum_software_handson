@@ -43,9 +43,15 @@
 
 - 04\_量子エラー補償の基礎
 
-  - 01\_エラー補償法を学ぶ
-    <br> [04_01_error_mitigation.ipynb](./doc/source/notebooks/04_01_error_mitigation.ipynb)
-    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/04_01_error_mitigation.ipynb)
+  - 01\_Qulacsでの混合状態
+    <br> [04_01_Density_Matrix_and_Error.ipynb](./doc/source/notebooks/04_01_Density_Matrix_and_Error.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/04_01_Density_Matrix_and_Error.ipynb)
+  - 02\_リチャードソン外挿法と指数関数外挿法を実装してみる
+    <br> [04_02_Extrapolation.ipynb](./doc/source/notebooks/04_02_Extrapolation.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/04_02_Extrapolation.ipynb)
+  - 03\_擬確率法を実装してみる
+    <br> [04_03_Probabilistic_error_cancellation.ipynb](./doc/source/notebooks/04_03_Probabilistic_error_cancellation.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/04_03_Probabilistic_error_cancellation.ipynb)
 
 - 05\_量子コンピュータと量子化学の基礎
 

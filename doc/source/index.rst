@@ -18,7 +18,9 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/02_02_parameter_shift_rule
    notebooks/03_01_QCL
    notebooks/03_02_quantum_kernel
-   notebooks/04_01_error_mitigation
+   notebooks/04_01_Density_Matrix_and_Error
+   notebooks/04_02_Extrapolation
+   notebooks/04_03_Probabilistic_error_cancellation
    notebooks/05_01_conventional_quantum_chemical_calculations
    notebooks/05_02_fermion_qubit_mapping
    notebooks/05_03_compute_groud_state_of_molecule_using_vqe
