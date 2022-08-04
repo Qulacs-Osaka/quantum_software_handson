@@ -134,6 +134,11 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html">
+   Qulacsでの混合状態
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="notebooks/04_02_Extrapolation.html">
    リチャードソン外挿法と指数関数外挿法を実装してみる
   </a>
@@ -413,6 +418,16 @@ title="Print to PDF"
 <li class="toctree-l2"><a class="reference internal" href="notebooks/03_02_quantum_kernel.html#カーネル法の準備">カーネル法の準備</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/03_02_quantum_kernel.html#簡単な回帰問題を解く">簡単な回帰問題を解く</a></li>
 <li class="toctree-l2"><a class="reference internal" href="notebooks/03_02_quantum_kernel.html#分類問題を解く">分類問題を解く</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html">Qulacsでの混合状態</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い">DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#量子状態（密度演算子）の準備">量子状態（密度演算子）の準備</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#いくつかのエラー：DepolarizingNoiseなど">いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#計算基底でのサンプリング：sampling()">計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#練習">練習</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/04_01_Density_Matrix_and_Error.html#補足：変分量子アルゴリズムなどでは、QuantumCircuit,--ParametricQuantumCircuitを使いますが、このときcircuit.add_gate(DepolarizingNoise(0,-0.15))のように使えばOK。">補足：変分量子アルゴリズムなどでは、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit,</span>&#160; <span class="pre">ParametricQuantumCircuit</span></code>を使いますが、このとき<code class="docutils literal notranslate"><span class="pre">circuit.add_gate(DepolarizingNoise(0,</span> <span class="pre">0.15))</span></code>のように使えばOK。</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/04_02_Extrapolation.html">リチャードソン外挿法と指数関数外挿法を実装してみる</a><ul>
