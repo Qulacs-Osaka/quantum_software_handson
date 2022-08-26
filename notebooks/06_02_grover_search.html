@@ -573,35 +573,37 @@ div.rendered_html tbody tr:hover {
 </style>
 <section id="グローバー探索量子アルゴリズムをとことん実装する">
 <h1>グローバー探索量子アルゴリズムをとことん実装する<a class="headerlink" href="#グローバー探索量子アルゴリズムをとことん実装する" title="Permalink to this headline">#</a></h1>
-<p>グローバー探索アルゴリズムは、ソートされていないN個のデータがあったときに、<span class="math notranslate nohighlight">\(O(\sqrt N)\)</span>回のクエリで目的のデータにアクセスするための方法である。古典コンピュータでは<span class="math notranslate nohighlight">\(O(N)\)</span>回のクエリが必要であるので、<span class="math notranslate nohighlight">\(N\)</span>が<span class="math notranslate nohighlight">\(n\)</span>ビットのランダムアクセスメモリ（<span class="math notranslate nohighlight">\(N=2^n\)</span>）のような場合には指数的な加速を可能とする。例えば、ある効率よく計算できるブール関数<span class="math notranslate nohighlight">\(f:\{0,1\}^n \rightarrow \{ 0,1\}\)</span>に対して、<span class="math notranslate nohighlight">\(f(x)=0\)</span>となる<span class="math notranslate nohighlight">\(x \in \{0,1\}^n\)</span>を見つけるような場合に利用できる。古典アルゴリズムの全探索部分をすべからく平方根（quadratic）に高速化してくれるので、SAT問題など古典ベストアルゴリズムを量子を用いてさらに加速することができる。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install qulacsvis</span>
+<span class="c1">#!pip install matplotlib</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install scipy</span>
+</pre></div>
+</div>
+</div>
+<p>グローバー探索アルゴリズムは、ソートされていないN個のデータがあったときに、<span class="math notranslate nohighlight">\(O(\sqrt N)\)</span>回のクエリで目的のデータにアクセスするための方法である。古典コンピュータでは<span class="math notranslate nohighlight">\(O(N)\)</span>回のクエリが必要であるので、<span class="math notranslate nohighlight">\(N\)</span>が<span class="math notranslate nohighlight">\(n\)</span>ビットのランダムアクセスメモリ（<span class="math notranslate nohighlight">\(N=2^n\)</span>）のような場合には指数的な加速を可能とする。例えば、ある効率よく計算できるブール関数<span class="math notranslate nohighlight">\(f:\{0,1\}^n \rightarrow \{ 0,1\}\)</span>に対して、<span class="math notranslate nohighlight">\(f(x)=0\)</span>となる<span class="math notranslate nohighlight">\(x \in \{0,1\}^n\)</span>を見つけるような場合に利用できる。古典アルゴリズムの全探索部分をすべからく平方根（quadratic）に高速化してくれるので、SAT問題など古典ベストアルゴリズムを量子を用いてさらに加速することができる。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">import</span> <span class="nn">random</span>
+
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span>
-<span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DenseMatrix</span>
 <span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">to_matrix_gate</span>
-<span class="kn">from</span> <span class="nn">qulacs.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuitOptimizer</span>
-<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Identity</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span> <span class="c1">#パウリ演算子</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">H</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">Sdag</span><span class="p">,</span> <span class="n">sqrtX</span><span class="p">,</span><span class="n">sqrtXdag</span><span class="p">,</span><span class="n">sqrtY</span><span class="p">,</span><span class="n">sqrtYdag</span> <span class="c1">#1量子ビット Clifford演算</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">T</span><span class="p">,</span><span class="n">Tdag</span> <span class="c1">#1量子ビット 非Clifford演算</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">RX</span><span class="p">,</span><span class="n">RY</span><span class="p">,</span><span class="n">RZ</span> <span class="c1">#パウリ演算子についての回転演算</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">CNOT</span><span class="p">,</span> <span class="n">CZ</span><span class="p">,</span> <span class="n">SWAP</span> <span class="c1">#2量子ビット演算</span>
-<span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">DephasingNoise</span><span class="p">,</span><span class="n">DepolarizingNoise</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">H</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Z</span>
+<span class="kn">from</span> <span class="nn">qulacs.state</span> <span class="kn">import</span> <span class="n">inner_product</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">):</span>
@@ -612,7 +614,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <p>初期状態としてすべてのビット列が重ね合わさった状態を準備する。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">5</span>
@@ -630,7 +632,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
@@ -641,11 +643,18 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_6_0.png" src="../_images/notebooks_06_02_grover_search_6_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_7_0.png" src="../_images/notebooks_06_02_grover_search_7_0.png" />
 </div>
 </div>
-<p>グローバーアルゴリズムでは、特定の target 状態の係数に-1を付けるフリップ演算子 target_flip と、初期状態のすべてのビット列が重ね合わさった状態（<span class="math notranslate nohighlight">\(|+\rangle ^{\otimes n}\)</span>）に-1をつけるフリップ演算子 initial_flip を繰り返し作用させることによって初期状態から終状態の２状態間の回転を誘導することになる。ここでは target 状態としてすべて1の状態 <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> を選んだ。実際には <span class="math notranslate nohighlight">\(f(x)=0\)</span> を満たすような状態を取り出すといった場合に利用されることになり、このような場合には、関数
-<span class="math notranslate nohighlight">\(f\)</span> を量子コンピュータ上で実行し、<span class="math notranslate nohighlight">\(\sum_x |x\rangle \rightarrow \sum_x (-1)^{f(x) \oplus 1}|x\rangle\)</span>のような量子演算がフリップ演算子となる。<span class="math notranslate nohighlight">\(f\)</span>を構成するところは<span class="math notranslate nohighlight">\(n\)</span>に対して多項式（<span class="math notranslate nohighlight">\(N=2^n\)</span>に対しては対数多項式）であるとしているので本質ではないため今回は <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> をターゲットとする。</p>
+<p>グローバーアルゴリズムでは、</p>
+<ul class="simple">
+<li><p>特定の target 状態の係数に-1を付けるフリップ演算子 target_flip</p></li>
+<li><p>初期状態のすべてのビット列が重ね合わさった状態（<span class="math notranslate nohighlight">\(|+\rangle ^{\otimes n}\)</span>）に-1をつけるフリップ演算子 initial_flip</p></li>
+</ul>
+<div class="line-block">
+<div class="line">を繰り返し作用させることによって初期状態から終状態の２状態間の回転を誘導することになる。ここでは target 状態としてすべて1の状態 <span class="math notranslate nohighlight">\(|11...1\rangle\)</span> を選んだ。</div>
+<div class="line">実際には <span class="math notranslate nohighlight">\(f(x)=0\)</span> を満たす状態を取り出す場合に利用する。この場合、関数 <span class="math notranslate nohighlight">\(f\)</span> を量子コンピュータ上で実行し、<span class="math notranslate nohighlight">\(\sum_x |x\rangle \rightarrow \sum_x (-1)^{f(x) \oplus 1}|x\rangle\)</span>という量子演算がフリップ演算子となる。<span class="math notranslate nohighlight">\(f\)</span>を構成する部分のゲート数は<span class="math notranslate nohighlight">\(n\)</span>に対して多項式（<span class="math notranslate nohighlight">\(N=2^n\)</span>に対しては対数多項式）であることを前提とする。</div>
+</div>
 <p>qulacsの特殊ゲート <code class="docutils literal notranslate"><span class="pre">to_matrix_gate</span></code> を使うと好きな <code class="docutils literal notranslate"><span class="pre">control_index</span></code> の量子ビットが好きなビット値 <code class="docutils literal notranslate"><span class="pre">control_with_value</span></code> の場合に作用する制御量子演算を実現できる。今回は、nqubits-1番目までの量子ビットがすべて1の場合にnqubits番目の量子ビットにZを作用させる（<span class="math notranslate nohighlight">\(|111...1 \rangle\)</span>のみ-1をつけるフリップ演算子を定義する）。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -665,9 +674,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hoge</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">hoge</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hoge</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flipped_state</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">flipped_state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">flipped_state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -705,9 +714,24 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<p>フリップ演算子を作用させて確率分布の変化を見よう。全部1の状態（一番右側）の確率が大きくなっている。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">circuit_drawer</span><span class="p">(</span><span class="n">initial_flip</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_06_02_grover_search_15_0.png" src="../_images/notebooks_06_02_grover_search_15_0.png" />
+</div>
+</div>
+<p>フリップ演算子を作用させて確率分布の変化を見よう。全部1の状態（一番右側）の確率が大きくなっている。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#初期状態の準備</span>
@@ -725,12 +749,12 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_15_0.png" src="../_images/notebooks_06_02_grover_search_15_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_17_0.png" src="../_images/notebooks_06_02_grover_search_17_0.png" />
 </div>
 </div>
 <p>これを何回か繰り返して、target状態の確率がどのように変化するか見ておく。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
@@ -743,13 +767,15 @@ div.rendered_html tbody tr:hover {
 
 <span class="c1">#すべての計算基底の重ね合わせ状態を作る</span>
 <span class="n">Hadamard</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;target状態&quot;</span><span class="p">)</span>
 <span class="n">show_distribution</span><span class="p">(</span><span class="n">target_state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
     <span class="n">target_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">initial_flip</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;繰り返し回数: </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">回目&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;target状態との内積: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">show_distribution</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="n">nqubits</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -757,14 +783,15 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_17_0.png" src="../_images/notebooks_06_02_grover_search_17_0.png" />
-</div>
+<div class="highlight"><pre>
+target状態
+</pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_17_1.png" src="../_images/notebooks_06_02_grover_search_17_1.png" />
+<img alt="../_images/notebooks_06_02_grover_search_19_1.png" src="../_images/notebooks_06_02_grover_search_19_1.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -772,14 +799,15 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.5082329989778311
+繰り返し回数: 1回目
+target状態との内積: 0.5082329989778305
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_17_3.png" src="../_images/notebooks_06_02_grover_search_17_3.png" />
+<img alt="../_images/notebooks_06_02_grover_search_19_3.png" src="../_images/notebooks_06_02_grover_search_19_3.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -787,14 +815,15 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.776160177786797
+繰り返し回数: 2回目
+target状態との内積: 0.7761601777867947
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_17_5.png" src="../_images/notebooks_06_02_grover_search_17_5.png" />
+<img alt="../_images/notebooks_06_02_grover_search_19_5.png" src="../_images/notebooks_06_02_grover_search_19_5.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -802,28 +831,37 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.9470673343724136
+繰り返し回数: 3回目
+target状態との内積: 0.9470673343724091
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_17_7.png" src="../_images/notebooks_06_02_grover_search_17_7.png" />
+<img alt="../_images/notebooks_06_02_grover_search_19_7.png" src="../_images/notebooks_06_02_grover_search_19_7.png" />
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+繰り返し回数: 4回目
+target状態との内積: 0.9995910741614723
+</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<div class="highlight"><pre>
-0.9995910741614789
-</pre></div></div>
+<img alt="../_images/notebooks_06_02_grover_search_19_9.png" src="../_images/notebooks_06_02_grover_search_19_9.png" />
 </div>
-<p>4回ほどでほぼ確率１で target 状態を得ることができた。</p>
+</div>
+<p>4回でほぼ確率１で target 状態を得ることができた。</p>
 <p>前準備ができたので、量子ビット数を変えて、target状態が得られるのに必要な繰り返し回数を計算してみる</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nqubits</span> <span class="o">=</span> <span class="mi">10</span>
@@ -874,27 +912,19 @@ div.rendered_html tbody tr:hover {
     <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">inner_product</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">target_state</span><span class="p">)))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[&lt;matplotlib.lines.Line2D at 0x105a11128&gt;]
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_20_1.png" src="../_images/notebooks_06_02_grover_search_20_1.png" />
+<img alt="../_images/notebooks_06_02_grover_search_22_0.png" src="../_images/notebooks_06_02_grover_search_22_0.png" />
 </div>
 </div>
 <p>約25回くらいでほぼ確率1でtarget状態が得られている。確率の増加は、サイン関数の２乗のような振る舞いになっている。これは、グローバー探索が、初期状態とtarget状態の間を一定の角度で回転している操作になっているからである。</p>
-<p>量子ビット数を増やして、target状態の得られる確率が最大となるステップ数を調べよう。</p>
+<p>量子ビット数を増やして、target状態の得られる確率が最大となるステップ数を調べよう。(※実行結果が出るまで、数分かかります)</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -962,14 +992,19 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#計算結果</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#計算結果の可視化</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],</span><span class="n">result</span><span class="p">)</span>
+<span class="c1">#実際のステップ数</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],</span><span class="n">result</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;actual number of steps&quot;</span><span class="p">)</span>
 <span class="c1">#2^n でスケール</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$2^n$&quot;</span><span class="p">)</span>
 <span class="c1">#2^(n/2)でスケール</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,(</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],[</span><span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,(</span><span class="n">i</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samp</span><span class="p">)],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$2^{n/2}$&quot;</span><span class="p">)</span>
+
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;nqubits&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;number of steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -978,7 +1013,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_02_grover_search_23_0.png" src="../_images/notebooks_06_02_grover_search_23_0.png" />
+<img alt="../_images/notebooks_06_02_grover_search_25_0.png" src="../_images/notebooks_06_02_grover_search_25_0.png" />
 </div>
 </div>
 <p>ステップ数が<span class="math notranslate nohighlight">\(2^{n/2}\)</span>でスケールしていることがわかった。</p>
