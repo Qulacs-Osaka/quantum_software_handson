@@ -653,6 +653,7 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install qulacs</span>
+<span class="c1">#!pip install qulacsvis</span>
 <span class="c1">#!pip install matplotlib</span>
 <span class="c1">#!pip install numpy</span>
 <span class="c1">#!pip install scipy</span>
@@ -675,6 +676,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span>
 <span class="kn">from</span> <span class="nn">qulacs.circuit</span> <span class="kn">import</span> <span class="n">QuantumCircuitOptimizer</span>
 <span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
 <span class="kn">import</span> <span class="nn">math</span>
 </pre></div>
 </div>
@@ -689,6 +691,7 @@ div.rendered_html tbody tr:hover {
     <span class="n">state_copy</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="c1">#射影測定のシミュレーション</span>
+    <span class="c1">#P0は|0&gt;への射影、P1は|1&gt;への射影を表す</span>
     <span class="n">P0</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">prob</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">get_squared_norm</span><span class="p">()</span>
 
@@ -696,12 +699,10 @@ div.rendered_html tbody tr:hover {
         <span class="n">outcome</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">state_copy</span>
         <span class="n">P1</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-
+        <span class="c1">#規格化</span>
         <span class="n">state</span><span class="o">.</span><span class="n">multiply_coef</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">prob</span><span class="p">))</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">drop_qubit</span><span class="p">(</span><span class="n">state</span><span class="p">,[</span><span class="n">index</span><span class="p">],[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">state</span><span class="p">,</span> <span class="n">outcome</span><span class="p">,</span> <span class="n">prob</span>
-        <span class="c1">#規格化</span>
-
     <span class="k">else</span><span class="p">:</span>
         <span class="n">outcome</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">state</span><span class="o">.</span><span class="n">multiply_coef</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">prob</span><span class="p">))</span>
@@ -748,22 +749,22 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[1, 1, 1, -1, 1, -1, 1, -1, 1, -1]
+[1, 1, -1, -1, 1, 1, 1, -1, 1, 1]
 (1+0j) Z0 Z1
 (1+0j) Z0 Z2
-(1+0j) Z0 Z3
+(-1+0j) Z0 Z3
 (-1+0j) Z0 Z4
 (1+0j) Z1 Z2
-(-1+0j) Z1 Z3
+(1+0j) Z1 Z3
 (1+0j) Z1 Z4
 (-1+0j) Z2 Z3
 (1+0j) Z2 Z4
-(-1+0j) Z3 Z4
-(1+0j) Z0
-(-1+0j) Z1
+(1+0j) Z3 Z4
+(-1+0j) Z0
+(1+0j) Z1
 (1+0j) Z2
 (-1+0j) Z3
-(-1+0j) Z4
+(1+0j) Z4
 </pre></div></div>
 </div>
 <p>#エネルギーをプロットしてみる</p>
@@ -803,8 +804,8 @@ div.rendered_html tbody tr:hover {
 <section id="ハミルトニアンダイナミクスの定義">
 <h2>ハミルトニアンダイナミクスの定義<a class="headerlink" href="#ハミルトニアンダイナミクスの定義" title="Permalink to this headline">#</a></h2>
 <p>ハミルトニアンダイナミクスを計算してみる：</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
@@ -815,7 +816,16 @@ div.rendered_html tbody tr:hover {
 <span class="n">dynamics</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="n">nqubits</span><span class="p">)</span>
 <span class="n">dynamics</span><span class="o">.</span><span class="n">add_observable_rotation_gate</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">,</span> <span class="n">delta_t</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">state</span><span class="o">.</span><span class="n">set_Haar_random_state</span><span class="p">()</span>
+<span class="c1"># 量子回路の可視化</span>
+<span class="n">circuit_drawer</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="o">.</span><span class="n">set_Haar_random_state</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">T</span><span class="o">/</span><span class="n">delta_t</span><span class="p">)):</span>
     <span class="n">dynamics</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -832,11 +842,18 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_11_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_11_0.png" />
+</div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_10_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_10_0.png" />
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_11_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_11_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -847,14 +864,14 @@ div.rendered_html tbody tr:hover {
 <span class="c1">#定数倍シフトをしておいてエネルギーを正にする</span>
 <span class="n">Hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">nqubits</span><span class="o">*</span><span class="p">(</span><span class="n">nqubits</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">nqubits</span><span class="p">,</span><span class="sa">f</span><span class="s2">&quot;I </span><span class="si">{</span><span class="mi">0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">show_energy_landscape</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">)</span>
-<br/><br/></pre></div>
+</pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_11_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_11_0.png" />
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_12_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_12_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -875,7 +892,7 @@ div.rendered_html tbody tr:hover {
         <span class="n">control_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">gate_tmp</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">control_circuit</span>
-<br/><br/></pre></div>
+</pre></div>
 </div>
 </div>
 </section>
@@ -894,10 +911,32 @@ div.rendered_html tbody tr:hover {
 <span class="n">dynamics</span><span class="o">.</span><span class="n">add_observable_rotation_gate</span><span class="p">(</span><span class="n">Hamiltonian</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">controlled_dynamics</span> <span class="o">=</span> <span class="n">add_control_qubit_for_circuit</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span><span class="n">nqubits</span><span class="p">,</span><span class="n">nqubits</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="c1">#control gateにする</span>
-<span class="c1">#dynamics.add_control_qubit(nqubits,1)</span>
 
-<span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># 量子回路の可視化</span>
+<span class="n">circuit_drawer</span><span class="p">(</span><span class="n">controlled_dynamics</span><span class="p">,</span> <span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CAUTION: The 15-th Gate you added is skipped.                    This gate does not have &#34;target_qubit_list&#34;.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_15_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_15_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">nqubits</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1">#全ての状態の重ね合わせを作る</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nqubits</span><span class="p">):</span>
@@ -936,26 +975,26 @@ div.rendered_html tbody tr:hover {
 
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]))],</span><span class="n">res</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<br/><br/></pre></div>
+</pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_14_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_14_0.png" />
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_16_0.png" src="../_images/notebooks_06_01_quantum_phase_estimation_16_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_14_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_14_1.png" />
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_16_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_16_1.png" />
 </div>
 </div>
 <p>どのような状態に収束しているか確認しておく</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">nqubits</span><span class="p">)</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">()[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">&gt;</span><span class="mf">0.01</span><span class="p">]</span>
@@ -971,8 +1010,10 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-32.0
-32.0
+20.0
+20.0
+20.0
+20.0
 </pre></div></div>
 </div>
 <p>同じエネルギーの状態（縮退したエネルギー固有状態）が得られている。 ただし、収束するのに必要なステップ数は大きい。次に、補助量子ビットの数を増やし、量子位相推定を実行する。位相推定のサブルーチンで利用する制御位相ゲートおよび逆量子フーリエ変換を定義しておく。</p>
@@ -980,7 +1021,7 @@ div.rendered_html tbody tr:hover {
 <section id="量子位相推定の実装">
 <h2>量子位相推定の実装<a class="headerlink" href="#量子位相推定の実装" title="Permalink to this headline">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#制御位相ゲート</span>
@@ -1002,12 +1043,12 @@ div.rendered_html tbody tr:hover {
             <span class="n">circuit</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">H</span><span class="p">(</span><span class="n">tot_num_qubits</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">state</span>
-<br/><br/></pre></div>
+</pre></div>
 </div>
 </div>
 <p>まずは固有状態を入力して、きちんとエネルギーが得られているか検証しておく。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#量子位相推定</span>
@@ -1118,7 +1159,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_21_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_21_1.png" />
+<img alt="../_images/notebooks_06_01_quantum_phase_estimation_23_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_23_1.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1128,74 +1169,60 @@ div.rendered_html tbody tr:hover {
 <div class="highlight"><pre>
 num_reg_qubits =  8
 43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
-43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
-27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
-43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
 39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
 39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
 39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
 47.0 [47, 47, 47, 47, 47, 47, 47, 47, 47, 47]
-47.0 [47, 47, 47, 47, 47, 47, 47, 47, 47, 47]
 39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+47.0 [47, 47, 47, 47, 47, 47, 47, 47, 47, 47]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
 43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+43.0 [43, 43, 43, 43, 43, 43, 43, 43, 43, 43]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
+27.0 [27, 27, 27, 27, 27, 27, 27, 27, 27, 27]
+31.0 [31, 31, 31, 31, 31, 31, 31, 31, 31, 31]
+39.0 [39, 39, 39, 39, 39, 39, 39, 39, 39, 39]
+35.0 [35, 35, 35, 35, 35, 35, 35, 35, 35, 35]
 </pre></div></div>
 </div>
 <p>最後に、重ね合わせ状態を入力として実際に補助量子ビットを射影測定して、量子位相推定が機能するか検証する。</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#量子位相推定</span>
@@ -1288,31 +1315,6 @@ num_reg_qubits =  8
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;energy　expectation value&quot;</span><span class="p">,</span><span class="n">Hamiltonian</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">state</span><span class="p">),</span><span class="s2">&quot;energy phase estimation&quot;</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">outcome_int</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">num_reg_qubits</span><span class="p">))</span><span class="o">/</span><span class="n">theta</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-energy shift 100
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/notebooks_06_01_quantum_phase_estimation_23_1.png" src="../_images/notebooks_06_01_quantum_phase_estimation_23_1.png" />
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-num_reg_qubits =  9
-measurement outcome (inverse order!!) [1, 0, 0, 1, 1, 0, 1, 0, 0]
-energy　expectation value 89.00000000000013 energy phase estimation 89
-</pre></div></div>
 </div>
 </section>
 <section id="発展編">
