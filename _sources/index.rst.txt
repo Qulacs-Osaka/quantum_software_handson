@@ -24,6 +24,7 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/05_01_conventional_quantum_chemical_calculations
    notebooks/05_02_fermion_qubit_mapping
    notebooks/05_03_compute_groud_state_of_molecule_using_vqe
+   notebooks/05_04_compute_chemical_properties_using_Qamuy
    notebooks/06_01_quantum_phase_estimation
    notebooks/06_02_grover_search
    notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank

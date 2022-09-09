@@ -37,6 +37,8 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/05_04_compute_chemical_properties_using_Qamuy.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="位相推定アルゴリズム" href="06_01_quantum_phase_estimation.html" />
+    <link rel="prev" title="量子変分固有値法（VQE)を用いた基底状態計算" href="05_03_compute_groud_state_of_molecule_using_vqe.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -93,7 +95,7 @@
   Contents:
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="01_01_how_to_use_qulacs.html">
    Qulacsの基本的な使い方
@@ -162,6 +164,11 @@
  <li class="toctree-l1">
   <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
    量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Qamuyを使った量子コンピュータｘ量子化学計算
   </a>
  </li>
  <li class="toctree-l1">
@@ -2006,7 +2013,7 @@ viewer_16626549925863566.render();
 </section>
 <section id="簡単な化学反応計算（アンモニアの傘反転）">
 <h2>簡単な化学反応計算（アンモニアの傘反転）<a class="headerlink" href="#簡単な化学反応計算（アンモニアの傘反転）" title="Permalink to this headline">#</a></h2>
-<p>アンモニア(NH3)は既に見てきたように、Nを頂点としてHが３つ傘のように広がった構造をとっています。 この傘がひっくり返っても、対称性からもとの構造と同じNH3が得られます。 このNH3のNを中心とした反転運動を化学反応の簡単な例として見ていきたいと思います。 <img alt="e067ae218a2d429e95bdc9b652bb2dcf" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Nitrogen-inversion-3D-balls.png" /> （photo taken from <a class="reference external" href="https://en.wikipedia.org/wiki/Pyramidal_inversion">https://en.wikipedia.org/wiki/Pyramidal_inversion</a> )</p>
+<p>アンモニア(NH3)は既に見てきたように、Nを頂点としてHが３つ傘のように広がった構造をとっています。 この傘がひっくり返っても、対称性からもとの構造と同じNH3が得られます。 このNH3のNを中心とした反転運動を化学反応の簡単な例として見ていきたいと思います。 <img alt="0da57c5dd9264d368344c0604557df07" src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Nitrogen-inversion-3D-balls.png" /> （photo taken from <a class="reference external" href="https://en.wikipedia.org/wiki/Pyramidal_inversion">https://en.wikipedia.org/wiki/Pyramidal_inversion</a> )</p>
 <p>この反転運動は、反応物と生成物が同じ構造です。既に両者の構造とエネルギーは先程の構造最適化で得られています。 化学反応においては、遷移状態(Transition State, TS)と呼ばれる極小点同士を結ぶ反応経路上にある一次の鞍点（最小エネルギー反応経路上の極大点）が、その反応を特徴づける点として重要になってきます。 では、この反応の遷移状態を求めてみます。 この反応は対称性が高い反応で、遷移状態は平面構造を取ることがわかります。 初期構造に平面構造を選んで構造最適化をすればこの反応の遷移状態は得られます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
@@ -2466,6 +2473,20 @@ oscillator_strength: 0.0163023205854495
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05_03_compute_groud_state_of_molecule_using_vqe.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">量子変分固有値法（VQE)を用いた基底状態計算</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06_01_quantum_phase_estimation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">位相推定アルゴリズム</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
