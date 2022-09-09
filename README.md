@@ -64,6 +64,9 @@
   - 03\_変分量子固有値法（VQE)を実行して分子の基底状態を計算してみる
     <br> [05_03_compute_groud_state_of_molecule_using_vqe.ipynb](./doc/source/notebooks/05_03_compute_groud_state_of_molecule_using_vqe.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/05_03_compute_groud_state_of_molecule_using_vqe.ipynb)
+  - 04\_Qamuyを使った量子コンピュータｘ量子化学計算
+    <br> [05_04_compute_chemical_properties_using_Qamuy.ipynb](./doc/source/notebooks/05_04_compute_chemical_properties_using_Qamuy.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/05_04_compute_chemical_properties_using_Qamuy.ipynb)
 
 - 06\_量子アルゴリズム各論
 
