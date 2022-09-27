@@ -104,9 +104,12 @@
    "outputs": [],
    "source": [
     "### 損失額を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく\n",
+    "g = Identity(0)\n",
     "\n",
     "### 各債務者のデフォルト確率を指定のqubitの|1>のamplitudeとして埋め込み\n",
-    "g = 問１# 注：債務者1,2のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]\n",
+    "for i in range(numObl):\n",
+    "    pdGate_i = 問１# 注：債務者0,1のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]\n",
+    "    g = merge(g, pdGate_i)\n",
     "\n",
     "### i番目の債務者がデフォルトしていれば、その債務額をtemporary registerにセットし、損失額レジスタに足す\n",
     "for i in range(numObl):\n",
@@ -297,7 +300,7 @@
  ],
  "metadata": {
   "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
+   "display_name": "Python 3",
    "language": "python",
    "name": "python3"
   },
@@ -311,7 +314,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.12"
+   "version": "3.8.5"
   }
  },
  "nbformat": 4,

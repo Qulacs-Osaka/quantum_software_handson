@@ -574,7 +574,7 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="nbinput nblast docutils container">
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -584,6 +584,65 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: numpy in c:\users\koich\anaconda3\lib\site-packages (1.22.4)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 22.2.2 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: matplotlib in c:\users\koich\anaconda3\lib\site-packages (3.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied: certifi&gt;=2020.06.20 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2020.6.20)
+Requirement already satisfied: numpy&gt;=1.15 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (1.22.4)
+Requirement already satisfied: pillow&gt;=6.2.0 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (8.0.1)
+Requirement already satisfied: python-dateutil&gt;=2.1 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2.8.1)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.3 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2.4.7)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (1.3.0)
+Requirement already satisfied: six in c:\users\koich\anaconda3\lib\site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.15.0)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 22.2.2 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: qulacs in c:\users\koich\anaconda3\lib\site-packages (0.3.0)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 22.2.2 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -592,7 +651,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Observable</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span><span class="p">,</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">Adder</span> <span class="kn">import</span> <span class="n">adder_gate</span>
 <span class="kn">from</span> <span class="nn">ConstSetter</span> <span class="kn">import</span> <span class="n">const_setter_gate</span><span class="p">,</span> <span class="n">ctrl_const_setter_gate</span>
 </pre></div>
@@ -666,9 +725,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 損失額を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1">### 各債務者のデフォルト確率を指定のqubitの|1&gt;のamplitudeとして埋め込み</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">([</span><span class="n">RY</span><span class="p">(</span><span class="n">oblIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pds</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
+    <span class="n">pdGate_i</span> <span class="o">=</span> <span class="n">RY</span><span class="p">(</span><span class="n">oblIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pds</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pdGate_i</span><span class="p">)</span>
 
 <span class="c1">### i番目の債務者がデフォルトしていれば、その債務額をtemporary registerにセットし、損失額レジスタに足す</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
@@ -827,7 +889,7 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x26ddb639f40&gt;
+&lt;matplotlib.legend.Legend at 0x1f2740b56d0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -835,14 +897,6 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <img alt="../../_images/notebooks_07_CreditPortfolioRisk_07_01_CreditPortfolioRiskMeasurement_13_1.png" src="../../_images/notebooks_07_CreditPortfolioRisk_07_01_CreditPortfolioRiskMeasurement_13_1.png" />
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
 </div>
 </div>
 </section>

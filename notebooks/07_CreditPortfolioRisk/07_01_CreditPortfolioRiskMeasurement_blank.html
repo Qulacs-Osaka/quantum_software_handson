@@ -667,9 +667,12 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 損失額を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1">### 各債務者のデフォルト確率を指定のqubitの|1&gt;のamplitudeとして埋め込み</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">問１</span><span class="c1"># 注：債務者1,2のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
+    <span class="n">pdGate_i</span> <span class="o">=</span> <span class="n">問１</span><span class="c1"># 注：債務者0,1のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pdGate_i</span><span class="p">)</span>
 
 <span class="c1">### i番目の債務者がデフォルトしていれば、その債務額をtemporary registerにセットし、損失額レジスタに足す</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
