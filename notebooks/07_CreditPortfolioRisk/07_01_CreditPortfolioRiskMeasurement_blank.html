@@ -593,7 +593,7 @@ div.rendered_html tbody tr:hover {
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Observable</span>
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span>
+<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span><span class="p">,</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">Adder</span> <span class="kn">import</span> <span class="n">adder_gate</span>
 <span class="kn">from</span> <span class="nn">ConstSetter</span> <span class="kn">import</span> <span class="n">const_setter_gate</span><span class="p">,</span> <span class="n">ctrl_const_setter_gate</span>
 </pre></div>
@@ -821,6 +821,7 @@ div.rendered_html tbody tr:hover {
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gCallNums</span><span class="p">,</span> <span class="mf">3.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gCallNums</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;∝ 1/x for comparison&quot;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
