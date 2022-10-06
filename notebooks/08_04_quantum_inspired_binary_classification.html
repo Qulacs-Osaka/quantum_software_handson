@@ -1,0 +1,1597 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2クラス問題に対する量子インスパイアード古典アルゴリズム &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_04_quantum_inspired_binary_classification.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="(行列:math:Cの特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_01_Density_Matrix_and_Error.html">
+   Qulacsでの混合状態
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_02_Extrapolation.html">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">
+   Qamuyを使った量子コンピュータｘ量子化学計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_01_Data_structure.html">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/08_04_quantum_inspired_binary_classification.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#データセットを読み込む">
+   データセットを読み込む
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#分類問題">
+   分類問題
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#擬似逆行列">
+     擬似逆行列
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">
+     量子インスパイアード古典アルゴリズム
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#図を描画する">
+     図を描画する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#サンプリング回数を増やした時の様子">
+       サンプリング回数を増やした時の様子
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#予測">
+   予測
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#参考文献">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2クラス問題に対する量子インスパイアード古典アルゴリズム</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#データセットを読み込む">
+   データセットを読み込む
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#分類問題">
+   分類問題
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#擬似逆行列">
+     擬似逆行列
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">
+     量子インスパイアード古典アルゴリズム
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#図を描画する">
+     図を描画する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#サンプリング回数を増やした時の様子">
+       サンプリング回数を増やした時の様子
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#予測">
+   予測
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#参考文献">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="line-block">
+<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 4 2022年10月7日(金)</div>
+<div class="line">高比良宗一</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\newcommand{\norm}[1]{\lVert#1\rVert}
+\renewcommand{\top}{\mathsf{T}}
+\newcommand{\SQ}{\mathrm{SQ}}\]</div>
+</div></blockquote>
+<section id="2クラス問題に対する量子インスパイアード古典アルゴリズム">
+<h1>2クラス問題に対する量子インスパイアード古典アルゴリズム<a class="headerlink" href="#2クラス問題に対する量子インスパイアード古典アルゴリズム" title="Permalink to this headline">#</a></h1>
+<p>このノートブックでは，2クラス問題について考察します．具体的にはIRISデータセットを例にして，線形識別関数の係数ベクトル<span class="math notranslate nohighlight">\(\theta\)</span>に関する<span class="math notranslate nohighlight">\(\SQ(\theta)\)</span>を考察します．そして，テスト用のデータがどちらのクラスであるかどうか，<span class="math notranslate nohighlight">\(\theta\)</span>をそのまま構成することなく，判別することについて考えます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">cmath</span><span class="o">,</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="データセットを読み込む">
+<h1>データセットを読み込む<a class="headerlink" href="#データセットを読み込む" title="Permalink to this headline">#</a></h1>
+<p>IRISデータセットはPythonのライブラリ<a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>に含まれています． このライブラリにある<code class="docutils literal notranslate"><span class="pre">load_iris</span></code>を使うことで読み込むことができます．次のセルでデータをロードしてみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">iris</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;DESCR&#39;: &#39;.. _iris_dataset:\n&#39;
+          &#39;\n&#39;
+          &#39;Iris plants dataset\n&#39;
+          &#39;--------------------\n&#39;
+          &#39;\n&#39;
+          &#39;**Data Set Characteristics:**\n&#39;
+          &#39;\n&#39;
+          &#39;    :Number of Instances: 150 (50 in each of three classes)\n&#39;
+          &#39;    :Number of Attributes: 4 numeric, predictive attributes and the &#39;
+          &#39;class\n&#39;
+          &#39;    :Attribute Information:\n&#39;
+          &#39;        - sepal length in cm\n&#39;
+          &#39;        - sepal width in cm\n&#39;
+          &#39;        - petal length in cm\n&#39;
+          &#39;        - petal width in cm\n&#39;
+          &#39;        - class:\n&#39;
+          &#39;                - Iris-Setosa\n&#39;
+          &#39;                - Iris-Versicolour\n&#39;
+          &#39;                - Iris-Virginica\n&#39;
+          &#39;                \n&#39;
+          &#39;    :Summary Statistics:\n&#39;
+          &#39;\n&#39;
+          &#39;    ============== ==== ==== ======= ===== ====================\n&#39;
+          &#39;                    Min  Max   Mean    SD   Class Correlation\n&#39;
+          &#39;    ============== ==== ==== ======= ===== ====================\n&#39;
+          &#39;    sepal length:   4.3  7.9   5.84   0.83    0.7826\n&#39;
+          &#39;    sepal width:    2.0  4.4   3.05   0.43   -0.4194\n&#39;
+          &#39;    petal length:   1.0  6.9   3.76   1.76    0.9490  (high!)\n&#39;
+          &#39;    petal width:    0.1  2.5   1.20   0.76    0.9565  (high!)\n&#39;
+          &#39;    ============== ==== ==== ======= ===== ====================\n&#39;
+          &#39;\n&#39;
+          &#39;    :Missing Attribute Values: None\n&#39;
+          &#39;    :Class Distribution: 33.3% for each of 3 classes.\n&#39;
+          &#39;    :Creator: R.A. Fisher\n&#39;
+          &#39;    :Donor: Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov)\n&#39;
+          &#39;    :Date: July, 1988\n&#39;
+          &#39;\n&#39;
+          &#39;The famous Iris database, first used by Sir R.A. Fisher. The &#39;
+          &#39;dataset is taken\n&#39;
+          &#34;from Fisher&#39;s paper. Note that it&#39;s the same as in R, but not as in &#34;
+          &#39;the UCI\n&#39;
+          &#39;Machine Learning Repository, which has two wrong data points.\n&#39;
+          &#39;\n&#39;
+          &#39;This is perhaps the best known database to be found in the\n&#39;
+          &#34;pattern recognition literature.  Fisher&#39;s paper is a classic in the &#34;
+          &#39;field and\n&#39;
+          &#39;is referenced frequently to this day.  (See Duda &amp; Hart, for &#39;
+          &#39;example.)  The\n&#39;
+          &#39;data set contains 3 classes of 50 instances each, where each class &#39;
+          &#39;refers to a\n&#39;
+          &#39;type of iris plant.  One class is linearly separable from the other &#39;
+          &#39;2; the\n&#39;
+          &#39;latter are NOT linearly separable from each other.\n&#39;
+          &#39;\n&#39;
+          &#39;.. topic:: References\n&#39;
+          &#39;\n&#39;
+          &#39;   - Fisher, R.A. &#34;The use of multiple measurements in taxonomic &#39;
+          &#39;problems&#34;\n&#39;
+          &#39;     Annual Eugenics, 7, Part II, 179-188 (1936); also in &#39;
+          &#39;&#34;Contributions to\n&#39;
+          &#39;     Mathematical Statistics&#34; (John Wiley, NY, 1950).\n&#39;
+          &#39;   - Duda, R.O., &amp; Hart, P.E. (1973) Pattern Classification and &#39;
+          &#39;Scene Analysis.\n&#39;
+          &#39;     (Q327.D83) John Wiley &amp; Sons.  ISBN 0-471-22361-1.  See page &#39;
+          &#39;218.\n&#39;
+          &#39;   - Dasarathy, B.V. (1980) &#34;Nosing Around the Neighborhood: A New &#39;
+          &#39;System\n&#39;
+          &#39;     Structure and Classification Rule for Recognition in Partially &#39;
+          &#39;Exposed\n&#39;
+          &#39;     Environments&#34;.  IEEE Transactions on Pattern Analysis and &#39;
+          &#39;Machine\n&#39;
+          &#39;     Intelligence, Vol. PAMI-2, No. 1, 67-71.\n&#39;
+          &#39;   - Gates, G.W. (1972) &#34;The Reduced Nearest Neighbor Rule&#34;.  IEEE &#39;
+          &#39;Transactions\n&#39;
+          &#39;     on Information Theory, May 1972, 431-433.\n&#39;
+          &#39;   - See also: 1988 MLC Proceedings, 54-64.  Cheeseman et al&#34;s &#39;
+          &#39;AUTOCLASS II\n&#39;
+          &#39;     conceptual clustering system finds 3 classes in the data.\n&#39;
+          &#39;   - Many, many more ...&#39;,
+ &#39;data&#39;: array([[5.1, 3.5, 1.4, 0.2],
+       [4.9, 3. , 1.4, 0.2],
+       [4.7, 3.2, 1.3, 0.2],
+       [4.6, 3.1, 1.5, 0.2],
+       [5. , 3.6, 1.4, 0.2],
+       [5.4, 3.9, 1.7, 0.4],
+       [4.6, 3.4, 1.4, 0.3],
+       [5. , 3.4, 1.5, 0.2],
+       [4.4, 2.9, 1.4, 0.2],
+       [4.9, 3.1, 1.5, 0.1],
+       [5.4, 3.7, 1.5, 0.2],
+       [4.8, 3.4, 1.6, 0.2],
+       [4.8, 3. , 1.4, 0.1],
+       [4.3, 3. , 1.1, 0.1],
+       [5.8, 4. , 1.2, 0.2],
+       [5.7, 4.4, 1.5, 0.4],
+       [5.4, 3.9, 1.3, 0.4],
+       [5.1, 3.5, 1.4, 0.3],
+       [5.7, 3.8, 1.7, 0.3],
+       [5.1, 3.8, 1.5, 0.3],
+       [5.4, 3.4, 1.7, 0.2],
+       [5.1, 3.7, 1.5, 0.4],
+       [4.6, 3.6, 1. , 0.2],
+       [5.1, 3.3, 1.7, 0.5],
+       [4.8, 3.4, 1.9, 0.2],
+       [5. , 3. , 1.6, 0.2],
+       [5. , 3.4, 1.6, 0.4],
+       [5.2, 3.5, 1.5, 0.2],
+       [5.2, 3.4, 1.4, 0.2],
+       [4.7, 3.2, 1.6, 0.2],
+       [4.8, 3.1, 1.6, 0.2],
+       [5.4, 3.4, 1.5, 0.4],
+       [5.2, 4.1, 1.5, 0.1],
+       [5.5, 4.2, 1.4, 0.2],
+       [4.9, 3.1, 1.5, 0.2],
+       [5. , 3.2, 1.2, 0.2],
+       [5.5, 3.5, 1.3, 0.2],
+       [4.9, 3.6, 1.4, 0.1],
+       [4.4, 3. , 1.3, 0.2],
+       [5.1, 3.4, 1.5, 0.2],
+       [5. , 3.5, 1.3, 0.3],
+       [4.5, 2.3, 1.3, 0.3],
+       [4.4, 3.2, 1.3, 0.2],
+       [5. , 3.5, 1.6, 0.6],
+       [5.1, 3.8, 1.9, 0.4],
+       [4.8, 3. , 1.4, 0.3],
+       [5.1, 3.8, 1.6, 0.2],
+       [4.6, 3.2, 1.4, 0.2],
+       [5.3, 3.7, 1.5, 0.2],
+       [5. , 3.3, 1.4, 0.2],
+       [7. , 3.2, 4.7, 1.4],
+       [6.4, 3.2, 4.5, 1.5],
+       [6.9, 3.1, 4.9, 1.5],
+       [5.5, 2.3, 4. , 1.3],
+       [6.5, 2.8, 4.6, 1.5],
+       [5.7, 2.8, 4.5, 1.3],
+       [6.3, 3.3, 4.7, 1.6],
+       [4.9, 2.4, 3.3, 1. ],
+       [6.6, 2.9, 4.6, 1.3],
+       [5.2, 2.7, 3.9, 1.4],
+       [5. , 2. , 3.5, 1. ],
+       [5.9, 3. , 4.2, 1.5],
+       [6. , 2.2, 4. , 1. ],
+       [6.1, 2.9, 4.7, 1.4],
+       [5.6, 2.9, 3.6, 1.3],
+       [6.7, 3.1, 4.4, 1.4],
+       [5.6, 3. , 4.5, 1.5],
+       [5.8, 2.7, 4.1, 1. ],
+       [6.2, 2.2, 4.5, 1.5],
+       [5.6, 2.5, 3.9, 1.1],
+       [5.9, 3.2, 4.8, 1.8],
+       [6.1, 2.8, 4. , 1.3],
+       [6.3, 2.5, 4.9, 1.5],
+       [6.1, 2.8, 4.7, 1.2],
+       [6.4, 2.9, 4.3, 1.3],
+       [6.6, 3. , 4.4, 1.4],
+       [6.8, 2.8, 4.8, 1.4],
+       [6.7, 3. , 5. , 1.7],
+       [6. , 2.9, 4.5, 1.5],
+       [5.7, 2.6, 3.5, 1. ],
+       [5.5, 2.4, 3.8, 1.1],
+       [5.5, 2.4, 3.7, 1. ],
+       [5.8, 2.7, 3.9, 1.2],
+       [6. , 2.7, 5.1, 1.6],
+       [5.4, 3. , 4.5, 1.5],
+       [6. , 3.4, 4.5, 1.6],
+       [6.7, 3.1, 4.7, 1.5],
+       [6.3, 2.3, 4.4, 1.3],
+       [5.6, 3. , 4.1, 1.3],
+       [5.5, 2.5, 4. , 1.3],
+       [5.5, 2.6, 4.4, 1.2],
+       [6.1, 3. , 4.6, 1.4],
+       [5.8, 2.6, 4. , 1.2],
+       [5. , 2.3, 3.3, 1. ],
+       [5.6, 2.7, 4.2, 1.3],
+       [5.7, 3. , 4.2, 1.2],
+       [5.7, 2.9, 4.2, 1.3],
+       [6.2, 2.9, 4.3, 1.3],
+       [5.1, 2.5, 3. , 1.1],
+       [5.7, 2.8, 4.1, 1.3],
+       [6.3, 3.3, 6. , 2.5],
+       [5.8, 2.7, 5.1, 1.9],
+       [7.1, 3. , 5.9, 2.1],
+       [6.3, 2.9, 5.6, 1.8],
+       [6.5, 3. , 5.8, 2.2],
+       [7.6, 3. , 6.6, 2.1],
+       [4.9, 2.5, 4.5, 1.7],
+       [7.3, 2.9, 6.3, 1.8],
+       [6.7, 2.5, 5.8, 1.8],
+       [7.2, 3.6, 6.1, 2.5],
+       [6.5, 3.2, 5.1, 2. ],
+       [6.4, 2.7, 5.3, 1.9],
+       [6.8, 3. , 5.5, 2.1],
+       [5.7, 2.5, 5. , 2. ],
+       [5.8, 2.8, 5.1, 2.4],
+       [6.4, 3.2, 5.3, 2.3],
+       [6.5, 3. , 5.5, 1.8],
+       [7.7, 3.8, 6.7, 2.2],
+       [7.7, 2.6, 6.9, 2.3],
+       [6. , 2.2, 5. , 1.5],
+       [6.9, 3.2, 5.7, 2.3],
+       [5.6, 2.8, 4.9, 2. ],
+       [7.7, 2.8, 6.7, 2. ],
+       [6.3, 2.7, 4.9, 1.8],
+       [6.7, 3.3, 5.7, 2.1],
+       [7.2, 3.2, 6. , 1.8],
+       [6.2, 2.8, 4.8, 1.8],
+       [6.1, 3. , 4.9, 1.8],
+       [6.4, 2.8, 5.6, 2.1],
+       [7.2, 3. , 5.8, 1.6],
+       [7.4, 2.8, 6.1, 1.9],
+       [7.9, 3.8, 6.4, 2. ],
+       [6.4, 2.8, 5.6, 2.2],
+       [6.3, 2.8, 5.1, 1.5],
+       [6.1, 2.6, 5.6, 1.4],
+       [7.7, 3. , 6.1, 2.3],
+       [6.3, 3.4, 5.6, 2.4],
+       [6.4, 3.1, 5.5, 1.8],
+       [6. , 3. , 4.8, 1.8],
+       [6.9, 3.1, 5.4, 2.1],
+       [6.7, 3.1, 5.6, 2.4],
+       [6.9, 3.1, 5.1, 2.3],
+       [5.8, 2.7, 5.1, 1.9],
+       [6.8, 3.2, 5.9, 2.3],
+       [6.7, 3.3, 5.7, 2.5],
+       [6.7, 3. , 5.2, 2.3],
+       [6.3, 2.5, 5. , 1.9],
+       [6.5, 3. , 5.2, 2. ],
+       [6.2, 3.4, 5.4, 2.3],
+       [5.9, 3. , 5.1, 1.8]]),
+ &#39;feature_names&#39;: [&#39;sepal length (cm)&#39;,
+                   &#39;sepal width (cm)&#39;,
+                   &#39;petal length (cm)&#39;,
+                   &#39;petal width (cm)&#39;],
+ &#39;filename&#39;: &#39;/opt/conda/lib/python3.7/site-packages/sklearn/datasets/data/iris.csv&#39;,
+ &#39;target&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]),
+ &#39;target_names&#39;: array([&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;], dtype=&#39;&lt;U10&#39;)}
+</pre></div></div>
+</div>
+</section>
+<section id="分類問題">
+<h1>分類問題<a class="headerlink" href="#分類問題" title="Permalink to this headline">#</a></h1>
+<p>scikit-learnに含まれている<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>を使うと，データを訓練用とテスト用の配列に分割することができます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">50</span><span class="p">:],</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="mi">50</span><span class="p">:],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;訓練用データ</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;訓練用ラベル</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;テスト用データ</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;テスト用ラベル</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+訓練用データ
+ [[6.  3.4 4.5 1.6]
+ [6.7 3.3 5.7 2.5]
+ [6.7 3.  5.  1.7]
+ [5.7 2.9 4.2 1.3]
+ [5.6 3.  4.1 1.3]
+ [7.7 3.8 6.7 2.2]
+ [5.9 3.  5.1 1.8]
+ [6.5 3.  5.8 2.2]
+ [6.7 3.  5.2 2.3]
+ [6.  3.  4.8 1.8]
+ [5.5 2.6 4.4 1.2]
+ [5.1 2.5 3.  1.1]
+ [7.2 3.6 6.1 2.5]
+ [6.1 2.8 4.7 1.2]
+ [5.4 3.  4.5 1.5]
+ [6.3 3.4 5.6 2.4]
+ [6.3 2.9 5.6 1.8]
+ [6.1 3.  4.9 1.8]
+ [6.7 3.1 4.4 1.4]
+ [6.3 2.8 5.1 1.5]
+ [6.1 3.  4.6 1.4]
+ [5.7 3.  4.2 1.2]
+ [6.9 3.1 5.1 2.3]
+ [6.8 2.8 4.8 1.4]
+ [6.2 3.4 5.4 2.3]
+ [5.  2.3 3.3 1. ]
+ [7.6 3.  6.6 2.1]
+ [6.4 2.9 4.3 1.3]
+ [6.5 2.8 4.6 1.5]
+ [6.7 2.5 5.8 1.8]
+ [5.7 2.8 4.1 1.3]
+ [6.1 2.8 4.  1.3]
+ [6.4 3.1 5.5 1.8]
+ [5.5 2.3 4.  1.3]
+ [6.7 3.3 5.7 2.1]
+ [5.5 2.4 3.8 1.1]
+ [6.5 3.  5.5 1.8]
+ [6.9 3.2 5.7 2.3]
+ [5.8 2.6 4.  1.2]
+ [6.2 2.9 4.3 1.3]
+ [6.9 3.1 5.4 2.1]
+ [6.6 2.9 4.6 1.3]
+ [6.5 3.2 5.1 2. ]
+ [7.  3.2 4.7 1.4]
+ [6.7 3.1 5.6 2.4]
+ [7.3 2.9 6.3 1.8]
+ [6.3 2.5 4.9 1.5]
+ [6.4 2.7 5.3 1.9]
+ [5.7 2.5 5.  2. ]
+ [4.9 2.4 3.3 1. ]
+ [6.3 2.5 5.  1.9]
+ [6.1 2.9 4.7 1.4]
+ [7.7 2.6 6.9 2.3]
+ [7.7 3.  6.1 2.3]
+ [5.6 2.9 3.6 1.3]
+ [5.7 2.6 3.5 1. ]
+ [6.  2.9 4.5 1.5]
+ [5.9 3.  4.2 1.5]
+ [6.2 2.2 4.5 1.5]
+ [5.9 3.2 4.8 1.8]
+ [6.3 3.3 6.  2.5]
+ [6.6 3.  4.4 1.4]
+ [6.3 3.3 4.7 1.6]
+ [5.6 2.8 4.9 2. ]
+ [6.2 2.8 4.8 1.8]
+ [6.4 3.2 4.5 1.5]
+ [5.6 3.  4.5 1.5]
+ [5.8 2.8 5.1 2.4]
+ [7.2 3.  5.8 1.6]
+ [5.7 2.8 4.5 1.3]
+ [7.2 3.2 6.  1.8]
+ [5.2 2.7 3.9 1.4]
+ [7.7 2.8 6.7 2. ]
+ [6.  2.2 4.  1. ]
+ [6.3 2.3 4.4 1.3]]
+訓練用ラベル
+ [1 2 1 1 1 2 2 2 2 2 1 1 2 1 1 2 2 2 1 2 1 1 2 1 2 1 2 1 1 2 1 1 2 1 2 1 2
+ 2 1 1 2 1 2 1 2 2 1 2 2 1 2 1 2 2 1 1 1 1 1 1 2 1 1 2 2 1 1 2 2 1 2 1 2 1
+ 1]
+テスト用データ
+ [[7.4 2.8 6.1 1.9]
+ [6.1 2.6 5.6 1.4]
+ [6.  2.7 5.1 1.6]
+ [7.9 3.8 6.4 2. ]
+ [6.8 3.2 5.9 2.3]
+ [5.8 2.7 4.1 1. ]
+ [6.7 3.1 4.7 1.5]
+ [6.4 2.8 5.6 2.2]
+ [6.  2.2 5.  1.5]
+ [6.4 3.2 5.3 2.3]
+ [5.8 2.7 5.1 1.9]
+ [5.5 2.5 4.  1.3]
+ [4.9 2.5 4.5 1.7]
+ [7.1 3.  5.9 2.1]
+ [5.8 2.7 5.1 1.9]
+ [5.8 2.7 3.9 1.2]
+ [5.5 2.4 3.7 1. ]
+ [5.6 2.7 4.2 1.3]
+ [6.4 2.8 5.6 2.1]
+ [5.  2.  3.5 1. ]
+ [6.9 3.1 4.9 1.5]
+ [6.3 2.7 4.9 1.8]
+ [6.5 3.  5.2 2. ]
+ [6.8 3.  5.5 2.1]
+ [5.6 2.5 3.9 1.1]]
+テスト用ラベル
+ [2 2 1 2 2 1 1 2 2 2 2 1 2 2 2 1 1 1 2 1 1 2 2 2 1]
+</pre></div></div>
+</div>
+<p>今回は<code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code>(がく片の長さ)と``petal length``(花びらの長さ)から，versicolorか，virginicaのどちらであるか判断することを考えます．IRISデータセットの50行目以降がversicolor及びvirginicaのデータで，<code class="docutils literal notranslate"><span class="pre">sepal</span> <span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal</span> <span class="pre">length</span></code>が0列目,2列目であることを踏まえると，行列<span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(b\)</span>は次のセルのように定義できます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="c1"># IRISデータセットを読み込み，versicolorとvirginicaに分ける．</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">50</span><span class="p">:],</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="mi">50</span><span class="p">:]</span> <span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1"># Aとbを定義する．</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+<span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">A</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1"># A = A/np.linalg.norm(A)</span>
+<span class="n">b</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">t</span><span class="o">==</span><span class="mi">1</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>  <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">y_train</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<section id="擬似逆行列">
+<h2>擬似逆行列<a class="headerlink" href="#擬似逆行列" title="Permalink to this headline">#</a></h2>
+<p>分類する直線に関するパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は，<span class="math notranslate nohighlight">\(\theta = A^+ b\)</span>のようにして求めることができます．この<span class="math notranslate nohighlight">\(\theta\)</span>によって，分類する直線は，<span class="math notranslate nohighlight">\(\theta_0 + \theta_1 x + \theta_2 y = 0\)</span>のようにして表されます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">b</span> <span class="c1"># or np.linalg.lstsq(A, b)[0]</span>
+<span class="n">exact_theta</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([ 2.64301213,  0.66176535, -1.37653241])
+</pre></div></div>
+</div>
+</section>
+<section id="量子インスパイアード古典アルゴリズム">
+<h2>量子インスパイアード古典アルゴリズム<a class="headerlink" href="#量子インスパイアード古典アルゴリズム" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\SQ(A)\)</span>を構成し，<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>でまとめた<code class="docutils literal notranslate"><span class="pre">SQx</span></code>を用いて，<span class="math notranslate nohighlight">\(\mathrm{SQ}(\theta)\)</span>を定義します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span><span class="p">,</span> <span class="n">SQx</span>
+<span class="n">SQA</span> <span class="o">=</span> <span class="n">MatrixBasedDataStructure</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">sq_theta</span> <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(\theta)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>を用いて<span class="math notranslate nohighlight">\(\tilde{\theta}\)</span>を構成してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">tilde_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">tilde_theta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">sq_theta</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="n">tilde_theta</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([-0.00031439, -0.00089496,  0.0011135 ])
+</pre></div></div>
+</div>
+</section>
+<section id="図を描画する">
+<h2>図を描画する<a class="headerlink" href="#図を描画する" title="Permalink to this headline">#</a></h2>
+<p>上記で求めたNumPyによる解<span class="math notranslate nohighlight">\(\theta\)</span>と，量子インスパイアード古典アルゴリズムによる近似解<span class="math notranslate nohighlight">\(\tilde{\theta}\)</span>について， 直線を引いてみて，その様子を見てみます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 点を描画する</span>
+<span class="n">class1_xs</span><span class="p">,</span> <span class="n">class1_ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">class2_xs</span><span class="p">,</span> <span class="n">class2_ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">xt</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">yt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">class1_xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">class1_ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">class2_xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">class2_ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">class1_xs</span><span class="p">,</span> <span class="n">class1_ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">class2_xs</span><span class="p">,</span> <span class="n">class2_ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">)</span>
+
+<span class="c1"># 直線を描画する</span>
+<span class="n">xs</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">line_exact</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">exact_theta</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span> <span class="c1"># NumPy</span>
+<span class="n">line_qi</span>    <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span> <span class="c1"># 量子インスパイアード</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_exact</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi</span>   <span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired&quot;</span><span class="p">)</span>
+
+<span class="c1"># その他</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_04_quantum_inspired_binary_classification_18_0.png" src="../_images/notebooks_08_04_quantum_inspired_binary_classification_18_0.png" />
+</div>
+</div>
+<section id="サンプリング回数を増やした時の様子">
+<h3>サンプリング回数を増やした時の様子<a class="headerlink" href="#サンプリング回数を増やした時の様子" title="Permalink to this headline">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span><span class="p">,</span> <span class="n">SQx</span>
+<span class="n">SQA</span> <span class="o">=</span> <span class="n">MatrixBasedDataStructure</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">sq_theta100</span>  <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">sq_theta200</span>  <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">sq_theta400</span>  <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">sq_theta800</span>  <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+<span class="n">sq_theta1600</span> <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tilde_theta100</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sq_theta100</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">tilde_theta200</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sq_theta200</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">tilde_theta400</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sq_theta400</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">tilde_theta800</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sq_theta800</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">tilde_theta1600</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">sq_theta1600</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># 点を描画する</span>
+<span class="n">class1_xs</span><span class="p">,</span> <span class="n">class1_ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="n">class2_xs</span><span class="p">,</span> <span class="n">class2_ys</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">xt</span><span class="p">,</span> <span class="n">yt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">yt</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">class1_xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">class1_ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">class2_xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">class2_ys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">class1_xs</span><span class="p">,</span> <span class="n">class1_ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">class2_xs</span><span class="p">,</span> <span class="n">class2_ys</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:green&#39;</span><span class="p">)</span>
+
+<span class="c1"># 直線を描画する</span>
+<span class="n">xs</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">line_exact</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">exact_theta</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>       <span class="c1"># NumPy</span>
+
+<span class="c1"># 量子インスパイアード</span>
+<span class="n">line_qi100</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta100</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+<span class="n">line_qi200</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta200</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+<span class="n">line_qi400</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta400</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+<span class="n">line_qi800</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta800</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+<span class="n">line_qi1600</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="p">(</span><span class="n">tilde_theta1600</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_exact</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi100</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired r=c=100&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi200</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired r=c=200&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi400</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired r=c=400&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi800</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired r=c=800&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">line_qi1600</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;quantum inspired r=c=1600&quot;</span><span class="p">)</span>
+
+<span class="c1"># その他</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_04_quantum_inspired_binary_classification_22_0.png" src="../_images/notebooks_08_04_quantum_inspired_binary_classification_22_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="予測">
+<h1>予測<a class="headerlink" href="#予測" title="Permalink to this headline">#</a></h1>
+<p>新しいデータ<span class="math notranslate nohighlight">\((x, y)\)</span>が来たときに，どちらのクラス(versicolor(<code class="docutils literal notranslate"><span class="pre">1</span></code>)かvirginica(<code class="docutils literal notranslate"><span class="pre">2</span></code>))に属するかどうかは，<span class="math notranslate nohighlight">\(f(x,y) = \theta_0 + \theta_1 x + \theta_2 y = (\theta_0,\theta_1,\theta_2)^\top (1, x, y)\)</span>の正負によって決定します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">fx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<p>テスト用データに対する予測値を計算します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">xt</span> <span class="ow">in</span> <span class="n">x_test</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">exact_theta</span><span class="p">,</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">prediction</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1]
+</pre></div></div>
+</div>
+<p>上記の<code class="docutils literal notranslate"><span class="pre">prediction</span></code>が<code class="docutils literal notranslate"><span class="pre">y_test</span></code>と同様であるか確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_test</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
+       2, 2, 1])
+</pre></div></div>
+</div>
+<p>正解率を計算してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.92
+</pre></div></div>
+</div>
+<p>次に量子インスパイアード古典アルゴリズムについて考察します． 内積をそのまま計算すると，行列のサイズ分だけ計算量を必要とします． そこで，内積の推定を用いて，<span class="math notranslate nohighlight">\(f(x,y)\)</span>の値を推定し，その推定値に基づいて，どちらのクラスであるか識別します：</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">qi_vdot</span><span class="p">(</span><span class="n">SQa</span><span class="p">,</span> <span class="n">Qb</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">i</span>  <span class="o">=</span> <span class="n">SQa</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+        <span class="n">zi</span> <span class="o">=</span> <span class="n">Qb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">SQa</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">val</span> <span class="o">+=</span> <span class="n">zi</span>
+    <span class="k">return</span> <span class="n">val</span><span class="o">/</span><span class="n">sample_size</span> <span class="o">*</span> <span class="n">SQa</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">qi_f</span><span class="p">(</span><span class="n">SQtheta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">fx</span> <span class="o">=</span> <span class="n">qi_vdot</span><span class="p">(</span><span class="n">SQtheta</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]),</span> <span class="n">sample_size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">fx</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">2</span>
+
+<span class="n">xt</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+<span class="n">qi_vdot</span><span class="p">(</span><span class="n">sq_theta</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-0.0
+</pre></div></div>
+</div>
+<p>テスト用データに対する予測値を計算します．(実行に数分かかります)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sq_theta</span> <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">prediction_qi</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">xt</span> <span class="ow">in</span> <span class="n">x_test</span><span class="p">:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">qi_f</span><span class="p">(</span><span class="n">sq_theta</span><span class="p">,</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">prediction_qi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">prediction_qi</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+</pre></div></div>
+</div>
+<p>正解率を計算してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prediction_qi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.56
+</pre></div></div>
+</div>
+</section>
+<section id="参考文献">
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
+<li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
+<li><p>平井有三, 「はじめてのパターン認識」, 森北出版, (2012)</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">(行列:math:<cite>C</cite>の特異値分解の後)</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

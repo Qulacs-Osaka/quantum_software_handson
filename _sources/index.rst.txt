@@ -28,6 +28,10 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/06_01_quantum_phase_estimation
    notebooks/06_02_grover_search
    notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank
+   notebooks/08_01_Data_structure
+   notebooks/08_02_Quantum_inspired_classical_algorithm_Part1
+   notebooks/08_03_Quantum_inspired_classical_algorithm_Part2
+   notebooks/08_04_quantum_inspired_binary_classification
 
 
 

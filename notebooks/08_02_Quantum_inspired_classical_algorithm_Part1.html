@@ -1,0 +1,2354 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>行列\(A\)を定義する &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="(行列:math:Cの特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
+    <link rel="prev" title="\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について" href="08_01_Data_structure.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_01_Density_Matrix_and_Error.html">
+   Qulacsでの混合状態
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_02_Extrapolation.html">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">
+   Qamuyを使った量子コンピュータｘ量子化学計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_01_Data_structure.html">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(A)\)
+     </span>
+     を定義する．
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
+     Step 1. 行添字のサンプリング:
+     <span class="math notranslate nohighlight">
+      \(R^\mathsf{T} R \approx A^\mathsf{T}A\)
+     </span>
+     を満たすような
+     <span class="math notranslate nohighlight">
+      \(R\)
+     </span>
+     を考える．
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">
+   行添字をサンプルする関数の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認">
+   <span class="math notranslate nohighlight">
+    \(A^\top A \approx R^\top R\)
+   </span>
+   の確認
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
+     Step 2. 列のサンプリング：
+     <span class="math notranslate nohighlight">
+      \(CC^\top \approx RR^\top\)
+     </span>
+     を満たすような
+     <span class="math notranslate nohighlight">
+      \(C\)
+     </span>
+     を構成する．
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装">
+   <span class="math notranslate nohighlight">
+    \(r \times c\)
+   </span>
+   の行列
+   <span class="math notranslate nohighlight">
+    \(C\)
+   </span>
+   を構成する関数の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認">
+   <span class="math notranslate nohighlight">
+    \(CC^\top \approx RR^\top\)
+   </span>
+   の確認
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-3:特異値分解">
+     Step 3:特異値分解
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
+     <span class="math notranslate nohighlight">
+      \(C\)
+     </span>
+     の特異値・特異ベクトルと
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     の特異値・特異ベクトルについて
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#特異値について">
+   特異値について
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#右特異ベクトルについて">
+   右特異ベクトルについて
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#左特異ベクトルについて">
+   左特異ベクトルについて
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#まとめ">
+     まとめ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#参考文献">
+     参考文献
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>行列Aを定義する</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(A)\)
+     </span>
+     を定義する．
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
+     Step 1. 行添字のサンプリング:
+     <span class="math notranslate nohighlight">
+      \(R^\mathsf{T} R \approx A^\mathsf{T}A\)
+     </span>
+     を満たすような
+     <span class="math notranslate nohighlight">
+      \(R\)
+     </span>
+     を考える．
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">
+   行添字をサンプルする関数の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認">
+   <span class="math notranslate nohighlight">
+    \(A^\top A \approx R^\top R\)
+   </span>
+   の確認
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
+     Step 2. 列のサンプリング：
+     <span class="math notranslate nohighlight">
+      \(CC^\top \approx RR^\top\)
+     </span>
+     を満たすような
+     <span class="math notranslate nohighlight">
+      \(C\)
+     </span>
+     を構成する．
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装">
+   <span class="math notranslate nohighlight">
+    \(r \times c\)
+   </span>
+   の行列
+   <span class="math notranslate nohighlight">
+    \(C\)
+   </span>
+   を構成する関数の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認">
+   <span class="math notranslate nohighlight">
+    \(CC^\top \approx RR^\top\)
+   </span>
+   の確認
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-3:特異値分解">
+     Step 3:特異値分解
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
+     <span class="math notranslate nohighlight">
+      \(C\)
+     </span>
+     の特異値・特異ベクトルと
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     の特異値・特異ベクトルについて
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#特異値について">
+   特異値について
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#右特異ベクトルについて">
+   右特異ベクトルについて
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#左特異ベクトルについて">
+   左特異ベクトルについて
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#まとめ">
+     まとめ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#参考文献">
+     参考文献
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="line-block">
+<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 2</div>
+<div class="line">2022年10月7日(金)</div>
+<div class="line">高比良宗一</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\newcommand{\norm}[1]{\lVert#1\rVert}
+\renewcommand{\top}{\mathsf{T}}
+\newcommand{\SQ}{\mathrm{SQ}}\]</div>
+<p># <span class="math notranslate nohighlight">\(x = A^+b\)</span>に関する量子インスパイアード古典アルゴリズム Part 1 ### (行列:math:<cite>C</cite>の特異値分解まで)</p>
+</div></blockquote>
+<p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>を得るまでの部分，及びその特異値分解について実装します．そして<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>によって，<span class="math notranslate nohighlight">\(A\)</span>の左右の特異ベクトルと特異値が近似される様子を確認してみます．</p>
+<section id="行列Aを定義する">
+<h1>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this headline">#</a></h1>
+<p>低ランク行列<span class="math notranslate nohighlight">\(A\)</span>を生成する関数を定義します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">cmath</span><span class="o">,</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">low_rank_matrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">cond</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ランクが`rank`で，条件数が`cond`であるような m x n の実行列を生成する．</span>
+<span class="sd">    ここで条件数とは最大特異値/最小特異値である．したがってrank=1のときは条件数の値は1になる．</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U</span><span class="p">,</span> <span class="n">_</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+    <span class="n">Vh</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">rank</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cond</span><span class="p">])</span>
+
+    <span class="k">elif</span> <span class="n">rank</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">cond</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">diag</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">cond</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rank</span><span class="p">)]</span>
+        <span class="n">diag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">diag</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">cond</span>
+
+    <span class="k">return</span> <span class="n">U</span><span class="p">[:,:</span><span class="n">rank</span><span class="p">]</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">diag</span><span class="p">)</span> <span class="o">@</span> <span class="n">Vh</span><span class="p">[:</span><span class="n">rank</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">low_rank_matrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="n">rankA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">normF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">norm2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">svdvals</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svdvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">condnumber</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">svdvals</span><span class="p">[:</span><span class="n">rankA</span><span class="p">])</span><span class="o">/</span><span class="nb">min</span><span class="p">(</span><span class="n">svdvals</span><span class="p">[:</span><span class="n">rankA</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aのランク =&quot;</span><span class="p">,</span> <span class="n">rankA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aのフロべニウスノルム =&quot;</span><span class="p">,</span> <span class="n">normF</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aの2ノルム =&quot;</span><span class="p">,</span> <span class="n">norm2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aの特異値</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">svdvals</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aの条件数</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">condnumber</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Aのランク = 2
+Aのフロべニウスノルム = 1.0077822185373186
+Aの2ノルム = 1.0
+Aの特異値
+ [1.00000000e+00 1.25000000e-01 1.03701686e-15 9.85591426e-16
+ 9.55109049e-16 9.46254262e-16 8.65943074e-16 8.13204863e-16
+ 7.58452167e-16 7.02290032e-16 6.05500371e-16 5.17382387e-16
+ 4.25699444e-16 3.36523089e-16 2.46415795e-16 1.40599449e-16
+ 9.76185084e-17 6.82908534e-17 6.36272576e-17 5.66807190e-17
+ 4.94933180e-17 4.62031412e-17 4.14934731e-17 3.98684853e-17
+ 3.80272523e-17 3.62815122e-17 3.50624520e-17 3.47435405e-17
+ 3.42564033e-17 3.28390361e-17 3.02329939e-17 2.98077227e-17
+ 2.75700398e-17 2.72142402e-17 2.65298881e-17 2.62443973e-17
+ 2.54323800e-17 2.48550910e-17 2.43260628e-17 2.37259164e-17
+ 2.33599527e-17 2.26052467e-17 2.23512661e-17 2.20548324e-17
+ 2.17383213e-17 2.10463255e-17 2.09686237e-17 2.05153623e-17
+ 2.00021999e-17 1.98048199e-17 1.95474367e-17 1.87467541e-17
+ 1.84913964e-17 1.82048968e-17 1.79046806e-17 1.78444316e-17
+ 1.74753797e-17 1.70584237e-17 1.68566240e-17 1.66782764e-17
+ 1.63451239e-17 1.62371741e-17 1.58393612e-17 1.56260791e-17
+ 1.54098828e-17 1.53362477e-17 1.50036377e-17 1.48822341e-17
+ 1.45657723e-17 1.45287967e-17 1.43199944e-17 1.41196332e-17
+ 1.39979292e-17 1.39516320e-17 1.36457157e-17 1.34692641e-17
+ 1.33223872e-17 1.30824949e-17 1.30336050e-17 1.26498689e-17
+ 1.25965530e-17 1.24415997e-17 1.23151826e-17 1.22377820e-17
+ 1.20131365e-17 1.18241113e-17 1.16873442e-17 1.15609509e-17
+ 1.13750150e-17 1.12606272e-17 1.10690374e-17 1.09723916e-17
+ 1.08402821e-17 1.07243544e-17 1.05582736e-17 1.04399557e-17
+ 1.02751097e-17 1.01893019e-17 9.87613803e-18 9.81624579e-18
+ 9.69448590e-18 9.57297064e-18 9.51370753e-18 9.45301979e-18
+ 9.30902375e-18 9.26198952e-18 9.24879925e-18 8.93015612e-18
+ 8.84504366e-18 8.77664485e-18 8.67092536e-18 8.59710178e-18
+ 8.51283364e-18 8.36441240e-18 8.17552025e-18 8.10148901e-18
+ 8.00921889e-18 7.89621487e-18 7.67691547e-18 7.64604672e-18
+ 7.58125477e-18 7.54360637e-18 7.38081381e-18 7.33718410e-18
+ 7.22984308e-18 7.17566959e-18 7.09535505e-18 6.99346497e-18
+ 6.96775601e-18 6.81994018e-18 6.78397361e-18 6.75815091e-18
+ 6.70279138e-18 6.60561593e-18 6.44173196e-18 6.29430553e-18
+ 6.26354404e-18 6.18896747e-18 6.08600043e-18 5.98262231e-18
+ 5.91692294e-18 5.85327127e-18 5.78454094e-18 5.66737413e-18
+ 5.59161111e-18 5.51671346e-18 5.48468978e-18 5.41604244e-18
+ 5.29452827e-18 5.23524770e-18 5.17579822e-18 5.14426044e-18
+ 5.11945067e-18 5.02319406e-18 4.99707609e-18 4.88682036e-18
+ 4.80679791e-18 4.75086790e-18 4.66177061e-18 4.60253162e-18
+ 4.51672722e-18 4.48349113e-18 4.45619333e-18 4.38121825e-18
+ 4.27722666e-18 4.23652402e-18 4.14441851e-18 4.09184224e-18
+ 4.02629872e-18 4.00432734e-18 3.97276041e-18 3.95134084e-18
+ 3.88414317e-18 3.82500215e-18 3.74621522e-18 3.70031861e-18
+ 3.66296859e-18 3.65117202e-18 3.56817986e-18 3.51894448e-18
+ 3.45651501e-18 3.41754912e-18 3.38593662e-18 3.35531966e-18
+ 3.31661298e-18 3.23248533e-18 3.19042348e-18 3.12384099e-18
+ 3.06806579e-18 3.03653312e-18 2.99535293e-18 2.91853214e-18
+ 2.88801298e-18 2.84909549e-18 2.80420443e-18 2.72541790e-18
+ 2.71570244e-18 2.68091553e-18 2.63554741e-18 2.56403406e-18
+ 2.50375962e-18 2.49075560e-18 2.45165154e-18 2.42581042e-18
+ 2.37435311e-18 2.32852999e-18 2.30343232e-18 2.27239686e-18
+ 2.24021711e-18 2.22452040e-18 2.17191892e-18 2.15509816e-18
+ 2.13910733e-18 2.10796108e-18 2.04741434e-18 2.04371731e-18
+ 1.98117377e-18 1.96868541e-18 1.93224842e-18 1.86946837e-18
+ 1.86615648e-18 1.82043756e-18 1.79003288e-18 1.77404052e-18
+ 1.77036477e-18 1.72319787e-18 1.71418441e-18 1.67937702e-18
+ 1.63654590e-18 1.60497176e-18 1.58630353e-18 1.58080194e-18
+ 1.55315792e-18 1.50589015e-18 1.46231989e-18 1.46157654e-18
+ 1.45637869e-18 1.42287317e-18 1.36969722e-18 1.35284332e-18
+ 1.32574621e-18 1.29532896e-18 1.28210464e-18 1.27770283e-18
+ 1.25543449e-18 1.22988047e-18 1.18900683e-18 1.15443298e-18
+ 1.13435339e-18 1.10631371e-18 1.10149981e-18 1.08248589e-18
+ 1.05394522e-18 1.04592053e-18 1.02392724e-18 9.84133689e-19
+ 9.75068952e-19 9.63301366e-19 9.44545379e-19 9.31808524e-19
+ 8.98627926e-19 8.95551044e-19 8.66116998e-19 8.56680004e-19
+ 8.38982805e-19 8.12442787e-19 7.84464304e-19 7.52566090e-19
+ 7.43005608e-19 7.28817429e-19 7.00808083e-19 6.90748815e-19
+ 6.78847090e-19 6.75455316e-19 6.45420835e-19 6.39155220e-19
+ 5.93709547e-19 5.79142758e-19 5.71297168e-19 5.56399027e-19
+ 5.28503592e-19 5.14385081e-19 4.98748626e-19 4.73903204e-19
+ 4.52570433e-19 4.38644641e-19 4.06183048e-19 3.80930863e-19
+ 3.61067065e-19 3.37419433e-19 3.15072532e-19 2.92103890e-19
+ 2.76550716e-19 2.50696219e-19 2.31909623e-19 2.15459903e-19
+ 2.04856652e-19 1.66325840e-19 1.22365499e-19 5.53675809e-20]
+Aの条件数
+ 8.0
+</pre></div></div>
+</div>
+<p>行列<span class="math notranslate nohighlight">\(A\)</span>の特異値分解の結果を保存しておきます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_U</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">,</span> <span class="n">exact_Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">exact_V</span> <span class="o">=</span> <span class="n">exact_Vh</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<section id="\mathrm{SQ}(A)を定義する．">
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">quantum_inspired.py</span></code>に<code class="docutils literal notranslate"><span class="pre">1_データ構造.ipynb</span></code>で実装した<code class="docutils literal notranslate"><span class="pre">SegmentTree</span></code>, <code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>と<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を記述しています．ここから<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>をインポートし，それを用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span>
+<span class="n">SQA</span> <span class="o">=</span> <span class="n">MatrixBasedDataStructure</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">(),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(150, 64, 0.0006067326890983444, 0.01532067321127685, 1.0077822185373184)
+</pre></div></div>
+</div>
+</section>
+<section id="Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
+<h2>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="行添字をサンプルする関数の実装">
+<h1>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this headline">#</a></h1>
+<p>Step 1の「確率<span class="math notranslate nohighlight">\(\frac{\norm{A_{i,\ast}}^2 }{\norm{A}_\mathrm{F}^2}\)</span>行添字<span class="math notranslate nohighlight">\(i\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回サンプリングする」という部分について実装します．これは，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回用いるだけなので，その通りに書きます．ここでの行添字<span class="math notranslate nohighlight">\(i_0,\dots,i_{r-1}\)</span>は行列<span class="math notranslate nohighlight">\(R\)</span>を表します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1</span>
+<span class="c1"># rはサンプル数</span>
+<span class="k">def</span> <span class="nf">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+    <span class="n">row_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">()</span>
+        <span class="n">row_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">row_indices</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプルされた行添字:</span><span class="se">\n</span><span class="s2">[i_0, i_1, ..., i_r-1] = &quot;</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+サンプルされた行添字:
+[i_0, i_1, ..., i_r-1] =  [350, 82, 320, 169, 183, 234, 78, 113, 319, 49]
+</pre></div></div>
+</div>
+</section>
+<section id="A^\top-A-\approx-R^\top-Rの確認">
+<h1><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this headline">#</a></h1>
+<p>量子インスパイアード古典アルゴリズムでは<span class="math notranslate nohighlight">\(r\times n\)</span>の行列<span class="math notranslate nohighlight">\(R\)</span>を実際には構成しません．しかし，サンプルされた行添字が表す行列<span class="math notranslate nohighlight">\(R\)</span>について，<span class="math notranslate nohighlight">\(A^\mathsf{T}A \approx R^\mathsf{T}R\)</span>であるかどうか気になると思います．そこで，行列<span class="math notranslate nohighlight">\(R\)</span>をサンプルされた行添字から構成する関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を以下のセルで定義し，<span class="math notranslate nohighlight">\(A^\top A\)</span>と<span class="math notranslate nohighlight">\(R^\top R\)</span>を直接計算して<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．<code class="docutils literal notranslate"><span class="pre">row_indices</span></code>はサンプルされた行添字です．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># サンプルされた行添字からRを構成する</span>
+<span class="c1"># 確認用</span>
+<span class="k">def</span> <span class="nf">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_indices</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="n">i_s</span><span class="p">,:]</span><span class="o">/</span><span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">R</span>
+</pre></div>
+</div>
+</div>
+<p>この関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を使って行列<span class="math notranslate nohighlight">\(R\)</span>を作り，<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span> <span class="o">-</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;誤差&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+誤差 0.023137777381409028
+</pre></div></div>
+</div>
+<p>さらに，<span class="math notranslate nohighlight">\(\mathbb{E}\left[ \lVert R^\top R - A^\top A \rVert_\mathrm{F}^2 \right] \le \frac{\lVert A \rVert_\mathrm{F}^4}{r}\)</span>であることを確認します．具体的には，<span class="math notranslate nohighlight">\(r\)</span>を増やしてみて，誤差<span class="math notranslate nohighlight">\(\lVert R^\top R - A^\top A \rVert_\mathrm{F}^2\)</span>が減少することを見てみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">:</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+
+        <span class="n">mean</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">R</span> <span class="o">-</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;r=</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+r=1 0.016598199983358857 1.0314941406249998
+r=2 0.005417590736010798 0.5157470703124999
+r=4 0.012854340386040866 0.25787353515624994
+r=8 0.001849509944679225 0.12893676757812497
+r=16 0.0024373851870283783 0.06446838378906249
+r=32 0.001119894497322654 0.03223419189453124
+r=64 0.0003003201697533293 0.01611709594726562
+r=128 8.051172903895418e-05 0.00805854797363281
+r=256 0.0002065389994894925 0.004029273986816405
+r=512 3.8386571355832134e-05 0.0020146369934082027
+r=1024 2.364921367894926e-05 0.0010073184967041013
+r=2048 1.7665216397064033e-05 0.0005036592483520507
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$(1/10)\sum_i^</span><span class="si">{10}</span><span class="s2"> || R^T R - A^T A ||_F^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;upper bound&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;r (sample size of row)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;E[||R^T R - A^T A||_F]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_19_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_19_0.png" />
+</div>
+</div>
+<p>なお，関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>はただの確認用なので，実際には使われないことに注意してください．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.02226905127146752,
+ 0.022269051271467537,
+ 0.022269051271467534,
+ 1.0077822185373182,
+ 1.0077822185373186)
+</pre></div></div>
+</div>
+<section id="Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
+<h2>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Permalink to this headline">#</a></h2>
+<p>次に，Step2について実装します． ## 列添字をサンプルする関数の実装 Step 2の「等確率で<span class="math notranslate nohighlight">\({0,1,\dots,r-1}\)</span>から数字をサンプリングし結果を<span class="math notranslate nohighlight">\(s\)</span>とする．そして確率<span class="math notranslate nohighlight">\(\frac{R_{s,j}^2}{\norm{R_{s,\ast}}^2} = \frac{A_{i_s,j}^2}{\norm{A_{i_s,\ast}}^2}\)</span>で列添字をサンプリングし，結果を<span class="math notranslate nohighlight">\(j_t\)</span>とする．この操作を<span class="math notranslate nohighlight">\(c\)</span>回行い，サンプリングされた列添字を<span class="math notranslate nohighlight">\(j_0,\dots,j_{c-1}\)</span>とする」の部分について実装します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_indices</span><span class="p">)</span>
+    <span class="n">col_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+        <span class="n">s</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">j_t</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+        <span class="n">col_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">j_t</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">col_indices</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">col_indices</span> <span class="o">=</span> <span class="n">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプルされた列添字:</span><span class="se">\n</span><span class="s2">[j_0, i_1, ..., j_c-1] = &quot;</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+サンプルされた列添字:
+[j_0, i_1, ..., j_c-1] =  [290, 270, 204, 6, 263, 221, 59, 49, 81, 263, 99, 216, 175, 224, 30, 171, 53, 285, 98, 153]
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="r-\times-cの行列Cを構成する関数の実装">
+<h1><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this headline">#</a></h1>
+<p>Step2の「<span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を第<span class="math notranslate nohighlight">\(t\)</span>列が <span class="math notranslate nohighlight">\(\frac{\norm{R}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}} = \frac{\norm{A}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}}\)</span>」となるように構成する」という部分について実装します． <span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>について注目します．行列<span class="math notranslate nohighlight">\(R\)</span>の<span class="math notranslate nohighlight">\(s\)</span>行目は<span class="math notranslate nohighlight">\(\frac{\norm{A}_\mathrm{F}}{\sqrt{r}} \frac{A_{i_s,\ast}}{\norm{A_{i_s,\ast}}}\)</span>であるので，
+行列<span class="math notranslate nohighlight">\(R\)</span>の第<span class="math notranslate nohighlight">\(j_t\)</span>列<span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>は</p>
+<div class="math notranslate nohighlight">
+\[ R_{\ast, j_t} = \frac{\norm{A}_\mathrm{F}}{\sqrt{r}}
+ \left(
+ \frac{A_{i_0,\ast}}{\norm{A_{i_0,j_t}}},
+ \frac{A_{i_1,\ast}}{\norm{A_{i_1,j_t}}},\dots,
+  \frac{A_{i_{r-1},\ast}}{\norm{A_{i_{r-1},j_t}}},
+\right)^\top\]</div>
+<p>となります．このことを踏まえると，行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数は次のようになります．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_C</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">):</span>
+    <span class="n">normAF</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_indices</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">col_indices</span><span class="p">)</span>
+
+    <span class="c1"># 行列Cを構成する</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+
+        <span class="c1"># Rのj_t列を構成する</span>
+        <span class="n">R_jt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">j_t</span> <span class="o">=</span> <span class="n">col_indices</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">R_jt</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">normAF</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">*</span> <span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i_s</span><span class="p">)))</span> <span class="o">*</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i_s</span><span class="p">,</span> <span class="n">j_t</span><span class="p">)</span>
+
+        <span class="c1"># Cのt列を構成</span>
+        <span class="n">C</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">normAF</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="o">*</span> <span class="n">R_jt</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R_jt</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">C</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="CC^\top-\approx-RR^\topの確認">
+<h1><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this headline">#</a></h1>
+<p><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>であることを前述と時と同様にして確認してみます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="n">col_indices</span> <span class="o">=</span> <span class="n">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">construct_C</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">)</span>
+
+<span class="n">error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">C</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;誤差&quot;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+誤差 0.017766116465666594
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\mathbb{E}\left[ \lVert RR^\top - AA^\top \rVert_\mathrm{F}^2 \right] \le \frac{\lVert R \rVert_\mathrm{F}^4}{c}\)</span>であることを確認します．具体的には，<span class="math notranslate nohighlight">\(c\)</span>を増やしてみて，誤差<span class="math notranslate nohighlight">\(\lVert RR^\top - AA^\top \rVert_\mathrm{F}^2\)</span>が減少することを見てみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># E(R R.T) = C C.Tを確認する</span>
+
+<span class="c1"># Rを作る</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cs</span><span class="p">:</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="c1"># Cを作る</span>
+        <span class="n">col_indices</span> <span class="o">=</span> <span class="n">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">construct_C</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">)</span>
+
+        <span class="n">mean</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">C</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c=</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+c=1 0.008346579399657737 1.031494140624999
+c=2 0.0034169588310364214 0.5157470703124994
+c=4 0.0010570795238283661 0.2578735351562497
+c=8 0.0011795989685171495 0.12893676757812486
+c=16 0.0006459791069746068 0.06446838378906243
+c=32 0.0004625016621439242 0.032234191894531215
+c=64 0.00024717129452194277 0.016117095947265608
+c=128 7.326438025246483e-05 0.008058547973632804
+c=256 2.2772030052404912e-05 0.004029273986816402
+c=512 1.0398127286920224e-05 0.002014636993408201
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$(1/10)\sum_i^</span><span class="si">{10}</span><span class="s2"> || RR^T - CC^T ||_F^2$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cs</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;upper bound&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;c (sample size of column)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;E[||R R^T - C C^T ||_F]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$RR^T\approx CC^T$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_32_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_32_0.png" />
+</div>
+</div>
+<section id="Step-3:特異値分解">
+<h2>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this headline">#</a></h2>
+<p>最後に，Step3について考えます．Step3は行列<span class="math notranslate nohighlight">\(C\)</span>を特異値分解をするだけなのであり，この部分はNumPyの関数を使います ．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+
+    <span class="c1"># Step 1</span>
+    <span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+
+    <span class="c1"># Step 2</span>
+    <span class="n">col_indices</span> <span class="o">=</span> <span class="n">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">construct_C</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">)</span>
+
+    <span class="c1"># Step 3</span>
+    <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span>
+
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;{i_0,...i_r-1} = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;left singular vector of C =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;singular values of C =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{i_0,...i_r-1} =
+ [299, 347, 190, 222, 270, 185, 34, 177, 374, 214, 354, 387, 3, 36, 146, 78, 59, 185, 362, 250, 289, 360, 134, 302, 144, 31, 86, 381, 150, 244, 350, 57, 82, 311, 79, 310, 386, 236, 41, 209, 37, 164, 384, 216, 229, 69, 377, 190, 339, 69, 389, 92, 185, 234, 164, 359, 354, 210, 145, 78, 315, 266, 194, 266, 250, 237, 236, 368, 91, 362, 234, 128, 31, 374, 230, 183, 19, 89, 53, 12, 317, 308, 293, 60, 272, 362, 307, 274, 100, 2, 344, 370, 260, 21, 348, 334, 56, 233, 302, 332]
+left singular vector of C =
+ [[-1.00882655e-01 -9.24648041e-02  7.17004378e-01 ...  5.97013899e-04
+  -7.92979511e-06  6.69912242e-01]
+ [-1.00810213e-01 -7.26888147e-02  1.29261663e-03 ...  5.51359705e-05
+  -7.32339650e-07  6.06161600e-04]
+ [-1.00494792e-01 -2.01378060e-02 -1.24383423e-01 ... -1.04082578e-01
+  -2.19637215e-01  5.94727845e-02]
+ ...
+ [-9.96050365e-02  6.50591424e-02  5.55850247e-02 ... -8.14103799e-02
+   1.46861541e-01 -4.56668302e-02]
+ [-1.00719032e-01 -5.41010178e-02  7.84696844e-02 ...  1.43215391e-01
+   6.09739864e-03 -1.05633238e-01]
+ [-9.96899004e-02  5.85217651e-02 -5.69029177e-02 ... -5.73308288e-02
+  -5.91995007e-02  6.39287437e-02]]
+singular values of C =
+ [1.00507858e+00 7.37702833e-02 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
+ 9.99122179e-17 9.99122179e-17 9.99122179e-17 1.59917118e-17]
+</pre></div></div>
+</div>
+</section>
+<section id="Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
+<h2><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section id="特異値について">
+<h1>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this headline">#</a></h1>
+<p>上記のアルゴリズムで得られた<span class="math notranslate nohighlight">\(C\)</span>の特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">S</span></code>)が，行列<span class="math notranslate nohighlight">\(A\)</span>の特異値<span class="math notranslate nohighlight">\(\sigma_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">exact_S</span></code>)を近似していることを見てみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">の行列Aの特異値: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">の行列Cの特異値: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+400x300の行列Aの特異値:
+ [1.00000000e+00 1.25000000e-01 4.56768673e-16 4.02238824e-16
+ 4.01020419e-16 3.58686424e-16 3.46257156e-16 3.33926304e-16
+ 3.19237735e-16 3.14276368e-16 3.11936289e-16 3.02926698e-16
+ 2.68531842e-16 2.59225521e-16 2.50666874e-16 2.34206701e-16
+ 2.06713068e-16 1.90246373e-16 1.84033175e-16 1.79052667e-16
+ 1.56460449e-16 1.46063331e-16 1.22092205e-16 1.20165738e-16
+ 1.15184186e-16 1.13422298e-16 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
+ 9.94363982e-17 9.94363982e-17 9.94363982e-17 8.44445797e-17
+ 8.37646290e-17 7.64453578e-17 5.31614742e-17 5.19225999e-17
+ 4.53937933e-17 2.21149970e-17 2.04931000e-17 1.73507404e-17]
+
+20x20の行列Cの特異値:
+ [1.00398260e+00 8.74295724e-02 9.19262741e-17 5.00989270e-17
+ 3.68481973e-17 3.32571565e-17 3.14220193e-17 2.75382546e-17
+ 1.98086049e-17 1.92974610e-17 1.72769567e-17 1.50360362e-17
+ 1.29204532e-17 9.91903593e-18 6.68838128e-18 4.87441106e-18
+ 3.15379430e-18 2.10002104e-18 9.05523490e-19 6.74656990e-34]
+</pre></div></div>
+</div>
+<p>サンプル数<span class="math notranslate nohighlight">\(r,c\)</span>を増やしたときの特異値に関する誤差についてみてみます．行列<span class="math notranslate nohighlight">\(A\)</span>のランク分だけ<span class="math notranslate nohighlight">\(C\)</span>の特異値に注目します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">hist0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hist1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">cs</span><span class="p">):</span>
+    <span class="n">mean0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">mean0</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact_S</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">mean1</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact_S</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">mean0</span> <span class="o">=</span> <span class="n">mean0</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="n">mean1</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">hist0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean0</span><span class="p">)</span>
+    <span class="n">hist1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(r,c)=(</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">,</span> <span class="n">mean0</span><span class="p">,</span> <span class="n">mean1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(r,c)=(2,2): 0.006903924167931996 0.10096048837499154
+(r,c)=(4,4): 0.018069422775078448 0.10053856381553095
+(r,c)=(8,8): 0.005083740320246111 0.0556472796469075
+(r,c)=(16,16): 0.003986828124333297 0.034642986019494434
+(r,c)=(32,32): 0.003877172245551641 0.030836945682362903
+(r,c)=(64,64): 0.006502350224764452 0.04571513412341687
+(r,c)=(128,128): 0.0023773637436249164 0.02091311107658724
+(r,c)=(256,256): 0.0018023390650911963 0.014186208292205914
+(r,c)=(512,512): 0.0010745037179999307 0.00877507340211179
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;r, c&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$|\sigma_\ell - \tilde{\sigma}_\ell|$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\tilde{\sigma}_\ell \approx \sigma_\ell$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_39_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_39_0.png" />
+</div>
+</div>
+<p>なお，サンプル数<span class="math notranslate nohighlight">\(r,c\)</span>が行列<span class="math notranslate nohighlight">\(A\)</span>のサイズよりも小さい場合，<span class="math notranslate nohighlight">\(C\)</span>のサイズは<span class="math notranslate nohighlight">\(A\)</span>のサイズよりも小さくなります．そのため，<span class="math notranslate nohighlight">\(A\)</span>の特異値をそのまま計算するよりも，高速に近似特異値を得ることが期待できます．(<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の構築時間を含めれると，遅くなることに注意)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">exact_S</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svdvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPyの特異値計算の時間</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+<span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="c1"># SQA = MatrixBasedDataStructure(A) # SQ(A)の構築も含めると遅くなる</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;qi_svdを用いた時の特異値計算の時間</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;特異値の誤差&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">exact_S</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">S</span><span class="p">[:</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SciPyの特異値計算の時間
+ 0.01494455337524414
+qi_svdを用いた時の特異値計算の時間
+ 0.0012636184692382812
+特異値の誤差 [0.00667859 0.07784901]
+</pre></div></div>
+</div>
+</section>
+<section id="右特異ベクトルについて">
+<h1>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this headline">#</a></h1>
+<p>行列<span class="math notranslate nohighlight">\(A\)</span>の右特異ベクトル<span class="math notranslate nohighlight">\(v^{(\ell)}\)</span>は，</p>
+<div class="math notranslate nohighlight">
+\[v^{(\ell)} \approx \tilde{v}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell}R^\dagger\vec{w}^{(\ell)}\]</div>
+<p>のようにして近似されます．このことを確認してみましょう．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v0</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;0番目の特異値に対応するAの右特異ベクトル&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;近似:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>   <span class="n">v0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">exact_V</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0番目の特異値に対応するAの右特異ベクトル
+近似:
+ [-0.09440838  0.01401883  0.04057489 -0.1191403  -0.05161434  0.06208742
+  0.10694682 -0.03938006 -0.00157065  0.03245503 -0.02819476  0.08019408
+ -0.02988361  0.00322013 -0.05996592  0.02516358 -0.11113624 -0.00973825
+ -0.0142656   0.05564676  0.11639113 -0.00480009 -0.07569705  0.0481747
+  0.06608749 -0.03194317  0.0641745  -0.10541631 -0.06696148 -0.06775029
+  0.0953519  -0.01781199  0.12013226 -0.04986569 -0.06952141 -0.01599937
+  0.04235067 -0.03020183  0.03267426  0.09344067 -0.01944155 -0.14624766
+  0.08316173 -0.07365214 -0.05568515  0.06221286  0.0098873   0.12694491
+ -0.04845045  0.09592046  0.00217039  0.02964429 -0.05246296 -0.09218318
+  0.00122886  0.01960742 -0.01781321 -0.09278275 -0.01163724 -0.04699686
+  0.00183574  0.00587643 -0.01031515  0.03799682 -0.02710374 -0.01619922
+ -0.10383155  0.01636865  0.02055436  0.02547612 -0.03571882 -0.08149416
+  0.10286032  0.07269496 -0.02412493 -0.07735724 -0.01754432  0.01310643
+  0.06227719  0.00246292  0.04386502 -0.12721506 -0.02648137  0.06675705
+ -0.04990223  0.02869365 -0.0398308  -0.01820521 -0.07055013 -0.02784117
+ -0.02582525 -0.03602001  0.05775231  0.043648   -0.00409544 -0.01244501
+ -0.04681567  0.11771469  0.11488634  0.11186431 -0.07924451 -0.03779427
+ -0.06806103 -0.0487432   0.02724304  0.10326964  0.0622083   0.04809121
+  0.09204101 -0.04471401 -0.00328162  0.07482932  0.0011359  -0.06506777
+ -0.01624378  0.00894266  0.04460019  0.0292381   0.02010398 -0.04354131
+ -0.02135557  0.01443532 -0.00858347  0.00295011 -0.03385917  0.01320969
+  0.06979743 -0.00473062  0.09042346 -0.04843368 -0.05320873  0.04488506
+ -0.10611463 -0.01750263 -0.00132003 -0.03091107 -0.02026742  0.03987817
+  0.00691618  0.0004644   0.00059604 -0.09554868  0.01747934  0.0071761
+  0.01416119  0.08889201  0.09095376 -0.09897474 -0.02552319 -0.07317721
+  0.08147642  0.05203029 -0.02026544  0.12989027 -0.06049482 -0.04940837
+  0.07372394 -0.03975119 -0.04775989 -0.07919803 -0.01008619  0.03183719
+ -0.08136334 -0.01519712 -0.02699868 -0.03107165  0.01143241  0.08923449
+ -0.03257458  0.02982004  0.01751632  0.108516   -0.0102156   0.13257179
+ -0.09201193 -0.06194467  0.00466802 -0.03272012 -0.08361412  0.05725051
+  0.08552165 -0.00732634  0.05140972  0.00024842 -0.02235194 -0.03464039
+  0.03911829 -0.0553957  -0.01524099  0.08196336 -0.0756198  -0.03131817
+  0.10667474  0.02873835 -0.00091342 -0.0651289  -0.0102943  -0.00099011
+ -0.05714779 -0.05295983  0.08084524 -0.03122158 -0.0116632  -0.01879263
+ -0.03703013 -0.0248649   0.09231227  0.0798206  -0.07898155 -0.02439702
+ -0.0461855  -0.00503522 -0.05594103 -0.01938095 -0.02051223  0.0884548
+  0.04160567  0.02221905  0.00600721 -0.03743507  0.0158709   0.0762567
+  0.03368389  0.13046626  0.04595701 -0.02244023  0.03700389  0.06395638
+  0.08105966 -0.01811342  0.01803027  0.03001832  0.0537241   0.02429548
+ -0.03339838  0.04100341  0.03725649 -0.01822307 -0.04683275  0.05629211
+ -0.02509542 -0.06660747 -0.1324734   0.00417205  0.06846496 -0.02104425
+ -0.0504611   0.01240532 -0.00388773 -0.03203592  0.07571767  0.09026531
+ -0.03706041  0.05113853  0.00537991  0.0413595  -0.00776075 -0.05753592
+  0.01464627 -0.00869199  0.02633839 -0.13736472 -0.05067958  0.14846509
+  0.06478176 -0.00326158  0.01171559  0.02756472 -0.02191005  0.02403296
+ -0.1236504   0.01456469  0.01086291  0.04261948  0.0774616   0.00820755
+ -0.06930585 -0.0588363  -0.01443862  0.08578656 -0.00453197 -0.00858526
+ -0.04219467  0.10617729  0.05431701  0.05221216  0.04822822 -0.00709345
+ -0.02775034  0.0196341   0.07173062 -0.03211098  0.06425894  0.02386264
+ -0.05277093 -0.01345887 -0.04198905 -0.021102   -0.03430726 -0.0552895 ]
+SciPy:
+ [-0.09471064  0.01372957  0.04051077 -0.11933572 -0.05170756  0.06247768
+  0.1073243  -0.03964476 -0.00188849  0.03224152 -0.02798623  0.08057127
+ -0.0297442   0.00300898 -0.06031805  0.02525174 -0.11141657 -0.00937732
+ -0.01438335  0.05564406  0.11701265 -0.00444267 -0.07579873  0.04853163
+  0.06602811 -0.03189037  0.06421818 -0.10561398 -0.0668613  -0.06780437
+  0.09570032 -0.01805283  0.11999884 -0.04994428 -0.06962074 -0.01583412
+  0.04275693 -0.03004738  0.03285676  0.09352209 -0.019438   -0.14654182
+  0.08310697 -0.07393991 -0.05561551  0.06236387  0.00976113  0.12734883
+ -0.04831869  0.09615316  0.00234365  0.03007216 -0.05302601 -0.09236233
+  0.00109117  0.01956787 -0.0178589  -0.09300284 -0.01159126 -0.04680271
+  0.00180033  0.0059654  -0.01007445  0.03801913 -0.02710623 -0.01615595
+ -0.1042319   0.01659143  0.02061617  0.02535664 -0.03601063 -0.08184089
+  0.10334685  0.07274689 -0.02402336 -0.07781568 -0.0178003   0.0129648
+  0.06249081  0.00238133  0.04401297 -0.12746416 -0.02621577  0.06688008
+ -0.04976269  0.02896132 -0.03996085 -0.01836859 -0.07047676 -0.02768637
+ -0.02576784 -0.0362957   0.05809425  0.044223   -0.00419313 -0.01237177
+ -0.04720948  0.11803157  0.11539617  0.1124343  -0.07975637 -0.03817376
+ -0.06831587 -0.04847168  0.02757441  0.10362264  0.06272684  0.04820414
+  0.0919005  -0.04501744 -0.00362717  0.07524043  0.001055   -0.06522994
+ -0.01620334  0.00879289  0.04500066  0.0289795   0.02009588 -0.0440136
+ -0.02133517  0.01460877 -0.00821815  0.00306867 -0.03379749  0.01314842
+  0.07008088 -0.00452072  0.09035257 -0.04870124 -0.05340681  0.04510858
+ -0.10652763 -0.01759559 -0.00117688 -0.03068651 -0.02023872  0.04008592
+  0.00719726  0.00020246  0.00022178 -0.09552771  0.01719767  0.00703798
+  0.01419717  0.08922587  0.09133025 -0.09923474 -0.02555688 -0.07363297
+  0.0816578   0.05201321 -0.0200971   0.13003671 -0.06080993 -0.0491947
+  0.07397917 -0.03984794 -0.04767979 -0.07928689 -0.00991256  0.03187969
+ -0.08130176 -0.01546301 -0.02674588 -0.03127716  0.01120935  0.08956723
+ -0.03255651  0.02967203  0.01753788  0.10886753 -0.01028791  0.13330003
+ -0.09174115 -0.06227649  0.00450689 -0.03257246 -0.08414405  0.05737186
+  0.08576719 -0.00757772  0.05149451  0.00022651 -0.02242961 -0.03480317
+  0.0392202  -0.05538021 -0.01549003  0.08246284 -0.07562297 -0.03125555
+  0.1070999   0.02866658 -0.00067906 -0.0654425  -0.01029521 -0.00094124
+ -0.05721901 -0.05306465  0.08111919 -0.03152411 -0.0116841  -0.01865934
+ -0.03751627 -0.02497335  0.09266249  0.07996402 -0.07885547 -0.0244993
+ -0.04575944 -0.00516472 -0.05610719 -0.01888673 -0.02058117  0.08854154
+  0.04192328  0.02222381  0.00578701 -0.03741132  0.01605285  0.07638107
+  0.03358526  0.13103157  0.04650432 -0.02249928  0.03734822  0.06400479
+  0.08115129 -0.01802758  0.01802316  0.03059441  0.05377636  0.02443309
+ -0.03327874  0.04134161  0.03765894 -0.01807389 -0.04711922  0.05628554
+ -0.02545551 -0.06666135 -0.13305746  0.00423795  0.06888222 -0.02102115
+ -0.05042663  0.01240284 -0.00388622 -0.03184146  0.07601019  0.09018991
+ -0.03727221  0.05115243  0.00555765  0.04128527 -0.00775533 -0.0575648
+  0.01484934 -0.00898963  0.02656037 -0.13754538 -0.05096266  0.14865486
+  0.06456281 -0.00359404  0.01163099  0.02776696 -0.02153132  0.02406405
+ -0.1237461   0.01447285  0.01084212  0.04261741  0.07743007  0.00833751
+ -0.0696192  -0.05944645 -0.0144877   0.08585432 -0.00469817 -0.00863429
+ -0.04212807  0.10601373  0.05432412  0.05211482  0.04799167 -0.00729734
+ -0.02770382  0.01965445  0.07215782 -0.03217011  0.06427889  0.02408606
+ -0.05290224 -0.01324289 -0.04202287 -0.02098145 -0.03483567 -0.05546826]
+</pre></div></div>
+</div>
+<p>サンプル数を増やしていくにつれて，<span class="math notranslate nohighlight">\(\norm{v^{(\ell)} - \tilde{v}^{(\ell)}}\)</span>が小さくなることを確認します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 確認する特異ベクトルの番号．</span>
+<span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+
+<span class="n">hist0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hist1</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">cs</span><span class="p">):</span>
+
+    <span class="n">mean0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="c1"># 確認</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+        <span class="n">v0</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">mean0</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v0</span> <span class="o">-</span> <span class="n">exact_V</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">mean1</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v1</span> <span class="o">-</span> <span class="n">exact_V</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">mean0</span> <span class="o">=</span> <span class="n">mean0</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="n">mean1</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">hist0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean0</span><span class="p">)</span>
+    <span class="n">hist1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(r,c)=(</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">,</span> <span class="n">mean0</span><span class="p">,</span> <span class="n">mean1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="n">rankA</span><span class="p">]</span> <span class="o">-</span> <span class="n">exact_S</span><span class="p">[:</span><span class="n">rankA</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(r,c)=(2,2): 0.053716921963869305 2.5698534935499238 [0.00765992 0.10930036]
+(r,c)=(4,4): 0.03779696020426916 2.04075692647302 [0.00725207 0.09231563]
+(r,c)=(8,8): 0.039405277988013174 1.2653715939284058 [0.00698005 0.08479822]
+(r,c)=(16,16): 0.02520930612912829 1.0795496028209515 [0.00635114 0.0713122 ]
+(r,c)=(32,32): 0.022201262845864544 1.1286874288581443 [0.00131866 0.01013171]
+(r,c)=(64,64): 0.009251939824001687 0.7851963201806067 [0.00284349 0.02535093]
+(r,c)=(128,128): 0.005899133454370995 1.2577253904429344 [0.00015355 0.00123461]
+(r,c)=(256,256): 0.007290099033723877 1.251522155362373 [0.00235924 0.01761108]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;r, c&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_47_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_47_0.png" />
+</div>
+</div>
+</section>
+<section id="左特異ベクトルについて">
+<h1>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this headline">#</a></h1>
+<p>行列<span class="math notranslate nohighlight">\(A\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(u^{(\ell)}\)</span>は，</p>
+<div class="math notranslate nohighlight">
+\[u^{(\ell)} \approx \tilde{u}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell^2}A R^\top w^{(\ell)}\]</div>
+<p>のようにして近似されます．このことを確認してみます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;0番目の特異値に対応するAの左特異ベクトル&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;近似:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>   <span class="n">u0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SciPy:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">exact_U</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0番目の特異値に対応するAの左特異ベクトル
+近似:
+ [-8.94996616e-03 -8.22405824e-02 -3.71806420e-02 -5.01494553e-02
+ -7.93813180e-02 -2.74469195e-02 -7.65251908e-03 -5.12497952e-02
+ -5.84841329e-03 -3.42411358e-03 -3.79755653e-02 -6.15472551e-02
+ -5.72408348e-02 -4.38638218e-02 -6.00219285e-02 -4.74886840e-02
+ -4.39239864e-02 -2.95294469e-02 -1.79091610e-02 -2.68804899e-02
+ -6.42535572e-02 -7.57484819e-02 -8.28715184e-02 -8.38103702e-02
+ -4.25391232e-03 -6.62288444e-02 -2.79515554e-02 -1.83275497e-02
+ -2.99560872e-03 -6.47622609e-02 -7.66108981e-02 -8.38512217e-02
+ -7.73643595e-02 -2.74629962e-02 -5.46328720e-02 -5.93558633e-02
+ -4.95149925e-02 -7.03435411e-02 -6.58338394e-02 -2.51921404e-02
+ -2.95519607e-02 -7.74226118e-02 -2.18741763e-02 -3.15434279e-02
+ -5.25158478e-02 -4.28435393e-02 -4.48297853e-02 -3.76906624e-02
+ -1.67299028e-02 -8.22903978e-02 -6.92488677e-02 -3.14818902e-02
+ -6.64784612e-02 -5.59980346e-02 -1.24520368e-02 -3.21401272e-04
+ -2.33041013e-02 -7.04984350e-02 -3.37129590e-02 -8.37639480e-02
+ -6.95693655e-02 -6.03934041e-02 -2.62047504e-02 -3.01899329e-02
+ -2.59616522e-03 -4.38582322e-02 -6.36089173e-02 -1.79800672e-02
+ -6.64707710e-02 -8.18438581e-02 -6.49223082e-02 -3.23480462e-02
+ -7.00968762e-02 -3.28204020e-03 -1.92949630e-02 -1.85334282e-02
+ -7.45418870e-02 -4.08620408e-02 -8.37251354e-02 -4.12764832e-02
+ -6.83454063e-02 -1.13980071e-03 -7.26148366e-02 -4.86606727e-02
+ -4.10327496e-02 -1.62375523e-02 -5.30580090e-02 -9.24893328e-03
+ -4.99882641e-02 -5.78818035e-02 -5.26521843e-02 -6.76684167e-02
+ -7.28522110e-02 -1.37496932e-02 -2.37068636e-02 -7.62755298e-02
+ -2.91363234e-02 -6.71183112e-04 -3.41485420e-02 -7.91756324e-02
+ -7.22880199e-02 -2.83609952e-02 -1.95805675e-02 -1.65488750e-02
+ -3.83785377e-02 -3.18673753e-02 -6.26593166e-03 -3.28157976e-02
+ -7.59632891e-02 -4.89263637e-02 -1.73879702e-02 -6.22378123e-02
+ -5.27088950e-02 -2.86956742e-02 -1.66185204e-03 -4.05708149e-02
+ -4.71083050e-02 -5.47123202e-03 -3.33522920e-02 -7.45251629e-02
+ -4.58809607e-03 -5.92303112e-02 -4.72886781e-02 -3.99968798e-02
+ -6.63371935e-02 -2.05129396e-02 -4.20050373e-02 -1.77173267e-02
+ -8.28013760e-02 -1.46227769e-02 -3.05525215e-02 -5.44152839e-02
+ -6.48771919e-02 -4.11733724e-02 -4.58039994e-02 -2.34430728e-02
+ -1.19675311e-02 -3.19736358e-02 -7.48795415e-02 -3.79139557e-02
+ -2.43341188e-02 -6.06222237e-02 -4.16461519e-02 -1.24134529e-03
+ -4.35379186e-02 -7.05647704e-02 -5.42201957e-02 -6.85940906e-02
+ -2.98075904e-02 -4.06645789e-02 -7.17101613e-02 -3.96578707e-02
+ -8.25196661e-02 -4.26255271e-02 -8.23665237e-02 -8.02655818e-02
+ -7.73440913e-04 -2.29286145e-03 -6.71487332e-03 -2.98350425e-02
+ -7.31274496e-02 -7.35880034e-02 -2.92818828e-02 -4.83566089e-02
+ -5.62966419e-02 -3.38200309e-02 -6.99423255e-02 -5.73772171e-02
+ -7.42669322e-02 -3.19589781e-02 -7.53893148e-03 -4.31742033e-02
+ -2.80885451e-02 -2.44051423e-02 -7.58158752e-03 -5.64991756e-02
+ -1.50289179e-02 -7.63636235e-02 -4.54481509e-02 -4.36676118e-02
+ -3.98843095e-02 -7.64168194e-02 -1.37866001e-03 -5.38865300e-02
+ -1.72496910e-02 -5.84516615e-02 -5.54982951e-02 -4.37464082e-02
+ -5.94043073e-02 -2.67897328e-02 -3.86452358e-02 -1.16295940e-02
+ -7.22346309e-03 -4.78468081e-02 -5.16087882e-02 -1.74334005e-02
+ -7.98537446e-02 -6.88517805e-02 -7.00797914e-02 -4.58299907e-02
+ -6.67268339e-02 -5.60483272e-03 -5.81462210e-02 -1.00275684e-02
+ -5.23318250e-02 -5.08172681e-02 -3.79746812e-02 -4.86234861e-02
+ -2.07445430e-02 -5.38063761e-02 -7.85650017e-02 -1.90105691e-02
+ -1.20787641e-02 -4.17062968e-02 -8.38842750e-02 -4.44295928e-02
+ -2.74843861e-02 -6.33998934e-02 -9.26511635e-03 -8.02985631e-02
+ -2.61642804e-02 -5.14437108e-02 -8.38245851e-02 -1.79829545e-02
+ -4.20854482e-02 -6.91700162e-03 -1.77534449e-02 -4.04104015e-02
+ -4.25800374e-02 -5.33897946e-02 -7.28136525e-02 -4.76890236e-02
+ -6.38448073e-02 -8.38110307e-02 -8.07954892e-02 -8.05111335e-02
+ -5.80556840e-02 -7.55255468e-02 -2.38280431e-02 -4.26755580e-02
+ -4.26324035e-02 -6.63863763e-03 -5.90464077e-02 -4.42330025e-02
+ -8.02828638e-02 -4.70031425e-03 -3.19888945e-02 -1.53477657e-02
+ -5.16695425e-02 -1.77530463e-02 -8.29354016e-02 -1.68726862e-02
+ -1.71125536e-02 -7.39963873e-02 -2.66866012e-02 -2.26558650e-02
+ -2.42811174e-02 -6.03889683e-02 -1.87398942e-03 -1.60070943e-02
+ -6.66641211e-02 -3.92107365e-02 -6.97145407e-02 -6.64722461e-02
+ -8.10091379e-02 -3.27109078e-02 -7.37767986e-02 -6.83710959e-02
+ -8.03061418e-02 -4.52291216e-02 -7.24321150e-02 -6.11291315e-02
+ -7.09619842e-02 -3.38552746e-02 -6.84837883e-02 -7.28593217e-02
+ -2.83859291e-02 -7.03034086e-02 -3.31562634e-03 -5.48979682e-03
+ -3.33960790e-02 -3.05397038e-03 -7.33144730e-02 -4.73702708e-02
+ -6.97636778e-03 -2.93678624e-02 -4.63482441e-02 -5.54951837e-02
+ -2.19865822e-02 -7.04258761e-02 -2.91388914e-04 -7.77167111e-03
+ -1.54960296e-02 -7.77859049e-02 -1.80623666e-02 -3.03755571e-02
+ -8.70216646e-03 -4.58367799e-02 -5.39645566e-02 -6.24171156e-02
+ -3.11662181e-03 -2.89800469e-02 -7.79284444e-02 -3.04262966e-02
+ -4.84387816e-02 -2.79617225e-02 -4.57666810e-02 -7.18582786e-02
+ -7.50219262e-02 -4.58247329e-02 -4.08779723e-02 -6.25131356e-02
+ -6.69704716e-02 -9.97270737e-04 -9.09458880e-03 -7.38451224e-02
+ -1.03608022e-02 -3.37153502e-02 -1.87712354e-02 -4.19701850e-02
+ -6.97353839e-02 -7.12324255e-03 -3.57046444e-02 -1.23699387e-03
+ -1.73575838e-02 -2.59207930e-02 -1.48508014e-02 -3.67785526e-02
+ -7.34205752e-02 -3.95075724e-02 -1.64201332e-02 -4.45631584e-02
+ -8.18897406e-02 -2.61011042e-02 -5.09742171e-02 -7.85591871e-02
+ -8.87568995e-03 -3.02885434e-02 -4.29021358e-02 -5.72279082e-02
+ -3.18471813e-02 -1.21599375e-02 -2.92566477e-02 -1.52380509e-02
+ -7.14686067e-02 -4.01561417e-03 -7.98251348e-03 -6.68362240e-02
+ -5.50986698e-02 -5.38920474e-02 -5.01139380e-02 -3.92704703e-02
+ -2.44745336e-02 -5.77969171e-02 -4.88436686e-02 -7.66501311e-03
+ -7.51800518e-02 -7.99401323e-02 -7.35682012e-02 -8.27759599e-02
+ -7.53210549e-02 -2.72519824e-02 -7.03017685e-02 -6.09060086e-02
+ -2.26194209e-02 -3.54279199e-02 -4.92754155e-02 -7.44601966e-02
+ -3.49506496e-02 -3.71845184e-02 -8.06270392e-02 -2.60456871e-02
+ -4.00449173e-02 -1.54320745e-02 -5.59514438e-02 -5.94882129e-02
+ -3.14889245e-02 -3.04400154e-02 -4.03936650e-02 -1.35194547e-02
+ -4.87152010e-02 -7.34648216e-02 -6.68679080e-02 -1.11755887e-02
+ -6.01810374e-02 -2.82003298e-02 -7.55038482e-02 -7.38864954e-02
+ -1.31429404e-02 -5.33538665e-02 -2.72339079e-02 -8.14746262e-02
+ -1.55400431e-02 -8.30904943e-02 -2.49149541e-02 -2.99747506e-02
+  2.35112008e-05 -8.13984584e-02 -4.59887181e-02 -1.45676187e-02]
+SciPy:
+ [-9.01460906e-03 -8.24166155e-02 -3.72535502e-02 -5.02465332e-02
+ -7.95548239e-02 -2.75440927e-02 -7.71794431e-03 -5.13785911e-02
+ -5.89564946e-03 -3.46716245e-03 -3.80676524e-02 -6.16814960e-02
+ -5.73956164e-02 -4.39905213e-02 -6.01840932e-02 -4.76010288e-02
+ -4.40504355e-02 -2.96363212e-02 -1.79498226e-02 -2.69478357e-02
+ -6.44188011e-02 -7.59329692e-02 -8.30280989e-02 -8.39940774e-02
+ -4.28332215e-03 -6.63982468e-02 -2.80213843e-02 -1.84122955e-02
+ -3.05148823e-03 -6.49023202e-02 -7.68029512e-02 -8.40293245e-02
+ -7.75597149e-02 -2.75514216e-02 -5.47486639e-02 -5.94743653e-02
+ -4.96580560e-02 -7.04918168e-02 -6.59789280e-02 -2.52749855e-02
+ -2.96387146e-02 -7.75775570e-02 -2.19150988e-02 -3.16046471e-02
+ -5.26291211e-02 -4.29222266e-02 -4.49641500e-02 -3.77650462e-02
+ -1.67905090e-02 -8.24667263e-02 -6.93816451e-02 -3.15966800e-02
+ -6.66439139e-02 -5.61103626e-02 -1.24779571e-02 -3.47912194e-04
+ -2.33518182e-02 -7.06573862e-02 -3.38177686e-02 -8.39575340e-02
+ -6.97009379e-02 -6.05605020e-02 -2.62746581e-02 -3.02545105e-02
+ -2.64535186e-03 -4.39493234e-02 -6.37770447e-02 -1.80389807e-02
+ -6.66474189e-02 -8.19947816e-02 -6.50610568e-02 -3.24286821e-02
+ -7.02713773e-02 -3.29853971e-03 -1.93410207e-02 -1.85888430e-02
+ -7.47065320e-02 -4.09679464e-02 -8.39203884e-02 -4.13662941e-02
+ -6.84912333e-02 -1.16652214e-03 -7.27942282e-02 -4.87725048e-02
+ -4.11116786e-02 -1.63213375e-02 -5.31985610e-02 -9.27066401e-03
+ -5.00881456e-02 -5.80270030e-02 -5.27711211e-02 -6.78021623e-02
+ -7.30431097e-02 -1.37968284e-02 -2.37986120e-02 -7.64281755e-02
+ -2.92261369e-02 -7.26061971e-04 -3.42149021e-02 -7.93777244e-02
+ -7.24771028e-02 -2.84186736e-02 -1.96589207e-02 -1.65937744e-02
+ -3.84723783e-02 -3.19405673e-02 -6.32190265e-03 -3.29322068e-02
+ -7.61325190e-02 -4.90489307e-02 -1.74276322e-02 -6.23862868e-02
+ -5.28305562e-02 -2.87584641e-02 -1.71041641e-03 -4.07003718e-02
+ -4.72394303e-02 -5.48953851e-03 -3.34184443e-02 -7.47020749e-02
+ -4.64098398e-03 -5.93406326e-02 -4.73858446e-02 -4.01165920e-02
+ -6.64748361e-02 -2.05543575e-02 -4.21256707e-02 -1.77925558e-02
+ -8.29809427e-02 -1.46949156e-02 -3.06545957e-02 -5.45278638e-02
+ -6.50095838e-02 -4.12597399e-02 -4.59144410e-02 -2.34948555e-02
+ -1.20426988e-02 -3.20329065e-02 -7.50585204e-02 -3.80363880e-02
+ -2.43798569e-02 -6.07625404e-02 -4.17691320e-02 -1.30076173e-03
+ -4.36546543e-02 -7.06977629e-02 -5.43704392e-02 -6.87376900e-02
+ -2.99091288e-02 -4.07544454e-02 -7.18724490e-02 -3.97600202e-02
+ -8.26973696e-02 -4.27414746e-02 -8.25268301e-02 -8.04636395e-02
+ -7.75825157e-04 -2.32445522e-03 -6.77754785e-03 -2.99035789e-02
+ -7.32933528e-02 -7.37441941e-02 -2.93391537e-02 -4.84602063e-02
+ -5.64367220e-02 -3.39259552e-02 -7.00774721e-02 -5.75182844e-02
+ -7.44097293e-02 -3.20562679e-02 -7.60354591e-03 -4.32963196e-02
+ -2.81962195e-02 -2.44785042e-02 -7.62155893e-03 -5.66247583e-02
+ -1.50774987e-02 -7.65155611e-02 -4.55865327e-02 -4.37948340e-02
+ -3.99637261e-02 -7.66020933e-02 -1.40032242e-03 -5.39886601e-02
+ -1.73318569e-02 -5.85608822e-02 -5.56093405e-02 -4.38645610e-02
+ -5.95649761e-02 -2.68812217e-02 -3.87298684e-02 -1.17060664e-02
+ -7.25054846e-03 -4.79759337e-02 -5.17223972e-02 -1.74692619e-02
+ -8.00424770e-02 -6.90025377e-02 -7.02331362e-02 -4.59478637e-02
+ -6.68506632e-02 -5.63425315e-03 -5.82644197e-02 -1.00810370e-02
+ -5.24848247e-02 -5.09417361e-02 -3.80984169e-02 -4.87251148e-02
+ -2.07938647e-02 -5.39366336e-02 -7.87321387e-02 -1.90716463e-02
+ -1.21391799e-02 -4.18098607e-02 -8.40945614e-02 -4.45430448e-02
+ -2.75511547e-02 -6.35641193e-02 -9.31541217e-03 -8.04761434e-02
+ -2.62489870e-02 -5.15713945e-02 -8.39916552e-02 -1.80233248e-02
+ -4.22162010e-02 -6.93409293e-03 -1.77906937e-02 -4.05060998e-02
+ -4.27069054e-02 -5.35011731e-02 -7.30034670e-02 -4.78267976e-02
+ -6.39860547e-02 -8.40149034e-02 -8.09703982e-02 -8.06610004e-02
+ -5.82010333e-02 -7.56805938e-02 -2.38764294e-02 -4.27845264e-02
+ -4.27103861e-02 -6.67452047e-03 -5.91607234e-02 -4.43381677e-02
+ -8.04615016e-02 -4.73983857e-03 -3.20521277e-02 -1.53852224e-02
+ -5.17959378e-02 -1.77865603e-02 -8.30951174e-02 -1.69578612e-02
+ -1.71573225e-02 -7.41537991e-02 -2.67353920e-02 -2.27348985e-02
+ -2.43597038e-02 -6.05527790e-02 -1.92478756e-03 -1.60706808e-02
+ -6.67961528e-02 -3.93369258e-02 -6.98685381e-02 -6.65992275e-02
+ -8.11656966e-02 -3.27888157e-02 -7.39261994e-02 -6.85168566e-02
+ -8.04784417e-02 -4.53120295e-02 -7.25894526e-02 -6.12645478e-02
+ -7.10947728e-02 -3.39283495e-02 -6.86336382e-02 -7.30485269e-02
+ -2.84777229e-02 -7.04609419e-02 -3.35432265e-03 -5.50987634e-03
+ -3.34690582e-02 -3.10292323e-03 -7.34945898e-02 -4.74642833e-02
+ -7.00692230e-03 -2.94517381e-02 -4.64354734e-02 -5.56092870e-02
+ -2.20531756e-02 -7.05823756e-02 -3.29183894e-04 -7.80254608e-03
+ -1.55616140e-02 -7.79649472e-02 -1.81024051e-02 -3.04771752e-02
+ -8.72375958e-03 -4.59215695e-02 -5.40956697e-02 -6.25408977e-02
+ -3.12339687e-03 -2.90803762e-02 -7.80915573e-02 -3.05320780e-02
+ -4.85540317e-02 -2.80476587e-02 -4.58599572e-02 -7.19916003e-02
+ -7.52159248e-02 -4.59285167e-02 -4.09955669e-02 -6.26586956e-02
+ -6.71175482e-02 -1.01935505e-03 -9.16501783e-03 -7.39924736e-02
+ -1.04336840e-02 -3.38040483e-02 -1.88160954e-02 -4.21013603e-02
+ -6.98997926e-02 -7.13790696e-03 -3.58253712e-02 -1.26660585e-03
+ -1.73955949e-02 -2.60189901e-02 -1.48841203e-02 -3.68516733e-02
+ -7.36091280e-02 -3.96048722e-02 -1.64656420e-02 -4.46984993e-02
+ -8.20874133e-02 -2.61835769e-02 -5.11153673e-02 -7.87457714e-02
+ -8.92523393e-03 -3.03673998e-02 -4.30020286e-02 -5.73771681e-02
+ -3.19085882e-02 -1.21831071e-02 -2.93258243e-02 -1.52969824e-02
+ -7.16498433e-02 -4.04166304e-03 -8.03994879e-03 -6.69725644e-02
+ -5.52055630e-02 -5.40168541e-02 -5.02431325e-02 -3.93957783e-02
+ -2.45365191e-02 -5.79393749e-02 -4.89612240e-02 -7.71159152e-03
+ -7.53182492e-02 -8.01017511e-02 -7.37453926e-02 -8.29284491e-02
+ -7.55104367e-02 -2.73452642e-02 -7.04548534e-02 -6.10335695e-02
+ -2.26872920e-02 -3.55421896e-02 -4.94204531e-02 -7.46023269e-02
+ -3.50695661e-02 -3.72527985e-02 -8.08072492e-02 -2.60997344e-02
+ -4.01639848e-02 -1.55129118e-02 -5.60848408e-02 -5.95978006e-02
+ -3.16037693e-02 -3.05104537e-02 -4.04799181e-02 -1.35879359e-02
+ -4.88364959e-02 -7.36150349e-02 -6.70316647e-02 -1.12403278e-02
+ -6.03124277e-02 -2.82775720e-02 -7.56679517e-02 -7.40407102e-02
+ -1.32087070e-02 -5.34603818e-02 -2.73139822e-02 -8.16789582e-02
+ -1.56120300e-02 -8.32658243e-02 -2.49909131e-02 -3.00524808e-02
+ -8.62309588e-06 -8.15914013e-02 -4.61050948e-02 -1.46459409e-02]
+</pre></div></div>
+</div>
+<p>サンプル数を増やしていくにつれて，<span class="math notranslate nohighlight">\(\norm{u^{(\ell)} - \tilde{u}^{(\ell)}}\)</span>が小さくなることを確認します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">hist0</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hist1</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">cs</span><span class="p">):</span>
+
+    <span class="n">mean0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="c1"># 確認</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+        <span class="n">u0</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">u1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">mean0</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u0</span> <span class="o">-</span> <span class="n">exact_U</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">mean1</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u1</span> <span class="o">-</span> <span class="n">exact_U</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">mean0</span> <span class="o">=</span> <span class="n">mean0</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">mean1</span> <span class="o">=</span> <span class="n">mean1</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="n">hist0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean0</span><span class="p">)</span>
+    <span class="n">hist1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(r,c)=(</span><span class="si">{</span><span class="n">r</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">,</span> <span class="n">mean0</span><span class="p">,</span> <span class="n">mean1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(r,c)=(2,2): 0.01363039658378295 140.09897560357606
+(r,c)=(4,4): 0.010289945038705044 112.98948135613978
+(r,c)=(8,8): 0.011281326791994797 5.818083842469619
+(r,c)=(16,16): 0.009328073472766903 4.693722668949129
+(r,c)=(32,32): 0.00788403639784217 2.24308025274472
+(r,c)=(64,64): 0.0047692053409146475 1.2538782231617849
+(r,c)=(128,128): 0.003680889905664607 1.1908862173998653
+(r,c)=(256,256): 0.003222959568654292 1.2480234507696288
+(r,c)=(512,512): 0.10216803671747085 1.171412455471266
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\ell=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;r, c&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_53_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_53_0.png" />
+</div>
+</div>
+<section id="まとめ">
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h2>
+<p>量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までをみてきました．このノートブックでは，特異ベクトルの復元に，行列<span class="math notranslate nohighlight">\(A\)</span>や<span class="math notranslate nohighlight">\(R\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトルに関する行列-ベクトル積を行なっているため，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の次元に関して多項式の計算量を必要とします．<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>では，このような計算量をかけずにSample, Query, Normそれぞれを実行することについて説明します．</p>
+</section>
+<section id="参考文献">
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
+<li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08_01_Data_structure.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">(行列:math:<cite>C</cite>の特異値分解の後)</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

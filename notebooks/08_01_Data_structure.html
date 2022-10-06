@@ -1,0 +1,1765 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_01_Data_structure.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="prev" title="QAE を用いた信用ポートフォリオリスク計測" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_01_Density_Matrix_and_Error.html">
+   Qulacsでの混合状態
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_02_Extrapolation.html">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">
+   Qamuyを使った量子コンピュータｘ量子化学計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/08_01_Data_structure.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#セグメント木構造の実装">
+   セグメント木構造の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
+   ベクトルに関するデータ構造
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(v)\)
+   </span>
+   の実装
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#定義">
+     定義
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#実装">
+     実装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#確認">
+     確認
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}()\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample}()\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
+   行列に基づくデータ構造
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   の実装
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     定義
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     実装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     確認
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample1}()\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample2}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(i,j)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}()\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#まとめ">
+   まとめ
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#参考文献">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#セグメント木構造の実装">
+   セグメント木構造の実装
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
+   ベクトルに関するデータ構造
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(v)\)
+   </span>
+   の実装
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#定義">
+     定義
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#実装">
+     実装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#確認">
+     確認
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}()\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample}()\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
+   行列に基づくデータ構造
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   の実装
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     定義
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     実装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     確認
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample1}()\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Sample2}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(i,j)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}(i)\)
+       </span>
+       について
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id8">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Norm}()\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#まとめ">
+   まとめ
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#参考文献">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="line-block">
+<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 1</div>
+<div class="line">2022年10月7日(金)</div>
+<div class="line">高比良宗一</div>
+</div>
+<section id="\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について">
+<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Permalink to this headline">#</a></h1>
+<p>このノートブックでは，SQデータ構造を実装します． 最初にセグメント木構造を実装します．次に，それを用いてベクトルに基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．その後に行列に基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を，ベクトルに基づくデータ構造を用いて実装します．</p>
+<div class="math notranslate nohighlight">
+\[%  ![image.png](attachment:image.png)
+\newcommand{\abs}[1]{|#1|}
+\newcommand{\norm}[1]{\lVert#1\rVert}\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="セグメント木構造の実装">
+<h1>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">セグメント木構造</a>は，次のセルのように実装できます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SegmentTree</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span>   <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">leaf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="o">//</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="o">//</span><span class="mi">2</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">size</span> <span class="o">+</span> <span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">val</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">k</span> <span class="o">//</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
+<h1>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this headline">#</a></h1>
+<p>セグメント木構造を用いて，ベクトルに基づいたデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．簡単のために実ベクトルのみを扱います．</p>
+<section id="定義">
+<h2>定義<a class="headerlink" href="#定義" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の定義は下記の通りです．</p>
+<p>ベクトル<span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を次の操作(1-3)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.5や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.1など) - <span class="math notranslate nohighlight">\(\text{Sample}()\)</span>. 確率<span class="math notranslate nohighlight">\(\abs{v_i}^2/\norm{v}^2\)</span>で添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i)\)</span>. ベクトルの第<span class="math notranslate nohighlight">\(i\)</span>成分を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>.
+ベクトルの2ノルム<span class="math notranslate nohighlight">\(\norm{v}\)</span>を出力する</p>
+</section>
+<section id="実装">
+<h2>実装<a class="headerlink" href="#実装" title="Permalink to this headline">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VectorBasedDataStructure</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vector</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">vector</span><span class="o">.</span><span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span> <span class="o">=</span> <span class="n">SegmentTree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sgn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample2</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_sample1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">size</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="o">-</span> <span class="n">size</span><span class="o">//</span><span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">_sample2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">height</span>
+        <span class="n">size</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="p">]:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">k</span> <span class="o">-</span> <span class="n">size</span><span class="o">//</span><span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">leaf</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sgn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">root</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">print_structure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">segment_tree</span><span class="o">.</span><span class="n">height</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;height =&quot;</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+                <span class="n">lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sgn</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="確認">
+<h2>確認<a class="headerlink" href="#確認" title="Permalink to this headline">#</a></h2>
+<p>上のセルの<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Norm}(), \mathrm{Query}(i), \mathrm{Sample}()\)</span>それぞれについて確認していきます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">SQv</span> <span class="o">=</span> <span class="n">VectorBasedDataStructure</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SQv</span><span class="o">.</span><span class="n">print_structure</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+height = 4
+[2.120901804620469]
+[2.0975887317480506, 0.023313072872418364]
+[0.139778771605787, 1.9578099601422638, 0.023313072872418364, 0.0]
+[0.08036850697945108, 0.05941026462633593, 0.8641459326645209, 1.093664027477743, 0.023313072872418364, 0.0, 0.0, 0.0]
+[0.018301360350497137, 0.06206714662895395, 0.03737714446339606, 0.022033120162939873, 0.03560276152483325, 0.8285431711396877, 0.8181854663602242, 0.2754785611175187, 6.490920279708548e-05, 0.023248163669621277, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+[-1.  1. -1.  1.  1. -1. -1.  1.  1. -1.]
+</pre></div></div>
+</div>
+<section id="\mathrm{Norm}()について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this headline">#</a></h3>
+<p>ベクトルの2ノルムが計算できているかどうか，NumPyの結果と比較をして確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">SQv</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+<span class="n">normv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQv.norm() = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">numpy.linalg.norm(v) = </span><span class="si">{</span><span class="n">normv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQv.norm() = 1.4563316259082162,
+numpy.linalg.norm(v) = 1.4563316259082162
+</pre></div></div>
+</div>
+</section>
+<section id="\mathrm{Query}(i)について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this headline">#</a></h3>
+<p>全ての<span class="math notranslate nohighlight">\(i\)</span>に対して，元々のベクトル<span class="math notranslate nohighlight">\(v\)</span>の<span class="math notranslate nohighlight">\(i\)</span>番目の成分と比較をしてみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">SQv</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">vi</span>  <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQv.query(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">, v_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">vi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">test_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">SQv</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">test_vector</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQv.query(0) = -0.13528252049136702, v_0 = -0.13528252049136702
+SQv.query(1) = 0.24913278914858628, v_1 = 0.24913278914858628
+SQv.query(2) = -0.19333169544437367, v_2 = -0.19333169544437367
+SQv.query(3) = 0.14843557579953626, v_3 = 0.14843557579953626
+SQv.query(4) = 0.18868694052539314, v_4 = 0.18868694052539314
+SQv.query(5) = -0.9102434680565896, v_5 = -0.9102434680565896
+SQv.query(6) = -0.904536050337533, v_6 = -0.904536050337533
+SQv.query(7) = 0.5248605158682816, v_7 = 0.5248605158682816
+SQv.query(8) = 0.008056624776982324, v_8 = 0.008056624776982324
+SQv.query(9) = -0.15247348513633863, v_9 = -0.15247348513633863
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+</section>
+<section id="\mathrm{Sample}()について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">SQv.sample()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\mathcal{D}_v (\Pr(i) = |v_i|^2/\norm{v}^2)\)</span>とを比較します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Dv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normv</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">SQv</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+    <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SQ(v)&quot;</span><span class="p">,</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact&quot;</span><span class="p">,</span> <span class="n">Dv</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Dv</span> <span class="o">-</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SQ(v).sample()&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">Dv</span>                <span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dv(exact)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;index i&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQ(v) [9.500e-03 2.900e-02 1.660e-02 8.800e-03 1.690e-02 3.810e-01 3.920e-01
+ 1.351e-01 2.000e-04 1.090e-02]
+exact [8.62904653e-03 2.92645074e-02 1.76232320e-02 1.03885621e-02
+ 1.67866148e-02 3.90656073e-01 3.85772441e-01 1.29887466e-01
+ 3.06045299e-05 1.09614522e-02]
+error = 0.012792073328308338
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_01_Data_structure_15_1.png" src="../_images/notebooks_08_01_Data_structure_15_1.png" />
+</div>
+</div>
+<p>グラフの青色は<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の結果を表し，オレンジ色は真の分布<span class="math notranslate nohighlight">\(\mathcal{D}_v\)</span>を表します．視覚的に見て大体同じであることを確認できると思います．</p>
+</section>
+</section>
+</section>
+<section id="行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
+<h1>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this headline">#</a></h1>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>について実装しました．これを用いて<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装します． 簡単のために実行列のみを扱います．</p>
+<section id="id5">
+<h2>定義<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>行列<span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を次の操作(1-5)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.10や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.2など) - <span class="math notranslate nohighlight">\(\text{Sample1}()\)</span>. 確率<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>で行添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Sample2}(i)\)</span>.
+確率<span class="math notranslate nohighlight">\(\abs{A_{ij}}^2/\norm{A_{i,\ast}}^2\)</span>で列添字<span class="math notranslate nohighlight">\(j\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i,j)\)</span>. 第<span class="math notranslate nohighlight">\((i,j)\)</span>成分<span class="math notranslate nohighlight">\(A_{ij}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}(i)\)</span>. 第<span class="math notranslate nohighlight">\(i\)</span>行の2ノルム<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>. フロべニウスノルム<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}\)</span>を出力する</p>
+</section>
+<section id="id6">
+<h2>実装<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を用いて<span class="math notranslate nohighlight">\(\mathrm{SQ(A)}\)</span>を実装します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MatrixBasedDataStructure</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vecFro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SQvecFro</span> <span class="o">=</span> <span class="n">VectorBasedDataStructure</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vecFro</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SQrowlist</span> <span class="o">=</span> <span class="p">[</span><span class="n">VectorBasedDataStructure</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)]</span>
+
+
+    <span class="k">def</span> <span class="nf">sample1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SQvecFro</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">sample2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SQrowlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SQrowlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SQrowlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">normF</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">SQvecFro</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>確認<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>上のセルの<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Sample2}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Query}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span> (<code class="docutils literal notranslate"><span class="pre">normF</span></code>), それぞれ確認していきます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">SQA</span> <span class="o">=</span> <span class="n">MatrixBasedDataStructure</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="\mathrm{Sample1}()について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">SQA.sample1()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(i) = \norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>とを比較します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normAF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># Aのフロべニウスノルム</span>
+<span class="n">Da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normAF</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)])</span>
+
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">()</span>
+    <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SQ(A).sample1()</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Da</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Da</span> <span class="o">-</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SQ(A).sample1()&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">Da</span><span class="p">,</span>                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;index i&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQ(A).sample1()
+ [0.1074 0.1594 0.056  0.1202 0.1715 0.1518 0.116  0.1177]
+exact
+ [0.10282038 0.15322317 0.05685199 0.12203012 0.17638788 0.15067793
+ 0.1183215  0.11968703]
+error = 0.009883797274048613
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_01_Data_structure_24_1.png" src="../_images/notebooks_08_01_Data_structure_24_1.png" />
+</div>
+</div>
+</section>
+<section id="\mathrm{Sample2}(i)について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this headline">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について確認します．<span class="math notranslate nohighlight">\(i = 0,1,2,\dots,m-1\)</span>の全てを調査すると図がたくさん表示されるので， 図については<span class="math notranslate nohighlight">\(i=0,1,2\)</span>までを見ます． <code class="docutils literal notranslate"><span class="pre">SQA.sample2()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(j) = |A_{i,j}|^2/\norm{A_{i,\ast}}^2)\)</span>とを比較します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">normAi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+    <span class="n">Dai</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normAi</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">counts</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;--------- i = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> ----------&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQ(A).sample2(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">Dai</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Dai</span> <span class="o">-</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">counts</span><span class="o">/</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;SQ(A).sample1(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">Dai</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;index j&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------- i = 0 ----------
+SQ(A).sample2(0):
+ [0.026 0.008 0.    0.04  0.012 0.137 0.064 0.06  0.035 0.071 0.04  0.072
+ 0.38  0.005 0.017 0.033]
+exact:
+ [2.61589305e-02 5.43838777e-03 7.12260289e-05 4.09045050e-02
+ 1.17076758e-02 1.46687110e-01 7.63977358e-02 5.58589520e-02
+ 3.49893460e-02 6.01797400e-02 3.03242259e-02 7.79174672e-02
+ 3.77870925e-01 4.13006695e-03 2.00947909e-02 3.12689151e-02]
+error = 0.023146647598591138
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_01_Data_structure_26_1.png" src="../_images/notebooks_08_01_Data_structure_26_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------- i = 1 ----------
+SQ(A).sample2(1):
+ [0.15  0.218 0.182 0.058 0.011 0.071 0.002 0.007 0.168 0.028 0.006 0.001
+ 0.001 0.047 0.049 0.001]
+exact:
+ [0.15364116 0.20022576 0.17234216 0.05975188 0.01254292 0.07700894
+ 0.00165842 0.00705121 0.17524188 0.01733796 0.00318492 0.00348038
+ 0.00062585 0.05626658 0.05836748 0.00127251]
+error = 0.02860360503672554
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_01_Data_structure_26_3.png" src="../_images/notebooks_08_01_Data_structure_26_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------- i = 2 ----------
+SQ(A).sample2(2):
+ [0.267 0.029 0.047 0.077 0.    0.036 0.134 0.012 0.004 0.02  0.006 0.039
+ 0.008 0.005 0.316 0.   ]
+exact:
+ [2.97310594e-01 3.49424249e-02 4.43479664e-02 7.87117376e-02
+ 1.04588378e-03 2.84099189e-02 1.22766266e-01 1.07283563e-02
+ 1.66576306e-03 1.30660945e-02 3.24114925e-03 4.10916978e-02
+ 1.07398985e-02 4.51190733e-03 3.07415815e-01 4.52714206e-06]
+error = 0.0360204468989882
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_01_Data_structure_26_5.png" src="../_images/notebooks_08_01_Data_structure_26_5.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------- i = 3 ----------
+SQ(A).sample2(3):
+ [0.121 0.012 0.014 0.134 0.022 0.12  0.013 0.041 0.03  0.112 0.09  0.007
+ 0.009 0.018 0.059 0.198]
+exact:
+ [0.12650471 0.01124571 0.0137039  0.14462051 0.02122042 0.12634149
+ 0.01084034 0.03499785 0.02977037 0.10949382 0.09215462 0.0076607
+ 0.00889631 0.01949074 0.05797309 0.18508543]
+error = 0.020168095562929002
+--------- i = 4 ----------
+SQ(A).sample2(4):
+ [0.083 0.019 0.115 0.05  0.033 0.003 0.02  0.105 0.039 0.155 0.069 0.124
+ 0.096 0.041 0.001 0.047]
+exact:
+ [0.08606608 0.0265392  0.10741687 0.06293396 0.02962027 0.00079901
+ 0.0223592  0.09870016 0.04926015 0.16711282 0.04760761 0.11911806
+ 0.09701586 0.03398356 0.00125728 0.05020992]
+error = 0.03386211981035436
+--------- i = 5 ----------
+SQ(A).sample2(5):
+ [0.092 0.004 0.003 0.022 0.158 0.031 0.006 0.138 0.139 0.013 0.012 0.117
+ 0.16  0.095 0.001 0.009]
+exact:
+ [0.09144526 0.00160718 0.0048929  0.02824854 0.16411036 0.03155316
+ 0.00428561 0.14134491 0.14548735 0.0131875  0.0144568  0.11291834
+ 0.15587874 0.08390405 0.00039349 0.00628582]
+error = 0.01769425954630108
+--------- i = 6 ----------
+SQ(A).sample2(6):
+ [0.08  0.007 0.035 0.093 0.    0.182 0.022 0.002 0.302 0.099 0.    0.006
+ 0.    0.001 0.003 0.168]
+exact:
+ [0.09146026 0.00512616 0.03675251 0.07794015 0.00113147 0.19122092
+ 0.02197223 0.00207659 0.28460209 0.0929698  0.00252154 0.00907162
+ 0.0010078  0.00120111 0.0065953  0.17435046]
+error = 0.029328923707191562
+--------- i = 7 ----------
+SQ(A).sample2(7):
+ [0.01  0.189 0.022 0.    0.143 0.014 0.128 0.033 0.101 0.119 0.028 0.059
+ 0.022 0.075 0.007 0.05 ]
+exact:
+ [1.03065756e-02 1.76390989e-01 2.09324456e-02 1.39945604e-04
+ 1.26301748e-01 1.34252113e-02 1.22365354e-01 3.74288424e-02
+ 1.14846742e-01 1.23772495e-01 2.09436653e-02 6.61513178e-02
+ 2.28600570e-02 8.06023831e-02 6.37167300e-03 5.71605548e-02]
+error = 0.029832921287860296
+</pre></div></div>
+</div>
+</section>
+<section id="\mathrm{Query}(i,j)について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this headline">#</a></h3>
+<p>全ての<span class="math notranslate nohighlight">\(i,j\)</span>に対して，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の<span class="math notranslate nohighlight">\(i,j\)</span>番目の成分と比較をしていきます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+        <span class="n">Aij</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQA.query(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2">, A[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">] = </span><span class="si">{</span><span class="n">Aij</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">test_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">test_matrix</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQA.query(0,0) = 0.24673634912174847, A[0,0] = 0.24673634912174847
+SQA.query(0,1) = 0.11250147779193254, A[0,1] = 0.11250147779193254
+SQA.query(0,2) = 0.012874859784769876, A[0,2] = 0.012874859784769876
+SQA.query(0,3) = -0.30853803765666965, A[0,3] = -0.30853803765666965
+SQA.query(0,4) = 0.16506632668228316, A[0,4] = 0.16506632668228316
+SQA.query(0,5) = -0.584277440516464, A[0,5] = -0.584277440516464
+SQA.query(0,6) = -0.42166095282004157, A[0,6] = -0.42166095282004157
+SQA.query(0,7) = 0.3605533487658288, A[0,7] = 0.3605533487658288
+SQA.query(0,8) = 0.28535865845082664, A[0,8] = 0.28535865845082664
+SQA.query(0,9) = 0.3742383549700018, A[0,9] = 0.3742383549700018
+SQA.query(0,10) = 0.26565500570949485, A[0,10] = 0.26565500570949485
+SQA.query(0,11) = 0.4258342170488666, A[0,11] = 0.4258342170488666
+SQA.query(0,12) = 0.9377668588378694, A[0,12] = 0.9377668588378694
+SQA.query(0,13) = -0.09803963553172723, A[0,13] = -0.09803963553172723
+SQA.query(0,14) = 0.21625436799722275, A[0,14] = 0.21625436799722275
+SQA.query(0,15) = 0.2697612395459955, A[0,15] = 0.2697612395459955
+SQA.query(1,0) = -0.7299608203865269, A[1,0] = -0.7299608203865269
+SQA.query(1,1) = 0.8333083393953221, A[1,1] = 0.8333083393953221
+SQA.query(1,2) = 0.7731104177481722, A[1,2] = 0.7731104177481722
+SQA.query(1,3) = -0.45522021323121287, A[1,3] = -0.45522021323121287
+SQA.query(1,4) = 0.20856678787488292, A[1,4] = 0.20856678787488292
+SQA.query(1,5) = 0.5167926591064899, A[1,5] = 0.5167926591064899
+SQA.query(1,6) = -0.0758390750814637, A[1,6] = -0.0758390750814637
+SQA.query(1,7) = -0.15637870336357795, A[1,7] = -0.15637870336357795
+SQA.query(1,8) = 0.7795872077696384, A[1,8] = 0.7795872077696384
+SQA.query(1,9) = 0.2452137497843706, A[1,9] = 0.2452137497843706
+SQA.query(1,10) = -0.10509806467091909, A[1,10] = -0.10509806467091909
+SQA.query(1,11) = -0.10986486489243019, A[1,11] = -0.10986486489243019
+SQA.query(1,12) = -0.0465886315103472, A[1,12] = -0.0465886315103472
+SQA.query(1,13) = -0.4417443655197838, A[1,13] = -0.4417443655197838
+SQA.query(1,14) = -0.44991578396820264, A[1,14] = -0.44991578396820264
+SQA.query(1,15) = -0.06643173351377951, A[1,15] = -0.06643173351377951
+SQA.query(2,0) = 0.6185311212526934, A[2,0] = 0.6185311212526934
+SQA.query(2,1) = 0.21204736686836534, A[2,1] = 0.21204736686836534
+SQA.query(2,2) = 0.2388873861483718, A[2,2] = 0.2388873861483718
+SQA.query(2,3) = 0.3182556436301801, A[2,3] = 0.3182556436301801
+SQA.query(2,4) = -0.03668580705203983, A[2,4] = -0.03668580705203983
+SQA.query(2,5) = 0.191201528822187, A[2,5] = 0.191201528822187
+SQA.query(2,6) = 0.39746224975753874, A[2,6] = 0.39746224975753874
+SQA.query(2,7) = -0.11749596641242566, A[2,7] = -0.11749596641242566
+SQA.query(2,8) = -0.046298079570315176, A[2,8] = -0.046298079570315176
+SQA.query(2,9) = 0.12966693998038026, A[2,9] = 0.12966693998038026
+SQA.query(2,10) = 0.06458116551653748, A[2,10] = 0.06458116551653748
+SQA.query(2,11) = -0.2299499961454199, A[2,11] = -0.2299499961454199
+SQA.query(2,12) = 0.11755915391003868, A[2,12] = 0.11755915391003868
+SQA.query(2,13) = 0.07619675027692918, A[2,13] = 0.07619675027692918
+SQA.query(2,14) = -0.6289548451843676, A[2,14] = -0.6289548451843676
+SQA.query(2,15) = -0.002413617383871025, A[2,15] = -0.002413617383871025
+SQA.query(3,0) = -0.5911128643351204, A[3,0] = -0.5911128643351204
+SQA.query(3,1) = 0.17624244220809804, A[3,1] = 0.17624244220809804
+SQA.query(3,2) = -0.1945535684839267, A[3,2] = -0.1945535684839267
+SQA.query(3,3) = -0.6320217234732717, A[3,3] = -0.6320217234732717
+SQA.query(3,4) = 0.242099600627819, A[3,4] = 0.242099600627819
+SQA.query(3,5) = -0.5907313976669135, A[3,5] = -0.5907313976669135
+SQA.query(3,6) = 0.17303679484002754, A[3,6] = 0.17303679484002754
+SQA.query(3,7) = 0.31091218667671516, A[3,7] = 0.31091218667671516
+SQA.query(3,8) = 0.2867538034005368, A[3,8] = 0.2867538034005368
+SQA.query(3,9) = 0.5499356338385218, A[3,9] = 0.5499356338385218
+SQA.query(3,10) = -0.5045167786279124, A[3,10] = -0.5045167786279124
+SQA.query(3,11) = 0.14546258278116297, A[3,11] = 0.14546258278116297
+SQA.query(3,12) = -0.15675522088301097, A[3,12] = -0.15675522088301097
+SQA.query(3,13) = -0.2320230995728314, A[3,13] = -0.2320230995728314
+SQA.query(3,14) = -0.40015689631469986, A[3,14] = -0.40015689631469986
+SQA.query(3,15) = 0.7149952888364521, A[3,15] = 0.7149952888364521
+SQA.query(4,0) = -0.586183929868981, A[4,0] = -0.586183929868981
+SQA.query(4,1) = -0.32550809523233704, A[4,1] = -0.32550809523233704
+SQA.query(4,2) = -0.654868570964269, A[4,2] = -0.654868570964269
+SQA.query(4,3) = -0.5012569845958675, A[4,3] = -0.5012569845958675
+SQA.query(4,4) = -0.34388433490484804, A[4,4] = -0.34388433490484804
+SQA.query(4,5) = -0.05647987602060445, A[4,5] = -0.05647987602060445
+SQA.query(4,6) = -0.29877621666636567, A[4,6] = -0.29877621666636567
+SQA.query(4,7) = 0.6277357114475264, A[4,7] = 0.6277357114475264
+SQA.query(4,8) = 0.4434715641604027, A[4,8] = 0.4434715641604027
+SQA.query(4,9) = -0.8168132799090656, A[4,9] = -0.8168132799090656
+SQA.query(4,10) = 0.43596950538405754, A[4,10] = 0.43596950538405754
+SQA.query(4,11) = 0.689615018349504, A[4,11] = 0.689615018349504
+SQA.query(4,12) = 0.6223565815474689, A[4,12] = 0.6223565815474689
+SQA.query(4,13) = 0.3683429223408494, A[4,13] = 0.3683429223408494
+SQA.query(4,14) = -0.07084901426325418, A[4,14] = -0.07084901426325418
+SQA.query(4,15) = -0.44772637245834657, A[4,15] = -0.44772637245834657
+SQA.query(5,0) = 0.558456001231237, A[5,0] = 0.558456001231237
+SQA.query(5,1) = 0.07403553413849095, A[5,1] = 0.07403553413849095
+SQA.query(5,2) = -0.12917890081878391, A[5,2] = -0.12917890081878391
+SQA.query(5,3) = 0.3103890247779444, A[5,3] = 0.3103890247779444
+SQA.query(5,4) = 0.7481287681704697, A[5,4] = 0.7481287681704697
+SQA.query(5,5) = 0.32804225875041715, A[5,5] = 0.32804225875041715
+SQA.query(5,6) = -0.12089680827027227, A[5,6] = -0.12089680827027227
+SQA.query(5,7) = -0.6943020467907778, A[5,7] = -0.6943020467907778
+SQA.query(5,8) = 0.7044026455602324, A[5,8] = 0.7044026455602324
+SQA.query(5,9) = -0.21207505242429137, A[5,9] = -0.21207505242429137
+SQA.query(5,10) = -0.22204675009227215, A[5,10] = -0.22204675009227215
+SQA.query(5,11) = -0.6205697420943074, A[5,11] = -0.6205697420943074
+SQA.query(5,12) = -0.7291246832146973, A[5,12] = -0.7291246832146973
+SQA.query(5,13) = 0.5349335404058227, A[5,13] = 0.5349335404058227
+SQA.query(5,14) = -0.03663333103788102, A[5,14] = -0.03663333103788102
+SQA.query(5,15) = -0.1464162674209859, A[5,15] = -0.1464162674209859
+SQA.query(6,0) = 0.4949160882925826, A[6,0] = 0.4949160882925826
+SQA.query(6,1) = 0.11716869150629228, A[6,1] = 0.11716869150629228
+SQA.query(6,2) = 0.3137320244708325, A[6,2] = 0.3137320244708325
+SQA.query(6,3) = 0.4568735055079639, A[6,3] = 0.4568735055079639
+SQA.query(6,4) = -0.05504752021050008, A[6,4] = -0.05504752021050008
+SQA.query(6,5) = 0.7156209853382922, A[6,5] = 0.7156209853382922
+SQA.query(6,6) = 0.24257857620570622, A[6,6] = 0.24257857620570622
+SQA.query(6,7) = 0.07457448934473199, A[6,7] = 0.07457448934473199
+SQA.query(6,8) = -0.8730405330732002, A[6,8] = -0.8730405330732002
+SQA.query(6,9) = 0.4989836451024824, A[6,9] = 0.4989836451024824
+SQA.query(6,10) = 0.08217668872868888, A[6,10] = 0.08217668872868888
+SQA.query(6,11) = -0.15586826770477313, A[6,11] = -0.15586826770477313
+SQA.query(6,12) = -0.05195203877240617, A[6,12] = -0.05195203877240617
+SQA.query(6,13) = 0.05671613914492646, A[6,13] = 0.05671613914492646
+SQA.query(6,14) = 0.13290239362722656, A[6,14] = 0.13290239362722656
+SQA.query(6,15) = -0.6833243739906927, A[6,15] = -0.6833243739906927
+SQA.query(7,0) = 0.1670953193809973, A[7,0] = 0.1670953193809973
+SQA.query(7,1) = 0.6912661429591236, A[7,1] = 0.6912661429591236
+SQA.query(7,2) = -0.23813162414005484, A[7,2] = -0.23813162414005484
+SQA.query(7,3) = -0.019470931058728103, A[7,3] = -0.019470931058728103
+SQA.query(7,4) = 0.5849406052162949, A[7,4] = 0.5849406052162949
+SQA.query(7,5) = 0.1907074477480124, A[7,5] = 0.1907074477480124
+SQA.query(7,6) = 0.5757531514364354, A[7,6] = 0.5757531514364354
+SQA.query(7,7) = 0.31842729423518656, A[7,7] = 0.31842729423518656
+SQA.query(7,8) = -0.5577844835583963, A[7,8] = -0.5577844835583963
+SQA.query(7,9) = 0.5790541275267532, A[7,9] = 0.5790541275267532
+SQA.query(7,10) = 0.23819543442769964, A[7,10] = 0.23819543442769964
+SQA.query(7,11) = 0.42332736061839404, A[7,11] = 0.42332736061839404
+SQA.query(7,12) = 0.24885464017544268, A[7,12] = 0.24885464017544268
+SQA.query(7,13) = 0.46728412815962417, A[7,13] = 0.46728412815962417
+SQA.query(7,14) = 0.1313813827450735, A[7,14] = 0.1313813827450735
+SQA.query(7,15) = -0.3935095769803745, A[7,15] = -0.3935095769803745
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+</section>
+<section id="\mathrm{Norm}(i)について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this headline">#</a></h3>
+<p>行列<span class="math notranslate nohighlight">\(A\)</span>の各列ベクトル<span class="math notranslate nohighlight">\(A_{0,\ast},\dots,A_{m,\ast}\)</span>の2ノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="n">val</span>    <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">normAi</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,:])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SQ(A).norm(</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">val</span><span class="si">}</span><span class="s2"> </span><span class="se">\t</span><span class="s2">, np.linalg.norm(Ai) = </span><span class="si">{</span><span class="n">normAi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQ(A).norm(0) = 1.525538393413868       , np.linalg.norm(Ai) = 1.525538393413868
+SQ(A).norm(1) = 1.862283338358721       , np.linalg.norm(Ai) = 1.8622833383587214
+SQ(A).norm(2) = 1.1343742611231984      , np.linalg.norm(Ai) = 1.1343742611231982
+SQ(A).norm(3) = 1.6619465991868285      , np.linalg.norm(Ai) = 1.6619465991868285
+SQ(A).norm(4) = 1.9981031627183627      , np.linalg.norm(Ai) = 1.9981031627183625
+SQ(A).norm(5) = 1.846751079073428       , np.linalg.norm(Ai) = 1.8467510790734278
+SQ(A).norm(6) = 1.6364975773818458      , np.linalg.norm(Ai) = 1.6364975773818458
+SQ(A).norm(7) = 1.6459138082844538      , np.linalg.norm(Ai) = 1.6459138082844536
+</pre></div></div>
+</div>
+</section>
+<section id="id8">
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>行列のフロべニウスノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SQ(A) norm()  &quot;</span><span class="p">,</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Frobenius norm&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQ(A) norm()   4.7575519405423
+Frobenius norm 4.7575519405423
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+<section id="まとめ">
+<h1>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h1>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v), \mathrm{SQ}(A)\)</span>をそれぞれ<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>で実装しました．</p>
+</section>
+<section id="参考文献">
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h1>
+<ol class="arabic simple">
+<li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
+<li><p>Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang. 2020. Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing Quantum machine learning. In Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020). Association for Computing Machinery, New York, NY, USA, 387–400. <a class="reference external" href="https://doi.org/10.1145/3357713.3384314">https://doi.org/10.1145/3357713.3384314</a></p></li>
+<li><p>András Gilyén, Zhao Song and Ewin Tang. 2022. An improved quantum-inspired algorithm for linear regression. Quantum, 6, 754. <a class="reference external" href="https://doi.org/10.22331/q-2022-06-30-754">https://doi.org/10.22331/q-2022-06-30-754</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">https://en.wikipedia.org/wiki/Segment_tree</a></p></li>
+</ol>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">QAE を用いた信用ポートフォリオリスク計測</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

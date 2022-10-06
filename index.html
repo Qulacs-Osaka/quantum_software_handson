@@ -183,6 +183,41 @@
    QAE を用いた信用ポートフォリオリスク計測
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/08_01_Data_structure.html">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -488,6 +523,66 @@ title="Print to PDF"
 </li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">QAE を用いた信用ポートフォリオリスク計測</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html#セグメント木構造の実装">セグメント木構造の実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#定義">定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#実装">実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#確認">確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#id5">定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#id6">実装</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_01_Data_structure.html#id7">確認</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html#まとめ">まとめ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_01_Data_structure.html#参考文献">参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#\mathrm{SQ}(A)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#行添字をサンプルする関数の実装">行添字をサンプルする関数の実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#A^\top-A-\approx-R^\top-Rの確認"><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#r-\times-cの行列Cを構成する関数の実装"><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#CC^\top-\approx-RR^\topの確認"><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#Step-3:特異値分解">Step 3:特異値分解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて"><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#特異値について">特異値について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#右特異ベクトルについて">右特異ベクトルについて</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#左特異ベクトルについて">左特異ベクトルについて</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#まとめ">まとめ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html#参考文献">参考文献</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列:math:<cite>C</cite>の特異値分解の後)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#行列Aとベクトルbを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#R_{\ast,k}の構成"><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定"><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#wを構成する．"><span class="math notranslate nohighlight">\(w\)</span>を構成する．</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#棄却サンプリングの受理確率の推定">棄却サンプリングの受理確率の推定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html#サンプルサイズについて">サンプルサイズについて</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#データセットを読み込む">データセットを読み込む</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#分類問題">分類問題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#擬似逆行列">擬似逆行列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#量子インスパイアード古典アルゴリズム">量子インスパイアード古典アルゴリズム</a></li>
+<li class="toctree-l2"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#図を描画する">図を描画する</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#予測">予測</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/08_04_quantum_inspired_binary_classification.html#参考文献">参考文献</a></li>
 </ul>
 </div>
 </section>

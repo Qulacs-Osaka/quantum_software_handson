@@ -1,0 +1,1820 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>(行列:math:Cの特異値分解の後) &#8212; Quantum Software Hands on  documentation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2クラス問題に対する量子インスパイアード古典アルゴリズム" href="08_04_quantum_inspired_binary_classification.html" />
+    <link rel="prev" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
+   Qulacsの基本的な使い方
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_02_Ramsay.html">
+   ラムゼイ干渉をプロットする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
+   変分法を用いて量子演算を特定の演算で分解する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_04_QuantumVolume.html">
+   ランダム量子回路と量子ボリューム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_01_sample_observable.html">
+   サンプリングによってオブザーバブルの期待値を推定する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_02_parameter_shift_rule.html">
+   パラメータシフト法による勾配最適化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_01_QCL.html">
+   簡単な量子回路学習を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_02_quantum_kernel.html">
+   量子カーネル法を使ってみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_01_Density_Matrix_and_Error.html">
+   Qulacsでの混合状態
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_02_Extrapolation.html">
+   リチャードソン外挿法と指数関数外挿法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
+   擬確率法を実装してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
+   古典コンピュータを使った量子化学計算を実行してみる
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
+   量子コンピュータ上に量子化学の問題をマッピングする
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
+   量子変分固有値法（VQE)を用いた基底状態計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">
+   Qamuyを使った量子コンピュータｘ量子化学計算
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
+   位相推定アルゴリズム
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06_02_grover_search.html">
+   グローバー探索量子アルゴリズムをとことん実装する
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
+   QAE を用いた信用ポートフォリオリスク計測
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_01_Data_structure.html">
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(A)\)
+   </span>
+   と
+   <span class="math notranslate nohighlight">
+    \(\mathrm{SQ}(b)\)
+   </span>
+   の実装について
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
+   行列
+   <span class="math notranslate nohighlight">
+    \(A\)
+   </span>
+   を定義する
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">
+   2クラス問題に対する量子インスパイアード古典アルゴリズム
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">
+     行列
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     とベクトル
+     <span class="math notranslate nohighlight">
+      \(b\)
+     </span>
+     を定義する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{SQ}(A)\)
+       </span>
+       と
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Q}(b)\)
+       </span>
+       を定義する．
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#前のノートブックの復習">
+       前のノートブックの復習
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{SQ}(x)\)
+       </span>
+       の
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(k)\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#R_{\ast,k}の構成">
+   <span class="math notranslate nohighlight">
+    \(R_{\ast,k}\)
+   </span>
+   の構成
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定">
+   <span class="math notranslate nohighlight">
+    \(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)
+   </span>
+   の推定
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wを構成する．">
+   <span class="math notranslate nohighlight">
+    \(w\)
+   </span>
+   を構成する．
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
+     棄却サンプリングの受理確率の推定
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#まとめ">
+       まとめ
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#参考文献">
+       参考文献
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#補足">
+       補足
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#サンプルサイズについて">
+     サンプルサイズについて
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>(行列:math:Cの特異値分解の後)</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解の後)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">
+     行列
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     とベクトル
+     <span class="math notranslate nohighlight">
+      \(b\)
+     </span>
+     を定義する
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{SQ}(A)\)
+       </span>
+       と
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Q}(b)\)
+       </span>
+       を定義する．
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#前のノートブックの復習">
+       前のノートブックの復習
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
+       <span class="math notranslate nohighlight">
+        \(\mathrm{SQ}(x)\)
+       </span>
+       の
+       <span class="math notranslate nohighlight">
+        \(\mathrm{Query}(k)\)
+       </span>
+       について
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#R_{\ast,k}の構成">
+   <span class="math notranslate nohighlight">
+    \(R_{\ast,k}\)
+   </span>
+   の構成
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定">
+   <span class="math notranslate nohighlight">
+    \(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)
+   </span>
+   の推定
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wを構成する．">
+   <span class="math notranslate nohighlight">
+    \(w\)
+   </span>
+   を構成する．
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
+     棄却サンプリングの受理確率の推定
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#まとめ">
+       まとめ
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#参考文献">
+       参考文献
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#補足">
+       補足
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#サンプルサイズについて">
+     サンプルサイズについて
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="line-block">
+<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 3</div>
+<div class="line">2022年10月7日(金)</div>
+<div class="line">高比良宗一</div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\newcommand{\norm}[1]{\lVert#1\rVert}
+\renewcommand{\top}{\mathsf{T}}
+\newcommand{\SQ}{\mathrm{SQ}}\]</div>
+<p># <span class="math notranslate nohighlight">\(x = A^+ b\)</span>に関する量子インスパイアード古典アルゴリズム Part 2</p>
+</div></blockquote>
+<section id="(行列:math:Cの特異値分解の後)">
+<h1>(行列:math:<cite>C</cite>の特異値分解の後)<a class="headerlink" href="#(行列:math:Cの特異値分解の後)" title="Permalink to this headline">#</a></h1>
+<p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の結果を得た後の部分について実装します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">cmath</span><span class="o">,</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span>
+<span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">construct_R</span><span class="p">,</span> <span class="n">qi_svd</span><span class="p">,</span> <span class="n">low_rank_matrix</span>
+</pre></div>
+</div>
+</div>
+<section id="行列Aとベクトルbを定義する">
+<h2>行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する<a class="headerlink" href="#行列Aとベクトルbを定義する" title="Permalink to this headline">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">low_rank_matrix</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="n">exact_U</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">,</span> <span class="n">exact_Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">exact_V</span> <span class="o">=</span> <span class="n">exact_Vh</span><span class="o">.</span><span class="n">T</span>
+<span class="n">exact_S</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aのランク</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aのフロべニウスノルム</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aの特異値</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svdvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Aのランク
+ 2
+Aのフロべニウスノルム
+ 1.0198039027185568
+Aの特異値
+ [1.00000000e+00 2.00000000e-01 1.12274432e-16 6.48274193e-17
+ 3.05197145e-17 1.35719378e-17 1.12212804e-17 6.26457319e-18]
+</pre></div></div>
+</div>
+<p>行列<span class="math notranslate nohighlight">\(A\)</span>の特異値分解の結果を保存しておきます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_U</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">,</span> <span class="n">exact_Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">exact_V</span> <span class="o">=</span> <span class="n">exact_Vh</span><span class="o">.</span><span class="n">T</span>
+<span class="n">exact_S</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([1. , 0.2])
+</pre></div></div>
+</div>
+<p>解ベクトル<span class="math notranslate nohighlight">\(x = A^+b\)</span>は，NumPyの<code class="docutils literal notranslate"><span class="pre">pinv</span></code>または<code class="docutils literal notranslate"><span class="pre">lstsq</span></code>を用いて次のようにして得ることができます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">b</span>
+<span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">x_</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(array([-0.53310266, -0.40190966,  1.16608955, -1.07758489, -0.42459156,
+         0.72297463, -0.90835653, -0.29179648,  0.19662703, -0.20607788,
+        -0.31897885, -0.8281004 ,  0.11160791, -0.2316848 , -0.06595113,
+         0.92040077]),
+ array([-0.53310266, -0.40190966,  1.16608955, -1.07758489, -0.42459156,
+         0.72297463, -0.90835653, -0.29179648,  0.19662703, -0.20607788,
+        -0.31897885, -0.8281004 ,  0.11160791, -0.2316848 , -0.06595113,
+         0.92040077]))
+</pre></div></div>
+</div>
+<section id="\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this headline">#</a></h3>
+<p>以下のセルで，<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>は<span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>のみだけなので，<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を使う必要はなく，<code class="docutils literal notranslate"><span class="pre">b</span></code>をそのまま使うだけで十分です．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span>
+
+<span class="n">SQA</span> <span class="o">=</span> <span class="n">MatrixBasedDataStructure</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">(),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(4, 10, 0.05566419114319317, 0.3097258798274286, 1.019803902718557)
+</pre></div></div>
+</div>
+</section>
+<section id="前のノートブックの復習">
+<h3>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this headline">#</a></h3>
+<p>前のノートブックで<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までを実装しました．<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(r,c\)</span>を渡すことで，<span class="math notranslate nohighlight">\(R\)</span>を表す行添字<span class="math notranslate nohighlight">\(i_0,i_1,\dots,i_{r-1}\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>が返ってくることを再度確認します．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;{i_0,...i_r-1} = </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cの左特異ベクトル =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cの特異値 =</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{i_0,...i_r-1} =
+ [3, 4, 0, 3, 4, 1, 1, 2, 1, 4, 1, 4, 3, 1, 4, 1, 1, 1, 3, 0, 4, 1, 4, 1, 3, 5, 3, 3, 4, 0, 4, 1, 1, 7, 1, 4, 2, 7, 3, 0, 3, 7, 3, 4, 4, 1, 0, 4, 3, 0, 7, 3, 3, 7, 2, 3, 5, 1, 0, 4, 1, 4, 1, 4, 1, 1, 1, 4, 3, 1, 1, 4, 5, 1, 3, 1, 4, 4, 4, 0, 4, 2, 0, 7, 4, 0, 1, 7, 1, 7, 7, 1, 1, 1, 1, 7, 3, 4, 0, 1]
+Cの左特異ベクトル =
+ [[-1.02886062e-01  3.34747355e-02  9.31267684e-01 ...  9.72286549e-19
+   1.75564029e-19 -3.41237960e-01]
+ [-1.01993291e-01 -1.34626893e-02 -2.06581085e-01 ...  5.18945293e-18
+  -2.09052614e-18 -5.85827274e-01]
+ [-1.02336581e-01  1.02255574e-01  4.92783047e-02 ...  2.13160043e-18
+   4.04597953e-18  1.67541608e-01]
+ ...
+ [-1.01993291e-01 -1.34626893e-02 -2.94970385e-02 ...  9.44485802e-19
+  -1.47284898e-18 -3.98796524e-02]
+ [-1.02336581e-01  1.02255574e-01  4.92783047e-02 ... -1.22844938e-18
+   2.85941010e-19  1.67541608e-01]
+ [-1.00087544e-01 -6.03289349e-02 -4.97374220e-02 ...  4.59961439e-18
+   2.72211004e-19 -2.08083506e-01]]
+Cの特異値 =
+ [9.98343419e-01 2.08111551e-01 1.80043991e-16 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
+ 9.78172205e-17 9.78172205e-17 9.78172205e-17 1.30320663e-17]
+</pre></div></div>
+</div>
+</section>
+<section id="\mathrm{SQ}(x)の\mathrm{Query}(k)について">
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+</section>
+<section id="R_{\ast,k}の構成">
+<h1><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成<a class="headerlink" href="#R_{\ast,k}の構成" title="Permalink to this headline">#</a></h1>
+<p><span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>，すなわち<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分について考察します． ベクトル<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分は次式のようにして書くことができます．</p>
+<div class="math notranslate nohighlight">
+\[x \approx \tilde{x}  = \frac{1}{\tilde{\sigma}_k}  R_{\ast, k}^\top  w\]</div>
+<p>ここで</p>
+<div class="math notranslate nohighlight">
+\[w =
+\frac{\tilde{\lambda}_1}{\tilde{\sigma}_1^3}\tilde{w}^{(1)} + \frac{\tilde{\lambda}_2}{\tilde{\sigma}_2^3}\tilde{w}^{(2)}+ \dots + \frac{\tilde{\lambda}_r}{\tilde{\sigma}_r^3}\tilde{w}^{(r)}\]</div>
+<p>です．<span class="math notranslate nohighlight">\(R\)</span>の<span class="math notranslate nohighlight">\(s\)</span>行目が</p>
+<div class="math notranslate nohighlight">
+\[R_{s,\ast} = \frac{\lVert A \rVert_\mathrm{F}}{\sqrt{r}} \frac{A_{i_s,\ast}}{\lVert A_{i_s,\ast}\rVert}\]</div>
+<p>のように定義されたことを思い出すと，<span class="math notranslate nohighlight">\(R_{\ast, k}\)</span>は次式のように書くことができます．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R_{\ast, k} = \frac{\lVert A \rVert_\mathrm{F}}{\sqrt{r}}
+\begin{bmatrix}
+    \frac{A_{i_1, k}}{\lVert A_{i_1,\ast} \rVert} \\
+    \frac{A_{i_2, k}}{\lVert A_{i_2,\ast} \rVert} \\
+    \vdots \\
+    \frac{A_{i_r, k}}{\lVert A_{i_r,\ast} \rVert}\\
+\end{bmatrix}\end{split}\]</div>
+<p>まずは，この式に基づいて<span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>を構成する関数を下のセルで定義します：</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">R_col</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">row_indices</span><span class="p">)</span>
+    <span class="n">Rk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">Rk</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i_s</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span><span class="o">/</span><span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span><span class="p">))</span> <span class="o">*</span> <span class="n">Rk</span>
+</pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>が正しく作れているか確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">R</span>  <span class="o">=</span> <span class="n">construct_R</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+<span class="n">Rk</span> <span class="o">=</span> <span class="n">R_col</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rの第</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">列目:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">R</span><span class="p">[:,</span><span class="n">k</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R_*,</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">Rk</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">R</span><span class="p">[:,</span><span class="n">k</span><span class="p">],</span> <span class="n">Rk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Rの第9列目:
+ [ 0.00926996  0.00537468  0.00843471  0.00843471  0.00926996  0.00926996
+ -0.00158105  0.01141514  0.00926996  0.01141514]
+R_*,9
+ [ 0.00926996  0.00537468  0.00843471  0.00843471  0.00926996  0.00926996
+ -0.00158105  0.01141514  0.00926996  0.01141514]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+True
+</pre></div></div>
+</div>
+</section>
+<section id="\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定">
+<h1><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定<a class="headerlink" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定" title="Permalink to this headline">#</a></h1>
+<p>次に$:nbsphinx-math:<cite>tilde{lambda}</cite>_:nbsphinx-math:<cite>ell`= :nbsphinx-math:</cite>mathrm{Tr}`(A:sup:<cite>:nbsphinx-math:</cite>dagger <cite>(b:nbsphinx-math:</cite>tilde{v}``{(<span class="math">\ell</span>) <span class="math">\dagger</span>})) $を推定する関数を実装します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_lambda</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">lam</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="c1"># A</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">()</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">Aij</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="c1"># B</span>
+        <span class="n">Rj</span> <span class="o">=</span> <span class="n">R_col</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+        <span class="n">vj</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="n">ell</span><span class="p">])</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">Rj</span><span class="p">,</span> <span class="n">W</span><span class="p">[:,</span> <span class="n">ell</span><span class="p">])</span>
+        <span class="n">Bij</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">vj</span>
+
+        <span class="c1"># Zij</span>
+        <span class="n">Zij</span> <span class="o">=</span>  <span class="n">Bij</span><span class="o">/</span><span class="n">Aij</span>
+
+        <span class="n">lam</span> <span class="o">+=</span> <span class="n">Zij</span>
+    <span class="n">lam</span> <span class="o">=</span> <span class="n">lam</span><span class="o">/</span><span class="n">sample_size</span>
+    <span class="k">return</span> <span class="n">lam</span> <span class="o">*</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+<br/></pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\lambda_\ell\)</span>を推定できているか確認してみます：</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact:&quot;</span><span class="p">)</span>
+<span class="n">exact_lambda0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">exact_V</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">exact_lambda1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">exact_V</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;λ0=&quot;</span><span class="p">,</span> <span class="n">exact_lambda0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;λ1=&quot;</span><span class="p">,</span> <span class="n">exact_lambda1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">approximation:&quot;</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">est_lambda0</span> <span class="o">=</span> <span class="n">estimate_lambda</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">est_lambda1</span> <span class="o">=</span> <span class="n">estimate_lambda</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;λ0=&quot;</span><span class="p">,</span> <span class="n">est_lambda0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;λ1=&quot;</span><span class="p">,</span> <span class="n">est_lambda1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">error:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exact_lambda0</span> <span class="o">-</span> <span class="n">est_lambda0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">exact_lambda1</span> <span class="o">-</span> <span class="n">est_lambda1</span><span class="p">)</span>
+<span class="c1"># print((exact_lambda0 - est_lambda0)/exact_lambda0)</span>
+<span class="c1"># print((exact_lambda1 - est_lambda1)/exact_lambda1)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+exact:
+λ0= -0.8088707983366525
+λ1= 0.09559822882108618
+
+approximation:
+λ0= -0.8661586110116519
+λ1= -0.10667765725624194
+
+error:
+0.05728781267499938
+0.2022758860773281
+</pre></div></div>
+</div>
+</section>
+<section id="wを構成する．">
+<h1><span class="math notranslate nohighlight">\(w\)</span>を構成する．<a class="headerlink" href="#wを構成する．" title="Permalink to this headline">#</a></h1>
+<p><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell\)</span>を推定する関数を用いて，</p>
+<div class="math notranslate nohighlight">
+\[w =
+\frac{\tilde{\lambda}_1}{\tilde{\sigma}_1^3}\tilde{w}^{(1)} + \frac{\tilde{\lambda}_2}{\tilde{\sigma}_2^3}\tilde{w}^{(2)}+ \dots + \frac{\tilde{\lambda}_r}{\tilde{\sigma}_r^3}\tilde{w}^{(r)}\]</div>
+<p>を構成する関数を以下のセルで定義します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">lambda_sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">lams</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">rank</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rank</span><span class="p">):</span>
+        <span class="n">lams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">estimate_lambda</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">lambda_sample_size</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">lams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">W</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">3</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rank</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">w</span>
+</pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(w\)</span>と<code class="docutils literal notranslate"><span class="pre">col_R</span></code>によって得られた<span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>と内積を取って， <span class="math notranslate nohighlight">\(\tilde{x}_k = e_k^\top R^\top w = R_{\ast,k}^\top w\)</span>を計算する関数を下のセルで定義します．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SQx_query</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="n">Rk</span> <span class="o">=</span> <span class="n">R_col</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vdot</span><span class="p">(</span><span class="n">Rk</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>この関数<code class="docutils literal notranslate"><span class="pre">construct_w</span></code>を使って<span class="math notranslate nohighlight">\(w\)</span>を構成し，<code class="docutils literal notranslate"><span class="pre">SQx_query</span></code>と合わせて計算できているか確認してみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">SQx_query</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SQ(x) query(1) =&quot;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SQ(x) query(1) = -0.8695322796503197
+exact = -0.40190965749654484
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\tilde{x} = (x_0,\dots,x_{n-1})\)</span>を構成し，<span class="math notranslate nohighlight">\(x = A^+b\)</span>と比較をしてみます．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">tilde_x</span> <span class="o">=</span> <span class="n">tilde_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">SQx_query</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact x:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tilde x:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tilde_x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;relative error =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tilde_x</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span><span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+exact x:
+ [-0.53310266 -0.40190966  1.16608955 -1.07758489 -0.42459156  0.72297463
+ -0.90835653 -0.29179648  0.19662703 -0.20607788 -0.31897885 -0.8281004
+  0.11160791 -0.2316848  -0.06595113  0.92040077]
+tilde x:
+ [-0.01088995 -0.0246222   0.40253673 -0.52201425 -0.23208211 -0.01177434
+ -0.44672484 -0.22334492  0.11788211 -0.04701944 -0.38681758 -0.36101074
+ -0.12254441 -0.17123117 -0.05969312  0.27835372]
+relative error = 0.6663184591215244
+</pre></div></div>
+</div>
+<p>次に，<span class="math notranslate nohighlight">\(\tilde{x}\)</span>と<span class="math notranslate nohighlight">\(x\)</span>との誤差がサンプリング数を増やすと減少することを確認してみます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
+
+<span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">cs</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sample_size</span><span class="p">):</span>
+        <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">tilde_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">SQx_query</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span>
+        <span class="n">mean</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">tilde_x</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span><span class="o">/</span><span class="n">sample_size</span>
+
+    <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rs</span><span class="p">,</span> <span class="n">hist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;r (sample size of row)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$||x - \tilde</span><span class="si">{x}</span><span class="s2">||$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[2.8552153632279885e+33, 345.95015422791903, 206.50140143269533, 5.309702006598731, 32.86782464433326, 1.4579370479058715, 4.978509736964198, 3.045386736979691, 2.6252627171897167]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について考察します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>は下記の手順によって実現できることを思い出すと，次のセルのようにして実装できます． 1. 確率<span class="math notranslate nohighlight">\(|w_s|^2/\norm{w}^2\)</span>で<span class="math notranslate nohighlight">\(s\)</span>をサンプリングする． 2. 確率<span class="math notranslate nohighlight">\(|A_{i_s,j}|^2/\norm{A_{i_s,\ast}^2}\)</span>で<span class="math notranslate nohighlight">\(j\)</span>をサンプリングする 3. $ r_j = <span class="math">\frac{|\tilde{x}_j|^2}{\norm{A}_\mathrm{F}^2 \sum_{s=0}^{r-1}(w_s A_{i_s, j}/\norm{A_{i_s,\ast}})^2}</span> $ を計算する． 4.
+0から1の一様乱数<span class="math notranslate nohighlight">\(y\)</span>を生成し，<span class="math notranslate nohighlight">\(y &lt; r_j\)</span>ならば「受理」として<span class="math notranslate nohighlight">\(j\)</span>を出力，<span class="math notranslate nohighlight">\(y \ge r_j\)</span>ならば1から再スタートする．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SQx_sample</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="n">normw2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">prob_</span>   <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normw2</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span>
+
+    <span class="n">accept</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">accept</span> <span class="p">:</span>
+
+        <span class="c1"># 提案分布</span>
+        <span class="n">s_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">prob_</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s_</span><span class="p">]</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+
+        <span class="n">xj</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="c1"># xj = SQx_query(SQA, j, row_indices, w)</span>
+
+        <span class="c1"># rj を計算する</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+            <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">temp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i_s</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i_s</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">rj</span> <span class="o">=</span> <span class="n">xj</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">temp</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">rj</span> <span class="p">:</span>
+            <span class="n">accept</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="n">j</span>
+<br/></pre></div>
+</div>
+</div>
+<p>上記の関数の出力結果が確率分布<span class="math notranslate nohighlight">\(D_x (\Pr(j) = |x_j|^2/\norm{x}^2)\)</span>に従うか確認してみます：</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">b</span>
+<span class="n">normx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Dx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normx</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span>  <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">num_shots</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_shots</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">SQx_sample</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+    <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="o">/</span><span class="n">num_shots</span> <span class="o">-</span> <span class="n">Dx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-0.01464205  0.01462656  0.03640738  0.00759976 -0.01831817  0.0178952
+ -0.01960899 -0.01337465  0.00392692  0.01332909 -0.00598255 -0.01771804
+ -0.00195665 -0.00843175 -0.00068323  0.00693116]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">counts</span><span class="o">/</span><span class="n">num_shots</span> <span class="o">-</span> <span class="n">Dx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.06080298113883857
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">counts</span><span class="o">/</span><span class="n">num_shots</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SQ(x).sample()&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">Dx</span><span class="p">,</span>               <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_37_0.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_37_0.png" />
+</div>
+</div>
+<p>サンプル数(<span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>の呼び出し回数)を増やしてみて，誤差が小さくなっていくことを確認してみます．一様ランダムにサンプリングした時の結果と比べてみてみます．(実行に数分かかります)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span>  <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># print(sample_size, np.linalg.norm(counts/sample_size - Dx))</span>
+
+<span class="c1"># ---------------------------------------------</span>
+
+<span class="n">hist_uniform</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">hist_sqxsample</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">num_shots</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]:</span>
+
+    <span class="n">counts_uniform</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">counts_sqxsample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_shots</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">counts_uniform</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">i</span> <span class="o">=</span> <span class="n">SQx_sample</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span>
+        <span class="n">counts_sqxsample</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">hist_uniform</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Dx</span> <span class="o">-</span> <span class="n">counts_uniform</span><span class="o">/</span><span class="n">num_shots</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">hist_sqxsample</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">Dx</span> <span class="o">-</span> <span class="n">counts_sqxsample</span><span class="o">/</span><span class="n">num_shots</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist_uniform</span><span class="p">,</span> <span class="n">hist_sqxsample</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+([1.5696527142146874,
+  1.5062800885175622,
+  1.2350840325474368,
+  0.9604996688380231,
+  0.9070185118222448,
+  0.8844870527388806,
+  1.0719870527388806,
+  0.9626120527388806,
+  1.0055808027388806],
+ [1.3066770804889458,
+  1.0986403134681453,
+  1.1096334087514086,
+  0.7898913852024907,
+  0.5086500541079879,
+  0.31683133301793764,
+  0.21542627025899352,
+  0.12943205429741522,
+  0.10878555942409243])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">hist_uniform</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;uniform&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">hist_sqxsample</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;SQ(x) sample()&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;sample size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" />
+</div>
+</div>
+<section id="棄却サンプリングの受理確率の推定">
+<h2>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this headline">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について実装します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>における棄却サンプリングの「受理」する確率は</p>
+<div class="math notranslate nohighlight">
+\[\frac{\norm{\tilde{x}}^2}{\norm{A}_\mathrm{F}^2 \norm{w}^2}\]</div>
+<p>です．したがって，ノルム<span class="math notranslate nohighlight">\(\norm{x}\)</span>の推定は，受理する確率を推定し，<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}^2\norm{w}^2\)</span>を掛ければ良いことがわかります． 実装は下記のようになります．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="n">normw2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">prob_</span>   <span class="o">=</span> <span class="p">[</span><span class="n">w</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">normw2</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">)]</span>
+
+    <span class="n">s</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">prob_</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+    <span class="n">j</span>   <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="n">i_s</span><span class="p">)</span>
+
+    <span class="n">xj</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+    <span class="c1"># xj =  SQx_query(SQA, j, row_indices, w)</span>
+
+
+    <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">i_s</span> <span class="o">=</span> <span class="n">row_indices</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+        <span class="n">temp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">*</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">i_s</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">i_s</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">rj</span> <span class="o">=</span> <span class="n">xj</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">temp</span><span class="p">)</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">rj</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">norm_sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">normw2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">normAF2</span> <span class="o">=</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">cnt</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">_SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">norm_sample_size</span><span class="p">))</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">cnt</span><span class="o">/</span><span class="n">norm_sample_size</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">normAF2</span> <span class="o">*</span> <span class="n">normw2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span>  <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.0, 2.5231251087653694)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">w</span>  <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">sample_size</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]:</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">sample_size</span><span class="p">)</span>
+    <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="n">hist</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.0,
+ 0.0,
+ 2.47209983387042,
+ 3.027691593100796,
+ 2.47209983387042,
+ 1.9543665195885975,
+ 2.622057834449867,
+ 2.5104292488071835,
+ 2.6761265710288424,
+ 2.603785431804569]
+</pre></div></div>
+</div>
+<section id="まとめ">
+<h3>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(), \mathrm{Sample}(), \mathrm{Norm}()\)</span>について実装しました．最後にクラスを使ってまとめます．</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SQx</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">lambda_sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SQA</span> <span class="o">=</span> <span class="n">SQA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">row_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span> <span class="o">=</span> <span class="n">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span>
+                             <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">lambda_sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SQx_sample</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SQA</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SQx_query</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_indices</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">norm_sample_size</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SQx_norm</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SQA</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_indices</span><span class="p">,</span> <span class="n">norm_sample_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="参考文献">
+<h3>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
+<li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
+</ul>
+</section>
+<section id="補足">
+<h3>補足<a class="headerlink" href="#補足" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="サンプルサイズについて">
+<h2>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this headline">#</a></h2>
+<p>サンプルサイズ<span class="math notranslate nohighlight">\(r,c\)</span>の値を以下のように設定すると，少なくとも<span class="math notranslate nohighlight">\(1-\eta\)</span>以上の確率で<span class="math notranslate nohighlight">\(\lVert \tilde{x} - x \rVert \le \epsilon \lVert A^+b \rVert\)</span>を満たすような<span class="math notranslate nohighlight">\(SQ(\tilde{x})\)</span>を得ることができます(<a class="reference external" href="https://arxiv.org/abs/1811.04909">https://arxiv.org/abs/1811.04909</a> のAlgorithm 1の<strong>Init.</strong>より)．</p>
+<div class="math notranslate nohighlight">
+\[r = 2^{10}\ln\left(\frac{8n}{\eta}\right)\frac{\kappa^4k^2\lVert A\rVert_F^2}{\epsilon^2}
+\quad
+c = 2^6 \cdot 3^4 \ln\left(\frac{8r}{\eta}\right)\frac{\kappa^8 k^2 \lVert A \rVert_F^2}{\epsilon^2}\]</div>
+<p>この<span class="math notranslate nohighlight">\(r,c\)</span>の値は大きくなりますが，<span class="math notranslate nohighlight">\(m\)</span>や<span class="math notranslate nohighlight">\(n\)</span>が非常に大きい場合は，相対的にみて小さくなります．</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">normAF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">eta</span><span class="p">,</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.01</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;行列サイズ = </span><span class="si">%e</span><span class="s2"> x </span><span class="si">%e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ランク =&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;フロべニウスノルム =&quot;</span><span class="p">,</span> <span class="n">normAF</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;成功確率 =&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">eta</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;条件数 =&quot;</span><span class="p">,</span> <span class="n">kappa</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;精度   =&quot;</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">r_</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">10</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">eta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">kappa</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normAF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">eps</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c_</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">6</span>  <span class="o">*</span> <span class="mi">3</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">r</span><span class="o">/</span><span class="n">eta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">kappa</span><span class="o">**</span><span class="mi">8</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">normAF</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">eps</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r =&quot;</span><span class="p">,</span> <span class="n">r_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;c =&quot;</span><span class="p">,</span> <span class="n">c_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;r^2c = &quot;</span><span class="p">,</span> <span class="n">r_</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+行列サイズ = 1.000000e+200 x 1.000000e+200
+ランク = 100
+フロべニウスノルム = 1000
+成功確率 = 0.99
+条件数 = 20
+精度   = 0.01
+
+r = 7.654631511269e+24
+c = 1.8038484623993326e+29
+r^2c =  1.0569358486549376e+79
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="08_04_quantum_inspired_binary_classification.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2クラス問題に対する量子インスパイアード古典アルゴリズム</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Qulacs-Osaka<br/>
+  
+      &copy; Copyright 2021, Qulacs-Osaka.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
