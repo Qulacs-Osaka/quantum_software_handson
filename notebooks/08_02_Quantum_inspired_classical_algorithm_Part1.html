@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>行列\(A\)を定義する &#8212; Quantum Software Hands on  documentation</title>
+    <title>\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart1(行列\(C\)の特異値分解まで) &#8212; Quantum Software Hands on  documentation</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -200,11 +200,14 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   行列
    <span class="math notranslate nohighlight">
-    \(A\)
+    \(x=A^+b\)
    </span>
-   を定義する
+   に関する量子インスパイアード古典アルゴリズムPart1(行列
+   <span class="math notranslate nohighlight">
+    \(C\)
+   </span>
+   の特異値分解まで)
   </a>
  </li>
  <li class="toctree-l1">
@@ -357,8 +360,8 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行列Aを定義する">
    行列
    <span class="math notranslate nohighlight">
     \(A\)
@@ -366,7 +369,7 @@ title="Print to PDF"
    を定義する
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．">
    <span class="math notranslate nohighlight">
     \(\mathrm{SQ}(A)\)
@@ -374,7 +377,7 @@ title="Print to PDF"
    を定義する．
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
    Step 1. 行添字のサンプリング:
    <span class="math notranslate nohighlight">
@@ -386,13 +389,13 @@ title="Print to PDF"
    </span>
    を考える．
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">
      行添字をサンプルする関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認">
      <span class="math notranslate nohighlight">
       \(A^\top A \approx R^\top R\)
@@ -402,7 +405,7 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
    Step 2. 列のサンプリング：
    <span class="math notranslate nohighlight">
@@ -414,13 +417,13 @@ title="Print to PDF"
    </span>
    を構成する．
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#列添字をサンプルする関数の実装">
      列添字をサンプルする関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装">
      <span class="math notranslate nohighlight">
       \(r \times c\)
@@ -432,7 +435,7 @@ title="Print to PDF"
      を構成する関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認">
      <span class="math notranslate nohighlight">
       \(CC^\top \approx RR^\top\)
@@ -440,14 +443,14 @@ title="Print to PDF"
      の確認
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#Step-3:特異値分解">
      Step 3:特異値分解
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
    <span class="math notranslate nohighlight">
     \(C\)
@@ -458,30 +461,30 @@ title="Print to PDF"
    </span>
    の特異値・特異ベクトルについて
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#特異値について">
      特異値について
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#右特異ベクトルについて">
      右特異ベクトルについて
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#左特異ベクトルについて">
      左特異ベクトルについて
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#まとめ">
    まとめ
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#参考文献">
    参考文献
   </a>
@@ -495,7 +498,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>行列Aを定義する</h1>
+                <h1>x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -505,8 +508,8 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#行列Aを定義する">
    行列
    <span class="math notranslate nohighlight">
     \(A\)
@@ -514,7 +517,7 @@ title="Print to PDF"
    を定義する
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．">
    <span class="math notranslate nohighlight">
     \(\mathrm{SQ}(A)\)
@@ -522,7 +525,7 @@ title="Print to PDF"
    を定義する．
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
    Step 1. 行添字のサンプリング:
    <span class="math notranslate nohighlight">
@@ -534,13 +537,13 @@ title="Print to PDF"
    </span>
    を考える．
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">
      行添字をサンプルする関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認">
      <span class="math notranslate nohighlight">
       \(A^\top A \approx R^\top R\)
@@ -550,7 +553,7 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
    Step 2. 列のサンプリング：
    <span class="math notranslate nohighlight">
@@ -562,13 +565,13 @@ title="Print to PDF"
    </span>
    を構成する．
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#列添字をサンプルする関数の実装">
      列添字をサンプルする関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装">
      <span class="math notranslate nohighlight">
       \(r \times c\)
@@ -580,7 +583,7 @@ title="Print to PDF"
      を構成する関数の実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認">
      <span class="math notranslate nohighlight">
       \(CC^\top \approx RR^\top\)
@@ -588,14 +591,14 @@ title="Print to PDF"
      の確認
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#Step-3:特異値分解">
      Step 3:特異値分解
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
    <span class="math notranslate nohighlight">
     \(C\)
@@ -606,30 +609,30 @@ title="Print to PDF"
    </span>
    の特異値・特異ベクトルについて
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#特異値について">
      特異値について
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#右特異ベクトルについて">
      右特異ベクトルについて
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#左特異ベクトルについて">
      左特異ベクトルについて
     </a>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#まとめ">
    まとめ
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#参考文献">
    参考文献
   </a>
@@ -910,11 +913,12 @@ div.rendered_html tbody tr:hover {
 \[\newcommand{\norm}[1]{\lVert#1\rVert}
 \renewcommand{\top}{\mathsf{T}}
 \newcommand{\SQ}{\mathrm{SQ}}\]</div>
-<p># <span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</p>
 </div></blockquote>
+<section id="x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)">
+<h1><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)<a class="headerlink" href="#x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)" title="Permalink to this headline">#</a></h1>
 <p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>を得るまでの部分，及びその特異値分解について実装します．そして<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>によって，<span class="math notranslate nohighlight">\(A\)</span>の左右の特異ベクトルと特異値が近似される様子を確認してみます．</p>
 <section id="行列Aを定義する">
-<h1>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this headline">#</a></h1>
+<h2>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this headline">#</a></h2>
 <p>低ランク行列<span class="math notranslate nohighlight">\(A\)</span>を生成する関数を定義します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -1074,7 +1078,7 @@ Aの条件数
 </div>
 </section>
 <section id="\mathrm{SQ}(A)を定義する．">
-<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Permalink to this headline">#</a></h1>
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Permalink to this headline">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">quantum_inspired.py</span></code>に<code class="docutils literal notranslate"><span class="pre">1_データ構造.ipynb</span></code>で実装した<code class="docutils literal notranslate"><span class="pre">SegmentTree</span></code>, <code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>と<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を記述しています．ここから<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>をインポートし，それを用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1104,9 +1108,9 @@ Aの条件数
 </div>
 </section>
 <section id="Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
-<h1>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Permalink to this headline">#</a></h1>
+<h2>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Permalink to this headline">#</a></h2>
 <section id="行添字をサンプルする関数の実装">
-<h2>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this headline">#</a></h2>
+<h3>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this headline">#</a></h3>
 <p>Step 1の「確率<span class="math notranslate nohighlight">\(\frac{\norm{A_{i,\ast}}^2 }{\norm{A}_\mathrm{F}^2}\)</span>行添字<span class="math notranslate nohighlight">\(i\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回サンプリングする」という部分について実装します．これは，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回用いるだけなので，その通りに書きます．ここでの行添字<span class="math notranslate nohighlight">\(i_0,\dots,i_{r-1}\)</span>は行列<span class="math notranslate nohighlight">\(R\)</span>を表します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -1151,7 +1155,7 @@ Aの条件数
 </div>
 </section>
 <section id="A^\top-A-\approx-R^\top-Rの確認">
-<h2><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this headline">#</a></h2>
+<h3><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this headline">#</a></h3>
 <p>量子インスパイアード古典アルゴリズムでは<span class="math notranslate nohighlight">\(r\times n\)</span>の行列<span class="math notranslate nohighlight">\(R\)</span>を実際には構成しません．しかし，サンプルされた行添字が表す行列<span class="math notranslate nohighlight">\(R\)</span>について，<span class="math notranslate nohighlight">\(A^\mathsf{T}A \approx R^\mathsf{T}R\)</span>であるかどうか気になると思います．そこで，行列<span class="math notranslate nohighlight">\(R\)</span>をサンプルされた行添字から構成する関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を以下のセルで定義し，<span class="math notranslate nohighlight">\(A^\top A\)</span>と<span class="math notranslate nohighlight">\(R^\top R\)</span>を直接計算して<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．<code class="docutils literal notranslate"><span class="pre">row_indices</span></code>はサンプルされた行添字です．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -1284,10 +1288,10 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </section>
 </section>
 <section id="Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
-<h1>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Permalink to this headline">#</a></h1>
+<h2>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Permalink to this headline">#</a></h2>
 <p>次に，Step2について実装します．</p>
 <section id="列添字をサンプルする関数の実装">
-<h2>列添字をサンプルする関数の実装<a class="headerlink" href="#列添字をサンプルする関数の実装" title="Permalink to this headline">#</a></h2>
+<h3>列添字をサンプルする関数の実装<a class="headerlink" href="#列添字をサンプルする関数の実装" title="Permalink to this headline">#</a></h3>
 <p>Step 2の「等確率で<span class="math notranslate nohighlight">\({0,1,\dots,r-1}\)</span>から数字をサンプリングし結果を<span class="math notranslate nohighlight">\(s\)</span>とする．そして確率<span class="math notranslate nohighlight">\(\frac{R_{s,j}^2}{\norm{R_{s,\ast}}^2} = \frac{A_{i_s,j}^2}{\norm{A_{i_s,\ast}}^2}\)</span>で列添字をサンプリングし，結果を<span class="math notranslate nohighlight">\(j_t\)</span>とする．この操作を<span class="math notranslate nohighlight">\(c\)</span>回行い，サンプリングされた列添字を<span class="math notranslate nohighlight">\(j_0,\dots,j_{c-1}\)</span>とする」の部分について実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -1331,7 +1335,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </section>
 <section id="r-\times-cの行列Cを構成する関数の実装">
-<h2><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this headline">#</a></h2>
+<h3><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this headline">#</a></h3>
 <p>Step2の「<span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を第<span class="math notranslate nohighlight">\(t\)</span>列が <span class="math notranslate nohighlight">\(\frac{\norm{R}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}} = \frac{\norm{A}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}}\)</span>」となるように構成する」という部分について実装します． <span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>について注目します．行列<span class="math notranslate nohighlight">\(R\)</span>の<span class="math notranslate nohighlight">\(s\)</span>行目は<span class="math notranslate nohighlight">\(\frac{\norm{A}_\mathrm{F}}{\sqrt{r}} \frac{A_{i_s,\ast}}{\norm{A_{i_s,\ast}}}\)</span>であるので，
 行列<span class="math notranslate nohighlight">\(R\)</span>の第<span class="math notranslate nohighlight">\(j_t\)</span>列<span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>は</p>
 <div class="math notranslate nohighlight">
@@ -1370,7 +1374,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </section>
 <section id="CC^\top-\approx-RR^\topの確認">
-<h2><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this headline">#</a></h2>
+<h3><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this headline">#</a></h3>
 <p><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>であることを前述と時と同様にして確認してみます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1479,7 +1483,7 @@ c=512 1.0398127286920224e-05 0.002014636993408201
 </div>
 </section>
 <section id="Step-3:特異値分解">
-<h2>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this headline">#</a></h2>
+<h3>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this headline">#</a></h3>
 <p>最後に，Step3について考えます．Step3は行列<span class="math notranslate nohighlight">\(C\)</span>を特異値分解をするだけなのであり，この部分はNumPyの関数を使います ．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
@@ -1559,9 +1563,9 @@ singular values of C =
 </section>
 </section>
 <section id="Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
-<h1><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Permalink to this headline">#</a></h1>
+<h2><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Permalink to this headline">#</a></h2>
 <section id="特異値について">
-<h2>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this headline">#</a></h2>
+<h3>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this headline">#</a></h3>
 <p>上記のアルゴリズムで得られた<span class="math notranslate nohighlight">\(C\)</span>の特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">S</span></code>)が，行列<span class="math notranslate nohighlight">\(A\)</span>の特異値<span class="math notranslate nohighlight">\(\sigma_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">exact_S</span></code>)を近似していることを見てみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
@@ -1767,7 +1771,7 @@ qi_svdを用いた時の特異値計算の時間
 </div>
 </section>
 <section id="右特異ベクトルについて">
-<h2>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this headline">#</a></h2>
+<h3>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this headline">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の右特異ベクトル<span class="math notranslate nohighlight">\(v^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[v^{(\ell)} \approx \tilde{v}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell}R^\dagger\vec{w}^{(\ell)}\]</div>
@@ -1984,7 +1988,7 @@ SciPy:
 </div>
 </section>
 <section id="左特異ベクトルについて">
-<h2>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this headline">#</a></h2>
+<h3>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this headline">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(u^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[u^{(\ell)} \approx \tilde{u}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell^2}A R^\top w^{(\ell)}\]</div>
@@ -2299,11 +2303,11 @@ SciPy:
 </section>
 </section>
 <section id="まとめ">
-<h1>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h1>
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h2>
 <p>量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までをみてきました．このノートブックでは，特異ベクトルの復元に，行列<span class="math notranslate nohighlight">\(A\)</span>や<span class="math notranslate nohighlight">\(R\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトルに関する行列-ベクトル積を行なっているため，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の次元に関して多項式の計算量を必要とします．<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>では，このような計算量をかけずにSample, Query, Normそれぞれを実行することについて説明します．</p>
 </section>
 <section id="参考文献">
-<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h1>
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
@@ -2316,6 +2320,7 @@ SciPy:
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 
 
