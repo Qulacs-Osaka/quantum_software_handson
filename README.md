@@ -85,13 +85,13 @@
 
 - 08\_量子インスパイアード古典アルゴリズム
 
-  - 01_$\mathrm{SQ}(A)$と$\mathrm{SQ}(b)$の実装について
+  - 01_ $\mathrm{SQ}(A)$と$\mathrm{SQ}(b)$の実装について
     <br> [08_01_Data_structure.ipynb](./doc/source/notebooks/08_01_Data_structure.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/08_01_Data_structure.ipynb)
-  - 02_$x = A^+b$に関する量子インスパイアード古典アルゴリズム Part 1
+  - 02_ $x = A^+b$に関する量子インスパイアード古典アルゴリズム Part 1
     <br> [08_02_Quantum_inspired_classical_algorithm_Part1.ipynb](./doc/source/notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.ipynb)
-  - 03_$x = A^+ b$に関する量子インスパイアード古典アルゴリズム Part 2
+  - 03_ $x = A^+ b$に関する量子インスパイアード古典アルゴリズム Part 2
     <br> [08_03_Quantum_inspired_classical_algorithm_Part2.ipynb](./doc/source/notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/08_03_Quantum_inspired_classical_algorithm_Part2.ipynb)
   - 04_2クラス問題に対する量子インスパイアード古典アルゴリズム
