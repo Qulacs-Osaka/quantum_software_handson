@@ -38,7 +38,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2クラス問題に対する量子インスパイアード古典アルゴリズム" href="08_04_quantum_inspired_binary_classification.html" />
-    <link rel="prev" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="prev" title="(行列:math:Cの特異値分解まで)" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -200,11 +200,11 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
-   行列
-   <span class="math notranslate nohighlight">
-    \(A\)
-   </span>
-   を定義する
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解まで)
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -374,37 +374,35 @@ title="Print to PDF"
      </span>
      を定義する
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{SQ}(A)\)
-       </span>
-       と
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Q}(b)\)
-       </span>
-       を定義する．
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#前のノートブックの復習">
-       前のノートブックの復習
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{SQ}(x)\)
-       </span>
-       の
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(k)\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(A)\)
+     </span>
+     と
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Q}(b)\)
+     </span>
+     を定義する．
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#前のノートブックの復習">
+     前のノートブックの復習
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Query}(k)\)
+     </span>
+     について
+    </a>
    </li>
   </ul>
  </li>
@@ -433,33 +431,57 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
-     棄却サンプリングの受理確率の推定
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Sample}()\)
+     </span>
+     について
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#まとめ">
-       まとめ
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#参考文献">
-       参考文献
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#補足">
-       補足
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#サンプルサイズについて">
-     サンプルサイズについて
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Norm}()\)
+     </span>
+     について
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
+   棄却サンプリングの受理確率の推定
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#まとめ">
+     まとめ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#参考文献">
+     参考文献
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#補足">
+     補足
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#サンプルサイズについて">
+   サンプルサイズについて
+  </a>
  </li>
 </ul>
 
@@ -501,37 +523,35 @@ title="Print to PDF"
      </span>
      を定義する
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{SQ}(A)\)
-       </span>
-       と
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Q}(b)\)
-       </span>
-       を定義する．
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#前のノートブックの復習">
-       前のノートブックの復習
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{SQ}(x)\)
-       </span>
-       の
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(k)\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(A)\)
+     </span>
+     と
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Q}(b)\)
+     </span>
+     を定義する．
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#前のノートブックの復習">
+     前のノートブックの復習
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Query}(k)\)
+     </span>
+     について
+    </a>
    </li>
   </ul>
  </li>
@@ -560,33 +580,57 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
-     棄却サンプリングの受理確率の推定
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Sample}()\)
+     </span>
+     について
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#まとめ">
-       まとめ
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#参考文献">
-       参考文献
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#補足">
-       補足
-      </a>
-     </li>
-    </ul>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#サンプルサイズについて">
-     サンプルサイズについて
+    <a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について">
+     <span class="math notranslate nohighlight">
+      \(\mathrm{SQ}(x)\)
+     </span>
+     の
+     <span class="math notranslate nohighlight">
+      \(\mathrm{Norm}()\)
+     </span>
+     について
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">
+   棄却サンプリングの受理確率の推定
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#まとめ">
+     まとめ
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#参考文献">
+     参考文献
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#補足">
+     補足
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#サンプルサイズについて">
+   サンプルサイズについて
+  </a>
  </li>
 </ul>
 
@@ -979,8 +1023,9 @@ To use the future default and silence this warning we advise to pass `rcond=None
          0.92040077]))
 </pre></div></div>
 </div>
+</section>
 <section id="\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
-<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this headline">#</a></h3>
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this headline">#</a></h2>
 <p>以下のセルで，<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>は<span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>のみだけなので，<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を使う必要はなく，<code class="docutils literal notranslate"><span class="pre">b</span></code>をそのまま使うだけで十分です．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1004,7 +1049,7 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </section>
 <section id="前のノートブックの復習">
-<h3>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this headline">#</a></h3>
+<h2>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this headline">#</a></h2>
 <p>前のノートブックで<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までを実装しました．<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(r,c\)</span>を渡すことで，<span class="math notranslate nohighlight">\(R\)</span>を表す行添字<span class="math notranslate nohighlight">\(i_0,i_1,\dots,i_{r-1}\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>が返ってくることを再度確認します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -1069,8 +1114,7 @@ Cの特異値 =
 </div>
 </section>
 <section id="\mathrm{SQ}(x)の\mathrm{Query}(k)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this headline">#</a></h3>
-</section>
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 <section id="R_{\ast,k}の構成">
@@ -1368,6 +1412,8 @@ relative error = 0.6663184591215244
 <img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" />
 </div>
 </div>
+<section id="\mathrm{SQ}(x)の\mathrm{Sample}()について">
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について考察します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>は下記の手順によって実現できることを思い出すと，次のセルのようにして実装できます． 1. 確率<span class="math notranslate nohighlight">\(|w_s|^2/\norm{w}^2\)</span>で<span class="math notranslate nohighlight">\(s\)</span>をサンプリングする． 2. 確率<span class="math notranslate nohighlight">\(|A_{i_s,j}|^2/\norm{A_{i_s,\ast}^2}\)</span>で<span class="math notranslate nohighlight">\(j\)</span>をサンプリングする 3. $ r_j = <span class="math">\frac{|\tilde{x}_j|^2}{\norm{A}_\mathrm{F}^2 \sum_{s=0}^{r-1}(w_s A_{i_s, j}/\norm{A_{i_s,\ast}})^2}</span> $ を計算する． 4.
 0から1の一様乱数<span class="math notranslate nohighlight">\(y\)</span>を生成し，<span class="math notranslate nohighlight">\(y &lt; r_j\)</span>ならば「受理」として<span class="math notranslate nohighlight">\(j\)</span>を出力，<span class="math notranslate nohighlight">\(y \ge r_j\)</span>ならば1から再スタートする．</p>
 <div class="nbinput nblast docutils container">
@@ -1574,8 +1620,13 @@ relative error = 0.6663184591215244
 <img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" />
 </div>
 </div>
+</section>
+<section id="\mathrm{SQ}(x)の\mathrm{Norm}()について">
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
 <section id="棄却サンプリングの受理確率の推定">
-<h2>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this headline">#</a></h2>
+<h1>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this headline">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について実装します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>における棄却サンプリングの「受理」する確率は</p>
 <div class="math notranslate nohighlight">
 \[\frac{\norm{\tilde{x}}^2}{\norm{A}_\mathrm{F}^2 \norm{w}^2}\]</div>
@@ -1676,7 +1727,7 @@ relative error = 0.6663184591215244
 </pre></div></div>
 </div>
 <section id="まとめ">
-<h3>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h3>
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(), \mathrm{Sample}(), \mathrm{Norm}()\)</span>について実装しました．最後にクラスを使ってまとめます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
@@ -1703,18 +1754,18 @@ relative error = 0.6663184591215244
 </div>
 </section>
 <section id="参考文献">
-<h3>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h3>
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 </ul>
 </section>
 <section id="補足">
-<h3>補足<a class="headerlink" href="#補足" title="Permalink to this headline">#</a></h3>
+<h2>補足<a class="headerlink" href="#補足" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 <section id="サンプルサイズについて">
-<h2>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this headline">#</a></h2>
+<h1>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this headline">#</a></h1>
 <p>サンプルサイズ<span class="math notranslate nohighlight">\(r,c\)</span>の値を以下のように設定すると，少なくとも<span class="math notranslate nohighlight">\(1-\eta\)</span>以上の確率で<span class="math notranslate nohighlight">\(\lVert \tilde{x} - x \rVert \le \epsilon \lVert A^+b \rVert\)</span>を満たすような<span class="math notranslate nohighlight">\(SQ(\tilde{x})\)</span>を得ることができます(<a class="reference external" href="https://arxiv.org/abs/1811.04909">https://arxiv.org/abs/1811.04909</a> のAlgorithm 1の<strong>Init.</strong>より)．</p>
 <div class="math notranslate nohighlight">
 \[r = 2^{10}\ln\left(\frac{8n}{\eta}\right)\frac{\kappa^4k^2\lVert A\rVert_F^2}{\epsilon^2}
@@ -1768,7 +1819,6 @@ r^2c =  1.0569358486549376e+79
 </div>
 </div>
 </section>
-</section>
 
 
               </div>
@@ -1782,7 +1832,7 @@ r^2c =  1.0569358486549376e+79
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
+            <p class="prev-next-title">(行列:math:<cite>C</cite>の特異値分解まで)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="08_04_quantum_inspired_binary_classification.html" title="next page">

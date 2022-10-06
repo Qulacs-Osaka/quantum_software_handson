@@ -37,7 +37,7 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_01_Data_structure.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="next" title="(行列:math:Cの特異値分解まで)" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
     <link rel="prev" title="QAE を用いた信用ポートフォリオリスク計測" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -200,11 +200,11 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
-   行列
-   <span class="math notranslate nohighlight">
-    \(A\)
-   </span>
-   を定義する
+   (行列:math:
+   <cite>
+    C
+   </cite>
+   の特異値分解まで)
   </a>
  </li>
  <li class="toctree-l1">
@@ -353,24 +353,12 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(A)\)
-   </span>
-   と
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(b)\)
-   </span>
-   の実装について
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#セグメント木構造の実装">
    セグメント木構造の実装
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
    ベクトルに関するデータ構造
    <span class="math notranslate nohighlight">
@@ -378,23 +366,23 @@ title="Print to PDF"
    </span>
    の実装
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#定義">
      定義
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#実装">
      実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#確認">
      確認
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}()\)
@@ -402,7 +390,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Query}(i)\)
@@ -410,7 +398,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample}()\)
@@ -422,7 +410,7 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
    行列に基づくデータ構造
    <span class="math notranslate nohighlight">
@@ -430,23 +418,23 @@ title="Print to PDF"
    </span>
    の実装
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
      定義
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
      実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
      確認
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample1}()\)
@@ -454,7 +442,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample2}(i)\)
@@ -462,7 +450,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Query}(i,j)\)
@@ -470,7 +458,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}(i)\)
@@ -478,7 +466,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id8">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}()\)
@@ -490,12 +478,12 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#まとめ">
    まとめ
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#参考文献">
    参考文献
   </a>
@@ -519,24 +507,12 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(A)\)
-   </span>
-   と
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(b)\)
-   </span>
-   の実装について
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#セグメント木構造の実装">
    セグメント木構造の実装
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
    ベクトルに関するデータ構造
    <span class="math notranslate nohighlight">
@@ -544,23 +520,23 @@ title="Print to PDF"
    </span>
    の実装
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#定義">
      定義
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#実装">
      実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#確認">
      確認
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}()\)
@@ -568,7 +544,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Query}(i)\)
@@ -576,7 +552,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample}()\)
@@ -588,7 +564,7 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
    行列に基づくデータ構造
    <span class="math notranslate nohighlight">
@@ -596,23 +572,23 @@ title="Print to PDF"
    </span>
    の実装
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
      定義
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
      実装
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
      確認
     </a>
     <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample1}()\)
@@ -620,7 +596,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Sample2}(i)\)
@@ -628,7 +604,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Query}(i,j)\)
@@ -636,7 +612,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}(i)\)
@@ -644,7 +620,7 @@ title="Print to PDF"
        について
       </a>
      </li>
-     <li class="toc-h3 nav-item toc-entry">
+     <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#id8">
        <span class="math notranslate nohighlight">
         \(\mathrm{Norm}()\)
@@ -656,12 +632,12 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#まとめ">
    まとめ
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#参考文献">
    参考文献
   </a>
@@ -955,9 +931,8 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-</section>
 <section id="セグメント木構造の実装">
-<h1>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this headline">#</a></h1>
+<h2>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">セグメント木構造</a>は，次のセルのように実装できます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -990,16 +965,16 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-<h1>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this headline">#</a></h1>
+<h2>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this headline">#</a></h2>
 <p>セグメント木構造を用いて，ベクトルに基づいたデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．簡単のために実ベクトルのみを扱います．</p>
 <section id="定義">
-<h2>定義<a class="headerlink" href="#定義" title="Permalink to this headline">#</a></h2>
+<h3>定義<a class="headerlink" href="#定義" title="Permalink to this headline">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の定義は下記の通りです．</p>
 <p>ベクトル<span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を次の操作(1-3)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.5や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.1など) - <span class="math notranslate nohighlight">\(\text{Sample}()\)</span>. 確率<span class="math notranslate nohighlight">\(\abs{v_i}^2/\norm{v}^2\)</span>で添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i)\)</span>. ベクトルの第<span class="math notranslate nohighlight">\(i\)</span>成分を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>.
 ベクトルの2ノルム<span class="math notranslate nohighlight">\(\norm{v}\)</span>を出力する</p>
 </section>
 <section id="実装">
-<h2>実装<a class="headerlink" href="#実装" title="Permalink to this headline">#</a></h2>
+<h3>実装<a class="headerlink" href="#実装" title="Permalink to this headline">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -1060,7 +1035,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="確認">
-<h2>確認<a class="headerlink" href="#確認" title="Permalink to this headline">#</a></h2>
+<h3>確認<a class="headerlink" href="#確認" title="Permalink to this headline">#</a></h3>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Norm}(), \mathrm{Query}(i), \mathrm{Sample}()\)</span>それぞれについて確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1096,7 +1071,7 @@ height = 4
 </pre></div></div>
 </div>
 <section id="\mathrm{Norm}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this headline">#</a></h4>
 <p>ベクトルの2ノルムが計算できているかどうか，NumPyの結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -1120,7 +1095,7 @@ numpy.linalg.norm(v) = 1.4563316259082162
 </div>
 </section>
 <section id="\mathrm{Query}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this headline">#</a></h4>
 <p>全ての<span class="math notranslate nohighlight">\(i\)</span>に対して，元々のベクトル<span class="math notranslate nohighlight">\(v\)</span>の<span class="math notranslate nohighlight">\(i\)</span>番目の成分と比較をしてみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -1164,7 +1139,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Sample}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this headline">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">SQv.sample()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\mathcal{D}_v (\Pr(i) = |v_i|^2/\norm{v}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -1220,15 +1195,15 @@ error = 0.012792073328308338
 </section>
 </section>
 <section id="行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-<h1>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this headline">#</a></h1>
+<h2>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>について実装しました．これを用いて<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装します． 簡単のために実行列のみを扱います．</p>
 <section id="id5">
-<h2>定義<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<h3>定義<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を次の操作(1-5)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.10や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.2など) - <span class="math notranslate nohighlight">\(\text{Sample1}()\)</span>. 確率<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>で行添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Sample2}(i)\)</span>.
 確率<span class="math notranslate nohighlight">\(\abs{A_{ij}}^2/\norm{A_{i,\ast}}^2\)</span>で列添字<span class="math notranslate nohighlight">\(j\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i,j)\)</span>. 第<span class="math notranslate nohighlight">\((i,j)\)</span>成分<span class="math notranslate nohighlight">\(A_{ij}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}(i)\)</span>. 第<span class="math notranslate nohighlight">\(i\)</span>行の2ノルム<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>. フロべニウスノルム<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}\)</span>を出力する</p>
 </section>
 <section id="id6">
-<h2>実装<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h3>実装<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を用いて<span class="math notranslate nohighlight">\(\mathrm{SQ(A)}\)</span>を実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -1263,7 +1238,7 @@ error = 0.012792073328308338
 </div>
 </section>
 <section id="id7">
-<h2>確認<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<h3>確認<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Sample2}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Query}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span> (<code class="docutils literal notranslate"><span class="pre">normF</span></code>), それぞれ確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1276,7 +1251,7 @@ error = 0.012792073328308338
 </div>
 </div>
 <section id="\mathrm{Sample1}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this headline">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">SQA.sample1()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(i) = \norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -1328,7 +1303,7 @@ error = 0.009883797274048613
 </div>
 </section>
 <section id="\mathrm{Sample2}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this headline">#</a></h4>
 <p><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について確認します．<span class="math notranslate nohighlight">\(i = 0,1,2,\dots,m-1\)</span>の全てを調査すると図がたくさん表示されるので， 図については<span class="math notranslate nohighlight">\(i=0,1,2\)</span>までを見ます． <code class="docutils literal notranslate"><span class="pre">SQA.sample2()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(j) = |A_{i,j}|^2/\norm{A_{i,\ast}}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1485,7 +1460,7 @@ error = 0.029832921287860296
 </div>
 </section>
 <section id="\mathrm{Query}(i,j)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this headline">#</a></h4>
 <p>全ての<span class="math notranslate nohighlight">\(i,j\)</span>に対して，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の<span class="math notranslate nohighlight">\(i,j\)</span>番目の成分と比較をしていきます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1648,7 +1623,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Norm}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this headline">#</a></h4>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の各列ベクトル<span class="math notranslate nohighlight">\(A_{0,\ast},\dots,A_{m,\ast}\)</span>の2ノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -1678,7 +1653,7 @@ SQ(A).norm(7) = 1.6459138082844538      , np.linalg.norm(Ai) = 1.645913808284453
 </div>
 </section>
 <section id="id8">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
 <p>行列のフロべニウスノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -1702,17 +1677,26 @@ Frobenius norm 4.7575519405423
 </section>
 </section>
 <section id="まとめ">
-<h1>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h1>
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v), \mathrm{SQ}(A)\)</span>をそれぞれ<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>で実装しました．</p>
 </section>
 <section id="参考文献">
-<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h1>
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 <li><p>Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang. 2020. Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing Quantum machine learning. In Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020). Association for Computing Machinery, New York, NY, USA, 387–400. <a class="reference external" href="https://doi.org/10.1145/3357713.3384314">https://doi.org/10.1145/3357713.3384314</a></p></li>
 <li><p>András Gilyén, Zhao Song and Ewin Tang. 2022. An improved quantum-inspired algorithm for linear regression. Quantum, 6, 754. <a class="reference external" href="https://doi.org/10.22331/q-2022-06-30-754">https://doi.org/10.22331/q-2022-06-30-754</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">https://en.wikipedia.org/wiki/Segment_tree</a></p></li>
 </ol>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
 </section>
 
 
@@ -1733,7 +1717,7 @@ Frobenius norm 4.7575519405423
     <a class='right-next' id="next-link" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
+        <p class="prev-next-title">(行列:math:<cite>C</cite>の特異値分解まで)</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

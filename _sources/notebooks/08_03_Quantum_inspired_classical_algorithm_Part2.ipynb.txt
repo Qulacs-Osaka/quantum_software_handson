@@ -157,7 +157,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# $\\mathrm{SQ}(A)$と$\\mathrm{Q}(b)$を定義する．\n",
+    "## $\\mathrm{SQ}(A)$と$\\mathrm{Q}(b)$を定義する．\n",
+    "\n",
     "以下のセルで，`MatrixBasedDataStructure`を用いて行列に基づくデータ構造$\\SQ(A)$を用意します．$\\mathrm{Q}(b)$は$\\mathrm{Query}(i)$のみだけなので，`VectorBasedDataStructure`を使う必要はなく，`b`をそのまま使うだけで十分です．"
    ]
   },
@@ -188,7 +189,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# 前のノートブックの復習\n",
+    "## 前のノートブックの復習\n",
+    "\n",
     "前のノートブックで$C$の特異値分解までを実装しました．$\\mathrm{SQ}(A)$と$r,c$を渡すことで，$R$を表す行添字$i_0,i_1,\\dots,i_{r-1}$と$C$の左特異ベクトル$w^{(\\ell)}$と特異値$\\tilde{\\sigma}_\\ell$が返ってくることを再度確認します．"
    ]
   },
@@ -258,9 +260,10 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# $\\mathrm{SQ}(x)$の$\\mathrm{Query}(k)$について\n",
+    "## $\\mathrm{SQ}(x)$の$\\mathrm{Query}(k)$について\n",
     "\n",
     "### $R_{\\ast,k}$の構成\n",
+    "\n",
     "$\\SQ(x)$の$\\mathrm{Query}(k)$，すなわち$x$の第$k$成分について考察します．\n",
     "ベクトル$x$の第$k$成分は次式のようにして書くことができます．\n",
     "$$\n",
@@ -356,6 +359,7 @@
    "metadata": {},
    "source": [
     "### $\\tilde{\\lambda}_\\ell = \\mathrm{Tr}(A^\\dagger (b\\tilde{v}^{(\\ell) \\dagger}))$の推定\n",
+    "\n",
     "次に$\\tilde{\\lambda}_\\ell= \\mathrm{Tr}(A^\\dagger (b\\tilde{v}^{(\\ell) \\dagger})) $を推定する関数を実装します．"
    ]
   },
@@ -443,6 +447,7 @@
    "metadata": {},
    "source": [
     "### $w$を構成する．\n",
+    "\n",
     "$\\tilde{\\lambda}_\\ell$を推定する関数を用いて，\n",
     "$$\n",
     "w = \n",
@@ -626,7 +631,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# $\\mathrm{SQ}(x)$の$\\mathrm{Sample}()$について\n",
+    "## $\\mathrm{SQ}(x)$の$\\mathrm{Sample}()$について\n",
+    "\n",
     "$\\mathrm{SQ}(x)$の$\\mathrm{Sample}()$について考察します．\n",
     "$\\mathrm{Sample}()$は下記の手順によって実現できることを思い出すと，次のセルのようにして実装できます．\n",
     "1. 確率$|w_s|^2/\\norm{w}^2$で$s$をサンプリングする．\n",
@@ -879,8 +885,9 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# $\\mathrm{SQ}(x)$の$\\mathrm{Norm}()$について\n",
-    "## 棄却サンプリングの受理確率の推定\n",
+    "## $\\mathrm{SQ}(x)$の$\\mathrm{Norm}()$について\n",
+    "\n",
+    "### 棄却サンプリングの受理確率の推定\n",
     "$\\mathrm{SQ}(x)$の$\\mathrm{Norm}()$について実装します．\n",
     "$\\mathrm{Sample}()$における棄却サンプリングの「受理」する確率は\n",
     "$$\n",
@@ -997,7 +1004,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# まとめ\n",
+    "## まとめ\n",
+    "\n",
     "$\\mathrm{SQ}(x)$の$\\mathrm{Query}(), \\mathrm{Sample}(), \\mathrm{Norm}()$について実装しました．最後にクラスを使ってまとめます．\n",
     "<!-- 各関数で$w$(`w`)や$i_0,\\dots,i_{r-1}$(`row_indices`)など共通した引数がありました．そこでクラスを -->"
    ]
@@ -1030,13 +1038,16 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "# 参考文献\n",
+    "## 参考文献\n",
+    "\n",
     "- András Gilyén, Seth Lloyd, and Ewin Tang, ''Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,'' arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909\n",
     "\n",
     "- Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. https://doi.org/10.1145/3313276.3316310\n",
     "\n",
-    "# 補足\n",
-    "## サンプルサイズについて\n",
+    "## 補足\n",
+    "\n",
+    "### サンプルサイズについて\n",
+    "\n",
     "サンプルサイズ$r,c$の値を以下のように設定すると，少なくとも$1-\\eta$以上の確率で$\\lVert \\tilde{x} - x \\rVert \\le \\epsilon \\lVert A^+b \\rVert$を満たすような$SQ(\\tilde{x})$を得ることができます(https://arxiv.org/abs/1811.04909 のAlgorithm 1の**Init.**より)．\n",
     "$$\n",
     " r = 2^{10}\\ln\\left(\\frac{8n}{\\eta}\\right)\\frac{\\kappa^4k^2\\lVert A\\rVert_F^2}{\\epsilon^2} \n",
