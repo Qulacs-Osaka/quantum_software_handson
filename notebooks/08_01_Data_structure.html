@@ -1,926 +1,353 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について &#8212; Quantum Software Hands on  documentation</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/08_01_Data_structure';</script>
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_01_Data_structure.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart1(行列\(C\)の特異値分解まで)" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
     <link rel="prev" title="QAE を用いた信用ポートフォリオリスク計測" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
-
-    
-
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/mark_type_jp_c.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Quantum Software Hands on  documentation</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Contents:
- </span>
-</p>
+    
+    
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_01_how_to_use_qulacs.html">
-   Qulacsの基本的な使い方
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01_02_Ramsay.html">
-   ラムゼイ干渉をプロットする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01_03_VariationalGateDecomposition.html">
-   変分法を用いて量子演算を特定の演算で分解する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="01_04_QuantumVolume.html">
-   ランダム量子回路と量子ボリューム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_01_sample_observable.html">
-   サンプリングによってオブザーバブルの期待値を推定する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_02_parameter_shift_rule.html">
-   パラメータシフト法による勾配最適化
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_01_QCL.html">
-   簡単な量子回路学習を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_02_quantum_kernel.html">
-   量子カーネル法を使ってみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_01_Density_Matrix_and_Error.html">
-   Qulacsでの混合状態
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_02_Extrapolation.html">
-   リチャードソン外挿法と指数関数外挿法を実装してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">
-   擬確率法を実装してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">
-   古典コンピュータを使った量子化学計算を実行してみる
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_02_fermion_qubit_mapping.html">
-   量子コンピュータ上に量子化学の問題をマッピングする
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">
-   量子変分固有値法（VQE)を用いた基底状態計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">
-   Qamuyを使った量子コンピュータｘ量子化学計算
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_01_quantum_phase_estimation.html">
-   位相推定アルゴリズム
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06_02_grover_search.html">
-   グローバー探索量子アルゴリズムをとことん実装する
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">
-   QAE を用いた信用ポートフォリオリスク計測
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(A)\)
-   </span>
-   と
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(b)\)
-   </span>
-   の実装について
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">
-   <span class="math notranslate nohighlight">
-    \(x=A^+b\)
-   </span>
-   に関する量子インスパイアード古典アルゴリズムPart1(行列
-   <span class="math notranslate nohighlight">
-    \(C\)
-   </span>
-   の特異値分解まで)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">
-   <span class="math notranslate nohighlight">
-    \(x=A^+b\)
-   </span>
-   に関する量子インスパイアード古典アルゴリズムPart2(行列
-   <span class="math notranslate nohighlight">
-    \(C\)
-   </span>
-   の特異値分解の後)
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">
-   2クラス問題に対する量子インスパイアード古典アルゴリズム
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_01_sample_observable.html">サンプリングによってオブザーバブルの期待値を推定する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_02_parameter_shift_rule.html">パラメータシフト法による勾配最適化</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_01_QCL.html">簡単な量子回路学習を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_02_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_01_Density_Matrix_and_Error.html">Qulacsでの混合状態</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_02_Extrapolation.html">リチャードソン外挿法と指数関数外挿法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">擬確率法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_02_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">Qamuyを使った量子コンピュータｘ量子化学計算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html">QAE を用いた信用ポートフォリオリスク計測</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/08_01_Data_structure.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
 
-          
 
 
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/08_01_Data_structure.ipynb.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </label>
-
+</div></div>
+      
     </div>
-</div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#セグメント木構造の実装">
-   セグメント木構造の実装
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-   ベクトルに関するデータ構造
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(v)\)
-   </span>
-   の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#定義">
-     定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#実装">
-     実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#確認">
-     確認
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}()\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample}()\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-   行列に基づくデータ構造
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(A)\)
-   </span>
-   の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     確認
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample1}()\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample2}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(i,j)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}()\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#まとめ">
-   まとめ
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#参考文献">
-   参考文献
-  </a>
- </li>
-</ul>
-
-    </nav>
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#セグメント木構造の実装">
-   セグメント木構造の実装
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-   ベクトルに関するデータ構造
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(v)\)
-   </span>
-   の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#定義">
-     定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#実装">
-     実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#確認">
-     確認
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Norm}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}()\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Query}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample}()\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-   行列に基づくデータ構造
-   <span class="math notranslate nohighlight">
-    \(\mathrm{SQ}(A)\)
-   </span>
-   の実装
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     定義
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     実装
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     確認
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample1}()について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample1}()\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Sample2}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Query}(i,j)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#\mathrm{Norm}(i)について">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}(i)\)
-       </span>
-       について
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       <span class="math notranslate nohighlight">
-        \(\mathrm{Norm}()\)
-       </span>
-       について
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#まとめ">
-   まとめ
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#参考文献">
-   参考文献
-  </a>
- </li>
-</ul>
-
-                        </nav>
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
-                
-              <div>
-                
   
-<style>
-/* CSS for nbsphinx extension */
+</div>
+</div>
+              
+              
 
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
 
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-.jp-RenderedHTMLCommon thead,
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-.jp-RenderedHTMLCommon th,
-div.rendered_html th {
-  font-weight: bold;
-}
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.jp-RenderedHTMLCommon tbody tr:hover,
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-</style>
-<div class="line-block">
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="line-block">
 <div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 1</div>
 <div class="line">2022年10月7日(金)</div>
 <div class="line">高比良宗一</div>
 </div>
 <section id="\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について">
-<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Permalink to this headline">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Permalink to this heading">#</a></h1>
 <p>このノートブックでは，SQデータ構造を実装します． 最初にセグメント木構造を実装します．次に，それを用いてベクトルに基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．その後に行列に基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を，ベクトルに基づくデータ構造を用いて実装します．</p>
 <div class="math notranslate nohighlight">
 \[%  ![image.png](attachment:image.png)
@@ -938,7 +365,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <section id="セグメント木構造の実装">
-<h2>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this headline">#</a></h2>
+<h2>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this heading">#</a></h2>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">セグメント木構造</a>は，次のセルのように実装できます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -971,16 +398,16 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-<h2>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this headline">#</a></h2>
+<h2>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this heading">#</a></h2>
 <p>セグメント木構造を用いて，ベクトルに基づいたデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．簡単のために実ベクトルのみを扱います．</p>
 <section id="定義">
-<h3>定義<a class="headerlink" href="#定義" title="Permalink to this headline">#</a></h3>
+<h3>定義<a class="headerlink" href="#定義" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の定義は下記の通りです．</p>
 <p>ベクトル<span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を次の操作(1-3)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.5や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.1など) - <span class="math notranslate nohighlight">\(\text{Sample}()\)</span>. 確率<span class="math notranslate nohighlight">\(\abs{v_i}^2/\norm{v}^2\)</span>で添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i)\)</span>. ベクトルの第<span class="math notranslate nohighlight">\(i\)</span>成分を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>.
 ベクトルの2ノルム<span class="math notranslate nohighlight">\(\norm{v}\)</span>を出力する</p>
 </section>
 <section id="実装">
-<h3>実装<a class="headerlink" href="#実装" title="Permalink to this headline">#</a></h3>
+<h3>実装<a class="headerlink" href="#実装" title="Permalink to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -1041,7 +468,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="確認">
-<h3>確認<a class="headerlink" href="#確認" title="Permalink to this headline">#</a></h3>
+<h3>確認<a class="headerlink" href="#確認" title="Permalink to this heading">#</a></h3>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Norm}(), \mathrm{Query}(i), \mathrm{Sample}()\)</span>それぞれについて確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1077,7 +504,7 @@ height = 4
 </pre></div></div>
 </div>
 <section id="\mathrm{Norm}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this heading">#</a></h4>
 <p>ベクトルの2ノルムが計算できているかどうか，NumPyの結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -1101,7 +528,7 @@ numpy.linalg.norm(v) = 1.4563316259082162
 </div>
 </section>
 <section id="\mathrm{Query}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this heading">#</a></h4>
 <p>全ての<span class="math notranslate nohighlight">\(i\)</span>に対して，元々のベクトル<span class="math notranslate nohighlight">\(v\)</span>の<span class="math notranslate nohighlight">\(i\)</span>番目の成分と比較をしてみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -1145,7 +572,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Sample}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">SQv.sample()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\mathcal{D}_v (\Pr(i) = |v_i|^2/\norm{v}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -1201,15 +628,15 @@ error = 0.012792073328308338
 </section>
 </section>
 <section id="行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-<h2>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this headline">#</a></h2>
+<h2>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>について実装しました．これを用いて<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装します． 簡単のために実行列のみを扱います．</p>
 <section id="id5">
-<h3>定義<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<h3>定義<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を次の操作(1-5)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.10や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.2など) - <span class="math notranslate nohighlight">\(\text{Sample1}()\)</span>. 確率<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>で行添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Sample2}(i)\)</span>.
 確率<span class="math notranslate nohighlight">\(\abs{A_{ij}}^2/\norm{A_{i,\ast}}^2\)</span>で列添字<span class="math notranslate nohighlight">\(j\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i,j)\)</span>. 第<span class="math notranslate nohighlight">\((i,j)\)</span>成分<span class="math notranslate nohighlight">\(A_{ij}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}(i)\)</span>. 第<span class="math notranslate nohighlight">\(i\)</span>行の2ノルム<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>. フロべニウスノルム<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}\)</span>を出力する</p>
 </section>
 <section id="id6">
-<h3>実装<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<h3>実装<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を用いて<span class="math notranslate nohighlight">\(\mathrm{SQ(A)}\)</span>を実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -1244,7 +671,7 @@ error = 0.012792073328308338
 </div>
 </section>
 <section id="id7">
-<h3>確認<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3>確認<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Sample2}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Query}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span> (<code class="docutils literal notranslate"><span class="pre">normF</span></code>), それぞれ確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1257,7 +684,7 @@ error = 0.012792073328308338
 </div>
 </div>
 <section id="\mathrm{Sample1}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this heading">#</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">SQA.sample1()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(i) = \norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -1309,7 +736,7 @@ error = 0.009883797274048613
 </div>
 </section>
 <section id="\mathrm{Sample2}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this heading">#</a></h4>
 <p><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について確認します．<span class="math notranslate nohighlight">\(i = 0,1,2,\dots,m-1\)</span>の全てを調査すると図がたくさん表示されるので， 図については<span class="math notranslate nohighlight">\(i=0,1,2\)</span>までを見ます． <code class="docutils literal notranslate"><span class="pre">SQA.sample2()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(j) = |A_{i,j}|^2/\norm{A_{i,\ast}}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1466,7 +893,7 @@ error = 0.029832921287860296
 </div>
 </section>
 <section id="\mathrm{Query}(i,j)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this heading">#</a></h4>
 <p>全ての<span class="math notranslate nohighlight">\(i,j\)</span>に対して，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の<span class="math notranslate nohighlight">\(i,j\)</span>番目の成分と比較をしていきます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1629,7 +1056,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Norm}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this heading">#</a></h4>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の各列ベクトル<span class="math notranslate nohighlight">\(A_{0,\ast},\dots,A_{m,\ast}\)</span>の2ノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -1659,7 +1086,7 @@ SQ(A).norm(7) = 1.6459138082844538      , np.linalg.norm(Ai) = 1.645913808284453
 </div>
 </section>
 <section id="id8">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h4>
+<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
 <p>行列のフロべニウスノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -1683,11 +1110,11 @@ Frobenius norm 4.7575519405423
 </section>
 </section>
 <section id="まとめ">
-<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this headline">#</a></h2>
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v), \mathrm{SQ}(A)\)</span>をそれぞれ<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>で実装しました．</p>
 </section>
 <section id="参考文献">
-<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this headline">#</a></h2>
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 <li><p>Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang. 2020. Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing Quantum machine learning. In Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020). Association for Computing Machinery, New York, NY, USA, 387–400. <a class="reference external" href="https://doi.org/10.1145/3357713.3384314">https://doi.org/10.1145/3357713.3384314</a></p></li>
@@ -1706,50 +1133,131 @@ Frobenius norm 4.7575519405423
 </section>
 
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">QAE を用いた信用ポートフォリオリスク計測</p>
-        </div>
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">QAE を用いた信用ポートフォリオリスク計測</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="08_02_Quantum_inspired_classical_algorithm_Part1.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Qulacs-Osaka<br/>
-  
-      &copy; Copyright 2021, Qulacs-Osaka.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
-
-
       </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qulacs-Osaka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2021, Qulacs-Osaka.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
