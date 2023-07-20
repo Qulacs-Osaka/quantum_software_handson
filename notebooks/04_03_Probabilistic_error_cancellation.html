@@ -306,7 +306,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#エラーなしの場合">エラーなしの場合</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#エラーありの場合">エラーありの場合</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#擬確率法">擬確率法</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ヒストグラムを作成（※計算時間が長い）">ヒストグラムを作成（※計算時間が長い）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ヒストグラムを作成">ヒストグラムを作成</a></li>
 </ul>
             </nav>
         </div>
@@ -394,11 +394,19 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+&lt;frozen importlib._bootstrap&gt;:228: RuntimeWarning: scipy._lib.messagestream.MessageStream size changed, may indicate binary incompatibility. Expected 56 from C header, got 64 from PyObject
+</pre></div></div>
+</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_0.png" />
+<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_1.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_1.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -433,7 +441,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485824641
+-5.072893485824163
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -447,7 +455,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </section>
 <section id="エラーありの場合">
 <h2>エラーありの場合<a class="headerlink" href="#エラーありの場合" title="Permalink to this heading">#</a></h2>
-<p>各ゲートに以下のエラーを作用させます。</p>
+<p>外挿法のときと同様に、各ゲートに以下のエラーを作用させます。</p>
 <p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -510,15 +518,16 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485824641
--3.8479645272663956
+-5.072893485824163
+-3.847959226687526
 </pre></div></div>
 </div>
+<p>エラーの影響で期待値が変わっていることが確認できます。次にサンプリングにより、期待値を求めます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params</span><span class="p">,</span><span class="n">error_rate</span><span class="p">):</span>
     <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
@@ -556,23 +565,27 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラー率を固定して、ヒストグラムを作成</span>
 <span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">n_test</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">n_test</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">no_mitigation_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
+<span class="n">no_mitigation_noisy_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_test</span><span class="p">):</span>
     <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
+    <span class="n">noiseless_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">no_mitigation_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
-    <span class="n">no_mitigation_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">)</span>
+    <span class="n">no_mitigation_noisy_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">,</span><span class="n">error_rate</span><span class="p">)</span>
 <span class="n">expec_value</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no mitigation&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Noiseless&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_noisy_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Noisy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">expec_value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
@@ -584,7 +597,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_17_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_17_0.png" />
+<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_18_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_18_0.png" />
 </div>
 </div>
 </section>
@@ -625,6 +638,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
+<p>エラーあり量子回路に対して擬確率法を実行する手順は以下の通り。 - 上で定義した確率的なゲートを各depolarizing noiseの直後で実行 - 確率的に選ばれたゲートが恒等演算子の場合は＋１、それ意外（X,Y,Z）の場合は－１としてパリティの値を定義。すべてのゲートについてパリティの積を計算し、測定結果にかける - この操作を何度も繰り返し、測定結果の平均値を求める -
+求めた平均値に対して、<span class="math notranslate nohighlight">\(C^{N_g}\)</span>をかける。<span class="math notranslate nohighlight">\(C\)</span>は各ゲートのコスト（<span class="math notranslate nohighlight">\(=\frac{3.0+2.0p}{3.0-4.0p}\)</span>）、<span class="math notranslate nohighlight">\(N_g\)</span>は実行するゲート数。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -716,19 +731,20 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.208917885503317
+-4.86829448252778
 </pre></div></div>
 </div>
 </section>
-<section id="ヒストグラムを作成（※計算時間が長い）">
-<h2>ヒストグラムを作成（※計算時間が長い）<a class="headerlink" href="#ヒストグラムを作成（※計算時間が長い）" title="Permalink to this heading">#</a></h2>
+<section id="ヒストグラムを作成">
+<h2>ヒストグラムを作成<a class="headerlink" href="#ヒストグラムを作成" title="Permalink to this heading">#</a></h2>
+<p>（※計算時間が長い）</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラー率を固定して、ヒストグラムを作成</span>
 <span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
-<span class="n">n_test</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">n_test</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">PEC_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
 
@@ -740,11 +756,11 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no mitigation&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Probabilistic error cancellation&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_noisy_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no mitigation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mitigated&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">expec_value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
@@ -756,29 +772,49 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_26_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_26_0.png" />
+<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_28_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_28_0.png" />
 </div>
 </div>
-<p>擬確率法により、確かにエラーが抑制できていることが分かります。</p>
-<div class="nbinput docutils container">
+<p>擬確率法により、確かにエラーが抑制できていることが分かります。バイアスが減ったぶん、分散が増えている様子が見えているので、サンプリングコストを計算してみます。</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost</span> <span class="o">=</span> <span class="p">(</span><span class="mf">3.0</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span> <span class="n">error_rate</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">3.0</span><span class="o">-</span><span class="mf">4.0</span><span class="o">*</span><span class="n">error_rate</span><span class="p">)</span>
-<span class="n">cost</span><span class="o">**</span><span class="p">((</span><span class="mf">3.0</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">*</span> <span class="n">circuit_depth</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#得られたヒストグラムから、それぞれの標準偏差を求めてみる。標準偏差の比から測定コストが求まる。</span>
+<span class="n">std_no_mitigation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">no_mitigation_list</span><span class="p">)</span>
+<span class="n">std_PEC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cost_per_gate</span> <span class="o">=</span> <span class="p">(</span><span class="mf">3.0</span><span class="o">+</span><span class="mf">2.0</span><span class="o">*</span> <span class="n">error_rate</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mf">3.0</span><span class="o">-</span><span class="mf">4.0</span><span class="o">*</span><span class="n">error_rate</span><span class="p">)</span>
+<span class="n">total_cost</span> <span class="o">=</span> <span class="n">cost_per_gate</span><span class="o">**</span><span class="p">((</span><span class="mf">3.0</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">*</span> <span class="n">circuit_depth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#実際に得られた標準偏差と、コストの見積もりの比較・線形外挿</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">std_PEC</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total_cost</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+4.307903590104474
 2.6201800228890098
 </pre></div></div>
 </div>
-<p>コストは2.6程度で、上のヒストグラムの広がりの比とほぼ同じ値であることが分かります。</p>
+<p>コストは2.6程度で、上のヒストグラムの広がりの比と同じような値であることが分かります。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -841,7 +877,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#エラーなしの場合">エラーなしの場合</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#エラーありの場合">エラーありの場合</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#擬確率法">擬確率法</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ヒストグラムを作成（※計算時間が長い）">ヒストグラムを作成（※計算時間が長い）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ヒストグラムを作成">ヒストグラムを作成</a></li>
 </ul>
   </nav></div>
 
