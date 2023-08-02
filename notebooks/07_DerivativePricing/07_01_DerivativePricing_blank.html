@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>QAE を用いた信用ポートフォリオリスク計測 &#8212; Quantum Software Hands on  documentation</title>
+    <title>QAE を用いたデジタルオプションプライシング &#8212; Quantum Software Hands on  documentation</title>
   
   
   
@@ -44,12 +44,10 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank';</script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/07_DerivativePricing/07_01_DerivativePricing_blank';</script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/07_DerivativePricing/07_01_DerivativePricing_blank.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について" href="../08_01_Data_structure.html" />
-    <link rel="prev" title="グローバー探索量子アルゴリズムをとことん実装する" href="../06_02_grover_search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -133,7 +131,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01_01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
@@ -152,7 +150,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../05_04_compute_chemical_properties_using_Qamuy.html">Qamuyを使った量子コンピュータｘ量子化学計算</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">QAE を用いた信用ポートフォリオリスク計測</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08_02_Quantum_inspired_classical_algorithm_Part1.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08_03_Quantum_inspired_classical_algorithm_Part2.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
@@ -211,7 +208,7 @@
       
       
       
-      <li><a href="../../_sources/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/07_DerivativePricing/07_01_DerivativePricing_blank.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +288,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>QAE を用いた信用ポートフォリオリスク計測</h1>
+    <h1>QAE を用いたデジタルオプションプライシング</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -305,7 +302,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="nbinput nblast docutils container">
+  <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -314,6 +311,65 @@ document.write(`
 <span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>qulacs
 </pre></div>
 </div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: numpy in c:\users\koich\anaconda3\lib\site-packages (1.20.3)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 23.2.1 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: matplotlib in c:\users\koich\anaconda3\lib\site-packages (3.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied: python-dateutil&gt;=2.1 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2.8.1)
+Requirement already satisfied: numpy&gt;=1.15 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (1.20.3)
+Requirement already satisfied: certifi&gt;=2020.06.20 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2021.10.8)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (1.3.0)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,&gt;=2.0.3 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (2.4.7)
+Requirement already satisfied: pillow&gt;=6.2.0 in c:\users\koich\anaconda3\lib\site-packages (from matplotlib) (9.0.1)
+Requirement already satisfied: six in c:\users\koich\anaconda3\lib\site-packages (from cycler&gt;=0.10-&gt;matplotlib) (1.15.0)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 23.2.1 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Requirement already satisfied: qulacs in c:\users\koich\anaconda3\lib\site-packages (0.3.0)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+WARNING: You are using pip version 21.3.1; however, version 23.2.1 is available.
+You should consider upgrading via the &#39;c:\users\koich\anaconda3\python.exe -m pip install --upgrade pip&#39; command.
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -325,12 +381,13 @@ document.write(`
 <span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span><span class="p">,</span> <span class="n">Observable</span>
 <span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">Z</span><span class="p">,</span> <span class="n">RY</span><span class="p">,</span> <span class="n">merge</span><span class="p">,</span> <span class="n">DenseMatrix</span><span class="p">,</span> <span class="n">Identity</span>
 <span class="kn">from</span> <span class="nn">Adder</span> <span class="kn">import</span> <span class="n">adder_gate</span>
+<span class="kn">from</span> <span class="nn">Subtracter</span> <span class="kn">import</span> <span class="n">subtracter_gate</span>
 <span class="kn">from</span> <span class="nn">ConstSetter</span> <span class="kn">import</span> <span class="n">const_setter_gate</span><span class="p">,</span> <span class="n">ctrl_const_setter_gate</span>
 </pre></div>
 </div>
 </div>
-<section id="QAE-を用いた信用ポートフォリオリスク計測">
-<h1>QAE を用いた信用ポートフォリオリスク計測<a class="headerlink" href="#QAE-を用いた信用ポートフォリオリスク計測" title="Permalink to this heading">#</a></h1>
+<section id="QAE-を用いたデジタルオプションプライシング">
+<h1>QAE を用いたデジタルオプションプライシング<a class="headerlink" href="#QAE-を用いたデジタルオプションプライシング" title="Permalink to this heading">#</a></h1>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -343,20 +400,23 @@ document.write(`
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 債務者数</span>
-<span class="n">numObl</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 時点数</span>
+<span class="n">numTimeStep</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="c1"># 各債務者のデフォルト確率を表すqubitのインデックス</span>
-<span class="n">oblIds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="c1"># 各時点での原資産価格の上昇・下落確率を表すqubitのインデックス</span>
+<span class="n">pIds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
-<span class="c1"># 各債務者のデフォルト確率</span>
-<span class="n">pds</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="c1"># 上昇確率</span>
+<span class="n">pUps</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
 
-<span class="c1"># 各債務者の債務額</span>
-<span class="n">exposures</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="c1"># 上昇・下落幅</span>
+<span class="n">deltaUdl</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="c1"># 損失額の閾値</span>
-<span class="n">lossTh</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="c1"># デジタルオプションの閾値</span>
+<span class="n">th</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># 原資産価格初期値</span>
+<span class="n">udlIni</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -365,21 +425,21 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 計算に要する桁数</span>
-<span class="n">digit</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">digit</span> <span class="o">=</span> <span class="mi">3</span>
 
-<span class="c1"># 損失額を保持するレジスタのqubitのインデックス</span>
-<span class="c1"># digitに加え一桁余分に確保しておく（last qubit（最上位ビット）がQAEのターゲットになる）</span>
-<span class="n">lossResIdStart</span> <span class="o">=</span> <span class="n">oblIds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">lossResIdEnd</span> <span class="o">=</span> <span class="n">lossResIdStart</span> <span class="o">+</span> <span class="n">digit</span>
-<span class="n">lossResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">lossResIdStart</span><span class="p">,</span> <span class="n">lossResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">qaeTargetId</span> <span class="o">=</span> <span class="n">lossResIdEnd</span>
+<span class="c1"># 原資産価格を保持するレジスタのqubitのインデックス</span>
+<span class="c1"># digitに加え一桁余分に確保しておく（last qubitがQAEのターゲットになる）</span>
+<span class="n">udlResIdStart</span> <span class="o">=</span> <span class="n">pIds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">udlResIdEnd</span> <span class="o">=</span> <span class="n">udlResIdStart</span> <span class="o">+</span> <span class="n">digit</span>
+<span class="n">udlResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">udlResIdStart</span><span class="p">,</span> <span class="n">udlResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">qaeTargetId</span> <span class="o">=</span> <span class="n">udlResIdEnd</span>
 
-<span class="c1"># 損失額レジスタに加える値を一時的に保持するレジスタ</span>
-<span class="n">tempResIdStart</span> <span class="o">=</span> <span class="n">lossResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># 原資産価格レジスタに加える値を一時的に保持するレジスタ</span>
+<span class="n">tempResIdStart</span> <span class="o">=</span> <span class="n">udlResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">tempResIdEnd</span> <span class="o">=</span> <span class="n">tempResIdStart</span> <span class="o">+</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="n">tempResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">tempResIdStart</span><span class="p">,</span> <span class="n">tempResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
-<span class="c1"># 可算の繰り上がり用レジスタ</span>
+<span class="c1"># 繰り上がり用レジスタ</span>
 <span class="n">carryResIdStart</span> <span class="o">=</span> <span class="n">tempResIdEnd</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">carryResIdEnd</span> <span class="o">=</span> <span class="n">carryResIdStart</span> <span class="o">+</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span>
 <span class="n">carryResIds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">carryResIdStart</span><span class="p">,</span> <span class="n">carryResIdEnd</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
@@ -396,26 +456,36 @@ document.write(`
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 損失額を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 原資産価格を計算し、閾値以上か否かを判定する回路を、QuantumGate gとして構成していく</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">Identity</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="c1">### 各債務者のデフォルト確率を指定のqubitの|1&gt;のamplitudeとして埋め込み</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
-    <span class="n">pdGate_i</span> <span class="o">=</span> <span class="n">問１</span><span class="c1"># 注：債務者0,1のデフォルトを示す量子ビットのインデックスはoblIds[0],oblIds[1]</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pdGate_i</span><span class="p">)</span>
+<span class="c1">### 原資産価格初期値をセット</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">const_setter_gate</span><span class="p">(</span><span class="n">udlIni</span><span class="p">,</span> <span class="n">udlResIds</span><span class="p">))</span>
 
-<span class="c1">### i番目の債務者がデフォルトしていれば、その債務額をtemporary registerにセットし、損失額レジスタに足す</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numObl</span><span class="p">):</span>
-    <span class="n">setter</span> <span class="o">=</span> <span class="n">ctrl_const_setter_gate</span><span class="p">(</span><span class="n">exposures</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">oblIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tempResIds</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># 債務額をtemporary registerにセット</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">lossResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 債務額を損失額レジスタに加える</span>
+<span class="c1">### 上昇・下落確率を指定のqubitの|1&gt;のamplitudeとして埋め込み</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTimeStep</span><span class="p">):</span>
+    <span class="n">pGate_i</span> <span class="o">=</span> <span class="n">問１</span><span class="c1"># 注：時点t=1,2での上昇・下落確率を示す量子ビットのインデックスはpIds[0],pIds[1]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">pGate_i</span><span class="p">)</span>
+
+<span class="c1">### 原資産価格の増減をtemporary registerにセットし、原資産価格レジスタに足す</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numTimeStep</span><span class="p">):</span>
+    <span class="c1"># 上昇の場合</span>
+    <span class="n">setter</span> <span class="o">=</span> <span class="n">ctrl_const_setter_gate</span><span class="p">(</span><span class="n">deltaUdl</span><span class="p">,</span> <span class="n">pIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tempResIds</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># 上昇額をtemporary registerにセット</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">udlResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 原資産価格レジスタに加える</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># temporary registerをリセット</span>
 
-<span class="c1">### 総損失額が閾値以上となっているか否かのチェック</span>
-<span class="c1"># 閾値の2の補数（損失額レジスタにこれを足して最上位ビットが1となる⇔損失額が閾値以上）</span>
-<span class="n">twosComplLossTh</span> <span class="o">=</span> <span class="p">(</span><span class="n">lossTh</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">const_setter_gate</span><span class="p">(</span><span class="n">twosComplLossTh</span><span class="p">,</span> <span class="n">tempResIds</span><span class="p">))</span> <span class="c1"># temporary registerに閾値の2の補数をセット</span>
-<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">lossResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 閾値の2の補数を損失額レジスタに足す</span>
+    <span class="c1"># 下落の場合</span>
+    <span class="n">setter</span> <span class="o">=</span> <span class="n">ctrl_const_setter_gate</span><span class="p">(</span><span class="n">deltaUdl</span><span class="p">,</span> <span class="n">pIds</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tempResIds</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># 下落額temporary registerにセット</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">subtracter_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">udlResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 原資産価格レジスタから減ずる</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">setter</span><span class="p">)</span> <span class="c1"># temporary registerをリセット</span>
+
+<span class="c1">### 原資産価格が閾値以上となっているか否かのチェック</span>
+<span class="c1"># 閾値の2の補数（原資産価格レジスタにこれを足して最上位ビットが1となる⇔原資産価格が閾値以上）</span>
+<span class="n">twosComplTh</span> <span class="o">=</span> <span class="p">(</span><span class="n">th</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">digit</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">const_setter_gate</span><span class="p">(</span><span class="n">twosComplTh</span><span class="p">,</span> <span class="n">tempResIds</span><span class="p">))</span> <span class="c1"># temporary registerに閾値の2の補数をセット</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">adder_gate</span><span class="p">(</span><span class="n">tempResIds</span><span class="p">,</span> <span class="n">udlResIds</span><span class="p">,</span> <span class="n">carryResIds</span><span class="p">))</span> <span class="c1"># 閾値の2の補数を原資産価格レジスタに足す</span>
 </pre></div>
 </div>
 </div>
@@ -467,7 +537,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### QAE</span>
-<span class="c1"># オブサーバブルの定義</span>
+<span class="c1"># オブサーバブルzTgtの定義（QAE target qubitのZ）</span>
 <span class="n">obs</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="n">totQubitNum</span><span class="p">)</span>
 <span class="n">obs</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Z &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">qaeTargetId</span><span class="p">))</span>
 
@@ -476,7 +546,7 @@ document.write(`
 <span class="n">state</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
 
 <span class="c1"># gを一回作用させた状態|Ψ&gt;</span>
-<span class="c1"># これのtarget qubitを測定して1を得る確率 ＝ 求めたい確率（「損失額≧3」となる確率）</span>
+<span class="c1"># これのtarget qubitを測定して1を得る確率 ＝ 求めたい確率（「原資産価格≧閾値」となる確率）</span>
 <span class="n">g</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
 <span class="c1"># Groverの作用回数を色々と変えたとき、それぞれの下で「1を得る回数」のサンプル値を格納するリスト</span>
@@ -535,7 +605,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Groverの作用回数と誤差のグラフ</span>
-<span class="n">pTrue</span> <span class="o">=</span> <span class="mf">0.06</span> <span class="c1"># 求めたい確率の真の値</span>
+<span class="n">pTrue</span> <span class="o">=</span> <span class="mf">0.16</span> <span class="c1"># 求めたい確率の真の値</span>
 <span class="n">errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> <span class="o">-</span> <span class="n">pTrue</span><span class="p">)</span> <span class="c1"># 推定値との真の値の乖離</span>
 <span class="n">gCallNums</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">it</span><span class="o">.</span><span class="n">accumulate</span><span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">groverNums</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">nShot</span><span class="p">))</span> <span class="c1"># 回路gおよびその逆を呼んだ回数</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;number of calls to g&#39;</span><span class="p">)</span>
@@ -555,28 +625,11 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x1caebdfc760&gt;
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/notebooks_07_CreditPortfolioRisk_07_01_CreditPortfolioRiskMeasurement_blank_13_1.png" src="../../_images/notebooks_07_CreditPortfolioRisk_07_01_CreditPortfolioRiskMeasurement_blank_13_1.png" />
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+<img alt="../../_images/notebooks_07_DerivativePricing_07_01_DerivativePricing_blank_13_0.png" src="../../_images/notebooks_07_DerivativePricing_07_01_DerivativePricing_blank_13_0.png" />
 </div>
 </div>
 </section>
@@ -593,24 +646,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../06_02_grover_search.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">グローバー探索量子アルゴリズムをとことん実装する</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../08_01_Data_structure.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div></div>
   
 </div>
