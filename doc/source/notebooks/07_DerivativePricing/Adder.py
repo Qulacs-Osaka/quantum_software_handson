@@ -1,15 +1,21 @@
-from qulacs.gate import TOFFOLI, CNOT, merge
+from qulacs import QuantumCircuit
+from qulacs.gate import TOFFOLI
 
-def sum_gate(ia, ib, iout):
-    return merge(CNOT(ib, iout), CNOT(ia, iout))
+def add_sum_gate(circ, ia, ib, iout):
+    circ.add_CNOT_gate(ib, iout)
+    circ.add_CNOT_gate(ia, iout)
     
-def carry_gate(ia, ib, icarry, iout):
-    return merge([TOFFOLI(ia, ib, iout), CNOT(ia, ib), TOFFOLI(ib, icarry, iout)])
+def add_carry_gate(circ, ia, ib, icarry, iout):
+    circ.add_gate(TOFFOLI(ia, ib, iout))
+    circ.add_CNOT_gate(ia, ib)
+    circ.add_gate(TOFFOLI(ib, icarry, iout))
     
-def inv_carry_gate(ia, ib, icarry, iout):
-    return merge([TOFFOLI(ib, icarry, iout), CNOT(ia, ib), TOFFOLI(ia, ib, iout)])
+def add_inv_carry_gate(circ, ia, ib, icarry, iout):
+    circ.add_gate(TOFFOLI(ib, icarry, iout))
+    circ.add_CNOT_gate(ia, ib)
+    circ.add_gate(TOFFOLI(ia, ib, iout))
 
-def adder_gate(addendIds, augendIds, carryIds):
+def add_adder_gate(circ, addendIds, augendIds, carryIds):
     
     digit = len(addendIds)
     
@@ -19,18 +25,15 @@ def adder_gate(addendIds, augendIds, carryIds):
     if digit != len(carryIds):
         raise ValueError("The addend register's qubit num must be equal to the carry register's qubit num")
         
-    ret = carry_gate(addendIds[0], augendIds[0], carryIds[0], carryIds[1])
+    add_carry_gate(circ, addendIds[0], augendIds[0], carryIds[0], carryIds[1])
     for i in range(1, digit - 1):
-        ret = merge(ret, carry_gate(addendIds[i], augendIds[i], carryIds[i], carryIds[i + 1]))
-        
-    ret = merge(ret, carry_gate(addendIds[digit - 1], augendIds[digit - 1], carryIds[digit - 1], augendIds[digit]))
-    ret = merge(ret, CNOT(addendIds[digit - 1], augendIds[digit - 1]))
-    ret = merge(ret, sum_gate(carryIds[digit - 1], addendIds[digit - 1], augendIds[digit - 1]))
+        add_carry_gate(circ, addendIds[i], augendIds[i], carryIds[i], carryIds[i + 1])
+       
+    add_carry_gate(circ, addendIds[digit - 1], augendIds[digit - 1], carryIds[digit - 1], augendIds[digit])
+    circ.add_CNOT_gate(addendIds[digit - 1], augendIds[digit - 1])
+    add_sum_gate(circ, carryIds[digit - 1], addendIds[digit - 1], augendIds[digit - 1])
     
     for i in range(digit - 2, -1, -1):
-        ret = merge(ret, inv_carry_gate(addendIds[i], augendIds[i], carryIds[i], carryIds[i + 1]))
-        ret = merge(ret, sum_gate(carryIds[i], addendIds[i], augendIds[i]))
-    
-    return ret
-        
+        add_inv_carry_gate(circ, addendIds[i], augendIds[i], carryIds[i], carryIds[i + 1])
+        add_sum_gate(circ, carryIds[i], addendIds[i], augendIds[i])
     

@@ -1,6 +1,7 @@
+from qulacs import QuantumCircuit
 from qulacs.gate import X, CNOT, merge
 
-def const_setter_gate(num, numIds):
+def add_const_setter_gate(circ, num, numIds):
     
     gateList = []
     
@@ -9,9 +10,9 @@ def const_setter_gate(num, numIds):
         if binNum[i] == '1':
             gateList += [X(numIds[i])]
     
-    return merge(gateList)
+    circ.add_gate(merge(gateList))
 
-def ctrl_const_setter_gate(num, ctrlId, numIds, ctrlIs1):
+def add_ctrl_const_setter_gate(circ, num, ctrlId, numIds, ctrlIs1):
     
     gateList = []
     
@@ -26,7 +27,7 @@ def ctrl_const_setter_gate(num, ctrlId, numIds, ctrlIs1):
     if not ctrlIs1:
         gateList += [X(ctrlId)]
     
-    return merge(gateList)
+    circ.add_gate(merge(gateList))
     
     
         

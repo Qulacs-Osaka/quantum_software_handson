@@ -1,7 +1,7 @@
-from qulacs.gate import TOFFOLI, CNOT, merge, Identity, X
-from Adder import sum_gate, carry_gate, inv_carry_gate
+from qulacs import QuantumCircuit
+from Adder import add_sum_gate, add_carry_gate, add_inv_carry_gate
 
-def subtracter_gate(subtrahendIds, minuendIds, carryIds):
+def add_subtracter_gate(circ, subtrahendIds, minuendIds, carryIds):
     
     digit = len(subtrahendIds)
     
@@ -12,25 +12,22 @@ def subtracter_gate(subtrahendIds, minuendIds, carryIds):
         raise ValueError("The subtrahend register's qubit num must be equal to the carry register's qubit num")
         
     # flip each qubit in the subtrahend register to get 2's complement of it - 1
-    ret = Identity(0)
     for i in range(digit):
-        ret = merge(ret, X(minuendIds[i]))    
+        circ.add_X_gate(minuendIds[i])
         
-    ret = merge(ret, carry_gate(subtrahendIds[0], minuendIds[0], carryIds[0], carryIds[1]))
+    add_carry_gate(circ, subtrahendIds[0], minuendIds[0], carryIds[0], carryIds[1])
     for i in range(1, digit - 1):
-        ret = merge(ret, carry_gate(subtrahendIds[i], minuendIds[i], carryIds[i], carryIds[i + 1]))
+        add_carry_gate(circ, subtrahendIds[i], minuendIds[i], carryIds[i], carryIds[i + 1])
         
-    ret = merge(ret, CNOT(subtrahendIds[digit - 1], minuendIds[digit - 1]))
-    ret = merge(ret, sum_gate(carryIds[digit - 1], subtrahendIds[digit - 1], minuendIds[digit - 1]))
+    circ.add_CNOT_gate(subtrahendIds[digit - 1], minuendIds[digit - 1])
+    add_sum_gate(circ, carryIds[digit - 1], subtrahendIds[digit - 1], minuendIds[digit - 1])
     
     for i in range(digit - 2, -1, -1):
-        ret = merge(ret, inv_carry_gate(subtrahendIds[i], minuendIds[i], carryIds[i], carryIds[i + 1]))
-        ret = merge(ret, sum_gate(carryIds[i], subtrahendIds[i], minuendIds[i]))
+        add_inv_carry_gate(circ, subtrahendIds[i], minuendIds[i], carryIds[i], carryIds[i + 1])
+        add_sum_gate(circ, carryIds[i], subtrahendIds[i], minuendIds[i])
     
     # flip each qubit in the minuend register
     for i in range(digit):
-        ret = merge(ret, X(minuendIds[i]))      
-    
-    return ret
+        circ.add_X_gate(minuendIds[i])
         
     
