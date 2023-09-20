@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart1(行列\(C\)の特異値分解まで) &#8212; Quantum Software Hands on  documentation</title>
+    <title>行列\(A\)を定義する &#8212; Quantum Software Hands on  documentation</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -34,8 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -48,7 +49,7 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_02_Quantum_inspired_classical_algorithm_Part1.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart2(行列\(C\)の特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
+    <link rel="next" title="(行列\(C\)の特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
     <link rel="prev" title="\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について" href="08_01_Data_structure.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -60,6 +61,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -153,9 +163,28 @@
 <li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -264,10 +293,10 @@
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -275,7 +304,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -292,7 +321,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)</h1>
+    <h1>行列Aを定義する</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -302,29 +331,31 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">行添字をサンプルする関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認"><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#列添字をサンプルする関数の実装">列添字をサンプルする関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装"><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認"><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:特異値分解">Step 3:特異値分解</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">行添字をサンプルする関数の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認"><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて"><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#特異値について">特異値について</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#右特異ベクトルについて">右特異ベクトルについて</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#左特異ベクトルについて">左特異ベクトルについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装"><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認"><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:特異値分解">Step 3:特異値分解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて"><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#特異値について">特異値について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#右特異ベクトルについて">右特異ベクトルについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#左特異ベクトルについて">左特異ベクトルについて</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -336,21 +367,19 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="line-block">
-<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 2</div>
-<div class="line">2022年10月7日(金)</div>
-<div class="line">高比良宗一</div>
+<div class="line">量子ソフトウェア勉強会:「量子インスパイアード古典アルゴリズム」ハンズオン資料 2</div>
+<div class="line">2023年9月20日(水) 高比良宗一（名城大学情報工学部情報工学科）</div>
 </div>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\newcommand{\norm}[1]{\lVert#1\rVert}
 \renewcommand{\top}{\mathsf{T}}
 \newcommand{\SQ}{\mathrm{SQ}}\]</div>
+<p># <span class="math notranslate nohighlight">\(x = A^+b\)</span>に関する量子インスパイアード古典アルゴリズム Part 1 ### (行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</p>
 </div></blockquote>
-<section id="x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)">
-<h1><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)<a class="headerlink" href="#x=A^+bに関する量子インスパイアード古典アルゴリズムPart1(行列Cの特異値分解まで)" title="Permalink to this heading">#</a></h1>
 <p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>を得るまでの部分，及びその特異値分解について実装します．そして<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>によって，<span class="math notranslate nohighlight">\(A\)</span>の左右の特異ベクトルと特異値が近似される様子を確認してみます．</p>
 <section id="行列Aを定義する">
-<h2>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this heading">#</a></h2>
+<h1>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this heading">#</a></h1>
 <p>低ランク行列<span class="math notranslate nohighlight">\(A\)</span>を生成する関数を定義します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -390,7 +419,7 @@ document.write(`
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">300</span>
@@ -416,91 +445,91 @@ document.write(`
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Aのランク = 2
-Aのフロべニウスノルム = 1.0077822185373186
-Aの2ノルム = 1.0
+Aのフロべニウスノルム = 1.0077822185373184
+Aの2ノルム = 0.9999999999999997
 Aの特異値
- [1.00000000e+00 1.25000000e-01 1.03701686e-15 9.85591426e-16
- 9.55109049e-16 9.46254262e-16 8.65943074e-16 8.13204863e-16
- 7.58452167e-16 7.02290032e-16 6.05500371e-16 5.17382387e-16
- 4.25699444e-16 3.36523089e-16 2.46415795e-16 1.40599449e-16
- 9.76185084e-17 6.82908534e-17 6.36272576e-17 5.66807190e-17
- 4.94933180e-17 4.62031412e-17 4.14934731e-17 3.98684853e-17
- 3.80272523e-17 3.62815122e-17 3.50624520e-17 3.47435405e-17
- 3.42564033e-17 3.28390361e-17 3.02329939e-17 2.98077227e-17
- 2.75700398e-17 2.72142402e-17 2.65298881e-17 2.62443973e-17
- 2.54323800e-17 2.48550910e-17 2.43260628e-17 2.37259164e-17
- 2.33599527e-17 2.26052467e-17 2.23512661e-17 2.20548324e-17
- 2.17383213e-17 2.10463255e-17 2.09686237e-17 2.05153623e-17
- 2.00021999e-17 1.98048199e-17 1.95474367e-17 1.87467541e-17
- 1.84913964e-17 1.82048968e-17 1.79046806e-17 1.78444316e-17
- 1.74753797e-17 1.70584237e-17 1.68566240e-17 1.66782764e-17
- 1.63451239e-17 1.62371741e-17 1.58393612e-17 1.56260791e-17
- 1.54098828e-17 1.53362477e-17 1.50036377e-17 1.48822341e-17
- 1.45657723e-17 1.45287967e-17 1.43199944e-17 1.41196332e-17
- 1.39979292e-17 1.39516320e-17 1.36457157e-17 1.34692641e-17
- 1.33223872e-17 1.30824949e-17 1.30336050e-17 1.26498689e-17
- 1.25965530e-17 1.24415997e-17 1.23151826e-17 1.22377820e-17
- 1.20131365e-17 1.18241113e-17 1.16873442e-17 1.15609509e-17
- 1.13750150e-17 1.12606272e-17 1.10690374e-17 1.09723916e-17
- 1.08402821e-17 1.07243544e-17 1.05582736e-17 1.04399557e-17
- 1.02751097e-17 1.01893019e-17 9.87613803e-18 9.81624579e-18
- 9.69448590e-18 9.57297064e-18 9.51370753e-18 9.45301979e-18
- 9.30902375e-18 9.26198952e-18 9.24879925e-18 8.93015612e-18
- 8.84504366e-18 8.77664485e-18 8.67092536e-18 8.59710178e-18
- 8.51283364e-18 8.36441240e-18 8.17552025e-18 8.10148901e-18
- 8.00921889e-18 7.89621487e-18 7.67691547e-18 7.64604672e-18
- 7.58125477e-18 7.54360637e-18 7.38081381e-18 7.33718410e-18
- 7.22984308e-18 7.17566959e-18 7.09535505e-18 6.99346497e-18
- 6.96775601e-18 6.81994018e-18 6.78397361e-18 6.75815091e-18
- 6.70279138e-18 6.60561593e-18 6.44173196e-18 6.29430553e-18
- 6.26354404e-18 6.18896747e-18 6.08600043e-18 5.98262231e-18
- 5.91692294e-18 5.85327127e-18 5.78454094e-18 5.66737413e-18
- 5.59161111e-18 5.51671346e-18 5.48468978e-18 5.41604244e-18
- 5.29452827e-18 5.23524770e-18 5.17579822e-18 5.14426044e-18
- 5.11945067e-18 5.02319406e-18 4.99707609e-18 4.88682036e-18
- 4.80679791e-18 4.75086790e-18 4.66177061e-18 4.60253162e-18
- 4.51672722e-18 4.48349113e-18 4.45619333e-18 4.38121825e-18
- 4.27722666e-18 4.23652402e-18 4.14441851e-18 4.09184224e-18
- 4.02629872e-18 4.00432734e-18 3.97276041e-18 3.95134084e-18
- 3.88414317e-18 3.82500215e-18 3.74621522e-18 3.70031861e-18
- 3.66296859e-18 3.65117202e-18 3.56817986e-18 3.51894448e-18
- 3.45651501e-18 3.41754912e-18 3.38593662e-18 3.35531966e-18
- 3.31661298e-18 3.23248533e-18 3.19042348e-18 3.12384099e-18
- 3.06806579e-18 3.03653312e-18 2.99535293e-18 2.91853214e-18
- 2.88801298e-18 2.84909549e-18 2.80420443e-18 2.72541790e-18
- 2.71570244e-18 2.68091553e-18 2.63554741e-18 2.56403406e-18
- 2.50375962e-18 2.49075560e-18 2.45165154e-18 2.42581042e-18
- 2.37435311e-18 2.32852999e-18 2.30343232e-18 2.27239686e-18
- 2.24021711e-18 2.22452040e-18 2.17191892e-18 2.15509816e-18
- 2.13910733e-18 2.10796108e-18 2.04741434e-18 2.04371731e-18
- 1.98117377e-18 1.96868541e-18 1.93224842e-18 1.86946837e-18
- 1.86615648e-18 1.82043756e-18 1.79003288e-18 1.77404052e-18
- 1.77036477e-18 1.72319787e-18 1.71418441e-18 1.67937702e-18
- 1.63654590e-18 1.60497176e-18 1.58630353e-18 1.58080194e-18
- 1.55315792e-18 1.50589015e-18 1.46231989e-18 1.46157654e-18
- 1.45637869e-18 1.42287317e-18 1.36969722e-18 1.35284332e-18
- 1.32574621e-18 1.29532896e-18 1.28210464e-18 1.27770283e-18
- 1.25543449e-18 1.22988047e-18 1.18900683e-18 1.15443298e-18
- 1.13435339e-18 1.10631371e-18 1.10149981e-18 1.08248589e-18
- 1.05394522e-18 1.04592053e-18 1.02392724e-18 9.84133689e-19
- 9.75068952e-19 9.63301366e-19 9.44545379e-19 9.31808524e-19
- 8.98627926e-19 8.95551044e-19 8.66116998e-19 8.56680004e-19
- 8.38982805e-19 8.12442787e-19 7.84464304e-19 7.52566090e-19
- 7.43005608e-19 7.28817429e-19 7.00808083e-19 6.90748815e-19
- 6.78847090e-19 6.75455316e-19 6.45420835e-19 6.39155220e-19
- 5.93709547e-19 5.79142758e-19 5.71297168e-19 5.56399027e-19
- 5.28503592e-19 5.14385081e-19 4.98748626e-19 4.73903204e-19
- 4.52570433e-19 4.38644641e-19 4.06183048e-19 3.80930863e-19
- 3.61067065e-19 3.37419433e-19 3.15072532e-19 2.92103890e-19
- 2.76550716e-19 2.50696219e-19 2.31909623e-19 2.15459903e-19
- 2.04856652e-19 1.66325840e-19 1.22365499e-19 5.53675809e-20]
+ [1.00000000e+00 1.25000000e-01 5.19213071e-16 4.79118019e-16
+ 4.71713714e-16 4.58222417e-16 4.18376202e-16 3.81834822e-16
+ 3.54408030e-16 3.47628970e-16 3.21416227e-16 3.06267277e-16
+ 2.94596201e-16 2.77563960e-16 2.60622934e-16 2.58545313e-16
+ 2.29930845e-16 2.29601626e-16 2.19035211e-16 2.08345819e-16
+ 2.02803805e-16 1.74125391e-16 1.59430441e-16 1.47403420e-16
+ 1.44858870e-16 1.29917459e-16 1.17028191e-16 1.00297735e-16
+ 9.37942832e-17 8.61352464e-17 8.54481002e-17 8.25804231e-17
+ 8.02026027e-17 7.59935124e-17 6.71003385e-17 6.55470690e-17
+ 6.29616202e-17 5.99590794e-17 5.90842981e-17 5.83481073e-17
+ 5.42559429e-17 5.32616988e-17 5.20634581e-17 4.88518527e-17
+ 4.77845279e-17 4.71140163e-17 4.53903152e-17 4.34603235e-17
+ 4.18865006e-17 4.11653036e-17 4.03700291e-17 3.93219745e-17
+ 3.78008155e-17 3.61795232e-17 3.48760210e-17 3.44060987e-17
+ 3.21714941e-17 3.18224187e-17 3.15013830e-17 3.09899747e-17
+ 3.05030105e-17 2.94799811e-17 2.87547844e-17 2.82762851e-17
+ 2.71794738e-17 2.66188204e-17 2.65593766e-17 2.58955778e-17
+ 2.57313346e-17 2.50097543e-17 2.48568056e-17 2.42186036e-17
+ 2.40435255e-17 2.36537034e-17 2.35260358e-17 2.30242899e-17
+ 2.23809209e-17 2.17939005e-17 2.16015771e-17 2.14806951e-17
+ 2.08692603e-17 2.05871356e-17 2.04536573e-17 2.03399627e-17
+ 1.95932932e-17 1.94572013e-17 1.92152275e-17 1.89255407e-17
+ 1.86323067e-17 1.85739870e-17 1.82830250e-17 1.77793150e-17
+ 1.77569421e-17 1.76039948e-17 1.69915772e-17 1.67849530e-17
+ 1.65287465e-17 1.64180495e-17 1.62054369e-17 1.58363436e-17
+ 1.57454327e-17 1.55593677e-17 1.54212713e-17 1.51981088e-17
+ 1.49675088e-17 1.46895809e-17 1.44847141e-17 1.43737005e-17
+ 1.41737181e-17 1.40435267e-17 1.38353451e-17 1.37652725e-17
+ 1.35983264e-17 1.31958979e-17 1.30107535e-17 1.29555106e-17
+ 1.28594865e-17 1.25156029e-17 1.24675914e-17 1.21872844e-17
+ 1.21783613e-17 1.19813660e-17 1.19021017e-17 1.16668045e-17
+ 1.14976212e-17 1.13525816e-17 1.13306028e-17 1.11254143e-17
+ 1.11109004e-17 1.07572074e-17 1.07482652e-17 1.06404959e-17
+ 1.04345157e-17 1.02335277e-17 1.02200967e-17 1.00440568e-17
+ 9.89968573e-18 9.78431182e-18 9.67081664e-18 9.48908699e-18
+ 9.36944023e-18 9.24094514e-18 9.11871447e-18 8.93315308e-18
+ 8.83238984e-18 8.80597694e-18 8.61609837e-18 8.55448812e-18
+ 8.46266622e-18 8.29933641e-18 8.19595843e-18 8.06216710e-18
+ 7.94296967e-18 7.81537940e-18 7.66151453e-18 7.50469568e-18
+ 7.44760795e-18 7.35429286e-18 7.27895009e-18 7.20166496e-18
+ 7.06097760e-18 6.88315576e-18 6.77897885e-18 6.76091588e-18
+ 6.62876084e-18 6.56428001e-18 6.44513690e-18 6.41760489e-18
+ 6.26344653e-18 6.13970093e-18 6.06707466e-18 5.99930842e-18
+ 5.91770843e-18 5.83532236e-18 5.77706755e-18 5.71123285e-18
+ 5.62476419e-18 5.61991301e-18 5.57047856e-18 5.52333805e-18
+ 5.37102942e-18 5.35480686e-18 5.25387834e-18 5.10437091e-18
+ 5.06835214e-18 4.99402028e-18 4.81752983e-18 4.77295842e-18
+ 4.71640294e-18 4.67109667e-18 4.62029149e-18 4.55662552e-18
+ 4.48249051e-18 4.44125242e-18 4.41581291e-18 4.28132619e-18
+ 4.18357302e-18 4.09950584e-18 4.03595753e-18 3.98391045e-18
+ 3.95288911e-18 3.91938640e-18 3.85110454e-18 3.80333119e-18
+ 3.77776324e-18 3.72927218e-18 3.64924670e-18 3.60160992e-18
+ 3.52530987e-18 3.47131489e-18 3.43039738e-18 3.42287556e-18
+ 3.36699887e-18 3.32916140e-18 3.23370117e-18 3.18840443e-18
+ 3.11620071e-18 3.09894801e-18 3.06071617e-18 3.03852313e-18
+ 2.99294541e-18 2.95033138e-18 2.89146352e-18 2.83005899e-18
+ 2.78690702e-18 2.75055694e-18 2.70925601e-18 2.63355929e-18
+ 2.60526269e-18 2.55233348e-18 2.52277879e-18 2.47486980e-18
+ 2.41134561e-18 2.39090624e-18 2.32997985e-18 2.29931649e-18
+ 2.28435486e-18 2.24070395e-18 2.21644341e-18 2.18247479e-18
+ 2.13062578e-18 2.04035556e-18 2.02726658e-18 2.00668714e-18
+ 1.96523986e-18 1.94403667e-18 1.89506717e-18 1.86914043e-18
+ 1.82731690e-18 1.80884057e-18 1.79533469e-18 1.74379845e-18
+ 1.72882613e-18 1.68547459e-18 1.65578022e-18 1.62886682e-18
+ 1.59356446e-18 1.55032771e-18 1.49730237e-18 1.47917764e-18
+ 1.40963443e-18 1.39897517e-18 1.35584901e-18 1.32530291e-18
+ 1.30014849e-18 1.27567866e-18 1.24250612e-18 1.18449954e-18
+ 1.17514589e-18 1.17329050e-18 1.15475950e-18 1.11678209e-18
+ 1.09808184e-18 1.08287195e-18 1.04762457e-18 9.99933617e-19
+ 9.47765773e-19 9.33397107e-19 8.83519416e-19 8.66250827e-19
+ 8.50368417e-19 8.04423706e-19 7.81105493e-19 7.78676724e-19
+ 7.37535138e-19 7.29599221e-19 6.73237315e-19 6.63651314e-19
+ 6.43575106e-19 6.29562939e-19 5.79981955e-19 5.55028008e-19
+ 5.30057187e-19 4.82473887e-19 4.74345389e-19 4.05071912e-19
+ 3.90661947e-19 3.26599040e-19 2.91767554e-19 2.76088986e-19]
 Aの条件数
- 8.0
+ 7.999999999999996
 </pre></div></div>
 </div>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の特異値分解の結果を保存しておきます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_U</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">,</span> <span class="n">exact_Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -508,12 +537,11 @@ Aの条件数
 </pre></div>
 </div>
 </div>
-</section>
 <section id="\mathrm{SQ}(A)を定義する．">
 <h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">quantum_inspired.py</span></code>に<code class="docutils literal notranslate"><span class="pre">1_データ構造.ipynb</span></code>で実装した<code class="docutils literal notranslate"><span class="pre">SegmentTree</span></code>, <code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>と<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を記述しています．ここから<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>をインポートし，それを用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span>
@@ -522,7 +550,7 @@ Aの条件数
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SQA</span><span class="o">.</span><span class="n">sample1</span><span class="p">(),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">sample2</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">()</span>
@@ -530,22 +558,24 @@ Aの条件数
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(150, 64, 0.0006067326890983444, 0.01532067321127685, 1.0077822185373184)
+(209, 138, 0.0017541011869238918, 0.06069818774819866, 1.0077822185373182)
 </pre></div></div>
 </div>
 </section>
 <section id="Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
 <h2>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
 <section id="行添字をサンプルする関数の実装">
-<h3>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this heading">#</a></h3>
+<h1>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this heading">#</a></h1>
 <p>Step 1の「確率<span class="math notranslate nohighlight">\(\frac{\norm{A_{i,\ast}}^2 }{\norm{A}_\mathrm{F}^2}\)</span>行添字<span class="math notranslate nohighlight">\(i\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回サンプリングする」という部分について実装します．これは，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回用いるだけなので，その通りに書きます．ここでの行添字<span class="math notranslate nohighlight">\(i_0,\dots,i_{r-1}\)</span>は行列<span class="math notranslate nohighlight">\(R\)</span>を表します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1</span>
@@ -560,7 +590,7 @@ Aの条件数
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
@@ -569,7 +599,7 @@ Aの条件数
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプルされた行添字:</span><span class="se">\n</span><span class="s2">[i_0, i_1, ..., i_r-1] = &quot;</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">)</span>
@@ -582,15 +612,15 @@ Aの条件数
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 サンプルされた行添字:
-[i_0, i_1, ..., i_r-1] =  [350, 82, 320, 169, 183, 234, 78, 113, 319, 49]
+[i_0, i_1, ..., i_r-1] =  [238, 48, 264, 8, 265, 55, 114, 131, 238, 289]
 </pre></div></div>
 </div>
 </section>
 <section id="A^\top-A-\approx-R^\top-Rの確認">
-<h3><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this heading">#</a></h1>
 <p>量子インスパイアード古典アルゴリズムでは<span class="math notranslate nohighlight">\(r\times n\)</span>の行列<span class="math notranslate nohighlight">\(R\)</span>を実際には構成しません．しかし，サンプルされた行添字が表す行列<span class="math notranslate nohighlight">\(R\)</span>について，<span class="math notranslate nohighlight">\(A^\mathsf{T}A \approx R^\mathsf{T}R\)</span>であるかどうか気になると思います．そこで，行列<span class="math notranslate nohighlight">\(R\)</span>をサンプルされた行添字から構成する関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を以下のセルで定義し，<span class="math notranslate nohighlight">\(A^\top A\)</span>と<span class="math notranslate nohighlight">\(R^\top R\)</span>を直接計算して<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．<code class="docutils literal notranslate"><span class="pre">row_indices</span></code>はサンプルされた行添字です．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># サンプルされた行添字からRを構成する</span>
@@ -608,7 +638,7 @@ Aの条件数
 </div>
 <p>この関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を使って行列<span class="math notranslate nohighlight">\(R\)</span>を作り，<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
@@ -625,12 +655,12 @@ Aの条件数
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-誤差 0.023137777381409028
+誤差 0.02244468398310593
 </pre></div></div>
 </div>
 <p>さらに，<span class="math notranslate nohighlight">\(\mathbb{E}\left[ \lVert R^\top R - A^\top A \rVert_\mathrm{F}^2 \right] \le \frac{\lVert A \rVert_\mathrm{F}^4}{r}\)</span>であることを確認します．具体的には，<span class="math notranslate nohighlight">\(r\)</span>を増やしてみて，誤差<span class="math notranslate nohighlight">\(\lVert R^\top R - A^\top A \rVert_\mathrm{F}^2\)</span>が減少することを見てみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
@@ -658,22 +688,22 @@ Aの条件数
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-r=1 0.016598199983358857 1.0314941406249998
-r=2 0.005417590736010798 0.5157470703124999
-r=4 0.012854340386040866 0.25787353515624994
-r=8 0.001849509944679225 0.12893676757812497
-r=16 0.0024373851870283783 0.06446838378906249
-r=32 0.001119894497322654 0.03223419189453124
-r=64 0.0003003201697533293 0.01611709594726562
-r=128 8.051172903895418e-05 0.00805854797363281
-r=256 0.0002065389994894925 0.004029273986816405
-r=512 3.8386571355832134e-05 0.0020146369934082027
-r=1024 2.364921367894926e-05 0.0010073184967041013
-r=2048 1.7665216397064033e-05 0.0005036592483520507
+r=1 0.011036088608588065 1.031494140624999
+r=2 0.012900277652816452 0.5157470703124994
+r=4 0.004301352915359831 0.2578735351562497
+r=8 0.002086925152078077 0.12893676757812486
+r=16 0.002153392048352806 0.06446838378906243
+r=32 0.0009459364084887019 0.032234191894531215
+r=64 0.0002901357148178583 0.016117095947265608
+r=128 0.00025792208961707787 0.008058547973632804
+r=256 0.00019129401249491832 0.004029273986816402
+r=512 8.136658623254179e-05 0.002014636993408201
+r=1024 4.0273416560124284e-05 0.0010073184967041005
+r=2048 1.6310662494746377e-05 0.0005036592483520502
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -697,7 +727,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 <p>なお，関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>はただの確認用なので，実際には使われないことに注意してください．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -705,28 +735,23 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(0.02226905127146752,
- 0.022269051271467537,
- 0.022269051271467534,
+(0.022269051271467524,
+ 0.022269051271467524,
+ 0.02226905127146753,
  1.0077822185373182,
- 1.0077822185373186)
+ 1.0077822185373184)
 </pre></div></div>
 </div>
-</section>
-</section>
 <section id="Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
 <h2>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Permalink to this heading">#</a></h2>
-<p>次に，Step2について実装します．</p>
-<section id="列添字をサンプルする関数の実装">
-<h3>列添字をサンプルする関数の実装<a class="headerlink" href="#列添字をサンプルする関数の実装" title="Permalink to this heading">#</a></h3>
-<p>Step 2の「等確率で<span class="math notranslate nohighlight">\({0,1,\dots,r-1}\)</span>から数字をサンプリングし結果を<span class="math notranslate nohighlight">\(s\)</span>とする．そして確率<span class="math notranslate nohighlight">\(\frac{R_{s,j}^2}{\norm{R_{s,\ast}}^2} = \frac{A_{i_s,j}^2}{\norm{A_{i_s,\ast}}^2}\)</span>で列添字をサンプリングし，結果を<span class="math notranslate nohighlight">\(j_t\)</span>とする．この操作を<span class="math notranslate nohighlight">\(c\)</span>回行い，サンプリングされた列添字を<span class="math notranslate nohighlight">\(j_0,\dots,j_{c-1}\)</span>とする」の部分について実装します．</p>
+<p>次に，Step2について実装します． ## 列添字をサンプルする関数の実装 Step 2の「等確率で<span class="math notranslate nohighlight">\({0,1,\dots,r-1}\)</span>から数字をサンプリングし結果を<span class="math notranslate nohighlight">\(s\)</span>とする．そして確率<span class="math notranslate nohighlight">\(\frac{R_{s,j}^2}{\norm{R_{s,\ast}}^2} = \frac{A_{i_s,j}^2}{\norm{A_{i_s,\ast}}^2}\)</span>で列添字をサンプリングし，結果を<span class="math notranslate nohighlight">\(j_t\)</span>とする．この操作を<span class="math notranslate nohighlight">\(c\)</span>回行い，サンプリングされた列添字を<span class="math notranslate nohighlight">\(j_0,\dots,j_{c-1}\)</span>とする」の部分について実装します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_cols</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -743,7 +768,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mi">10</span>
@@ -762,12 +787,13 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 サンプルされた列添字:
-[j_0, i_1, ..., j_c-1] =  [290, 270, 204, 6, 263, 221, 59, 49, 81, 263, 99, 216, 175, 224, 30, 171, 53, 285, 98, 153]
+[j_0, i_1, ..., j_c-1] =  [12, 290, 76, 146, 2, 287, 150, 48, 182, 114, 182, 194, 122, 247, 243, 47, 76, 41, 198, 206]
 </pre></div></div>
 </div>
 </section>
+</section>
 <section id="r-\times-cの行列Cを構成する関数の実装">
-<h3><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this heading">#</a></h1>
 <p>Step2の「<span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を第<span class="math notranslate nohighlight">\(t\)</span>列が <span class="math notranslate nohighlight">\(\frac{\norm{R}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}} = \frac{\norm{A}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}}\)</span>」となるように構成する」という部分について実装します． <span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>について注目します．行列<span class="math notranslate nohighlight">\(R\)</span>の<span class="math notranslate nohighlight">\(s\)</span>行目は<span class="math notranslate nohighlight">\(\frac{\norm{A}_\mathrm{F}}{\sqrt{r}} \frac{A_{i_s,\ast}}{\norm{A_{i_s,\ast}}}\)</span>であるので，
 行列<span class="math notranslate nohighlight">\(R\)</span>の第<span class="math notranslate nohighlight">\(j_t\)</span>列<span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>は</p>
 <div class="math notranslate nohighlight">
@@ -779,7 +805,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 \right)^\top\]</div>
 <p>となります．このことを踏まえると，行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数は次のようになります．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_C</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">col_indices</span><span class="p">):</span>
@@ -806,10 +832,10 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </section>
 <section id="CC^\top-\approx-RR^\topの確認">
-<h3><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>であることを前述と時と同様にして確認してみます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span>
@@ -817,7 +843,7 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">row_indices</span> <span class="o">=</span> <span class="n">sample_rows</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
@@ -836,12 +862,12 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-誤差 0.017766116465666594
+誤差 0.12079629623014908
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\mathbb{E}\left[ \lVert RR^\top - AA^\top \rVert_\mathrm{F}^2 \right] \le \frac{\lVert R \rVert_\mathrm{F}^4}{c}\)</span>であることを確認します．具体的には，<span class="math notranslate nohighlight">\(c\)</span>を増やしてみて，誤差<span class="math notranslate nohighlight">\(\lVert RR^\top - AA^\top \rVert_\mathrm{F}^2\)</span>が減少することを見てみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
@@ -877,20 +903,20 @@ r=2048 1.7665216397064033e-05 0.0005036592483520507
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-c=1 0.008346579399657737 1.031494140624999
-c=2 0.0034169588310364214 0.5157470703124994
-c=4 0.0010570795238283661 0.2578735351562497
-c=8 0.0011795989685171495 0.12893676757812486
-c=16 0.0006459791069746068 0.06446838378906243
-c=32 0.0004625016621439242 0.032234191894531215
-c=64 0.00024717129452194277 0.016117095947265608
-c=128 7.326438025246483e-05 0.008058547973632804
-c=256 2.2772030052404912e-05 0.004029273986816402
-c=512 1.0398127286920224e-05 0.002014636993408201
+c=1 0.0439018565995124 1.0314941406249971
+c=2 0.01231327307140965 0.5157470703124986
+c=4 0.0027570746630107973 0.2578735351562493
+c=8 0.0015392452097097507 0.12893676757812464
+c=16 0.002100567090502002 0.06446838378906232
+c=32 0.0005925130682599771 0.03223419189453116
+c=64 0.00026716441867974096 0.01611709594726558
+c=128 0.00017349561289635792 0.00805854797363279
+c=256 0.0001212114849485813 0.004029273986816395
+c=512 5.384591647598512e-05 0.0020146369934081975
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -913,12 +939,11 @@ c=512 1.0398127286920224e-05 0.002014636993408201
 <img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_32_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_32_0.png" />
 </div>
 </div>
-</section>
 <section id="Step-3:特異値分解">
-<h3>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this heading">#</a></h3>
+<h2>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this heading">#</a></h2>
 <p>最後に，Step3について考えます．Step3は行列<span class="math notranslate nohighlight">\(C\)</span>を特異値分解をするだけなのであり，この部分はNumPyの関数を使います ．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">qi_svd</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -949,58 +974,59 @@ c=512 1.0398127286920224e-05 0.002014636993408201
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {i_0,...i_r-1} =
- [299, 347, 190, 222, 270, 185, 34, 177, 374, 214, 354, 387, 3, 36, 146, 78, 59, 185, 362, 250, 289, 360, 134, 302, 144, 31, 86, 381, 150, 244, 350, 57, 82, 311, 79, 310, 386, 236, 41, 209, 37, 164, 384, 216, 229, 69, 377, 190, 339, 69, 389, 92, 185, 234, 164, 359, 354, 210, 145, 78, 315, 266, 194, 266, 250, 237, 236, 368, 91, 362, 234, 128, 31, 374, 230, 183, 19, 89, 53, 12, 317, 308, 293, 60, 272, 362, 307, 274, 100, 2, 344, 370, 260, 21, 348, 334, 56, 233, 302, 332]
+ [79, 131, 236, 138, 78, 41, 85, 354, 123, 169, 337, 258, 140, 76, 150, 308, 235, 238, 96, 231, 138, 258, 308, 211, 254, 260, 36, 307, 199, 195, 186, 124, 305, 85, 227, 323, 8, 129, 383, 8, 246, 132, 59, 145, 84, 129, 80, 129, 316, 95, 30, 11, 1, 211, 155, 271, 129, 106, 30, 5, 155, 256, 367, 266, 304, 182, 146, 195, 194, 55, 314, 4, 109, 186, 383, 220, 199, 220, 371, 159, 238, 153, 354, 289, 132, 314, 304, 181, 68, 55, 333, 229, 143, 231, 168, 35, 234, 137, 137, 79]
 left singular vector of C =
- [[-1.00882655e-01 -9.24648041e-02  7.17004378e-01 ...  5.97013899e-04
-  -7.92979511e-06  6.69912242e-01]
- [-1.00810213e-01 -7.26888147e-02  1.29261663e-03 ...  5.51359705e-05
-  -7.32339650e-07  6.06161600e-04]
- [-1.00494792e-01 -2.01378060e-02 -1.24383423e-01 ... -1.04082578e-01
-  -2.19637215e-01  5.94727845e-02]
+ [[-0.10078665  0.05567284  0.32115091 ... -0.00234017  0.00356132
+   0.93119914]
+ [-0.09960004 -0.07489795  0.1081485  ... -0.01584392  0.02411162
+  -0.04766102]
+ [-0.09953486 -0.07910364 -0.05188662 ...  0.00095203 -0.00144882
+   0.01363859]
  ...
- [-9.96050365e-02  6.50591424e-02  5.55850247e-02 ... -8.14103799e-02
-   1.46861541e-01 -4.56668302e-02]
- [-1.00719032e-01 -5.41010178e-02  7.84696844e-02 ...  1.43215391e-01
-   6.09739864e-03 -1.05633238e-01]
- [-9.96899004e-02  5.85217651e-02 -5.69029177e-02 ... -5.73308288e-02
-  -5.91995007e-02  6.39287437e-02]]
+ [-0.09931901 -0.09232038 -0.08066682 ... -0.09563616  0.14554116
+   0.03532856]
+ [-0.09931901 -0.09232038 -0.08066682 ...  0.08259732 -0.12569838
+   0.03532856]
+ [-0.10078665  0.05567284  0.05176083 ... -0.02035416  0.03097539
+  -0.0232938 ]]
 singular values of C =
- [1.00507858e+00 7.37702833e-02 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 9.99122179e-17
- 9.99122179e-17 9.99122179e-17 9.99122179e-17 1.59917118e-17]
+ [1.00242849e+00 1.03740617e-01 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 9.87669694e-17
+ 9.87669694e-17 9.87669694e-17 9.87669694e-17 3.00449313e-17]
 </pre></div></div>
 </div>
 </section>
-</section>
 <section id="Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
 <h2><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Permalink to this heading">#</a></h2>
+</section>
+</section>
 <section id="特異値について">
-<h3>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this heading">#</a></h3>
+<h1>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this heading">#</a></h1>
 <p>上記のアルゴリズムで得られた<span class="math notranslate nohighlight">\(C\)</span>の特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">S</span></code>)が，行列<span class="math notranslate nohighlight">\(A\)</span>の特異値<span class="math notranslate nohighlight">\(\sigma_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">exact_S</span></code>)を近似していることを見てみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>
@@ -1016,93 +1042,93 @@ singular values of C =
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 400x300の行列Aの特異値:
- [1.00000000e+00 1.25000000e-01 4.56768673e-16 4.02238824e-16
- 4.01020419e-16 3.58686424e-16 3.46257156e-16 3.33926304e-16
- 3.19237735e-16 3.14276368e-16 3.11936289e-16 3.02926698e-16
- 2.68531842e-16 2.59225521e-16 2.50666874e-16 2.34206701e-16
- 2.06713068e-16 1.90246373e-16 1.84033175e-16 1.79052667e-16
- 1.56460449e-16 1.46063331e-16 1.22092205e-16 1.20165738e-16
- 1.15184186e-16 1.13422298e-16 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 9.94363982e-17
- 9.94363982e-17 9.94363982e-17 9.94363982e-17 8.44445797e-17
- 8.37646290e-17 7.64453578e-17 5.31614742e-17 5.19225999e-17
- 4.53937933e-17 2.21149970e-17 2.04931000e-17 1.73507404e-17]
+ [1.00000000e+00 1.25000000e-01 5.19213094e-16 4.79345167e-16
+ 4.71732210e-16 4.58242570e-16 4.18376202e-16 3.81834821e-16
+ 3.51484432e-16 3.47825823e-16 3.15975052e-16 3.06894888e-16
+ 2.92151597e-16 2.76922056e-16 2.60478793e-16 2.58559675e-16
+ 2.32224610e-16 2.30232802e-16 2.14765425e-16 2.08972139e-16
+ 2.02095864e-16 1.59139236e-16 1.54982739e-16 1.45129604e-16
+ 1.28041119e-16 1.23098986e-16 1.21378664e-16 9.86021132e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 9.71529166e-17 9.71529166e-17 9.71529166e-17
+ 9.71529166e-17 8.78031527e-17 6.59778865e-17 5.63605870e-17
+ 4.49028869e-17 2.86026833e-17 1.75002194e-17 3.56813390e-18]
 
 20x20の行列Cの特異値:
- [1.00398260e+00 8.74295724e-02 9.19262741e-17 5.00989270e-17
- 3.68481973e-17 3.32571565e-17 3.14220193e-17 2.75382546e-17
- 1.98086049e-17 1.92974610e-17 1.72769567e-17 1.50360362e-17
- 1.29204532e-17 9.91903593e-18 6.68838128e-18 4.87441106e-18
- 3.15379430e-18 2.10002104e-18 9.05523490e-19 6.74656990e-34]
+ [1.00490103e+00 7.61506021e-02 1.21927212e-16 4.18890547e-17
+ 3.72992896e-17 3.63914528e-17 2.97914887e-17 2.87506791e-17
+ 2.44828993e-17 2.13046125e-17 1.99266041e-17 1.53090350e-17
+ 1.33693534e-17 9.03175877e-18 8.53422448e-18 5.09049230e-18
+ 3.77324832e-18 2.06136031e-18 1.41230911e-33 6.38038974e-34]
 </pre></div></div>
 </div>
 <p>サンプル数<span class="math notranslate nohighlight">\(r,c\)</span>を増やしたときの特異値に関する誤差についてみてみます．行列<span class="math notranslate nohighlight">\(A\)</span>のランク分だけ<span class="math notranslate nohighlight">\(C\)</span>の特異値に注目します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[66]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">10</span>
@@ -1134,19 +1160,19 @@ singular values of C =
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(r,c)=(2,2): 0.006903924167931996 0.10096048837499154
-(r,c)=(4,4): 0.018069422775078448 0.10053856381553095
-(r,c)=(8,8): 0.005083740320246111 0.0556472796469075
-(r,c)=(16,16): 0.003986828124333297 0.034642986019494434
-(r,c)=(32,32): 0.003877172245551641 0.030836945682362903
-(r,c)=(64,64): 0.006502350224764452 0.04571513412341687
-(r,c)=(128,128): 0.0023773637436249164 0.02091311107658724
-(r,c)=(256,256): 0.0018023390650911963 0.014186208292205914
-(r,c)=(512,512): 0.0010745037179999307 0.00877507340211179
+(r,c)=(2,2): 0.007605164936364128 0.10077677401493898
+(r,c)=(4,4): 0.006664163493095154 0.08303654467706957
+(r,c)=(8,8): 0.011376142261109523 0.07973403408947627
+(r,c)=(16,16): 0.009745271459953176 0.06004110776570289
+(r,c)=(32,32): 0.003609230642555905 0.031184591754424763
+(r,c)=(64,64): 0.004273053488123823 0.03890602246205678
+(r,c)=(128,128): 0.002837380586722571 0.024082138257608424
+(r,c)=(256,256): 0.00208143073207121 0.018202510064449937
+(r,c)=(512,512): 0.0017952579212976772 0.014526341778711576
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[65]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1171,7 +1197,7 @@ singular values of C =
 </div>
 <p>なお，サンプル数<span class="math notranslate nohighlight">\(r,c\)</span>が行列<span class="math notranslate nohighlight">\(A\)</span>のサイズよりも小さい場合，<span class="math notranslate nohighlight">\(C\)</span>のサイズは<span class="math notranslate nohighlight">\(A\)</span>のサイズよりも小さくなります．そのため，<span class="math notranslate nohighlight">\(A\)</span>の特異値をそのまま計算するよりも，高速に近似特異値を得ることが期待できます．(<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の構築時間を含めれると，遅くなることに注意)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[74]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -1195,21 +1221,21 @@ singular values of C =
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 SciPyの特異値計算の時間
- 0.01494455337524414
+ 0.017342090606689453
 qi_svdを用いた時の特異値計算の時間
- 0.0012636184692382812
-特異値の誤差 [0.00667859 0.07784901]
+ 0.0013911724090576172
+特異値の誤差 [0.00457841 0.04470537]
 </pre></div></div>
 </div>
 </section>
 <section id="右特異ベクトルについて">
-<h3>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this heading">#</a></h3>
+<h1>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this heading">#</a></h1>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の右特異ベクトル<span class="math notranslate nohighlight">\(v^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[v^{(\ell)} \approx \tilde{v}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell}R^\dagger\vec{w}^{(\ell)}\]</div>
 <p>のようにして近似されます．このことを確認してみましょう．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[75]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
@@ -1220,7 +1246,7 @@ qi_svdを用いた時の特異値計算の時間
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[76]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v0</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1238,112 +1264,112 @@ qi_svdを用いた時の特異値計算の時間
 <div class="highlight"><pre>
 0番目の特異値に対応するAの右特異ベクトル
 近似:
- [-0.09440838  0.01401883  0.04057489 -0.1191403  -0.05161434  0.06208742
-  0.10694682 -0.03938006 -0.00157065  0.03245503 -0.02819476  0.08019408
- -0.02988361  0.00322013 -0.05996592  0.02516358 -0.11113624 -0.00973825
- -0.0142656   0.05564676  0.11639113 -0.00480009 -0.07569705  0.0481747
-  0.06608749 -0.03194317  0.0641745  -0.10541631 -0.06696148 -0.06775029
-  0.0953519  -0.01781199  0.12013226 -0.04986569 -0.06952141 -0.01599937
-  0.04235067 -0.03020183  0.03267426  0.09344067 -0.01944155 -0.14624766
-  0.08316173 -0.07365214 -0.05568515  0.06221286  0.0098873   0.12694491
- -0.04845045  0.09592046  0.00217039  0.02964429 -0.05246296 -0.09218318
-  0.00122886  0.01960742 -0.01781321 -0.09278275 -0.01163724 -0.04699686
-  0.00183574  0.00587643 -0.01031515  0.03799682 -0.02710374 -0.01619922
- -0.10383155  0.01636865  0.02055436  0.02547612 -0.03571882 -0.08149416
-  0.10286032  0.07269496 -0.02412493 -0.07735724 -0.01754432  0.01310643
-  0.06227719  0.00246292  0.04386502 -0.12721506 -0.02648137  0.06675705
- -0.04990223  0.02869365 -0.0398308  -0.01820521 -0.07055013 -0.02784117
- -0.02582525 -0.03602001  0.05775231  0.043648   -0.00409544 -0.01244501
- -0.04681567  0.11771469  0.11488634  0.11186431 -0.07924451 -0.03779427
- -0.06806103 -0.0487432   0.02724304  0.10326964  0.0622083   0.04809121
-  0.09204101 -0.04471401 -0.00328162  0.07482932  0.0011359  -0.06506777
- -0.01624378  0.00894266  0.04460019  0.0292381   0.02010398 -0.04354131
- -0.02135557  0.01443532 -0.00858347  0.00295011 -0.03385917  0.01320969
-  0.06979743 -0.00473062  0.09042346 -0.04843368 -0.05320873  0.04488506
- -0.10611463 -0.01750263 -0.00132003 -0.03091107 -0.02026742  0.03987817
-  0.00691618  0.0004644   0.00059604 -0.09554868  0.01747934  0.0071761
-  0.01416119  0.08889201  0.09095376 -0.09897474 -0.02552319 -0.07317721
-  0.08147642  0.05203029 -0.02026544  0.12989027 -0.06049482 -0.04940837
-  0.07372394 -0.03975119 -0.04775989 -0.07919803 -0.01008619  0.03183719
- -0.08136334 -0.01519712 -0.02699868 -0.03107165  0.01143241  0.08923449
- -0.03257458  0.02982004  0.01751632  0.108516   -0.0102156   0.13257179
- -0.09201193 -0.06194467  0.00466802 -0.03272012 -0.08361412  0.05725051
-  0.08552165 -0.00732634  0.05140972  0.00024842 -0.02235194 -0.03464039
-  0.03911829 -0.0553957  -0.01524099  0.08196336 -0.0756198  -0.03131817
-  0.10667474  0.02873835 -0.00091342 -0.0651289  -0.0102943  -0.00099011
- -0.05714779 -0.05295983  0.08084524 -0.03122158 -0.0116632  -0.01879263
- -0.03703013 -0.0248649   0.09231227  0.0798206  -0.07898155 -0.02439702
- -0.0461855  -0.00503522 -0.05594103 -0.01938095 -0.02051223  0.0884548
-  0.04160567  0.02221905  0.00600721 -0.03743507  0.0158709   0.0762567
-  0.03368389  0.13046626  0.04595701 -0.02244023  0.03700389  0.06395638
-  0.08105966 -0.01811342  0.01803027  0.03001832  0.0537241   0.02429548
- -0.03339838  0.04100341  0.03725649 -0.01822307 -0.04683275  0.05629211
- -0.02509542 -0.06660747 -0.1324734   0.00417205  0.06846496 -0.02104425
- -0.0504611   0.01240532 -0.00388773 -0.03203592  0.07571767  0.09026531
- -0.03706041  0.05113853  0.00537991  0.0413595  -0.00776075 -0.05753592
-  0.01464627 -0.00869199  0.02633839 -0.13736472 -0.05067958  0.14846509
-  0.06478176 -0.00326158  0.01171559  0.02756472 -0.02191005  0.02403296
- -0.1236504   0.01456469  0.01086291  0.04261948  0.0774616   0.00820755
- -0.06930585 -0.0588363  -0.01443862  0.08578656 -0.00453197 -0.00858526
- -0.04219467  0.10617729  0.05431701  0.05221216  0.04822822 -0.00709345
- -0.02775034  0.0196341   0.07173062 -0.03211098  0.06425894  0.02386264
- -0.05277093 -0.01345887 -0.04198905 -0.021102   -0.03430726 -0.0552895 ]
+ [-0.0317202   0.01337399 -0.11415716  0.06198199 -0.05629502 -0.03856402
+  0.07927241 -0.05296198  0.02053256  0.07143687 -0.06066683  0.06599246
+  0.08793431 -0.05312667  0.051438   -0.01644564 -0.05498971  0.03757013
+ -0.00098816  0.02539686  0.06564687 -0.00855814 -0.0259037  -0.05998523
+  0.05305378  0.08943291  0.07003928  0.00999123  0.04687588  0.00265625
+ -0.09704059  0.07938635 -0.01840886  0.06111095 -0.06052255 -0.07395583
+ -0.0521981   0.11650144 -0.09268968  0.07901958  0.02008417  0.08155085
+ -0.04346777  0.01810488  0.03339253  0.05137885 -0.03231164  0.03518399
+ -0.03111885  0.03459961  0.00977295  0.03586271 -0.10363354 -0.07319737
+ -0.0802782   0.03757656  0.02940295 -0.02734621 -0.03605049 -0.0772996
+  0.05253919 -0.06384619  0.01248809  0.00919471  0.08133145 -0.07976466
+  0.07494208 -0.08056276 -0.07593681  0.02836961  0.04319938  0.03126609
+  0.033294    0.1033259  -0.07034601  0.10302226 -0.09485786  0.08655116
+  0.0194916   0.01596536 -0.0566828   0.08449272  0.02083656  0.08549993
+ -0.00218206  0.00948511  0.02293383 -0.01769414 -0.07367503  0.00033869
+ -0.04419602  0.10288678 -0.06686099  0.04419152  0.01094282 -0.01183871
+  0.05867622 -0.02852445 -0.10442126  0.00174744 -0.01631248  0.05210681
+ -0.01571766 -0.02589921 -0.08469993 -0.07157025 -0.0230451  -0.06465406
+  0.00617937 -0.0159394   0.07770179 -0.02575547 -0.07170193 -0.06723837
+ -0.04396394  0.03729801 -0.00641077 -0.07978389 -0.05345854  0.02760726
+ -0.02578446  0.00591991  0.08548548  0.02656586  0.13203495 -0.03676117
+ -0.06378039 -0.01779187 -0.09531531  0.02193487 -0.09872355 -0.00112499
+  0.01478052  0.03016424 -0.03330164 -0.04999261  0.04666671 -0.0789648
+  0.04571095 -0.0003321  -0.05986715 -0.00819154 -0.05777269 -0.05001009
+  0.06926649 -0.02717667 -0.11020916  0.06314345  0.04643599 -0.01661893
+ -0.03868591 -0.08211097  0.05058854 -0.05164187  0.01467088 -0.04339066
+ -0.01783837  0.08601976 -0.1095638   0.0054588  -0.00342149 -0.09726745
+ -0.03630337  0.02420097 -0.05219577 -0.06499896 -0.0011301  -0.01747065
+  0.04274382 -0.04308753  0.05683675  0.0512726  -0.01191697  0.03852084
+  0.08130772  0.03795078 -0.01944249  0.03060062  0.0523495   0.02011647
+ -0.0880724  -0.05803288 -0.11355218 -0.00479497  0.0039829  -0.07985159
+ -0.01587512 -0.03129549 -0.03690483 -0.02547485 -0.04708811 -0.017056
+  0.01738491  0.00883852 -0.1573275  -0.06953934 -0.04309797 -0.08133134
+ -0.06846626 -0.00274993  0.0155446   0.05527531  0.00888762 -0.08007245
+  0.02708738 -0.00783943  0.09025781  0.02962462  0.15465978  0.05453309
+  0.05973076 -0.03082224  0.00290697  0.08462897 -0.08427127  0.13412481
+ -0.04548615  0.04383659 -0.01316888 -0.00543999  0.0320396   0.05633077
+ -0.04379285  0.11285006 -0.01666589  0.10728228  0.00355295 -0.02455303
+  0.06540515 -0.00571469 -0.14216609 -0.02847352  0.0749826   0.01440262
+  0.00832115 -0.03356875  0.07404006  0.04974037  0.05205633  0.0340721
+  0.0260405   0.00697726  0.01628316  0.05733054  0.05572234 -0.01441417
+ -0.09585749 -0.0509137  -0.03943181 -0.03281695  0.04084048  0.15735757
+ -0.00024769 -0.1315968  -0.01233281 -0.01006828  0.02565003  0.03327864
+ -0.05773076  0.02379497 -0.03868227 -0.02009777  0.02232155  0.02321261
+  0.11474818 -0.01715254  0.00643562  0.07770879  0.00178848  0.02780374
+  0.06755107  0.01103524 -0.0750486  -0.00611766  0.01811955 -0.04082593
+  0.02820813 -0.04598371 -0.0077759   0.10142964  0.09072496 -0.01452512
+  0.0361294  -0.00788169  0.04839007  0.04639304 -0.02924079 -0.09581713
+  0.05989333 -0.00654495  0.09971479  0.06922174 -0.02830517 -0.01349306
+ -0.06510445  0.01003437  0.07008415  0.06489023  0.0167468  -0.01076254]
 SciPy:
- [-0.09471064  0.01372957  0.04051077 -0.11933572 -0.05170756  0.06247768
-  0.1073243  -0.03964476 -0.00188849  0.03224152 -0.02798623  0.08057127
- -0.0297442   0.00300898 -0.06031805  0.02525174 -0.11141657 -0.00937732
- -0.01438335  0.05564406  0.11701265 -0.00444267 -0.07579873  0.04853163
-  0.06602811 -0.03189037  0.06421818 -0.10561398 -0.0668613  -0.06780437
-  0.09570032 -0.01805283  0.11999884 -0.04994428 -0.06962074 -0.01583412
-  0.04275693 -0.03004738  0.03285676  0.09352209 -0.019438   -0.14654182
-  0.08310697 -0.07393991 -0.05561551  0.06236387  0.00976113  0.12734883
- -0.04831869  0.09615316  0.00234365  0.03007216 -0.05302601 -0.09236233
-  0.00109117  0.01956787 -0.0178589  -0.09300284 -0.01159126 -0.04680271
-  0.00180033  0.0059654  -0.01007445  0.03801913 -0.02710623 -0.01615595
- -0.1042319   0.01659143  0.02061617  0.02535664 -0.03601063 -0.08184089
-  0.10334685  0.07274689 -0.02402336 -0.07781568 -0.0178003   0.0129648
-  0.06249081  0.00238133  0.04401297 -0.12746416 -0.02621577  0.06688008
- -0.04976269  0.02896132 -0.03996085 -0.01836859 -0.07047676 -0.02768637
- -0.02576784 -0.0362957   0.05809425  0.044223   -0.00419313 -0.01237177
- -0.04720948  0.11803157  0.11539617  0.1124343  -0.07975637 -0.03817376
- -0.06831587 -0.04847168  0.02757441  0.10362264  0.06272684  0.04820414
-  0.0919005  -0.04501744 -0.00362717  0.07524043  0.001055   -0.06522994
- -0.01620334  0.00879289  0.04500066  0.0289795   0.02009588 -0.0440136
- -0.02133517  0.01460877 -0.00821815  0.00306867 -0.03379749  0.01314842
-  0.07008088 -0.00452072  0.09035257 -0.04870124 -0.05340681  0.04510858
- -0.10652763 -0.01759559 -0.00117688 -0.03068651 -0.02023872  0.04008592
-  0.00719726  0.00020246  0.00022178 -0.09552771  0.01719767  0.00703798
-  0.01419717  0.08922587  0.09133025 -0.09923474 -0.02555688 -0.07363297
-  0.0816578   0.05201321 -0.0200971   0.13003671 -0.06080993 -0.0491947
-  0.07397917 -0.03984794 -0.04767979 -0.07928689 -0.00991256  0.03187969
- -0.08130176 -0.01546301 -0.02674588 -0.03127716  0.01120935  0.08956723
- -0.03255651  0.02967203  0.01753788  0.10886753 -0.01028791  0.13330003
- -0.09174115 -0.06227649  0.00450689 -0.03257246 -0.08414405  0.05737186
-  0.08576719 -0.00757772  0.05149451  0.00022651 -0.02242961 -0.03480317
-  0.0392202  -0.05538021 -0.01549003  0.08246284 -0.07562297 -0.03125555
-  0.1070999   0.02866658 -0.00067906 -0.0654425  -0.01029521 -0.00094124
- -0.05721901 -0.05306465  0.08111919 -0.03152411 -0.0116841  -0.01865934
- -0.03751627 -0.02497335  0.09266249  0.07996402 -0.07885547 -0.0244993
- -0.04575944 -0.00516472 -0.05610719 -0.01888673 -0.02058117  0.08854154
-  0.04192328  0.02222381  0.00578701 -0.03741132  0.01605285  0.07638107
-  0.03358526  0.13103157  0.04650432 -0.02249928  0.03734822  0.06400479
-  0.08115129 -0.01802758  0.01802316  0.03059441  0.05377636  0.02443309
- -0.03327874  0.04134161  0.03765894 -0.01807389 -0.04711922  0.05628554
- -0.02545551 -0.06666135 -0.13305746  0.00423795  0.06888222 -0.02102115
- -0.05042663  0.01240284 -0.00388622 -0.03184146  0.07601019  0.09018991
- -0.03727221  0.05115243  0.00555765  0.04128527 -0.00775533 -0.0575648
-  0.01484934 -0.00898963  0.02656037 -0.13754538 -0.05096266  0.14865486
-  0.06456281 -0.00359404  0.01163099  0.02776696 -0.02153132  0.02406405
- -0.1237461   0.01447285  0.01084212  0.04261741  0.07743007  0.00833751
- -0.0696192  -0.05944645 -0.0144877   0.08585432 -0.00469817 -0.00863429
- -0.04212807  0.10601373  0.05432412  0.05211482  0.04799167 -0.00729734
- -0.02770382  0.01965445  0.07215782 -0.03217011  0.06427889  0.02408606
- -0.05290224 -0.01324289 -0.04202287 -0.02098145 -0.03483567 -0.05546826]
+ [-0.03178579  0.01339787 -0.1143845   0.06210105 -0.05640416 -0.03864014
+  0.07942287 -0.05306616  0.0205774   0.0715718  -0.06078328  0.06612246
+  0.08810335 -0.05323437  0.05153945 -0.01648487 -0.05510182  0.03764083
+ -0.00099093  0.02545148  0.06577178 -0.00858007 -0.02595692 -0.0601031
+  0.0531583   0.08960578  0.0701723   0.01000783  0.04696291  0.0026565
+ -0.09723311  0.07954568 -0.01844061  0.06122542 -0.06063984 -0.07410657
+ -0.05229871  0.11672668 -0.09286865  0.07917701  0.02012488  0.08171221
+ -0.04355533  0.01813954  0.03345575  0.0514816  -0.03237935  0.03525824
+ -0.03117853  0.03466819  0.00978781  0.03593037 -0.10383397 -0.07333392
+ -0.08043726  0.0376514   0.0294628  -0.02740079 -0.03612539 -0.07744662
+  0.052643   -0.06397362  0.01251978  0.00921097  0.08149118 -0.07992301
+  0.07509322 -0.08071959 -0.07609187  0.02842743  0.04328069  0.03132377
+  0.03336238  0.10352992 -0.07048071  0.10322216 -0.09504197  0.08671549
+  0.01952856  0.01599235 -0.0567889   0.08465883  0.02087572  0.08566471
+ -0.00219     0.00950963  0.02298541 -0.01772501 -0.07381223  0.00033611
+ -0.04427933  0.1030884  -0.0669901   0.04427171  0.01096017 -0.01186036
+  0.05879242 -0.02858395 -0.10463549  0.00175337 -0.01635007  0.05220833
+ -0.01574671 -0.02594836 -0.08486516 -0.07170336 -0.02309082 -0.0647826
+  0.00618636 -0.01597017  0.07785602 -0.02580621 -0.07183828 -0.06737655
+ -0.04404622  0.03736789 -0.00642312 -0.07994316 -0.05355942  0.02766029
+ -0.02584077  0.00592402  0.08565684  0.02661693  0.13228927 -0.03683485
+ -0.06389875 -0.01782499 -0.09549502  0.02198091 -0.09891416 -0.00112374
+  0.01481104  0.0302231  -0.03336965 -0.05009244  0.04676617 -0.07912072
+  0.04579826 -0.00032691 -0.05997921 -0.00820417 -0.05788193 -0.05011023
+  0.06939673 -0.02723142 -0.11042606  0.06326595  0.04652422 -0.01664543
+ -0.03876942 -0.0822678   0.05067961 -0.05173948  0.01470153 -0.04348097
+ -0.01787777  0.0861799  -0.10977688  0.00547187 -0.00343178 -0.09745301
+ -0.03637709  0.02425079 -0.05229407 -0.06512647 -0.00113412 -0.01750239
+  0.04283423 -0.04316742  0.05694969  0.05137446 -0.0119413   0.03859628
+  0.08146537  0.03802787 -0.01947816  0.03066369  0.0524491   0.02014959
+ -0.08824002 -0.05813942 -0.1137716  -0.0047998   0.0039882  -0.08001098
+ -0.01590691 -0.03135636 -0.0369706  -0.02552279 -0.04717569 -0.01708627
+  0.01741501  0.00885184 -0.15763194 -0.0696734  -0.04318288 -0.08148692
+ -0.06860291 -0.00275695  0.01557192  0.05538071  0.00890811 -0.08022934
+  0.02714474 -0.00785599  0.09043169  0.02968092  0.15496412  0.05464191
+  0.05984439 -0.03088542  0.00291311  0.08479313 -0.08443903  0.13438914
+ -0.04557197  0.04391762 -0.01319775 -0.0054477   0.03210176  0.05644166
+ -0.04387738  0.11307303 -0.01669799  0.10748609  0.00356494 -0.02459806
+  0.06553224 -0.00573285 -0.14244482 -0.02852883  0.07513035  0.0144233
+  0.00833655 -0.0336364   0.07418805  0.04983916  0.05215753  0.03414352
+  0.02609588  0.00699501  0.01631814  0.05744169  0.05582713 -0.01443581
+ -0.09604381 -0.05101221 -0.03951222 -0.03287923  0.04091922  0.15766364
+ -0.00024434 -0.13185333 -0.01236108 -0.01008769  0.02570283  0.03334367
+ -0.05784436  0.02384133 -0.03875717 -0.02013642  0.02236463  0.02325399
+  0.11496818 -0.01718518  0.00644599  0.07786043  0.00178812  0.02785964
+  0.06768607  0.01104995 -0.07519349 -0.00612426  0.01815661 -0.04090824
+  0.02826305 -0.04607949 -0.00779054  0.10163116  0.09090134 -0.01455158
+  0.0361944  -0.007898    0.04848326  0.04648396 -0.02929724 -0.09599888
+  0.06001497 -0.00655647  0.09990745  0.06935388 -0.02836367 -0.01351696
+ -0.06524075  0.01004781  0.07021831  0.06501476  0.01677325 -0.01077529]
 </pre></div></div>
 </div>
 <p>サンプル数を増やしていくにつれて，<span class="math notranslate nohighlight">\(\norm{v^{(\ell)} - \tilde{v}^{(\ell)}}\)</span>が小さくなることを確認します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[79]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">errors</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1384,18 +1410,18 @@ SciPy:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(r,c)=(2,2): 0.053716921963869305 2.5698534935499238 [0.00765992 0.10930036]
-(r,c)=(4,4): 0.03779696020426916 2.04075692647302 [0.00725207 0.09231563]
-(r,c)=(8,8): 0.039405277988013174 1.2653715939284058 [0.00698005 0.08479822]
-(r,c)=(16,16): 0.02520930612912829 1.0795496028209515 [0.00635114 0.0713122 ]
-(r,c)=(32,32): 0.022201262845864544 1.1286874288581443 [0.00131866 0.01013171]
-(r,c)=(64,64): 0.009251939824001687 0.7851963201806067 [0.00284349 0.02535093]
-(r,c)=(128,128): 0.005899133454370995 1.2577253904429344 [0.00015355 0.00123461]
-(r,c)=(256,256): 0.007290099033723877 1.251522155362373 [0.00235924 0.01761108]
+(r,c)=(2,2): 0.02829504908539988 11.953080497719569 [0.05143816 0.21537544]
+(r,c)=(4,4): 0.037495686271958616 2.864633876497967 [0.00751327 0.10171908]
+(r,c)=(8,8): 0.018633988145829013 1.7889104770224038 [0.00145007 0.01220476]
+(r,c)=(16,16): 0.02246828079147237 1.2119560370589524 [0.00659683 0.07613456]
+(r,c)=(32,32): 0.015194689881244009 1.1144072028039513 [0.00340926 0.03121909]
+(r,c)=(64,64): 0.011350414319032538 1.0925412277833169 [0.00151848 0.01160038]
+(r,c)=(128,128): 0.008898171229586123 0.8549066952643022 [0.00144013 0.01211654]
+(r,c)=(256,256): 0.0041891501005805205 0.28546587539012197 [3.09644045e-05 2.47466442e-04]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1420,13 +1446,13 @@ SciPy:
 </div>
 </section>
 <section id="左特異ベクトルについて">
-<h3>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this heading">#</a></h3>
+<h1>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this heading">#</a></h1>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(u^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[u^{(\ell)} \approx \tilde{u}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell^2}A R^\top w^{(\ell)}\]</div>
 <p>のようにして近似されます．このことを確認してみます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[82]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
@@ -1436,7 +1462,7 @@ SciPy:
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[84]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">R</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">W</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
@@ -1454,212 +1480,146 @@ SciPy:
 <div class="highlight"><pre>
 0番目の特異値に対応するAの左特異ベクトル
 近似:
- [-8.94996616e-03 -8.22405824e-02 -3.71806420e-02 -5.01494553e-02
- -7.93813180e-02 -2.74469195e-02 -7.65251908e-03 -5.12497952e-02
- -5.84841329e-03 -3.42411358e-03 -3.79755653e-02 -6.15472551e-02
- -5.72408348e-02 -4.38638218e-02 -6.00219285e-02 -4.74886840e-02
- -4.39239864e-02 -2.95294469e-02 -1.79091610e-02 -2.68804899e-02
- -6.42535572e-02 -7.57484819e-02 -8.28715184e-02 -8.38103702e-02
- -4.25391232e-03 -6.62288444e-02 -2.79515554e-02 -1.83275497e-02
- -2.99560872e-03 -6.47622609e-02 -7.66108981e-02 -8.38512217e-02
- -7.73643595e-02 -2.74629962e-02 -5.46328720e-02 -5.93558633e-02
- -4.95149925e-02 -7.03435411e-02 -6.58338394e-02 -2.51921404e-02
- -2.95519607e-02 -7.74226118e-02 -2.18741763e-02 -3.15434279e-02
- -5.25158478e-02 -4.28435393e-02 -4.48297853e-02 -3.76906624e-02
- -1.67299028e-02 -8.22903978e-02 -6.92488677e-02 -3.14818902e-02
- -6.64784612e-02 -5.59980346e-02 -1.24520368e-02 -3.21401272e-04
- -2.33041013e-02 -7.04984350e-02 -3.37129590e-02 -8.37639480e-02
- -6.95693655e-02 -6.03934041e-02 -2.62047504e-02 -3.01899329e-02
- -2.59616522e-03 -4.38582322e-02 -6.36089173e-02 -1.79800672e-02
- -6.64707710e-02 -8.18438581e-02 -6.49223082e-02 -3.23480462e-02
- -7.00968762e-02 -3.28204020e-03 -1.92949630e-02 -1.85334282e-02
- -7.45418870e-02 -4.08620408e-02 -8.37251354e-02 -4.12764832e-02
- -6.83454063e-02 -1.13980071e-03 -7.26148366e-02 -4.86606727e-02
- -4.10327496e-02 -1.62375523e-02 -5.30580090e-02 -9.24893328e-03
- -4.99882641e-02 -5.78818035e-02 -5.26521843e-02 -6.76684167e-02
- -7.28522110e-02 -1.37496932e-02 -2.37068636e-02 -7.62755298e-02
- -2.91363234e-02 -6.71183112e-04 -3.41485420e-02 -7.91756324e-02
- -7.22880199e-02 -2.83609952e-02 -1.95805675e-02 -1.65488750e-02
- -3.83785377e-02 -3.18673753e-02 -6.26593166e-03 -3.28157976e-02
- -7.59632891e-02 -4.89263637e-02 -1.73879702e-02 -6.22378123e-02
- -5.27088950e-02 -2.86956742e-02 -1.66185204e-03 -4.05708149e-02
- -4.71083050e-02 -5.47123202e-03 -3.33522920e-02 -7.45251629e-02
- -4.58809607e-03 -5.92303112e-02 -4.72886781e-02 -3.99968798e-02
- -6.63371935e-02 -2.05129396e-02 -4.20050373e-02 -1.77173267e-02
- -8.28013760e-02 -1.46227769e-02 -3.05525215e-02 -5.44152839e-02
- -6.48771919e-02 -4.11733724e-02 -4.58039994e-02 -2.34430728e-02
- -1.19675311e-02 -3.19736358e-02 -7.48795415e-02 -3.79139557e-02
- -2.43341188e-02 -6.06222237e-02 -4.16461519e-02 -1.24134529e-03
- -4.35379186e-02 -7.05647704e-02 -5.42201957e-02 -6.85940906e-02
- -2.98075904e-02 -4.06645789e-02 -7.17101613e-02 -3.96578707e-02
- -8.25196661e-02 -4.26255271e-02 -8.23665237e-02 -8.02655818e-02
- -7.73440913e-04 -2.29286145e-03 -6.71487332e-03 -2.98350425e-02
- -7.31274496e-02 -7.35880034e-02 -2.92818828e-02 -4.83566089e-02
- -5.62966419e-02 -3.38200309e-02 -6.99423255e-02 -5.73772171e-02
- -7.42669322e-02 -3.19589781e-02 -7.53893148e-03 -4.31742033e-02
- -2.80885451e-02 -2.44051423e-02 -7.58158752e-03 -5.64991756e-02
- -1.50289179e-02 -7.63636235e-02 -4.54481509e-02 -4.36676118e-02
- -3.98843095e-02 -7.64168194e-02 -1.37866001e-03 -5.38865300e-02
- -1.72496910e-02 -5.84516615e-02 -5.54982951e-02 -4.37464082e-02
- -5.94043073e-02 -2.67897328e-02 -3.86452358e-02 -1.16295940e-02
- -7.22346309e-03 -4.78468081e-02 -5.16087882e-02 -1.74334005e-02
- -7.98537446e-02 -6.88517805e-02 -7.00797914e-02 -4.58299907e-02
- -6.67268339e-02 -5.60483272e-03 -5.81462210e-02 -1.00275684e-02
- -5.23318250e-02 -5.08172681e-02 -3.79746812e-02 -4.86234861e-02
- -2.07445430e-02 -5.38063761e-02 -7.85650017e-02 -1.90105691e-02
- -1.20787641e-02 -4.17062968e-02 -8.38842750e-02 -4.44295928e-02
- -2.74843861e-02 -6.33998934e-02 -9.26511635e-03 -8.02985631e-02
- -2.61642804e-02 -5.14437108e-02 -8.38245851e-02 -1.79829545e-02
- -4.20854482e-02 -6.91700162e-03 -1.77534449e-02 -4.04104015e-02
- -4.25800374e-02 -5.33897946e-02 -7.28136525e-02 -4.76890236e-02
- -6.38448073e-02 -8.38110307e-02 -8.07954892e-02 -8.05111335e-02
- -5.80556840e-02 -7.55255468e-02 -2.38280431e-02 -4.26755580e-02
- -4.26324035e-02 -6.63863763e-03 -5.90464077e-02 -4.42330025e-02
- -8.02828638e-02 -4.70031425e-03 -3.19888945e-02 -1.53477657e-02
- -5.16695425e-02 -1.77530463e-02 -8.29354016e-02 -1.68726862e-02
- -1.71125536e-02 -7.39963873e-02 -2.66866012e-02 -2.26558650e-02
- -2.42811174e-02 -6.03889683e-02 -1.87398942e-03 -1.60070943e-02
- -6.66641211e-02 -3.92107365e-02 -6.97145407e-02 -6.64722461e-02
- -8.10091379e-02 -3.27109078e-02 -7.37767986e-02 -6.83710959e-02
- -8.03061418e-02 -4.52291216e-02 -7.24321150e-02 -6.11291315e-02
- -7.09619842e-02 -3.38552746e-02 -6.84837883e-02 -7.28593217e-02
- -2.83859291e-02 -7.03034086e-02 -3.31562634e-03 -5.48979682e-03
- -3.33960790e-02 -3.05397038e-03 -7.33144730e-02 -4.73702708e-02
- -6.97636778e-03 -2.93678624e-02 -4.63482441e-02 -5.54951837e-02
- -2.19865822e-02 -7.04258761e-02 -2.91388914e-04 -7.77167111e-03
- -1.54960296e-02 -7.77859049e-02 -1.80623666e-02 -3.03755571e-02
- -8.70216646e-03 -4.58367799e-02 -5.39645566e-02 -6.24171156e-02
- -3.11662181e-03 -2.89800469e-02 -7.79284444e-02 -3.04262966e-02
- -4.84387816e-02 -2.79617225e-02 -4.57666810e-02 -7.18582786e-02
- -7.50219262e-02 -4.58247329e-02 -4.08779723e-02 -6.25131356e-02
- -6.69704716e-02 -9.97270737e-04 -9.09458880e-03 -7.38451224e-02
- -1.03608022e-02 -3.37153502e-02 -1.87712354e-02 -4.19701850e-02
- -6.97353839e-02 -7.12324255e-03 -3.57046444e-02 -1.23699387e-03
- -1.73575838e-02 -2.59207930e-02 -1.48508014e-02 -3.67785526e-02
- -7.34205752e-02 -3.95075724e-02 -1.64201332e-02 -4.45631584e-02
- -8.18897406e-02 -2.61011042e-02 -5.09742171e-02 -7.85591871e-02
- -8.87568995e-03 -3.02885434e-02 -4.29021358e-02 -5.72279082e-02
- -3.18471813e-02 -1.21599375e-02 -2.92566477e-02 -1.52380509e-02
- -7.14686067e-02 -4.01561417e-03 -7.98251348e-03 -6.68362240e-02
- -5.50986698e-02 -5.38920474e-02 -5.01139380e-02 -3.92704703e-02
- -2.44745336e-02 -5.77969171e-02 -4.88436686e-02 -7.66501311e-03
- -7.51800518e-02 -7.99401323e-02 -7.35682012e-02 -8.27759599e-02
- -7.53210549e-02 -2.72519824e-02 -7.03017685e-02 -6.09060086e-02
- -2.26194209e-02 -3.54279199e-02 -4.92754155e-02 -7.44601966e-02
- -3.49506496e-02 -3.71845184e-02 -8.06270392e-02 -2.60456871e-02
- -4.00449173e-02 -1.54320745e-02 -5.59514438e-02 -5.94882129e-02
- -3.14889245e-02 -3.04400154e-02 -4.03936650e-02 -1.35194547e-02
- -4.87152010e-02 -7.34648216e-02 -6.68679080e-02 -1.11755887e-02
- -6.01810374e-02 -2.82003298e-02 -7.55038482e-02 -7.38864954e-02
- -1.31429404e-02 -5.33538665e-02 -2.72339079e-02 -8.14746262e-02
- -1.55400431e-02 -8.30904943e-02 -2.49149541e-02 -2.99747506e-02
-  2.35112008e-05 -8.13984584e-02 -4.59887181e-02 -1.45676187e-02]
+ [-0.0605458  -0.0704849  -0.07149567 -0.04855803 -0.06494327 -0.0608823
+ -0.00690812 -0.04015194 -0.07384671 -0.0734254  -0.00876735 -0.05075763
+ -0.05635925 -0.03699295 -0.03174713 -0.07583245 -0.00139154 -0.02593728
+ -0.07389579 -0.04645488 -0.05951348 -0.03605792 -0.05254252 -0.01226802
+ -0.00362969 -0.0339557  -0.04472962 -0.0125205  -0.07404588 -0.03484445
+ -0.07841977 -0.08207029 -0.05855517 -0.06039629 -0.06840638 -0.06452022
+ -0.06882283 -0.02948692 -0.06494297 -0.06989275 -0.00083706 -0.07390116
+ -0.06036129 -0.05834352 -0.0173526  -0.05614958 -0.04937652 -0.03994919
+ -0.01978992 -0.03851737 -0.03806637 -0.08059453 -0.02387455 -0.07240957
+ -0.07010345 -0.08319091 -0.00675038 -0.01602705 -0.03474378 -0.02315195
+ -0.05877738 -0.01669903 -0.04517126 -0.03589944 -0.00946414 -0.08191783
+ -0.03327773 -0.07096757 -0.07956595 -0.07393915 -0.03677444 -0.05498509
+ -0.00635478 -0.02331074 -0.0667158  -0.0048446  -0.05927138 -0.04358965
+ -0.07173062 -0.07904759 -0.0728023  -0.04476247 -0.06216394 -0.05068522
+ -0.07986796 -0.08303011 -0.03791738 -0.01840737 -0.03995369 -0.00265248
+ -0.02539848 -0.02249231 -0.08164556 -0.04743769 -0.05679071 -0.05941819
+ -0.0577563  -0.05288016 -0.00592677 -0.03649032 -0.00146731 -0.03588471
+ -0.05995013 -0.01976901 -0.01166355 -0.04299707 -0.05190724 -0.029776
+ -0.04378774 -0.0463587  -0.03521626 -0.05078906 -0.01696562 -0.01960544
+ -0.07342023 -0.06143066 -0.05866729 -0.04179887 -0.08295138 -0.01211161
+ -0.03385545 -0.08145    -0.0477917  -0.08235871 -0.070211   -0.03934347
+ -0.01423589 -0.06718754 -0.02678061 -0.0756882  -0.07849846 -0.04628303
+ -0.06796465 -0.01840771 -0.06584961 -0.03190238 -0.00906975 -0.06983423
+ -0.05323478 -0.03375346 -0.04189315 -0.01298106 -0.03455251 -0.03931664
+ -0.05917124 -0.07962125 -0.03689864 -0.01044661 -0.01134955 -0.0107187
+ -0.06491777 -0.00575106 -0.00521567 -0.07257526 -0.01290219 -0.08276778
+ -0.06561617 -0.07916155 -0.0674428  -0.03894268 -0.03202196 -0.02759434
+ -0.0706788  -0.00872396 -0.03247791 -0.02014104 -0.00996913 -0.01419721
+ -0.07869264 -0.06606762 -0.0274082  -0.00420174 -0.0122052  -0.05808773
+ -0.05176395 -0.0566248  -0.00416218 -0.07744653 -0.06151638 -0.07639261
+ -0.05347447 -0.06627271 -0.07669143 -0.03477293 -0.04141373 -0.03128679
+ -0.03788901 -0.05323336 -0.08258669 -0.02300419 -0.002807   -0.00712448
+ -0.00251053 -0.07134748 -0.05720149 -0.06478203 -0.05903397 -0.00977324
+ -0.02724393 -0.05174461 -0.0596949  -0.06747449 -0.0706302  -0.05346121
+ -0.02997381 -0.04722246 -0.04539428 -0.01989842 -0.05704522 -0.08253875
+ -0.076835   -0.07251446 -0.07125862 -0.05001557 -0.00465223 -0.0815906
+ -0.02634413 -0.08109756 -0.0491986  -0.03975387 -0.06204669 -0.02409887
+ -0.01237883 -0.05061375 -0.07087539 -0.01549627 -0.04723927 -0.0798324
+ -0.01603082 -0.04837712 -0.00276387 -0.05772191 -0.03471284 -0.00823026
+ -0.01678352 -0.07274266 -0.03495152 -0.08061009 -0.07631995 -0.06716318
+ -0.00873076 -0.06160927 -0.08070924 -0.04558438 -0.06143948 -0.07142257
+ -0.056468   -0.03793588 -0.03122556 -0.05919834 -0.00885933 -0.0029276
+ -0.0568097  -0.01650095 -0.06685359 -0.046717   -0.03655642 -0.03812575
+ -0.04561245 -0.00911834 -0.08015103 -0.0662699  -0.04707998 -0.00862236
+ -0.06604481 -0.0664349  -0.0580816  -0.05609323 -0.02730883 -0.02042405
+ -0.01226267 -0.05435141 -0.06087473 -0.03697347 -0.00023972 -0.05346648
+ -0.04716755 -0.02469469 -0.00302745 -0.03113723 -0.02623074 -0.02681332
+ -0.05223701 -0.02821278 -0.0493041  -0.02786236 -0.02784349 -0.03131616
+ -0.0546355  -0.06380391 -0.00023605 -0.05146422 -0.03066548 -0.05251106
+ -0.07201202 -0.04256657 -0.02744108 -0.00875707 -0.02055682 -0.03793859
+ -0.05096003 -0.02404277 -0.02215396 -0.04740809 -0.08059723 -0.08117378
+ -0.04382467 -0.07713837 -0.08115339 -0.05283448 -0.04931161 -0.07286654
+ -0.04332738 -0.03636768 -0.06870996 -0.02358293 -0.0416052  -0.08031554
+ -0.0288785  -0.03039519 -0.00443046 -0.00799646 -0.03985718 -0.02861012
+ -0.0356367  -0.01622956 -0.05600859 -0.00584186 -0.04529722 -0.0414683
+ -0.00295963 -0.05200601 -0.03670453 -0.02870568 -0.03131672 -0.01109076
+ -0.06158986 -0.05923834 -0.07795516 -0.07206882 -0.04505654 -0.08203382
+ -0.04190346 -0.02162796 -0.03967774 -0.04925219 -0.04258829 -0.01581113
+ -0.06189415 -0.02329364 -0.06518351 -0.0329322  -0.06291574 -0.0444857
+ -0.07947668 -0.04571527 -0.06775138 -0.03454912 -0.01213915 -0.02988561
+ -0.00573499 -0.04412681 -0.02397704 -0.01587559 -0.03690571 -0.01068382
+ -0.01793798 -0.03995668 -0.00986041 -0.0808141  -0.00030202 -0.07198661
+ -0.03742878 -0.03056998 -0.04473364 -0.02759723 -0.0140094  -0.01773207
+ -0.04575469 -0.05951234 -0.05822442 -0.08182881 -0.06823165 -0.05164249
+ -0.01971849 -0.03670303 -0.05498087 -0.07597282 -0.04423853 -0.01947815
+ -0.06791941 -0.0294482  -0.01051621 -0.04196672 -0.02150881 -0.04872591
+ -0.02877166 -0.06208905 -0.05471735 -0.05511436]
 SciPy:
- [-9.01460906e-03 -8.24166155e-02 -3.72535502e-02 -5.02465332e-02
- -7.95548239e-02 -2.75440927e-02 -7.71794431e-03 -5.13785911e-02
- -5.89564946e-03 -3.46716245e-03 -3.80676524e-02 -6.16814960e-02
- -5.73956164e-02 -4.39905213e-02 -6.01840932e-02 -4.76010288e-02
- -4.40504355e-02 -2.96363212e-02 -1.79498226e-02 -2.69478357e-02
- -6.44188011e-02 -7.59329692e-02 -8.30280989e-02 -8.39940774e-02
- -4.28332215e-03 -6.63982468e-02 -2.80213843e-02 -1.84122955e-02
- -3.05148823e-03 -6.49023202e-02 -7.68029512e-02 -8.40293245e-02
- -7.75597149e-02 -2.75514216e-02 -5.47486639e-02 -5.94743653e-02
- -4.96580560e-02 -7.04918168e-02 -6.59789280e-02 -2.52749855e-02
- -2.96387146e-02 -7.75775570e-02 -2.19150988e-02 -3.16046471e-02
- -5.26291211e-02 -4.29222266e-02 -4.49641500e-02 -3.77650462e-02
- -1.67905090e-02 -8.24667263e-02 -6.93816451e-02 -3.15966800e-02
- -6.66439139e-02 -5.61103626e-02 -1.24779571e-02 -3.47912194e-04
- -2.33518182e-02 -7.06573862e-02 -3.38177686e-02 -8.39575340e-02
- -6.97009379e-02 -6.05605020e-02 -2.62746581e-02 -3.02545105e-02
- -2.64535186e-03 -4.39493234e-02 -6.37770447e-02 -1.80389807e-02
- -6.66474189e-02 -8.19947816e-02 -6.50610568e-02 -3.24286821e-02
- -7.02713773e-02 -3.29853971e-03 -1.93410207e-02 -1.85888430e-02
- -7.47065320e-02 -4.09679464e-02 -8.39203884e-02 -4.13662941e-02
- -6.84912333e-02 -1.16652214e-03 -7.27942282e-02 -4.87725048e-02
- -4.11116786e-02 -1.63213375e-02 -5.31985610e-02 -9.27066401e-03
- -5.00881456e-02 -5.80270030e-02 -5.27711211e-02 -6.78021623e-02
- -7.30431097e-02 -1.37968284e-02 -2.37986120e-02 -7.64281755e-02
- -2.92261369e-02 -7.26061971e-04 -3.42149021e-02 -7.93777244e-02
- -7.24771028e-02 -2.84186736e-02 -1.96589207e-02 -1.65937744e-02
- -3.84723783e-02 -3.19405673e-02 -6.32190265e-03 -3.29322068e-02
- -7.61325190e-02 -4.90489307e-02 -1.74276322e-02 -6.23862868e-02
- -5.28305562e-02 -2.87584641e-02 -1.71041641e-03 -4.07003718e-02
- -4.72394303e-02 -5.48953851e-03 -3.34184443e-02 -7.47020749e-02
- -4.64098398e-03 -5.93406326e-02 -4.73858446e-02 -4.01165920e-02
- -6.64748361e-02 -2.05543575e-02 -4.21256707e-02 -1.77925558e-02
- -8.29809427e-02 -1.46949156e-02 -3.06545957e-02 -5.45278638e-02
- -6.50095838e-02 -4.12597399e-02 -4.59144410e-02 -2.34948555e-02
- -1.20426988e-02 -3.20329065e-02 -7.50585204e-02 -3.80363880e-02
- -2.43798569e-02 -6.07625404e-02 -4.17691320e-02 -1.30076173e-03
- -4.36546543e-02 -7.06977629e-02 -5.43704392e-02 -6.87376900e-02
- -2.99091288e-02 -4.07544454e-02 -7.18724490e-02 -3.97600202e-02
- -8.26973696e-02 -4.27414746e-02 -8.25268301e-02 -8.04636395e-02
- -7.75825157e-04 -2.32445522e-03 -6.77754785e-03 -2.99035789e-02
- -7.32933528e-02 -7.37441941e-02 -2.93391537e-02 -4.84602063e-02
- -5.64367220e-02 -3.39259552e-02 -7.00774721e-02 -5.75182844e-02
- -7.44097293e-02 -3.20562679e-02 -7.60354591e-03 -4.32963196e-02
- -2.81962195e-02 -2.44785042e-02 -7.62155893e-03 -5.66247583e-02
- -1.50774987e-02 -7.65155611e-02 -4.55865327e-02 -4.37948340e-02
- -3.99637261e-02 -7.66020933e-02 -1.40032242e-03 -5.39886601e-02
- -1.73318569e-02 -5.85608822e-02 -5.56093405e-02 -4.38645610e-02
- -5.95649761e-02 -2.68812217e-02 -3.87298684e-02 -1.17060664e-02
- -7.25054846e-03 -4.79759337e-02 -5.17223972e-02 -1.74692619e-02
- -8.00424770e-02 -6.90025377e-02 -7.02331362e-02 -4.59478637e-02
- -6.68506632e-02 -5.63425315e-03 -5.82644197e-02 -1.00810370e-02
- -5.24848247e-02 -5.09417361e-02 -3.80984169e-02 -4.87251148e-02
- -2.07938647e-02 -5.39366336e-02 -7.87321387e-02 -1.90716463e-02
- -1.21391799e-02 -4.18098607e-02 -8.40945614e-02 -4.45430448e-02
- -2.75511547e-02 -6.35641193e-02 -9.31541217e-03 -8.04761434e-02
- -2.62489870e-02 -5.15713945e-02 -8.39916552e-02 -1.80233248e-02
- -4.22162010e-02 -6.93409293e-03 -1.77906937e-02 -4.05060998e-02
- -4.27069054e-02 -5.35011731e-02 -7.30034670e-02 -4.78267976e-02
- -6.39860547e-02 -8.40149034e-02 -8.09703982e-02 -8.06610004e-02
- -5.82010333e-02 -7.56805938e-02 -2.38764294e-02 -4.27845264e-02
- -4.27103861e-02 -6.67452047e-03 -5.91607234e-02 -4.43381677e-02
- -8.04615016e-02 -4.73983857e-03 -3.20521277e-02 -1.53852224e-02
- -5.17959378e-02 -1.77865603e-02 -8.30951174e-02 -1.69578612e-02
- -1.71573225e-02 -7.41537991e-02 -2.67353920e-02 -2.27348985e-02
- -2.43597038e-02 -6.05527790e-02 -1.92478756e-03 -1.60706808e-02
- -6.67961528e-02 -3.93369258e-02 -6.98685381e-02 -6.65992275e-02
- -8.11656966e-02 -3.27888157e-02 -7.39261994e-02 -6.85168566e-02
- -8.04784417e-02 -4.53120295e-02 -7.25894526e-02 -6.12645478e-02
- -7.10947728e-02 -3.39283495e-02 -6.86336382e-02 -7.30485269e-02
- -2.84777229e-02 -7.04609419e-02 -3.35432265e-03 -5.50987634e-03
- -3.34690582e-02 -3.10292323e-03 -7.34945898e-02 -4.74642833e-02
- -7.00692230e-03 -2.94517381e-02 -4.64354734e-02 -5.56092870e-02
- -2.20531756e-02 -7.05823756e-02 -3.29183894e-04 -7.80254608e-03
- -1.55616140e-02 -7.79649472e-02 -1.81024051e-02 -3.04771752e-02
- -8.72375958e-03 -4.59215695e-02 -5.40956697e-02 -6.25408977e-02
- -3.12339687e-03 -2.90803762e-02 -7.80915573e-02 -3.05320780e-02
- -4.85540317e-02 -2.80476587e-02 -4.58599572e-02 -7.19916003e-02
- -7.52159248e-02 -4.59285167e-02 -4.09955669e-02 -6.26586956e-02
- -6.71175482e-02 -1.01935505e-03 -9.16501783e-03 -7.39924736e-02
- -1.04336840e-02 -3.38040483e-02 -1.88160954e-02 -4.21013603e-02
- -6.98997926e-02 -7.13790696e-03 -3.58253712e-02 -1.26660585e-03
- -1.73955949e-02 -2.60189901e-02 -1.48841203e-02 -3.68516733e-02
- -7.36091280e-02 -3.96048722e-02 -1.64656420e-02 -4.46984993e-02
- -8.20874133e-02 -2.61835769e-02 -5.11153673e-02 -7.87457714e-02
- -8.92523393e-03 -3.03673998e-02 -4.30020286e-02 -5.73771681e-02
- -3.19085882e-02 -1.21831071e-02 -2.93258243e-02 -1.52969824e-02
- -7.16498433e-02 -4.04166304e-03 -8.03994879e-03 -6.69725644e-02
- -5.52055630e-02 -5.40168541e-02 -5.02431325e-02 -3.93957783e-02
- -2.45365191e-02 -5.79393749e-02 -4.89612240e-02 -7.71159152e-03
- -7.53182492e-02 -8.01017511e-02 -7.37453926e-02 -8.29284491e-02
- -7.55104367e-02 -2.73452642e-02 -7.04548534e-02 -6.10335695e-02
- -2.26872920e-02 -3.55421896e-02 -4.94204531e-02 -7.46023269e-02
- -3.50695661e-02 -3.72527985e-02 -8.08072492e-02 -2.60997344e-02
- -4.01639848e-02 -1.55129118e-02 -5.60848408e-02 -5.95978006e-02
- -3.16037693e-02 -3.05104537e-02 -4.04799181e-02 -1.35879359e-02
- -4.88364959e-02 -7.36150349e-02 -6.70316647e-02 -1.12403278e-02
- -6.03124277e-02 -2.82775720e-02 -7.56679517e-02 -7.40407102e-02
- -1.32087070e-02 -5.34603818e-02 -2.73139822e-02 -8.16789582e-02
- -1.56120300e-02 -8.32658243e-02 -2.49909131e-02 -3.00524808e-02
- -8.62309588e-06 -8.15914013e-02 -4.61050948e-02 -1.46459409e-02]
+ [-0.06063178 -0.07056625 -0.07158246 -0.04862612 -0.06503195 -0.06095108
+ -0.00693953 -0.04021985 -0.07394289 -0.07351338 -0.00878353 -0.05081582
+ -0.05642742 -0.03704946 -0.0318087  -0.07593304 -0.00141568 -0.02599341
+ -0.07399201 -0.04650953 -0.05959117 -0.03611226 -0.05260113 -0.01228628
+ -0.00363698 -0.03401735 -0.04479451 -0.01254705 -0.0741346  -0.03491016
+ -0.07853127 -0.08218143 -0.05863315 -0.06048798 -0.0684982  -0.06460986
+ -0.06891866 -0.02954067 -0.06503005 -0.06997553 -0.00084306 -0.0740002
+ -0.06045485 -0.05842809 -0.0173783  -0.05623333 -0.04943806 -0.04001221
+ -0.01984121 -0.03857801 -0.03813133 -0.08068746 -0.02390982 -0.07250399
+ -0.0702003  -0.08329509 -0.00678477 -0.01606309 -0.03480238 -0.02319961
+ -0.058862   -0.01672736 -0.04524962 -0.03596486 -0.00950268 -0.08201297
+ -0.03332387 -0.0710696  -0.07965349 -0.07402582 -0.03682144 -0.05505557
+ -0.00636821 -0.02335395 -0.06680174 -0.00485834 -0.05936046 -0.04365236
+ -0.0718282  -0.07914442 -0.07288395 -0.04483074 -0.06224089 -0.05074273
+ -0.07996829 -0.08314655 -0.03797211 -0.01842989 -0.03999778 -0.00266692
+ -0.02543578 -0.02253468 -0.08174462 -0.04750384 -0.05687514 -0.0594967
+ -0.05783011 -0.0529424  -0.00593584 -0.03653522 -0.00148681 -0.03593123
+ -0.06001967 -0.0198167  -0.01170331 -0.04304919 -0.05196441 -0.02982581
+ -0.04385963 -0.04641885 -0.03527912 -0.05086332 -0.01700349 -0.01964498
+ -0.07352595 -0.06151298 -0.05875747 -0.04185704 -0.08305182 -0.01212945
+ -0.03391248 -0.08154055 -0.04785471 -0.0824541  -0.07031419 -0.03940017
+ -0.01425221 -0.06726387 -0.02683388 -0.07579793 -0.07861089 -0.04634977
+ -0.06804526 -0.01844644 -0.06593022 -0.03196295 -0.00909236 -0.06993697
+ -0.05331092 -0.03380142 -0.0419535  -0.01300585 -0.03460886 -0.03936059
+ -0.05925991 -0.07971551 -0.03694779 -0.01046141 -0.01136678 -0.01075114
+ -0.0650068  -0.00576516 -0.00523565 -0.07265599 -0.01292018 -0.08285846
+ -0.06568797 -0.07925332 -0.06752771 -0.03899369 -0.03206217 -0.0276371
+ -0.07076888 -0.00874673 -0.03254125 -0.02016686 -0.00999661 -0.01424195
+ -0.07878899 -0.06616008 -0.02745157 -0.00421571 -0.01222621 -0.0581739
+ -0.05182444 -0.0567016  -0.00417239 -0.07753641 -0.0616052  -0.07648652
+ -0.05355695 -0.06635803 -0.07679893 -0.0348233  -0.0414831  -0.03133529
+ -0.0379397  -0.05329744 -0.08270502 -0.02303596 -0.00281382 -0.00715434
+ -0.00251455 -0.07143812 -0.05728264 -0.06485961 -0.05912167 -0.00980228
+ -0.02728896 -0.05180133 -0.05978358 -0.06756594 -0.07071727 -0.05354538
+ -0.03002496 -0.04729218 -0.04545434 -0.01992118 -0.05712637 -0.08264747
+ -0.07692423 -0.07261944 -0.07133902 -0.05009336 -0.0046716  -0.08170006
+ -0.02638369 -0.08120615 -0.04926476 -0.03980993 -0.06211485 -0.02414838
+ -0.01239285 -0.0506823  -0.07095273 -0.0155263  -0.0473167  -0.07994415
+ -0.01606506 -0.04844704 -0.00277822 -0.05778958 -0.034761   -0.00826202
+ -0.0168026  -0.07282904 -0.03500217 -0.08070908 -0.07642476 -0.0672386
+ -0.008764   -0.06170246 -0.0808191  -0.04564182 -0.06153348 -0.0715151
+ -0.0565438  -0.0379882  -0.03128069 -0.05928644 -0.0088728  -0.00293301
+ -0.05688345 -0.01654686 -0.0669474  -0.04678061 -0.03661127 -0.03818637
+ -0.04568726 -0.00915323 -0.08024214 -0.06635014 -0.04713686 -0.0086446
+ -0.06612905 -0.06651602 -0.05814475 -0.05617944 -0.0273549  -0.02047405
+ -0.01229146 -0.05442679 -0.06096082 -0.0370327  -0.00024619 -0.05353806
+ -0.04724044 -0.02474614 -0.00303486 -0.03118458 -0.0262789  -0.02686085
+ -0.05230675 -0.02825987 -0.04937317 -0.02789618 -0.02789151 -0.03135598
+ -0.05471743 -0.0638749  -0.00026383 -0.05152938 -0.03071228 -0.05257198
+ -0.07211434 -0.04264211 -0.0274817  -0.00878321 -0.0205986  -0.03799543
+ -0.05102354 -0.02409885 -0.0221824  -0.04746076 -0.08069505 -0.08127258
+ -0.04389224 -0.07722425 -0.08125058 -0.05289844 -0.04939296 -0.07295638
+ -0.04337727 -0.03643595 -0.06880348 -0.02362328 -0.04167796 -0.08040976
+ -0.02892012 -0.03043761 -0.0044412  -0.00802596 -0.03990368 -0.02864774
+ -0.03569326 -0.01625035 -0.05607518 -0.00586505 -0.04537514 -0.04152883
+ -0.00298864 -0.05208027 -0.03677207 -0.02873733 -0.03135558 -0.01111267
+ -0.0616602  -0.0593312  -0.07805245 -0.07215897 -0.04512449 -0.0821318
+ -0.04195338 -0.02165334 -0.03974893 -0.0493141  -0.04264729 -0.015829
+ -0.06198071 -0.02332793 -0.06528109 -0.03297081 -0.06300878 -0.04453606
+ -0.07958374 -0.04576957 -0.0678319  -0.03459215 -0.01216611 -0.02993966
+ -0.00575253 -0.04419967 -0.0240268  -0.01591216 -0.03696948 -0.01070977
+ -0.01797275 -0.04002642 -0.00989548 -0.0809272  -0.00032691 -0.07207141
+ -0.03747797 -0.03060903 -0.04479431 -0.02763489 -0.01403073 -0.01775245
+ -0.04581232 -0.05959357 -0.05831362 -0.08193596 -0.06832077 -0.05172321
+ -0.01974377 -0.03675004 -0.05504588 -0.076076   -0.04428945 -0.01952937
+ -0.06800251 -0.02949921 -0.01054801 -0.04201861 -0.02154635 -0.04880282
+ -0.02883157 -0.06216436 -0.05477746 -0.05518749]
 </pre></div></div>
 </div>
 <p>サンプル数を増やしていくにつれて，<span class="math notranslate nohighlight">\(\norm{u^{(\ell)} - \tilde{u}^{(\ell)}}\)</span>が小さくなることを確認します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[85]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">20</span>
@@ -1697,19 +1657,19 @@ SciPy:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(r,c)=(2,2): 0.01363039658378295 140.09897560357606
-(r,c)=(4,4): 0.010289945038705044 112.98948135613978
-(r,c)=(8,8): 0.011281326791994797 5.818083842469619
-(r,c)=(16,16): 0.009328073472766903 4.693722668949129
-(r,c)=(32,32): 0.00788403639784217 2.24308025274472
-(r,c)=(64,64): 0.0047692053409146475 1.2538782231617849
-(r,c)=(128,128): 0.003680889905664607 1.1908862173998653
-(r,c)=(256,256): 0.003222959568654292 1.2480234507696288
-(r,c)=(512,512): 0.10216803671747085 1.171412455471266
+(r,c)=(2,2): 0.013603883719106055 2130.2608988385095
+(r,c)=(4,4): 0.014645442873687764 15.121519302163557
+(r,c)=(8,8): 0.02509946525614708 10.636265086191234
+(r,c)=(16,16): 0.012625600458247736 3.8287808017213267
+(r,c)=(32,32): 0.007096984858864107 2.3173803313471515
+(r,c)=(64,64): 0.005862771726432317 1.7957413769009574
+(r,c)=(128,128): 0.004717295673775422 1.279604646308625
+(r,c)=(256,256): 0.004818623948890067 1.378776675271584
+(r,c)=(512,512): 0.0029659244507325017 0.9435018957612348
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[88]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1732,8 +1692,6 @@ SciPy:
 <img alt="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_53_0.png" src="../_images/notebooks_08_02_Quantum_inspired_classical_algorithm_Part1_53_0.png" />
 </div>
 </div>
-</section>
-</section>
 <section id="まとめ">
 <h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h2>
 <p>量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までをみてきました．このノートブックでは，特異ベクトルの復元に，行列<span class="math notranslate nohighlight">\(A\)</span>や<span class="math notranslate nohighlight">\(R\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトルに関する行列-ベクトル積を行なっているため，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の次元に関して多項式の計算量を必要とします．<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>では，このような計算量をかけずにSample, Query, Normそれぞれを実行することについて説明します．</p>
@@ -1761,11 +1719,10 @@ SciPy:
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_01_Data_structure.html"
@@ -1781,14 +1738,11 @@ SciPy:
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</p>
+        <p class="prev-next-title">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1803,29 +1757,31 @@ SciPy:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">行添字をサンプルする関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認"><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#列添字をサンプルする関数の実装">列添字をサンプルする関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装"><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認"><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:特異値分解">Step 3:特異値分解</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#行添字をサンプルする関数の実装">行添字をサンプルする関数の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#A^\top-A-\approx-R^\top-Rの確認"><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて"><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#特異値について">特異値について</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#右特異ベクトルについて">右特異ベクトルについて</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#左特異ベクトルについて">左特異ベクトルについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#r-\times-cの行列Cを構成する関数の実装"><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#CC^\top-\approx-RR^\topの確認"><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Step-3:特異値分解">Step 3:特異値分解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて"><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#特異値について">特異値について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#右特異ベクトルについて">右特異ベクトルについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#左特異ベクトルについて">左特異ベクトルについて</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
@@ -1872,8 +1828,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
   </footer>

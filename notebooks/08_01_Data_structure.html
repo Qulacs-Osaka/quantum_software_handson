@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -34,8 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -48,7 +49,7 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_01_Data_structure.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart1(行列\(C\)の特異値分解まで)" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="next" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
     <link rel="prev" title="グローバー探索量子アルゴリズムをとことん実装する" href="06_02_grover_search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -60,6 +61,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -153,9 +163,28 @@
 <li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -264,10 +293,10 @@
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -275,7 +304,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -302,34 +331,36 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -341,9 +372,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="line-block">
-<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 1</div>
-<div class="line">2022年10月7日(金)</div>
-<div class="line">高比良宗一</div>
+<div class="line">量子ソフトウェア勉強会:「量子インスパイアード古典アルゴリズム」ハンズオン資料 1</div>
+<div class="line">2023年9月20日(水)</div>
+<div class="line">高比良宗一 (名城大学情報工学部情報工学科)</div>
 </div>
 <section id="\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について">
 <h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Permalink to this heading">#</a></h1>
@@ -353,7 +384,7 @@ document.write(`
 \newcommand{\abs}[1]{|#1|}
 \newcommand{\norm}[1]{\lVert#1\rVert}\]</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[125]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -363,11 +394,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</section>
 <section id="セグメント木構造の実装">
-<h2>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this heading">#</a></h2>
+<h1>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this heading">#</a></h1>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">セグメント木構造</a>は，次のセルのように実装できます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[126]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SegmentTree</span><span class="p">:</span>
@@ -397,18 +429,18 @@ document.write(`
 </div>
 </section>
 <section id="ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-<h2>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this heading">#</a></h2>
+<h1>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this heading">#</a></h1>
 <p>セグメント木構造を用いて，ベクトルに基づいたデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．簡単のために実ベクトルのみを扱います．</p>
 <section id="定義">
-<h3>定義<a class="headerlink" href="#定義" title="Permalink to this heading">#</a></h3>
+<h2>定義<a class="headerlink" href="#定義" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の定義は下記の通りです．</p>
 <p>ベクトル<span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を次の操作(1-3)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.5や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.1など) - <span class="math notranslate nohighlight">\(\text{Sample}()\)</span>. 確率<span class="math notranslate nohighlight">\(\abs{v_i}^2/\norm{v}^2\)</span>で添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i)\)</span>. ベクトルの第<span class="math notranslate nohighlight">\(i\)</span>成分を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>.
 ベクトルの2ノルム<span class="math notranslate nohighlight">\(\norm{v}\)</span>を出力する</p>
 </section>
 <section id="実装">
-<h3>実装<a class="headerlink" href="#実装" title="Permalink to this heading">#</a></h3>
+<h2>実装<a class="headerlink" href="#実装" title="Permalink to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">VectorBasedDataStructure</span><span class="p">:</span>
@@ -467,10 +499,10 @@ document.write(`
 </div>
 </section>
 <section id="確認">
-<h3>確認<a class="headerlink" href="#確認" title="Permalink to this heading">#</a></h3>
+<h2>確認<a class="headerlink" href="#確認" title="Permalink to this heading">#</a></h2>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Norm}(), \mathrm{Query}(i), \mathrm{Sample}()\)</span>それぞれについて確認していきます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[128]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -481,7 +513,7 @@ document.write(`
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[129]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SQv</span><span class="o">.</span><span class="n">print_structure</span><span class="p">()</span>
@@ -494,19 +526,19 @@ document.write(`
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 height = 4
-[2.120901804620469]
-[2.0975887317480506, 0.023313072872418364]
-[0.139778771605787, 1.9578099601422638, 0.023313072872418364, 0.0]
-[0.08036850697945108, 0.05941026462633593, 0.8641459326645209, 1.093664027477743, 0.023313072872418364, 0.0, 0.0, 0.0]
-[0.018301360350497137, 0.06206714662895395, 0.03737714446339606, 0.022033120162939873, 0.03560276152483325, 0.8285431711396877, 0.8181854663602242, 0.2754785611175187, 6.490920279708548e-05, 0.023248163669621277, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-[-1.  1. -1.  1.  1. -1. -1.  1.  1. -1.]
+[2.448569350113205]
+[1.8257522517986355, 0.6228170983145696]
+[1.4081692953908433, 0.417582956407792, 0.6228170983145696, 0.0]
+[0.9040148948790538, 0.5041544005117894, 0.18858400987600943, 0.2289989465317826, 0.6228170983145696, 0.0, 0.0, 0.0]
+[0.5134774824972979, 0.390537412381756, 0.5012377704182622, 0.0029166300935271807, 0.1416840701326077, 0.046899939743401745, 0.2107787982003918, 0.018220148331390806, 0.4618647517187302, 0.16095234659583932, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+[-1. -1. -1. -1.  1. -1. -1. -1. -1.  1.]
 </pre></div></div>
 </div>
 <section id="\mathrm{Norm}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this heading">#</a></h3>
 <p>ベクトルの2ノルムが計算できているかどうか，NumPyの結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[130]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">SQv</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
@@ -521,16 +553,16 @@ height = 4
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQv.norm() = 1.4563316259082162,
-numpy.linalg.norm(v) = 1.4563316259082162
+SQv.norm() = 1.5647905131720363,
+numpy.linalg.norm(v) = 1.5647905131720363
 </pre></div></div>
 </div>
 </section>
 <section id="\mathrm{Query}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this heading">#</a></h3>
 <p>全ての<span class="math notranslate nohighlight">\(i\)</span>に対して，元々のベクトル<span class="math notranslate nohighlight">\(v\)</span>の<span class="math notranslate nohighlight">\(i\)</span>番目の成分と比較をしてみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[131]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -548,20 +580,20 @@ numpy.linalg.norm(v) = 1.4563316259082162
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQv.query(0) = -0.13528252049136702, v_0 = -0.13528252049136702
-SQv.query(1) = 0.24913278914858628, v_1 = 0.24913278914858628
-SQv.query(2) = -0.19333169544437367, v_2 = -0.19333169544437367
-SQv.query(3) = 0.14843557579953626, v_3 = 0.14843557579953626
-SQv.query(4) = 0.18868694052539314, v_4 = 0.18868694052539314
-SQv.query(5) = -0.9102434680565896, v_5 = -0.9102434680565896
-SQv.query(6) = -0.904536050337533, v_6 = -0.904536050337533
-SQv.query(7) = 0.5248605158682816, v_7 = 0.5248605158682816
-SQv.query(8) = 0.008056624776982324, v_8 = 0.008056624776982324
-SQv.query(9) = -0.15247348513633863, v_9 = -0.15247348513633863
+SQv.query(0) = -0.7165734313364527, v_0 = -0.7165734313364527
+SQv.query(1) = -0.6249299259771098, v_1 = -0.6249299259771098
+SQv.query(2) = -0.7079814760417551, v_2 = -0.7079814760417551
+SQv.query(3) = -0.05400583388419422, v_3 = -0.05400583388419422
+SQv.query(4) = 0.37640944479729477, v_4 = 0.37640944479729477
+SQv.query(5) = -0.21656393915747318, v_5 = -0.21656393915747318
+SQv.query(6) = -0.4591065216269442, v_6 = -0.4591065216269442
+SQv.query(7) = -0.13498202966095452, v_7 = -0.13498202966095452
+SQv.query(8) = -0.6796063211291742, v_8 = -0.6796063211291742
+SQv.query(9) = 0.4011886670830064, v_9 = 0.4011886670830064
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[131]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -571,10 +603,10 @@ True
 </div>
 </section>
 <section id="\mathrm{Sample}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SQv.sample()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\mathcal{D}_v (\Pr(i) = |v_i|^2/\norm{v}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[132]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -607,12 +639,10 @@ True
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQ(v) [9.500e-03 2.900e-02 1.660e-02 8.800e-03 1.690e-02 3.810e-01 3.920e-01
- 1.351e-01 2.000e-04 1.090e-02]
-exact [8.62904653e-03 2.92645074e-02 1.76232320e-02 1.03885621e-02
- 1.67866148e-02 3.90656073e-01 3.85772441e-01 1.29887466e-01
- 3.06045299e-05 1.09614522e-02]
-error = 0.012792073328308338
+SQ(v) [0.2141 0.162  0.2029 0.0014 0.0574 0.0196 0.089  0.008  0.183  0.0626]
+exact [0.2097051  0.15949616 0.20470638 0.00119116 0.05786402 0.01915402
+ 0.08608243 0.00744114 0.18862637 0.06573322]
+error = 0.008922043102418013
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -627,18 +657,18 @@ error = 0.012792073328308338
 </section>
 </section>
 <section id="行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-<h2>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this heading">#</a></h2>
+<h1>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>について実装しました．これを用いて<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装します． 簡単のために実行列のみを扱います．</p>
 <section id="id5">
-<h3>定義<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<h2>定義<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>行列<span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を次の操作(1-5)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.10や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.2など) - <span class="math notranslate nohighlight">\(\text{Sample1}()\)</span>. 確率<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>で行添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Sample2}(i)\)</span>.
 確率<span class="math notranslate nohighlight">\(\abs{A_{ij}}^2/\norm{A_{i,\ast}}^2\)</span>で列添字<span class="math notranslate nohighlight">\(j\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i,j)\)</span>. 第<span class="math notranslate nohighlight">\((i,j)\)</span>成分<span class="math notranslate nohighlight">\(A_{ij}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}(i)\)</span>. 第<span class="math notranslate nohighlight">\(i\)</span>行の2ノルム<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>. フロべニウスノルム<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}\)</span>を出力する</p>
 </section>
 <section id="id6">
-<h3>実装<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<h2>実装<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を用いて<span class="math notranslate nohighlight">\(\mathrm{SQ(A)}\)</span>を実装します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[133]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MatrixBasedDataStructure</span><span class="p">:</span>
@@ -670,10 +700,10 @@ error = 0.012792073328308338
 </div>
 </section>
 <section id="id7">
-<h3>確認<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<h2>確認<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Sample2}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Query}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span> (<code class="docutils literal notranslate"><span class="pre">normF</span></code>), それぞれ確認していきます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[134]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span>
@@ -683,10 +713,10 @@ error = 0.012792073328308338
 </div>
 </div>
 <section id="\mathrm{Sample1}()について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SQA.sample1()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(i) = \norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[135]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">normAF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># Aのフロべニウスノルム</span>
@@ -719,11 +749,11 @@ error = 0.012792073328308338
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 SQ(A).sample1()
- [0.1074 0.1594 0.056  0.1202 0.1715 0.1518 0.116  0.1177]
+ [0.1522 0.1526 0.0841 0.032  0.1664 0.1372 0.1672 0.1083]
 exact
- [0.10282038 0.15322317 0.05685199 0.12203012 0.17638788 0.15067793
- 0.1183215  0.11968703]
-error = 0.009883797274048613
+ [0.14825435 0.15554245 0.08303897 0.03323757 0.16950496 0.1370892
+ 0.16827819 0.10505432]
+error = 0.006945032299413305
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -735,10 +765,10 @@ error = 0.009883797274048613
 </div>
 </section>
 <section id="\mathrm{Sample2}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について確認します．<span class="math notranslate nohighlight">\(i = 0,1,2,\dots,m-1\)</span>の全てを調査すると図がたくさん表示されるので， 図については<span class="math notranslate nohighlight">\(i=0,1,2\)</span>までを見ます． <code class="docutils literal notranslate"><span class="pre">SQA.sample2()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(j) = |A_{i,j}|^2/\norm{A_{i,\ast}}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[136]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_size</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -773,14 +803,14 @@ error = 0.009883797274048613
 <div class="highlight"><pre>
 --------- i = 0 ----------
 SQ(A).sample2(0):
- [0.026 0.008 0.    0.04  0.012 0.137 0.064 0.06  0.035 0.071 0.04  0.072
- 0.38  0.005 0.017 0.033]
+ [0.009 0.131 0.1   0.001 0.066 0.026 0.01  0.02  0.006 0.012 0.178 0.061
+ 0.173 0.    0.132 0.075]
 exact:
- [2.61589305e-02 5.43838777e-03 7.12260289e-05 4.09045050e-02
- 1.17076758e-02 1.46687110e-01 7.63977358e-02 5.58589520e-02
- 3.49893460e-02 6.01797400e-02 3.03242259e-02 7.79174672e-02
- 3.77870925e-01 4.13006695e-03 2.00947909e-02 3.12689151e-02]
-error = 0.023146647598591138
+ [6.67122278e-03 1.38546480e-01 7.76453219e-02 2.50954261e-03
+ 6.44932654e-02 2.45554475e-02 1.28339181e-02 1.72999979e-02
+ 5.34582623e-03 1.68245798e-02 1.62068438e-01 6.26758781e-02
+ 1.98143792e-01 6.71504133e-07 1.36248853e-01 7.41367652e-02]
+error = 0.038928099973546876
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -797,13 +827,14 @@ error = 0.023146647598591138
 <div class="highlight"><pre>
 --------- i = 1 ----------
 SQ(A).sample2(1):
- [0.15  0.218 0.182 0.058 0.011 0.071 0.002 0.007 0.168 0.028 0.006 0.001
- 0.001 0.047 0.049 0.001]
+ [0.213 0.011 0.013 0.001 0.095 0.055 0.003 0.    0.172 0.11  0.    0.084
+ 0.015 0.192 0.002 0.034]
 exact:
- [0.15364116 0.20022576 0.17234216 0.05975188 0.01254292 0.07700894
- 0.00165842 0.00705121 0.17524188 0.01733796 0.00318492 0.00348038
- 0.00062585 0.05626658 0.05836748 0.00127251]
-error = 0.02860360503672554
+ [2.15359578e-01 1.16837036e-02 9.31491496e-03 5.06239791e-03
+ 7.80504864e-02 4.90597131e-02 5.19151565e-03 2.48252261e-06
+ 1.69286768e-01 1.21914890e-01 4.32025218e-05 1.00895384e-01
+ 1.23973871e-02 1.88623411e-01 3.99739544e-03 2.91167693e-02]
+error = 0.029056605818409322
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -820,14 +851,14 @@ error = 0.02860360503672554
 <div class="highlight"><pre>
 --------- i = 2 ----------
 SQ(A).sample2(2):
- [0.267 0.029 0.047 0.077 0.    0.036 0.134 0.012 0.004 0.02  0.006 0.039
- 0.008 0.005 0.316 0.   ]
+ [0.023 0.061 0.019 0.139 0.077 0.022 0.056 0.077 0.    0.027 0.105 0.
+ 0.027 0.    0.111 0.256]
 exact:
- [2.97310594e-01 3.49424249e-02 4.43479664e-02 7.87117376e-02
- 1.04588378e-03 2.84099189e-02 1.22766266e-01 1.07283563e-02
- 1.66576306e-03 1.30660945e-02 3.24114925e-03 4.10916978e-02
- 1.07398985e-02 4.51190733e-03 3.07415815e-01 4.52714206e-06]
-error = 0.0360204468989882
+ [1.57269980e-02 7.35258294e-02 1.89341155e-02 1.26425068e-01
+ 8.75346716e-02 1.25606000e-02 6.36604968e-02 9.08985281e-02
+ 7.63685414e-04 2.50247356e-02 1.04376861e-01 2.50924759e-04
+ 3.29819512e-02 2.76470713e-05 1.09891470e-01 2.37416418e-01]
+error = 0.034744195213902936
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -844,58 +875,58 @@ error = 0.0360204468989882
 <div class="highlight"><pre>
 --------- i = 3 ----------
 SQ(A).sample2(3):
- [0.121 0.012 0.014 0.134 0.022 0.12  0.013 0.041 0.03  0.112 0.09  0.007
- 0.009 0.018 0.059 0.198]
+ [0.154 0.002 0.018 0.055 0.03  0.019 0.143 0.019 0.18  0.038 0.045 0.008
+ 0.    0.154 0.135 0.   ]
 exact:
- [0.12650471 0.01124571 0.0137039  0.14462051 0.02122042 0.12634149
- 0.01084034 0.03499785 0.02977037 0.10949382 0.09215462 0.0076607
- 0.00889631 0.01949074 0.05797309 0.18508543]
-error = 0.020168095562929002
+ [1.69432833e-01 1.60980102e-03 1.10291568e-02 5.21402355e-02
+ 3.43614356e-02 1.78829232e-02 1.56175123e-01 1.28661022e-02
+ 1.77819918e-01 3.81903573e-02 3.70157725e-02 1.25719260e-02
+ 1.25468382e-04 1.56160672e-01 1.22569680e-01 4.85963581e-05]
+error = 0.027842645049913007
 --------- i = 4 ----------
 SQ(A).sample2(4):
- [0.083 0.019 0.115 0.05  0.033 0.003 0.02  0.105 0.039 0.155 0.069 0.124
- 0.096 0.041 0.001 0.047]
+ [0.014 0.017 0.088 0.004 0.003 0.057 0.017 0.058 0.025 0.065 0.001 0.176
+ 0.214 0.055 0.037 0.169]
 exact:
- [0.08606608 0.0265392  0.10741687 0.06293396 0.02962027 0.00079901
- 0.0223592  0.09870016 0.04926015 0.16711282 0.04760761 0.11911806
- 0.09701586 0.03398356 0.00125728 0.05020992]
-error = 0.03386211981035436
+ [0.01393605 0.0217129  0.07857658 0.00524667 0.0040309  0.05020077
+ 0.02124284 0.05733651 0.02595176 0.07900304 0.00195552 0.17700639
+ 0.21686669 0.05330799 0.04394615 0.14967925]
+error = 0.02845773519419411
 --------- i = 5 ----------
 SQ(A).sample2(5):
- [0.092 0.004 0.003 0.022 0.158 0.031 0.006 0.138 0.139 0.013 0.012 0.117
- 0.16  0.095 0.001 0.009]
+ [0.013 0.047 0.012 0.    0.017 0.014 0.102 0.11  0.001 0.03  0.033 0.15
+ 0.097 0.011 0.082 0.281]
 exact:
- [0.09144526 0.00160718 0.0048929  0.02824854 0.16411036 0.03155316
- 0.00428561 0.14134491 0.14548735 0.0131875  0.0144568  0.11291834
- 0.15587874 0.08390405 0.00039349 0.00628582]
-error = 0.01769425954630108
+ [0.01576997 0.04215698 0.01144164 0.00033565 0.01556054 0.01639636
+ 0.10100832 0.10008773 0.0014015  0.02666267 0.03470309 0.1538619
+ 0.10978272 0.00868706 0.07262467 0.2895192 ]
+error = 0.022292108031832302
 --------- i = 6 ----------
 SQ(A).sample2(6):
- [0.08  0.007 0.035 0.093 0.    0.182 0.022 0.002 0.302 0.099 0.    0.006
- 0.    0.001 0.003 0.168]
+ [0.005 0.034 0.252 0.027 0.03  0.001 0.041 0.027 0.153 0.021 0.132 0.
+ 0.004 0.022 0.153 0.098]
 exact:
- [0.09146026 0.00512616 0.03675251 0.07794015 0.00113147 0.19122092
- 0.02197223 0.00207659 0.28460209 0.0929698  0.00252154 0.00907162
- 0.0010078  0.00120111 0.0065953  0.17435046]
-error = 0.029328923707191562
+ [0.0052013  0.03883059 0.27740928 0.02884997 0.02194162 0.00064374
+ 0.03472452 0.02751076 0.1596721  0.02511733 0.11893572 0.00081955
+ 0.00126794 0.01839077 0.13991555 0.10076927]
+error = 0.034775200605602186
 --------- i = 7 ----------
 SQ(A).sample2(7):
- [0.01  0.189 0.022 0.    0.143 0.014 0.128 0.033 0.101 0.119 0.028 0.059
- 0.022 0.075 0.007 0.05 ]
+ [0.003 0.137 0.065 0.24  0.    0.052 0.073 0.008 0.045 0.016 0.03  0.044
+ 0.219 0.003 0.001 0.064]
 exact:
- [1.03065756e-02 1.76390989e-01 2.09324456e-02 1.39945604e-04
- 1.26301748e-01 1.34252113e-02 1.22365354e-01 3.74288424e-02
- 1.14846742e-01 1.23772495e-01 2.09436653e-02 6.61513178e-02
- 2.28600570e-02 8.06023831e-02 6.37167300e-03 5.71605548e-02]
-error = 0.029832921287860296
+ [0.00434803 0.13924038 0.08037212 0.23336496 0.00033546 0.04986425
+ 0.05077556 0.00809676 0.05716576 0.01563804 0.03255437 0.04650511
+ 0.21055747 0.00359115 0.00176015 0.06583043]
+error = 0.03197284358965613
 </pre></div></div>
 </div>
 </section>
 <section id="\mathrm{Query}(i,j)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this heading">#</a></h3>
 <p>全ての<span class="math notranslate nohighlight">\(i,j\)</span>に対して，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の<span class="math notranslate nohighlight">\(i,j\)</span>番目の成分と比較をしていきます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[137]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -914,138 +945,138 @@ error = 0.029832921287860296
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQA.query(0,0) = 0.24673634912174847, A[0,0] = 0.24673634912174847
-SQA.query(0,1) = 0.11250147779193254, A[0,1] = 0.11250147779193254
-SQA.query(0,2) = 0.012874859784769876, A[0,2] = 0.012874859784769876
-SQA.query(0,3) = -0.30853803765666965, A[0,3] = -0.30853803765666965
-SQA.query(0,4) = 0.16506632668228316, A[0,4] = 0.16506632668228316
-SQA.query(0,5) = -0.584277440516464, A[0,5] = -0.584277440516464
-SQA.query(0,6) = -0.42166095282004157, A[0,6] = -0.42166095282004157
-SQA.query(0,7) = 0.3605533487658288, A[0,7] = 0.3605533487658288
-SQA.query(0,8) = 0.28535865845082664, A[0,8] = 0.28535865845082664
-SQA.query(0,9) = 0.3742383549700018, A[0,9] = 0.3742383549700018
-SQA.query(0,10) = 0.26565500570949485, A[0,10] = 0.26565500570949485
-SQA.query(0,11) = 0.4258342170488666, A[0,11] = 0.4258342170488666
-SQA.query(0,12) = 0.9377668588378694, A[0,12] = 0.9377668588378694
-SQA.query(0,13) = -0.09803963553172723, A[0,13] = -0.09803963553172723
-SQA.query(0,14) = 0.21625436799722275, A[0,14] = 0.21625436799722275
-SQA.query(0,15) = 0.2697612395459955, A[0,15] = 0.2697612395459955
-SQA.query(1,0) = -0.7299608203865269, A[1,0] = -0.7299608203865269
-SQA.query(1,1) = 0.8333083393953221, A[1,1] = 0.8333083393953221
-SQA.query(1,2) = 0.7731104177481722, A[1,2] = 0.7731104177481722
-SQA.query(1,3) = -0.45522021323121287, A[1,3] = -0.45522021323121287
-SQA.query(1,4) = 0.20856678787488292, A[1,4] = 0.20856678787488292
-SQA.query(1,5) = 0.5167926591064899, A[1,5] = 0.5167926591064899
-SQA.query(1,6) = -0.0758390750814637, A[1,6] = -0.0758390750814637
-SQA.query(1,7) = -0.15637870336357795, A[1,7] = -0.15637870336357795
-SQA.query(1,8) = 0.7795872077696384, A[1,8] = 0.7795872077696384
-SQA.query(1,9) = 0.2452137497843706, A[1,9] = 0.2452137497843706
-SQA.query(1,10) = -0.10509806467091909, A[1,10] = -0.10509806467091909
-SQA.query(1,11) = -0.10986486489243019, A[1,11] = -0.10986486489243019
-SQA.query(1,12) = -0.0465886315103472, A[1,12] = -0.0465886315103472
-SQA.query(1,13) = -0.4417443655197838, A[1,13] = -0.4417443655197838
-SQA.query(1,14) = -0.44991578396820264, A[1,14] = -0.44991578396820264
-SQA.query(1,15) = -0.06643173351377951, A[1,15] = -0.06643173351377951
-SQA.query(2,0) = 0.6185311212526934, A[2,0] = 0.6185311212526934
-SQA.query(2,1) = 0.21204736686836534, A[2,1] = 0.21204736686836534
-SQA.query(2,2) = 0.2388873861483718, A[2,2] = 0.2388873861483718
-SQA.query(2,3) = 0.3182556436301801, A[2,3] = 0.3182556436301801
-SQA.query(2,4) = -0.03668580705203983, A[2,4] = -0.03668580705203983
-SQA.query(2,5) = 0.191201528822187, A[2,5] = 0.191201528822187
-SQA.query(2,6) = 0.39746224975753874, A[2,6] = 0.39746224975753874
-SQA.query(2,7) = -0.11749596641242566, A[2,7] = -0.11749596641242566
-SQA.query(2,8) = -0.046298079570315176, A[2,8] = -0.046298079570315176
-SQA.query(2,9) = 0.12966693998038026, A[2,9] = 0.12966693998038026
-SQA.query(2,10) = 0.06458116551653748, A[2,10] = 0.06458116551653748
-SQA.query(2,11) = -0.2299499961454199, A[2,11] = -0.2299499961454199
-SQA.query(2,12) = 0.11755915391003868, A[2,12] = 0.11755915391003868
-SQA.query(2,13) = 0.07619675027692918, A[2,13] = 0.07619675027692918
-SQA.query(2,14) = -0.6289548451843676, A[2,14] = -0.6289548451843676
-SQA.query(2,15) = -0.002413617383871025, A[2,15] = -0.002413617383871025
-SQA.query(3,0) = -0.5911128643351204, A[3,0] = -0.5911128643351204
-SQA.query(3,1) = 0.17624244220809804, A[3,1] = 0.17624244220809804
-SQA.query(3,2) = -0.1945535684839267, A[3,2] = -0.1945535684839267
-SQA.query(3,3) = -0.6320217234732717, A[3,3] = -0.6320217234732717
-SQA.query(3,4) = 0.242099600627819, A[3,4] = 0.242099600627819
-SQA.query(3,5) = -0.5907313976669135, A[3,5] = -0.5907313976669135
-SQA.query(3,6) = 0.17303679484002754, A[3,6] = 0.17303679484002754
-SQA.query(3,7) = 0.31091218667671516, A[3,7] = 0.31091218667671516
-SQA.query(3,8) = 0.2867538034005368, A[3,8] = 0.2867538034005368
-SQA.query(3,9) = 0.5499356338385218, A[3,9] = 0.5499356338385218
-SQA.query(3,10) = -0.5045167786279124, A[3,10] = -0.5045167786279124
-SQA.query(3,11) = 0.14546258278116297, A[3,11] = 0.14546258278116297
-SQA.query(3,12) = -0.15675522088301097, A[3,12] = -0.15675522088301097
-SQA.query(3,13) = -0.2320230995728314, A[3,13] = -0.2320230995728314
-SQA.query(3,14) = -0.40015689631469986, A[3,14] = -0.40015689631469986
-SQA.query(3,15) = 0.7149952888364521, A[3,15] = 0.7149952888364521
-SQA.query(4,0) = -0.586183929868981, A[4,0] = -0.586183929868981
-SQA.query(4,1) = -0.32550809523233704, A[4,1] = -0.32550809523233704
-SQA.query(4,2) = -0.654868570964269, A[4,2] = -0.654868570964269
-SQA.query(4,3) = -0.5012569845958675, A[4,3] = -0.5012569845958675
-SQA.query(4,4) = -0.34388433490484804, A[4,4] = -0.34388433490484804
-SQA.query(4,5) = -0.05647987602060445, A[4,5] = -0.05647987602060445
-SQA.query(4,6) = -0.29877621666636567, A[4,6] = -0.29877621666636567
-SQA.query(4,7) = 0.6277357114475264, A[4,7] = 0.6277357114475264
-SQA.query(4,8) = 0.4434715641604027, A[4,8] = 0.4434715641604027
-SQA.query(4,9) = -0.8168132799090656, A[4,9] = -0.8168132799090656
-SQA.query(4,10) = 0.43596950538405754, A[4,10] = 0.43596950538405754
-SQA.query(4,11) = 0.689615018349504, A[4,11] = 0.689615018349504
-SQA.query(4,12) = 0.6223565815474689, A[4,12] = 0.6223565815474689
-SQA.query(4,13) = 0.3683429223408494, A[4,13] = 0.3683429223408494
-SQA.query(4,14) = -0.07084901426325418, A[4,14] = -0.07084901426325418
-SQA.query(4,15) = -0.44772637245834657, A[4,15] = -0.44772637245834657
-SQA.query(5,0) = 0.558456001231237, A[5,0] = 0.558456001231237
-SQA.query(5,1) = 0.07403553413849095, A[5,1] = 0.07403553413849095
-SQA.query(5,2) = -0.12917890081878391, A[5,2] = -0.12917890081878391
-SQA.query(5,3) = 0.3103890247779444, A[5,3] = 0.3103890247779444
-SQA.query(5,4) = 0.7481287681704697, A[5,4] = 0.7481287681704697
-SQA.query(5,5) = 0.32804225875041715, A[5,5] = 0.32804225875041715
-SQA.query(5,6) = -0.12089680827027227, A[5,6] = -0.12089680827027227
-SQA.query(5,7) = -0.6943020467907778, A[5,7] = -0.6943020467907778
-SQA.query(5,8) = 0.7044026455602324, A[5,8] = 0.7044026455602324
-SQA.query(5,9) = -0.21207505242429137, A[5,9] = -0.21207505242429137
-SQA.query(5,10) = -0.22204675009227215, A[5,10] = -0.22204675009227215
-SQA.query(5,11) = -0.6205697420943074, A[5,11] = -0.6205697420943074
-SQA.query(5,12) = -0.7291246832146973, A[5,12] = -0.7291246832146973
-SQA.query(5,13) = 0.5349335404058227, A[5,13] = 0.5349335404058227
-SQA.query(5,14) = -0.03663333103788102, A[5,14] = -0.03663333103788102
-SQA.query(5,15) = -0.1464162674209859, A[5,15] = -0.1464162674209859
-SQA.query(6,0) = 0.4949160882925826, A[6,0] = 0.4949160882925826
-SQA.query(6,1) = 0.11716869150629228, A[6,1] = 0.11716869150629228
-SQA.query(6,2) = 0.3137320244708325, A[6,2] = 0.3137320244708325
-SQA.query(6,3) = 0.4568735055079639, A[6,3] = 0.4568735055079639
-SQA.query(6,4) = -0.05504752021050008, A[6,4] = -0.05504752021050008
-SQA.query(6,5) = 0.7156209853382922, A[6,5] = 0.7156209853382922
-SQA.query(6,6) = 0.24257857620570622, A[6,6] = 0.24257857620570622
-SQA.query(6,7) = 0.07457448934473199, A[6,7] = 0.07457448934473199
-SQA.query(6,8) = -0.8730405330732002, A[6,8] = -0.8730405330732002
-SQA.query(6,9) = 0.4989836451024824, A[6,9] = 0.4989836451024824
-SQA.query(6,10) = 0.08217668872868888, A[6,10] = 0.08217668872868888
-SQA.query(6,11) = -0.15586826770477313, A[6,11] = -0.15586826770477313
-SQA.query(6,12) = -0.05195203877240617, A[6,12] = -0.05195203877240617
-SQA.query(6,13) = 0.05671613914492646, A[6,13] = 0.05671613914492646
-SQA.query(6,14) = 0.13290239362722656, A[6,14] = 0.13290239362722656
-SQA.query(6,15) = -0.6833243739906927, A[6,15] = -0.6833243739906927
-SQA.query(7,0) = 0.1670953193809973, A[7,0] = 0.1670953193809973
-SQA.query(7,1) = 0.6912661429591236, A[7,1] = 0.6912661429591236
-SQA.query(7,2) = -0.23813162414005484, A[7,2] = -0.23813162414005484
-SQA.query(7,3) = -0.019470931058728103, A[7,3] = -0.019470931058728103
-SQA.query(7,4) = 0.5849406052162949, A[7,4] = 0.5849406052162949
-SQA.query(7,5) = 0.1907074477480124, A[7,5] = 0.1907074477480124
-SQA.query(7,6) = 0.5757531514364354, A[7,6] = 0.5757531514364354
-SQA.query(7,7) = 0.31842729423518656, A[7,7] = 0.31842729423518656
-SQA.query(7,8) = -0.5577844835583963, A[7,8] = -0.5577844835583963
-SQA.query(7,9) = 0.5790541275267532, A[7,9] = 0.5790541275267532
-SQA.query(7,10) = 0.23819543442769964, A[7,10] = 0.23819543442769964
-SQA.query(7,11) = 0.42332736061839404, A[7,11] = 0.42332736061839404
-SQA.query(7,12) = 0.24885464017544268, A[7,12] = 0.24885464017544268
-SQA.query(7,13) = 0.46728412815962417, A[7,13] = 0.46728412815962417
-SQA.query(7,14) = 0.1313813827450735, A[7,14] = 0.1313813827450735
-SQA.query(7,15) = -0.3935095769803745, A[7,15] = -0.3935095769803745
+SQA.query(0,0) = 0.14093412328130706, A[0,0] = 0.14093412328130706
+SQA.query(0,1) = -0.6422604567828589, A[0,1] = -0.6422604567828589
+SQA.query(0,2) = 0.4808073338826254, A[0,2] = 0.4808073338826254
+SQA.query(0,3) = 0.08643919692093416, A[0,3] = 0.08643919692093416
+SQA.query(0,4) = 0.438198230360778, A[0,4] = 0.438198230360778
+SQA.query(0,5) = 0.2703879684103896, A[0,5] = 0.2703879684103896
+SQA.query(0,6) = 0.1954758311642607, A[0,6] = 0.1954758311642607
+SQA.query(0,7) = 0.22695327908324625, A[0,7] = 0.22695327908324625
+SQA.query(0,8) = 0.12615976025407138, A[0,8] = 0.12615976025407138
+SQA.query(0,9) = -0.2238131242581275, A[0,9] = -0.2238131242581275
+SQA.query(0,10) = 0.694644592086265, A[0,10] = 0.694644592086265
+SQA.query(0,11) = 0.4319800096257096, A[0,11] = 0.4319800096257096
+SQA.query(0,12) = -0.7680750739709041, A[0,12] = -0.7680750739709041
+SQA.query(0,13) = 0.0014139621405123703, A[0,13] = 0.0014139621405123703
+SQA.query(0,14) = 0.6369126347355241, A[0,14] = 0.6369126347355241
+SQA.query(0,15) = 0.46981864981002985, A[0,15] = 0.46981864981002985
+SQA.query(1,0) = -0.8201933963741046, A[1,0] = -0.8201933963741046
+SQA.query(1,1) = 0.19104005693382153, A[1,1] = 0.19104005693382153
+SQA.query(1,2) = 0.17057823648830006, A[1,2] = 0.17057823648830006
+SQA.query(1,3) = 0.12575125033809176, A[1,3] = 0.12575125033809176
+SQA.query(1,4) = -0.49376690737214046, A[1,4] = -0.49376690737214046
+SQA.query(1,5) = -0.39146836758388903, A[1,5] = -0.39146836758388903
+SQA.query(1,6) = 0.12734481200033876, A[1,6] = 0.12734481200033876
+SQA.query(1,7) = 0.0027847151601838593, A[1,7] = 0.0027847151601838593
+SQA.query(1,8) = -0.7271862858557843, A[1,8] = -0.7271862858557843
+SQA.query(1,9) = -0.6171099494546467, A[1,9] = -0.6171099494546467
+SQA.query(1,10) = -0.011616859101067578, A[1,10] = -0.011616859101067578
+SQA.query(1,11) = -0.5613966577861469, A[1,11] = -0.5613966577861469
+SQA.query(1,12) = 0.19678829123864472, A[1,12] = 0.19678829123864472
+SQA.query(1,13) = -0.7675947054442894, A[1,13] = -0.7675947054442894
+SQA.query(1,14) = 0.1117436181422381, A[1,14] = 0.1117436181422381
+SQA.query(1,15) = 0.30158224234842623, A[1,15] = 0.30158224234842623
+SQA.query(2,0) = 0.16194726362509615, A[2,0] = 0.16194726362509615
+SQA.query(2,1) = -0.3501633308703348, A[2,1] = -0.3501633308703348
+SQA.query(2,2) = -0.17769418248106894, A[2,2] = -0.17769418248106894
+SQA.query(2,3) = 0.4591634344249518, A[2,3] = 0.4591634344249518
+SQA.query(2,4) = -0.3820680765301999, A[2,4] = -0.3820680765301999
+SQA.query(2,5) = 0.14472911011702605, A[2,5] = 0.14472911011702605
+SQA.query(2,6) = -0.325825980138746, A[2,6] = -0.325825980138746
+SQA.query(2,7) = 0.3893400890919879, A[2,7] = 0.3893400890919879
+SQA.query(2,8) = 0.03568682789941191, A[2,8] = 0.03568682789941191
+SQA.query(2,9) = 0.2042845148393685, A[2,9] = 0.2042845148393685
+SQA.query(2,10) = 0.41720817959265766, A[2,10] = 0.41720817959265766
+SQA.query(2,11) = 0.020456082024582822, A[2,11] = 0.020456082024582822
+SQA.query(2,12) = 0.2345248521009452, A[2,12] = 0.2345248521009452
+SQA.query(2,13) = -0.006790085839027404, A[2,13] = -0.006790085839027404
+SQA.query(2,14) = -0.4280876401967807, A[2,14] = -0.4280876401967807
+SQA.query(2,15) = -0.6292251501525093, A[2,15] = -0.6292251501525093
+SQA.query(3,0) = 0.3362970843015157, A[3,0] = 0.3362970843015157
+SQA.query(3,1) = -0.032780110699528464, A[3,1] = -0.032780110699528464
+SQA.query(3,2) = 0.08580161676563114, A[3,2] = 0.08580161676563114
+SQA.query(3,3) = -0.18655668248293644, A[3,3] = -0.18655668248293644
+SQA.query(3,4) = -0.15144675283966347, A[3,4] = -0.15144675283966347
+SQA.query(3,5) = -0.10925556615764154, A[3,5] = -0.10925556615764154
+SQA.query(3,6) = 0.3228718958953265, A[3,6] = 0.3228718958953265
+SQA.query(3,7) = -0.09267184619828961, A[3,7] = -0.09267184619828961
+SQA.query(3,8) = 0.34452006368823207, A[3,8] = 0.34452006368823207
+SQA.query(3,9) = 0.15966185725909277, A[3,9] = 0.15966185725909277
+SQA.query(3,10) = 0.15718739802730652, A[3,10] = 0.15718739802730652
+SQA.query(3,11) = -0.09160627519329856, A[3,11] = -0.09160627519329856
+SQA.query(3,12) = 0.009151482736465266, A[3,12] = 0.009151482736465266
+SQA.query(3,13) = 0.32285695830253747, A[3,13] = 0.32285695830253747
+SQA.query(3,14) = 0.2860328029573471, A[3,14] = 0.2860328029573471
+SQA.query(3,15) = 0.0056954255366680195, A[3,15] = 0.0056954255366680195
+SQA.query(4,0) = 0.21780649015659348, A[4,0] = 0.21780649015659348
+SQA.query(4,1) = 0.2718690747371104, A[4,1] = 0.2718690747371104
+SQA.query(4,2) = 0.5171868597757535, A[4,2] = 0.5171868597757535
+SQA.query(4,3) = -0.13364197820892265, A[4,3] = -0.13364197820892265
+SQA.query(4,4) = -0.11713908379811988, A[4,4] = -0.11713908379811988
+SQA.query(4,5) = 0.4133863403370368, A[4,5] = 0.4133863403370368
+SQA.query(4,6) = 0.2689101696622659, A[4,6] = 0.2689101696622659
+SQA.query(4,7) = 0.4417906533895565, A[4,7] = 0.4417906533895565
+SQA.query(4,8) = -0.2972243018824269, A[4,8] = -0.2972243018824269
+SQA.query(4,9) = 0.518588424140816, A[4,9] = 0.518588424140816
+SQA.query(4,10) = -0.0815890485970916, A[4,10] = -0.0815890485970916
+SQA.query(4,11) = -0.776238874583782, A[4,11] = -0.776238874583782
+SQA.query(4,12) = -0.8592060710086514, A[4,12] = -0.8592060710086514
+SQA.query(4,13) = 0.4259876904483514, A[4,13] = 0.4259876904483514
+SQA.query(4,14) = -0.38677759652068755, A[4,14] = -0.38677759652068755
+SQA.query(4,15) = 0.7138084930173041, A[4,15] = 0.7138084930173041
+SQA.query(5,0) = 0.20836592388937025, A[5,0] = 0.20836592388937025
+SQA.query(5,1) = 0.34067956078481576, A[5,1] = 0.34067956078481576
+SQA.query(5,2) = 0.17748247527291805, A[5,2] = 0.17748247527291805
+SQA.query(5,3) = 0.030398627777401765, A[5,3] = 0.030398627777401765
+SQA.query(5,4) = -0.20697775838029697, A[5,4] = -0.20697775838029697
+SQA.query(5,5) = 0.21246383998474372, A[5,5] = 0.21246383998474372
+SQA.query(5,6) = -0.5273390168337392, A[5,6] = -0.5273390168337392
+SQA.query(5,7) = -0.5249304229808457, A[5,7] = -0.5249304229808457
+SQA.query(5,8) = 0.06211661058983631, A[5,8] = 0.06211661058983631
+SQA.query(5,9) = 0.27093375338051207, A[5,9] = 0.27093375338051207
+SQA.query(5,10) = 0.3090974536216523, A[5,10] = 0.3090974536216523
+SQA.query(5,11) = 0.6508439478107384, A[5,11] = 0.6508439478107384
+SQA.query(5,12) = 0.549766563407166, A[5,12] = 0.549766563407166
+SQA.query(5,13) = -0.15464923556456833, A[5,13] = -0.15464923556456833
+SQA.query(5,14) = -0.4471501765864284, A[5,14] = -0.4471501765864284
+SQA.query(5,15) = -0.8927914167341512, A[5,15] = -0.8927914167341512
+SQA.query(6,0) = -0.13258052903277384, A[6,0] = -0.13258052903277384
+SQA.query(6,1) = 0.3622518401646888, A[6,1] = 0.3622518401646888
+SQA.query(6,2) = 0.9682424470459597, A[6,2] = 0.9682424470459597
+SQA.query(6,3) = 0.3122455850735979, A[6,3] = 0.3122455850735979
+SQA.query(6,4) = -0.27230647328439617, A[6,4] = -0.27230647328439617
+SQA.query(6,5) = -0.04664235819021334, A[6,5] = -0.04664235819021334
+SQA.query(6,6) = 0.34256403322217643, A[6,6] = 0.34256403322217643
+SQA.query(6,7) = -0.3049122587462949, A[6,7] = -0.3049122587462949
+SQA.query(6,8) = 0.7345783762682324, A[6,8] = 0.7345783762682324
+SQA.query(6,9) = -0.29134688974415235, A[6,9] = -0.29134688974415235
+SQA.query(6,10) = 0.6339861653430977, A[6,10] = 0.6339861653430977
+SQA.query(6,11) = -0.05262732554989691, A[6,11] = -0.05262732554989691
+SQA.query(6,12) = -0.06545946168630756, A[6,12] = -0.06545946168630756
+SQA.query(6,13) = 0.2493007349621853, A[6,13] = 0.2493007349621853
+SQA.query(6,14) = -0.6876328511517561, A[6,14] = -0.6876328511517561
+SQA.query(6,15) = -0.5835629175555761, A[6,15] = -0.5835629175555761
+SQA.query(7,0) = -0.0957773323822696, A[7,0] = -0.0957773323822696
+SQA.query(7,1) = 0.5419999670745368, A[7,1] = 0.5419999670745368
+SQA.query(7,2) = 0.41178392385220786, A[7,2] = 0.41178392385220786
+SQA.query(7,3) = 0.7016725469592794, A[7,3] = 0.7016725469592794
+SQA.query(7,4) = -0.02660351905816538, A[7,4] = -0.02660351905816538
+SQA.query(7,5) = -0.324348058898821, A[7,5] = -0.324348058898821
+SQA.query(7,6) = -0.3272985056145026, A[7,6] = -0.3272985056145026
+SQA.query(7,7) = 0.13069902444473547, A[7,7] = 0.13069902444473547
+SQA.query(7,8) = 0.34728390209753224, A[7,8] = 0.34728390209753224
+SQA.query(7,9) = -0.18163848348933354, A[7,9] = -0.18163848348933354
+SQA.query(7,10) = 0.26207242647626483, A[7,10] = 0.26207242647626483
+SQA.query(7,11) = 0.31323262604248814, A[7,11] = 0.31323262604248814
+SQA.query(7,12) = -0.6665028152726765, A[7,12] = -0.6665028152726765
+SQA.query(7,13) = 0.08704291439877654, A[7,13] = 0.08704291439877654
+SQA.query(7,14) = -0.0609384398900068, A[7,14] = -0.0609384398900068
+SQA.query(7,15) = -0.3726747743755001, A[7,15] = -0.3726747743755001
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[137]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1055,10 +1086,10 @@ True
 </div>
 </section>
 <section id="\mathrm{Norm}(i)について">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this heading">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の各列ベクトル<span class="math notranslate nohighlight">\(A_{0,\ast},\dots,A_{m,\ast}\)</span>の2ノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[138]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
@@ -1073,22 +1104,22 @@ True
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQ(A).norm(0) = 1.525538393413868       , np.linalg.norm(Ai) = 1.525538393413868
-SQ(A).norm(1) = 1.862283338358721       , np.linalg.norm(Ai) = 1.8622833383587214
-SQ(A).norm(2) = 1.1343742611231984      , np.linalg.norm(Ai) = 1.1343742611231982
-SQ(A).norm(3) = 1.6619465991868285      , np.linalg.norm(Ai) = 1.6619465991868285
-SQ(A).norm(4) = 1.9981031627183627      , np.linalg.norm(Ai) = 1.9981031627183625
-SQ(A).norm(5) = 1.846751079073428       , np.linalg.norm(Ai) = 1.8467510790734278
-SQ(A).norm(6) = 1.6364975773818458      , np.linalg.norm(Ai) = 1.6364975773818458
-SQ(A).norm(7) = 1.6459138082844538      , np.linalg.norm(Ai) = 1.6459138082844536
+SQ(A).norm(0) = 1.7254939312579298      , np.linalg.norm(Ai) = 1.7254939312579296
+SQ(A).norm(1) = 1.7673972420715773      , np.linalg.norm(Ai) = 1.7673972420715773
+SQ(A).norm(2) = 1.2913700163394468      , np.linalg.norm(Ai) = 1.2913700163394468
+SQ(A).norm(3) = 0.8170042507879813      , np.linalg.norm(Ai) = 0.8170042507879812
+SQ(A).norm(4) = 1.84501930629778        , np.linalg.norm(Ai) = 1.8450193062977802
+SQ(A).norm(5) = 1.659248081864714       , np.linalg.norm(Ai) = 1.6592480818647137
+SQ(A).norm(6) = 1.8383306476239845      , np.linalg.norm(Ai) = 1.8383306476239842
+SQ(A).norm(7) = 1.452501744169358       , np.linalg.norm(Ai) = 1.452501744169358
 </pre></div></div>
 </div>
 </section>
 <section id="id8">
-<h4><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <p>行列のフロべニウスノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[139]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SQ(A) norm()  &quot;</span><span class="p">,</span> <span class="n">SQA</span><span class="o">.</span><span class="n">normF</span><span class="p">())</span>
@@ -1101,34 +1132,25 @@ SQ(A).norm(7) = 1.6459138082844538      , np.linalg.norm(Ai) = 1.645913808284453
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQ(A) norm()   4.7575519405423
-Frobenius norm 4.7575519405423
+SQ(A) norm()   4.481358734534456
+Frobenius norm 4.481358734534455
 </pre></div></div>
 </div>
 </section>
 </section>
 </section>
 <section id="まとめ">
-<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h2>
+<h1>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v), \mathrm{SQ}(A)\)</span>をそれぞれ<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>で実装しました．</p>
 </section>
 <section id="参考文献">
-<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h2>
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 <li><p>Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang. 2020. Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing Quantum machine learning. In Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020). Association for Computing Machinery, New York, NY, USA, 387–400. <a class="reference external" href="https://doi.org/10.1145/3357713.3384314">https://doi.org/10.1145/3357713.3384314</a></p></li>
 <li><p>András Gilyén, Zhao Song and Ewin Tang. 2022. An improved quantum-inspired algorithm for linear regression. Quantum, 6, 754. <a class="reference external" href="https://doi.org/10.22331/q-2022-06-30-754">https://doi.org/10.22331/q-2022-06-30-754</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">https://en.wikipedia.org/wiki/Segment_tree</a></p></li>
 </ol>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
-</div>
-</section>
 </section>
 
 
@@ -1137,11 +1159,10 @@ Frobenius norm 4.7575519405423
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="06_02_grover_search.html"
@@ -1157,14 +1178,11 @@ Frobenius norm 4.7575519405423
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</p>
+        <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1179,34 +1197,36 @@ Frobenius norm 4.7575519405423
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#セグメント木構造の実装">セグメント木構造の実装</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#定義">定義</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#実装">実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#確認">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">定義</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">実装</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">確認</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample1}()について"><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Sample2}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Query}(i,j)について"><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{Norm}(i)について"><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8"><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
@@ -1253,8 +1273,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -34,8 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -48,7 +49,7 @@
     <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/08_04_quantum_inspired_binary_classification.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart2(行列\(C\)の特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
+    <link rel="prev" title="(行列\(C\)の特異値分解の後)" href="08_03_Quantum_inspired_classical_algorithm_Part2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -59,6 +60,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -152,9 +162,28 @@
 <li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -263,10 +292,10 @@
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -274,7 +303,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -301,17 +330,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#データセットを読み込む">データセットを読み込む</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#分類問題">分類問題</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#擬似逆行列">擬似逆行列</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">量子インスパイアード古典アルゴリズム</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#図を描画する">図を描画する</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#データセットを読み込む">データセットを読み込む</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#分類問題">分類問題</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#擬似逆行列">擬似逆行列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">量子インスパイアード古典アルゴリズム</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#図を描画する">図を描画する</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプリング回数を増やした時の様子">サンプリング回数を増やした時の様子</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#予測">予測</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#予測">予測</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -323,8 +356,9 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="line-block">
-<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 4 2022年10月7日(金)</div>
-<div class="line">高比良宗一</div>
+<div class="line">量子ソフトウェア勉強会:「量子インスパイアード古典アルゴリズム」ハンズオン資料 4</div>
+<div class="line">2023年9月20日(水)</div>
+<div class="line">高比良宗一（名城大学情報工学部情報工学科）</div>
 </div>
 <blockquote>
 <div><div class="math notranslate nohighlight">
@@ -351,8 +385,9 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</section>
 <section id="データセットを読み込む">
-<h2>データセットを読み込む<a class="headerlink" href="#データセットを読み込む" title="Permalink to this heading">#</a></h2>
+<h1>データセットを読み込む<a class="headerlink" href="#データセットを読み込む" title="Permalink to this heading">#</a></h1>
 <p>IRISデータセットはPythonのライブラリ<a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>に含まれています． このライブラリにある<code class="docutils literal notranslate"><span class="pre">load_iris</span></code>を使うことで読み込むことができます．次のセルでデータをロードしてみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -598,11 +633,13 @@ document.write(`
        [6.5, 3. , 5.2, 2. ],
        [6.2, 3.4, 5.4, 2.3],
        [5.9, 3. , 5.1, 1.8]]),
+ &#39;data_module&#39;: &#39;sklearn.datasets.data&#39;,
  &#39;feature_names&#39;: [&#39;sepal length (cm)&#39;,
                    &#39;sepal width (cm)&#39;,
                    &#39;petal length (cm)&#39;,
                    &#39;petal width (cm)&#39;],
- &#39;filename&#39;: &#39;/opt/conda/lib/python3.7/site-packages/sklearn/datasets/data/iris.csv&#39;,
+ &#39;filename&#39;: &#39;iris.csv&#39;,
+ &#39;frame&#39;: None,
  &#39;target&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -615,7 +652,7 @@ document.write(`
 </div>
 </section>
 <section id="分類問題">
-<h2>分類問題<a class="headerlink" href="#分類問題" title="Permalink to this heading">#</a></h2>
+<h1>分類問題<a class="headerlink" href="#分類問題" title="Permalink to this heading">#</a></h1>
 <p>scikit-learnに含まれている<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>を使うと，データを訓練用とテスト用の配列に分割することができます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -771,7 +808,7 @@ document.write(`
 </div>
 </div>
 <section id="擬似逆行列">
-<h3>擬似逆行列<a class="headerlink" href="#擬似逆行列" title="Permalink to this heading">#</a></h3>
+<h2>擬似逆行列<a class="headerlink" href="#擬似逆行列" title="Permalink to this heading">#</a></h2>
 <p>分類する直線に関するパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は，<span class="math notranslate nohighlight">\(\theta = A^+ b\)</span>のようにして求めることができます．この<span class="math notranslate nohighlight">\(\theta\)</span>によって，分類する直線は，<span class="math notranslate nohighlight">\(\theta_0 + \theta_1 x + \theta_2 y = 0\)</span>のようにして表されます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -793,7 +830,7 @@ array([ 2.64301213,  0.66176535, -1.37653241])
 </div>
 </section>
 <section id="量子インスパイアード古典アルゴリズム">
-<h3>量子インスパイアード古典アルゴリズム<a class="headerlink" href="#量子インスパイアード古典アルゴリズム" title="Permalink to this heading">#</a></h3>
+<h2>量子インスパイアード古典アルゴリズム<a class="headerlink" href="#量子インスパイアード古典アルゴリズム" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\SQ(A)\)</span>を構成し，<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>でまとめた<code class="docutils literal notranslate"><span class="pre">SQx</span></code>を用いて，<span class="math notranslate nohighlight">\(\mathrm{SQ}(\theta)\)</span>を定義します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -825,15 +862,15 @@ array([ 2.64301213,  0.66176535, -1.37653241])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([-0.00031439, -0.00089496,  0.0011135 ])
+array([-6.29859579e-05, -1.72154583e-04,  2.36267084e-04])
 </pre></div></div>
 </div>
 </section>
 <section id="図を描画する">
-<h3>図を描画する<a class="headerlink" href="#図を描画する" title="Permalink to this heading">#</a></h3>
+<h2>図を描画する<a class="headerlink" href="#図を描画する" title="Permalink to this heading">#</a></h2>
 <p>上記で求めたNumPyによる解<span class="math notranslate nohighlight">\(\theta\)</span>と，量子インスパイアード古典アルゴリズムによる近似解<span class="math notranslate nohighlight">\(\tilde{\theta}\)</span>について， 直線を引いてみて，その様子を見てみます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -884,7 +921,6 @@ array([-0.00031439, -0.00089496,  0.0011135 ])
 <img alt="../_images/notebooks_08_04_quantum_inspired_binary_classification_18_0.png" src="../_images/notebooks_08_04_quantum_inspired_binary_classification_18_0.png" />
 </div>
 </div>
-</section>
 <section id="サンプリング回数を増やした時の様子">
 <h3>サンプリング回数を増やした時の様子<a class="headerlink" href="#サンプリング回数を増やした時の様子" title="Permalink to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
@@ -968,8 +1004,9 @@ array([-0.00031439, -0.00089496,  0.0011135 ])
 </div>
 </section>
 </section>
+</section>
 <section id="予測">
-<h2>予測<a class="headerlink" href="#予測" title="Permalink to this heading">#</a></h2>
+<h1>予測<a class="headerlink" href="#予測" title="Permalink to this heading">#</a></h1>
 <p>新しいデータ<span class="math notranslate nohighlight">\((x, y)\)</span>が来たときに，どちらのクラス(versicolor(<code class="docutils literal notranslate"><span class="pre">1</span></code>)かvirginica(<code class="docutils literal notranslate"><span class="pre">2</span></code>))に属するかどうかは，<span class="math notranslate nohighlight">\(f(x,y) = \theta_0 + \theta_1 x + \theta_2 y = (\theta_0,\theta_1,\theta_2)^\top (1, x, y)\)</span>の正負によって決定します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1047,7 +1084,7 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 <p>次に量子インスパイアード古典アルゴリズムについて考察します． 内積をそのまま計算すると，行列のサイズ分だけ計算量を必要とします． そこで，内積の推定を用いて，<span class="math notranslate nohighlight">\(f(x,y)\)</span>の値を推定し，その推定値に基づいて，どちらのクラスであるか識別します：</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">qi_vdot</span><span class="p">(</span><span class="n">SQa</span><span class="p">,</span> <span class="n">Qb</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -1067,22 +1104,22 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 
 <span class="n">xt</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="n">xt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xt</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
-<span class="n">qi_vdot</span><span class="p">(</span><span class="n">sq_theta</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">qi_vdot</span><span class="p">(</span><span class="n">sq_theta</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--0.0
+0.0
 </pre></div></div>
 </div>
-<p>テスト用データに対する予測値を計算します．(実行に数分かかります)</p>
+<p>テスト用データに対する予測値を計算します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sq_theta</span> <span class="o">=</span> <span class="n">SQx</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -1096,17 +1133,17 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 </pre></div></div>
 </div>
 <p>正解率を計算してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">prediction_qi</span><span class="p">)</span>
@@ -1114,7 +1151,7 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -1124,7 +1161,7 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 </section>
 <section id="参考文献">
-<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h2>
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
@@ -1139,7 +1176,6 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 </div>
 </section>
-</section>
 
 
                 </article>
@@ -1147,11 +1183,10 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_03_Quantum_inspired_classical_algorithm_Part2.html"
@@ -1159,13 +1194,10 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</p>
+        <p class="prev-next-title">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1180,17 +1212,21 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#データセットを読み込む">データセットを読み込む</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#分類問題">分類問題</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#擬似逆行列">擬似逆行列</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">量子インスパイアード古典アルゴリズム</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#図を描画する">図を描画する</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#データセットを読み込む">データセットを読み込む</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#分類問題">分類問題</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#擬似逆行列">擬似逆行列</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#量子インスパイアード古典アルゴリズム">量子インスパイアード古典アルゴリズム</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#図を描画する">図を描画する</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプリング回数を増やした時の様子">サンプリング回数を増やした時の様子</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#予測">予測</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#予測">予測</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
@@ -1237,8 +1273,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
   </footer>

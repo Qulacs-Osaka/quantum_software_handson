@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart2(行列\(C\)の特異値分解の後) &#8212; Quantum Software Hands on  documentation</title>
+    <title>(行列\(C\)の特異値分解の後) &#8212; Quantum Software Hands on  documentation</title>
   
   
   
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -34,8 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -49,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2クラス問題に対する量子インスパイアード古典アルゴリズム" href="08_04_quantum_inspired_binary_classification.html" />
-    <link rel="prev" title="\(x=A^+b\)に関する量子インスパイアード古典アルゴリズムPart1(行列\(C\)の特異値分解まで)" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
+    <link rel="prev" title="行列\(A\)を定義する" href="08_02_Quantum_inspired_classical_algorithm_Part1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -60,6 +61,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -153,9 +163,28 @@
 <li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+
+
+
+
 </ul>
 
     </div>
@@ -264,10 +293,10 @@
 
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
@@ -275,7 +304,7 @@ document.write(`
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -292,7 +321,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>x=A^+bに関する量子インスパイアード古典アルゴリズムPart2(行列Cの特異値分解の後)</h1>
+    <h1>(行列Cの特異値分解の後)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -302,27 +331,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#前のノートブックの復習">前のノートブックの復習</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#R_{\ast,k}の構成"><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定"><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wを構成する．"><span class="math notranslate nohighlight">\(w\)</span>を構成する．</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">棄却サンプリングの受理確率の推定</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#補足">補足</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプルサイズについて">サンプルサイズについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#前のノートブックの復習">前のノートブックの復習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#R_{\ast,k}の構成"><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定"><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#wを構成する．"><span class="math notranslate nohighlight">\(w\)</span>を構成する．</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">棄却サンプリングの受理確率の推定</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#補足">補足</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプルサイズについて">サンプルサイズについて</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -334,21 +365,22 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <div class="line-block">
-<div class="line">量子ソフトウェア勉強会第13回目:「量子インスパイアード古典アルゴリズム」ハンズオン資料 3</div>
-<div class="line">2022年10月7日(金)</div>
-<div class="line">高比良宗一</div>
+<div class="line">量子ソフトウェア勉強会:「量子インスパイアード古典アルゴリズム」ハンズオン資料 3</div>
+<div class="line">2023年9月20日(水)</div>
+<div class="line">高比良宗一（名城大学情報工学部情報工学科）</div>
 </div>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[\newcommand{\norm}[1]{\lVert#1\rVert}
 \renewcommand{\top}{\mathsf{T}}
 \newcommand{\SQ}{\mathrm{SQ}}\]</div>
+<p># <span class="math notranslate nohighlight">\(x = A^+ b\)</span>に関する量子インスパイアード古典アルゴリズム Part 2</p>
 </div></blockquote>
-<section id="x=A^+bに関する量子インスパイアード古典アルゴリズムPart2(行列Cの特異値分解の後)">
-<h1><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart2(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)<a class="headerlink" href="#x=A^+bに関する量子インスパイアード古典アルゴリズムPart2(行列Cの特異値分解の後)" title="Permalink to this heading">#</a></h1>
+<section id="(行列Cの特異値分解の後)">
+<h1>(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)<a class="headerlink" href="#(行列Cの特異値分解の後)" title="Permalink to this heading">#</a></h1>
 <p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の結果を得た後の部分について実装します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[178]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -367,7 +399,7 @@ document.write(`
 <section id="行列Aとベクトルbを定義する">
 <h2>行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する<a class="headerlink" href="#行列Aとベクトルbを定義する" title="Permalink to this heading">#</a></h2>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[324]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span>
@@ -394,15 +426,15 @@ document.write(`
 Aのランク
  2
 Aのフロべニウスノルム
- 1.0198039027185568
+ 1.019803902718557
 Aの特異値
- [1.00000000e+00 2.00000000e-01 1.12274432e-16 6.48274193e-17
- 3.05197145e-17 1.35719378e-17 1.12212804e-17 6.26457319e-18]
+ [1.00000000e+00 2.00000000e-01 1.67908272e-16 2.98375394e-17
+ 2.52902526e-17 1.77019006e-17 7.74774146e-18 4.77261502e-18]
 </pre></div></div>
 </div>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の特異値分解の結果を保存しておきます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[325]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">exact_U</span><span class="p">,</span> <span class="n">exact_S</span><span class="p">,</span> <span class="n">exact_Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -412,7 +444,7 @@ Aの特異値
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[325]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -422,7 +454,7 @@ array([1. , 0.2])
 </div>
 <p>解ベクトル<span class="math notranslate nohighlight">\(x = A^+b\)</span>は，NumPyの<code class="docutils literal notranslate"><span class="pre">pinv</span></code>または<code class="docutils literal notranslate"><span class="pre">lstsq</span></code>を用いて次のようにして得ることができます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[326]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">b</span>
@@ -436,33 +468,32 @@ array([1. , 0.2])
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+/Users/takahira/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
 To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
 
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[326]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(array([-0.53310266, -0.40190966,  1.16608955, -1.07758489, -0.42459156,
-         0.72297463, -0.90835653, -0.29179648,  0.19662703, -0.20607788,
-        -0.31897885, -0.8281004 ,  0.11160791, -0.2316848 , -0.06595113,
-         0.92040077]),
- array([-0.53310266, -0.40190966,  1.16608955, -1.07758489, -0.42459156,
-         0.72297463, -0.90835653, -0.29179648,  0.19662703, -0.20607788,
-        -0.31897885, -0.8281004 ,  0.11160791, -0.2316848 , -0.06595113,
-         0.92040077]))
+(array([ 0.56206703,  0.24009411, -0.01203472,  0.38808847, -0.51127657,
+        -0.19467505,  0.38614959, -0.69783124, -0.03046933, -0.37373618,
+        -0.03402853,  0.2976032 ,  1.50894295,  0.77235867, -0.56817388,
+        -0.10994197]),
+ array([-9.36760289e+14, -3.43783041e+13, -7.50947472e+13, -2.47231074e+14,
+        -5.09813618e+13, -9.45237328e+13,  3.88576318e+13, -2.95068253e+14,
+        -2.63409408e+11, -5.58462608e+12, -1.44999642e+14,  2.02130075e+13,
+         2.00216706e+14,  3.83210589e+13, -3.22268980e+13, -1.24769581e+13]))
 </pre></div></div>
 </div>
-</section>
 <section id="\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
-<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this heading">#</a></h2>
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this heading">#</a></h3>
 <p>以下のセルで，<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>は<span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>のみだけなので，<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を使う必要はなく，<code class="docutils literal notranslate"><span class="pre">b</span></code>をそのまま使うだけで十分です．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[327]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantum_inspired</span> <span class="kn">import</span> <span class="n">MatrixBasedDataStructure</span>
@@ -473,20 +504,20 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[327]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(4, 10, 0.05566419114319317, 0.3097258798274286, 1.019803902718557)
+(4, 0, 0.1109045131629001, 0.295949597594083, 1.019803902718557)
 </pre></div></div>
 </div>
 </section>
 <section id="前のノートブックの復習">
-<h2>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this heading">#</a></h2>
+<h3>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this heading">#</a></h3>
 <p>前のノートブックで<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までを実装しました．<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(r,c\)</span>を渡すことで，<span class="math notranslate nohighlight">\(R\)</span>を表す行添字<span class="math notranslate nohighlight">\(i_0,i_1,\dots,i_{r-1}\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>が返ってくることを再度確認します．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[328]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
@@ -503,54 +534,57 @@ To use the future default and silence this warning we advise to pass `rcond=None
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 {i_0,...i_r-1} =
- [3, 4, 0, 3, 4, 1, 1, 2, 1, 4, 1, 4, 3, 1, 4, 1, 1, 1, 3, 0, 4, 1, 4, 1, 3, 5, 3, 3, 4, 0, 4, 1, 1, 7, 1, 4, 2, 7, 3, 0, 3, 7, 3, 4, 4, 1, 0, 4, 3, 0, 7, 3, 3, 7, 2, 3, 5, 1, 0, 4, 1, 4, 1, 4, 1, 1, 1, 4, 3, 1, 1, 4, 5, 1, 3, 1, 4, 4, 4, 0, 4, 2, 0, 7, 4, 0, 1, 7, 1, 7, 7, 1, 1, 1, 1, 7, 3, 4, 0, 1]
+ [6, 4, 0, 7, 7, 7, 2, 6, 6, 3, 7, 0, 5, 7, 3, 7, 7, 5, 0, 7, 7, 7, 3, 4, 4, 0, 6, 0, 1, 1, 3, 7, 7, 7, 7, 7, 0, 7, 7, 7, 7, 7, 7, 6, 3, 7, 6, 0, 7, 4, 0, 7, 0, 7, 7, 6, 7, 7, 7, 5, 5, 7, 5, 3, 7, 7, 7, 5, 4, 7, 7, 6, 6, 7, 3, 0, 7, 7, 6, 7, 0, 7, 6, 3, 7, 4, 0, 7, 6, 5, 2, 3, 7, 4, 0, 7, 7, 3, 2, 2]
 Cの左特異ベクトル =
- [[-1.02886062e-01  3.34747355e-02  9.31267684e-01 ...  9.72286549e-19
-   1.75564029e-19 -3.41237960e-01]
- [-1.01993291e-01 -1.34626893e-02 -2.06581085e-01 ...  5.18945293e-18
-  -2.09052614e-18 -5.85827274e-01]
- [-1.02336581e-01  1.02255574e-01  4.92783047e-02 ...  2.13160043e-18
-   4.04597953e-18  1.67541608e-01]
+ [[-9.62349434e-02 -1.40487908e-01  9.62711239e-01 ...  1.74787269e-05
+  -4.65690811e-05  5.65984500e-02]
+ [-1.00651819e-01 -5.46311690e-02 -1.20247501e-01 ...  1.38992743e-05
+  -3.70322412e-05 -1.12468396e-01]
+ [-1.02089037e-01  1.35429170e-02 -4.05827031e-02 ...  1.27784174e-02
+   7.21935380e-03  1.06159137e-01]
  ...
- [-1.01993291e-01 -1.34626893e-02 -2.94970385e-02 ...  9.44485802e-19
-  -1.47284898e-18 -3.98796524e-02]
- [-1.02336581e-01  1.02255574e-01  4.92783047e-02 ... -1.22844938e-18
-   2.85941010e-19  1.67541608e-01]
- [-1.00087544e-01 -6.03289349e-02 -4.97374220e-02 ...  4.59961439e-18
-   2.72211004e-19 -2.08083506e-01]]
+ [-1.00968105e-01 -4.48551907e-02 -7.19961093e-03 ...  8.17095798e-04
+  -2.17701213e-03  1.93040947e-01]
+ [-8.97552897e-02 -2.15625953e-01 -3.81545759e-02 ...  2.49380968e-03
+   2.97843657e-03 -1.29656744e-01]
+ [-8.97552897e-02 -2.15625953e-01 -3.81545759e-02 ... -2.16336416e-03
+  -3.85885219e-03 -1.29656744e-01]]
 Cの特異値 =
- [9.98343419e-01 2.08111551e-01 1.80043991e-16 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 9.78172205e-17
- 9.78172205e-17 9.78172205e-17 9.78172205e-17 1.30320663e-17]
+ [1.00262240e+00 1.86408997e-01 1.50264660e-16 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 9.94695719e-17
+ 9.94695719e-17 9.94695719e-17 9.94695719e-17 1.35067160e-17]
 </pre></div></div>
 </div>
 </section>
 <section id="\mathrm{SQ}(x)の\mathrm{Query}(k)について">
-<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this heading">#</a></h2>
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
+</section>
 <section id="R_{\ast,k}の構成">
-<h3><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成<a class="headerlink" href="#R_{\ast,k}の構成" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成<a class="headerlink" href="#R_{\ast,k}の構成" title="Permalink to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>，すなわち<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分について考察します． ベクトル<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分は次式のようにして書くことができます．</p>
 <div class="math notranslate nohighlight">
 \[x \approx \tilde{x}  = \frac{1}{\tilde{\sigma}_k}  R_{\ast, k}^\top  w\]</div>
@@ -572,7 +606,7 @@ Cの特異値 =
 \end{bmatrix}\end{split}\]</div>
 <p>まずは，この式に基づいて<span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>を構成する関数を下のセルで定義します：</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[329]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">R_col</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">):</span>
@@ -587,7 +621,7 @@ Cの特異値 =
 </div>
 <p><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>が正しく作れているか確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[330]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
@@ -609,15 +643,15 @@ Cの特異値 =
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Rの第9列目:
- [ 0.00926996  0.00537468  0.00843471  0.00843471  0.00926996  0.00926996
- -0.00158105  0.01141514  0.00926996  0.01141514]
+ [0.01819629 0.03465237 0.03465237 0.02259931 0.03465237 0.03465237
+ 0.03465237 0.01819629 0.03465237 0.01819629]
 R_*,9
- [ 0.00926996  0.00537468  0.00843471  0.00843471  0.00926996  0.00926996
- -0.00158105  0.01141514  0.00926996  0.01141514]
+ [0.01819629 0.03465237 0.03465237 0.02259931 0.03465237 0.03465237
+ 0.03465237 0.01819629 0.03465237 0.01819629]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[330]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -627,10 +661,10 @@ True
 </div>
 </section>
 <section id="\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定">
-<h3><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定<a class="headerlink" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定<a class="headerlink" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定" title="Permalink to this heading">#</a></h1>
 <p>次に$:nbsphinx-math:<cite>tilde{lambda}</cite>_:nbsphinx-math:<cite>ell`= :nbsphinx-math:</cite>mathrm{Tr}`(A<sup>:nbsphinx-math:</sup>dagger <cite>(b:nbsphinx-math:</cite>tilde{v}``{(<span class="math">\ell</span>) <span class="math">\dagger</span>})) $を推定する関数を実装します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[331]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">estimate_lambda</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">ell</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -657,7 +691,7 @@ True
 </div>
 <p><span class="math notranslate nohighlight">\(\lambda_\ell\)</span>を推定できているか確認してみます：</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[332]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact:&quot;</span><span class="p">)</span>
@@ -688,28 +722,28 @@ True
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 exact:
-λ0= -0.8088707983366525
-λ1= 0.09559822882108618
+λ0= -0.814616577964749
+λ1= -0.08231444269573662
 
 approximation:
-λ0= -0.8661586110116519
-λ1= -0.10667765725624194
+λ0= -0.8277991056224335
+λ1= 0.07071649370986763
 
 error:
-0.05728781267499938
-0.2022758860773281
+0.013182527657684573
+-0.15303093640560425
 </pre></div></div>
 </div>
 </section>
 <section id="wを構成する．">
-<h3><span class="math notranslate nohighlight">\(w\)</span>を構成する．<a class="headerlink" href="#wを構成する．" title="Permalink to this heading">#</a></h3>
+<h1><span class="math notranslate nohighlight">\(w\)</span>を構成する．<a class="headerlink" href="#wを構成する．" title="Permalink to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell\)</span>を推定する関数を用いて，</p>
 <div class="math notranslate nohighlight">
 \[w =
 \frac{\tilde{\lambda}_1}{\tilde{\sigma}_1^3}\tilde{w}^{(1)} + \frac{\tilde{\lambda}_2}{\tilde{\sigma}_2^3}\tilde{w}^{(2)}+ \dots + \frac{\tilde{\lambda}_r}{\tilde{\sigma}_r^3}\tilde{w}^{(r)}\]</div>
 <p>を構成する関数を以下のセルで定義します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[333]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_w</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">lambda_sample_size</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
@@ -724,7 +758,7 @@ error:
 </div>
 <p><span class="math notranslate nohighlight">\(w\)</span>と<code class="docutils literal notranslate"><span class="pre">col_R</span></code>によって得られた<span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>と内積を取って， <span class="math notranslate nohighlight">\(\tilde{x}_k = e_k^\top R^\top w = R_{\ast,k}^\top w\)</span>を計算する関数を下のセルで定義します．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[334]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SQx_query</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
@@ -735,7 +769,7 @@ error:
 </div>
 <p>この関数<code class="docutils literal notranslate"><span class="pre">construct_w</span></code>を使って<span class="math notranslate nohighlight">\(w\)</span>を構成し，<code class="docutils literal notranslate"><span class="pre">SQx_query</span></code>と合わせて計算できているか確認してみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[335]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
@@ -753,13 +787,13 @@ error:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-SQ(x) query(1) = -0.8695322796503197
-exact = -0.40190965749654484
+SQ(x) query(1) = 2.7297614080469628
+exact = 0.24009411071851006
 </pre></div></div>
 </div>
 <p><span class="math notranslate nohighlight">\(\tilde{x} = (x_0,\dots,x_{n-1})\)</span>を構成し，<span class="math notranslate nohighlight">\(x = A^+b\)</span>と比較をしてみます．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[336]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
@@ -778,19 +812,19 @@ exact = -0.40190965749654484
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 exact x:
- [-0.53310266 -0.40190966  1.16608955 -1.07758489 -0.42459156  0.72297463
- -0.90835653 -0.29179648  0.19662703 -0.20607788 -0.31897885 -0.8281004
-  0.11160791 -0.2316848  -0.06595113  0.92040077]
+ [ 0.56206703  0.24009411 -0.01203472  0.38808847 -0.51127657 -0.19467505
+  0.38614959 -0.69783124 -0.03046933 -0.37373618 -0.03402853  0.2976032
+  1.50894295  0.77235867 -0.56817388 -0.10994197]
 tilde x:
- [-0.01088995 -0.0246222   0.40253673 -0.52201425 -0.23208211 -0.01177434
- -0.44672484 -0.22334492  0.11788211 -0.04701944 -0.38681758 -0.36101074
- -0.12254441 -0.17123117 -0.05969312  0.27835372]
-relative error = 0.6663184591215244
+ [ 0.70117502  0.33562345  0.04355428  0.71526907 -0.79921548 -0.22163797
+  0.5080238  -0.88646637 -0.04591551 -0.56876387  0.03787303  0.45879089
+  2.15538181  0.98493529 -0.84373965 -0.16237684]
+relative error = 0.4247833106051156
 </pre></div></div>
 </div>
 <p>次に，<span class="math notranslate nohighlight">\(\tilde{x}\)</span>と<span class="math notranslate nohighlight">\(x\)</span>との誤差がサンプリング数を増やすと減少することを確認してみます．</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[337]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)]</span>
@@ -813,8 +847,19 @@ relative error = 0.6663184591215244
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/takahira/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/ipykernel_launcher.py:11: RuntimeWarning: divide by zero encountered in double_scalars
+  # This is added back by InteractiveShellApp.init_path()
+/Users/takahira/.pyenv/versions/anaconda3-5.3.1/lib/python3.7/site-packages/ipykernel_launcher.py:11: RuntimeWarning: invalid value encountered in double_scalars
+  # This is added back by InteractiveShellApp.init_path()
+</pre></div></div>
+</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[338]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
@@ -834,7 +879,7 @@ relative error = 0.6663184591215244
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[2.8552153632279885e+33, 345.95015422791903, 206.50140143269533, 5.309702006598731, 32.86782464433326, 1.4579370479058715, 4.978509736964198, 3.045386736979691, 2.6252627171897167]
+[nan, 97.59715359977743, 122.18443687222172, 25.702572270322047, 9.062091361330115, 4.018066440121322, 2.0314723297229538, 5.652620088169565, 4.154287290417791]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -844,14 +889,10 @@ relative error = 0.6663184591215244
 <img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_30_1.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="\mathrm{SQ}(x)の\mathrm{Sample}()について">
-<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について考察します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>は下記の手順によって実現できることを思い出すと，次のセルのようにして実装できます． 1. 確率<span class="math notranslate nohighlight">\(|w_s|^2/\norm{w}^2\)</span>で<span class="math notranslate nohighlight">\(s\)</span>をサンプリングする． 2. 確率<span class="math notranslate nohighlight">\(|A_{i_s,j}|^2/\norm{A_{i_s,\ast}^2}\)</span>で<span class="math notranslate nohighlight">\(j\)</span>をサンプリングする 3. $ r_j = <span class="math">\frac{|\tilde{x}_j|^2}{\norm{A}_\mathrm{F}^2 \sum_{s=0}^{r-1}(w_s A_{i_s, j}/\norm{A_{i_s,\ast}})^2}</span> $ を計算する． 4.
 0から1の一様乱数<span class="math notranslate nohighlight">\(y\)</span>を生成し，<span class="math notranslate nohighlight">\(y &lt; r_j\)</span>ならば「受理」として<span class="math notranslate nohighlight">\(j\)</span>を出力，<span class="math notranslate nohighlight">\(y \ge r_j\)</span>ならば1から再スタートする．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[339]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">SQx_sample</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">S</span><span class="p">):</span>
@@ -888,7 +929,7 @@ relative error = 0.6663184591215244
 </div>
 <p>上記の関数の出力結果が確率分布<span class="math notranslate nohighlight">\(D_x (\Pr(j) = |x_j|^2/\norm{x}^2)\)</span>に従うか確認してみます：</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[340]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">@</span> <span class="n">b</span>
@@ -898,7 +939,7 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[359]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
@@ -921,13 +962,14 @@ relative error = 0.6663184591215244
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[-0.01464205  0.01462656  0.03640738  0.00759976 -0.01831817  0.0178952
- -0.01960899 -0.01337465  0.00392692  0.01332909 -0.00598255 -0.01771804
- -0.00195665 -0.00843175 -0.00068323  0.00693116]
+[-2.44944961e-02  1.82318161e-02 -2.95677380e-05 -1.07473660e-02
+  2.66347903e-02  2.26309900e-03  2.95590923e-02  4.05860693e-02
+ -1.89527447e-04  1.48477986e-03 -2.36392039e-04  1.91903462e-03
+ -4.48277788e-02 -2.17823883e-02 -1.59035723e-02 -2.46759274e-03]
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[360]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">counts</span><span class="o">/</span><span class="n">num_shots</span> <span class="o">-</span> <span class="n">Dx</span><span class="p">)</span>
@@ -935,16 +977,16 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[360]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.06080298113883857
+0.08385930314180226
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[361]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -962,9 +1004,9 @@ relative error = 0.6663184591215244
 <img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_37_0.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_37_0.png" />
 </div>
 </div>
-<p>サンプル数(<span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>の呼び出し回数)を増やしてみて，誤差が小さくなっていくことを確認してみます．一様ランダムにサンプリングした時の結果と比べてみてみます．(実行に数分かかります)</p>
+<p>サンプル数(<span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>の呼び出し回数)を増やしてみて，誤差が小さくなっていくことを確認してみます．一様ランダムにサンプリングした時の結果と比べてみてみます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[377]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -997,7 +1039,7 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[378]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hist_uniform</span><span class="p">,</span> <span class="n">hist_sqxsample</span>
@@ -1005,33 +1047,33 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[378]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-([1.5696527142146874,
-  1.5062800885175622,
-  1.2350840325474368,
-  0.9604996688380231,
-  0.9070185118222448,
-  0.8844870527388806,
-  1.0719870527388806,
-  0.9626120527388806,
-  1.0055808027388806],
- [1.3066770804889458,
-  1.0986403134681453,
-  1.1096334087514086,
-  0.7898913852024907,
-  0.5086500541079879,
-  0.31683133301793764,
-  0.21542627025899352,
-  0.12943205429741522,
-  0.10878555942409243])
+([1.9795910125325353,
+  1.6622353292156404,
+  1.3547666985631897,
+  1.1870388605763613,
+  1.1913553402015982,
+  1.0010371877093074,
+  1.0439231955997017,
+  1.1145747517724383,
+  1.0117505823112038],
+ [1.034182511612626,
+  0.8715165809975999,
+  0.9047856800927231,
+  0.5029914086335496,
+  0.2998524229877776,
+  0.25527245627203365,
+  0.13967943369629343,
+  0.11513034359018359,
+  0.13477077353680234])
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[383]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -1054,17 +1096,14 @@ relative error = 0.6663184591215244
 <img alt="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" src="../_images/notebooks_08_03_Quantum_inspired_classical_algorithm_Part2_41_0.png" />
 </div>
 </div>
-</section>
-<section id="\mathrm{SQ}(x)の\mathrm{Norm}()について">
-<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について" title="Permalink to this heading">#</a></h2>
 <section id="棄却サンプリングの受理確率の推定">
-<h3>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this heading">#</a></h3>
+<h2>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について実装します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>における棄却サンプリングの「受理」する確率は</p>
 <div class="math notranslate nohighlight">
 \[\frac{\norm{\tilde{x}}^2}{\norm{A}_\mathrm{F}^2 \norm{w}^2}\]</div>
 <p>です．したがって，ノルム<span class="math notranslate nohighlight">\(\norm{x}\)</span>の推定は，受理する確率を推定し，<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}^2\norm{w}^2\)</span>を掛ければ良いことがわかります． 実装は下記のようになります．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[384]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_SQx_norm</span><span class="p">(</span><span class="n">SQA</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">row_indices</span><span class="p">):</span>
@@ -1103,7 +1142,7 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[385]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
@@ -1114,16 +1153,16 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[385]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(0.0, 2.5231251087653694)
+(1.4765651816322898, 2.213231199352785)
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[390]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
@@ -1141,30 +1180,28 @@ relative error = 0.6663184591215244
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[390]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [0.0,
- 0.0,
- 2.47209983387042,
- 3.027691593100796,
- 2.47209983387042,
- 1.9543665195885975,
- 2.622057834449867,
- 2.5104292488071835,
- 2.6761265710288424,
- 2.603785431804569]
+ 4.546617386600984,
+ 3.9374861580844662,
+ 1.6074719927631071,
+ 1.9687430790422331,
+ 2.273308693300492,
+ 1.9687430790422331,
+ 2.343272965528198,
+ 2.237506318888447,
+ 2.2193885606357435]
 </pre></div></div>
 </div>
-</section>
-</section>
 <section id="まとめ">
-<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h2>
+<h3>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(), \mathrm{Sample}(), \mathrm{Norm}()\)</span>について実装しました．最後にクラスを使ってまとめます．</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[393]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SQx</span><span class="p">:</span>
@@ -1188,16 +1225,18 @@ relative error = 0.6663184591215244
 </div>
 </section>
 <section id="参考文献">
-<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h2>
+<h3>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 </ul>
 </section>
 <section id="補足">
-<h2>補足<a class="headerlink" href="#補足" title="Permalink to this heading">#</a></h2>
+<h3>補足<a class="headerlink" href="#補足" title="Permalink to this heading">#</a></h3>
+</section>
+</section>
 <section id="サンプルサイズについて">
-<h3>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this heading">#</a></h3>
+<h2>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this heading">#</a></h2>
 <p>サンプルサイズ<span class="math notranslate nohighlight">\(r,c\)</span>の値を以下のように設定すると，少なくとも<span class="math notranslate nohighlight">\(1-\eta\)</span>以上の確率で<span class="math notranslate nohighlight">\(\lVert \tilde{x} - x \rVert \le \epsilon \lVert A^+b \rVert\)</span>を満たすような<span class="math notranslate nohighlight">\(SQ(\tilde{x})\)</span>を得ることができます(<a class="reference external" href="https://arxiv.org/abs/1811.04909">https://arxiv.org/abs/1811.04909</a> のAlgorithm 1の<strong>Init.</strong>より)．</p>
 <div class="math notranslate nohighlight">
 \[r = 2^{10}\ln\left(\frac{8n}{\eta}\right)\frac{\kappa^4k^2\lVert A\rVert_F^2}{\epsilon^2}
@@ -1205,7 +1244,7 @@ relative error = 0.6663184591215244
 c = 2^6 \cdot 3^4 \ln\left(\frac{8r}{\eta}\right)\frac{\kappa^8 k^2 \lVert A \rVert_F^2}{\epsilon^2}\]</div>
 <p>この<span class="math notranslate nohighlight">\(r,c\)</span>の値は大きくなりますが，<span class="math notranslate nohighlight">\(m\)</span>や<span class="math notranslate nohighlight">\(n\)</span>が非常に大きい場合は，相対的にみて小さくなります．</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[397]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="p">,</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">normAF</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">200</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span>
@@ -1252,7 +1291,6 @@ r^2c =  1.0569358486549376e+79
 </div>
 </section>
 </section>
-</section>
 
 
                 </article>
@@ -1260,11 +1298,10 @@ r^2c =  1.0569358486549376e+79
 
               
               
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_02_Quantum_inspired_classical_algorithm_Part1.html"
@@ -1272,7 +1309,7 @@ r^2c =  1.0569358486549376e+79
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="math notranslate nohighlight">\(x=A^+b\)</span>に関する量子インスパイアード古典アルゴリズムPart1(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解まで)</p>
+        <p class="prev-next-title">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</p>
       </div>
     </a>
     <a class="right-next"
@@ -1284,10 +1321,7 @@ r^2c =  1.0569358486549376e+79
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1302,27 +1336,29 @@ r^2c =  1.0569358486549376e+79
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#前のノートブックの復習">前のノートブックの復習</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#R_{\ast,k}の構成"><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定"><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wを構成する．"><span class="math notranslate nohighlight">\(w\)</span>を構成する．</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Sample}()について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Norm}()について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">棄却サンプリングの受理確率の推定</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#補足">補足</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプルサイズについて">サンプルサイズについて</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#行列Aとベクトルbを定義する">行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#前のノートブックの復習">前のノートブックの復習</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について"><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#R_{\ast,k}の構成"><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定"><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#wを構成する．"><span class="math notranslate nohighlight">\(w\)</span>を構成する．</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#棄却サンプリングの受理確率の推定">棄却サンプリングの受理確率の推定</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#まとめ">まとめ</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#参考文献">参考文献</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#補足">補足</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#サンプルサイズについて">サンプルサイズについて</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
@@ -1369,8 +1405,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
   </footer>
