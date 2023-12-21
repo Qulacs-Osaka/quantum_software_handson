@@ -79,9 +79,9 @@
 
 - 07\_量子コンピュータと金融実務計算
 
-  - 01_QAE を用いた信用ポートフォリオリスク計測
-    <br> [07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb)
-    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank.ipynb)
+  - 01_QAE を用いたデジタルオプションプライシング
+    <br> [07_DerivativePricing/07_01_DerivativePricing.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/07_DerivativePricing/07_01_DerivativePricing.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/07_DerivativePricing/07_01_DerivativePricing.ipynb)
 
 - 08\_量子インスパイアード古典アルゴリズム
 
