@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>サンプリングによってオブザーバブルの期待値を推定する &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -375,9 +389,9 @@ document.write(`
 </div>
 </div>
 <section id="サンプリングによってオブザーバブルの期待値を推定する">
-<h1>サンプリングによってオブザーバブルの期待値を推定する<a class="headerlink" href="#サンプリングによってオブザーバブルの期待値を推定する" title="Permalink to this heading">#</a></h1>
+<h1>サンプリングによってオブザーバブルの期待値を推定する<a class="headerlink" href="#サンプリングによってオブザーバブルの期待値を推定する" title="Link to this heading">#</a></h1>
 <section id="オブザーバブルを定義する">
-<h2>オブザーバブルを定義する<a class="headerlink" href="#オブザーバブルを定義する" title="Permalink to this heading">#</a></h2>
+<h2>オブザーバブルを定義する<a class="headerlink" href="#オブザーバブルを定義する" title="Link to this heading">#</a></h2>
 <p>ここでは1次元ハイゼンベルグ模型</p>
 <div class="math notranslate nohighlight">
 \[H = \sum_{i} J_{i} (X_iX_{i+1} + Y_iY_{1+1} + Z_iZ_{i+1})\]</div>
@@ -399,7 +413,7 @@ document.write(`
 </div>
 </section>
 <section id="適当な状態を準備する">
-<h2>適当な状態を準備する<a class="headerlink" href="#適当な状態を準備する" title="Permalink to this heading">#</a></h2>
+<h2>適当な状態を準備する<a class="headerlink" href="#適当な状態を準備する" title="Link to this heading">#</a></h2>
 <p>期待値測定をする対象として、適当な回路を通した状態を準備します。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -447,9 +461,9 @@ document.write(`
 </div>
 </section>
 <section id="サンプリングをしてみる。">
-<h2>サンプリングをしてみる。<a class="headerlink" href="#サンプリングをしてみる。" title="Permalink to this heading">#</a></h2>
+<h2>サンプリングをしてみる。<a class="headerlink" href="#サンプリングをしてみる。" title="Link to this heading">#</a></h2>
 <section id="Z-のサンプリング">
-<h3><span class="math notranslate nohighlight">\(Z\)</span> のサンプリング<a class="headerlink" href="#Z-のサンプリング" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(Z\)</span> のサンプリング<a class="headerlink" href="#Z-のサンプリング" title="Link to this heading">#</a></h3>
 <div class="line-block">
 <div class="line"><span class="math notranslate nohighlight">\(H_{ZZ} = \sum_i J_i Z_iZ_{i+1}\)</span> の期待値 <span class="math notranslate nohighlight">\(\langle H \rangle\)</span> を求めよう。<span class="math notranslate nohighlight">\(Z\)</span> の固有ベクトルは <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> なので、そのままサンプリングすれば OK です。</div>
 <div class="line">変数<code class="docutils literal notranslate"><span class="pre">mask_list</span></code>の中身はそれぞれ、<span class="math notranslate nohighlight">\(Z_0 Z_1, Z_1 Z_2, Z_2 Z_3, Z_3 Z_0\)</span>に対応しています。(<span class="math notranslate nohighlight">\(Z_i\)</span>を使う場合、<code class="docutils literal notranslate"><span class="pre">0bxxxx</span></code>の右からi番目を1にする)</div>
@@ -500,7 +514,7 @@ document.write(`
 </div>
 </section>
 <section id="X-のサンプリング">
-<h3><span class="math notranslate nohighlight">\(X\)</span> のサンプリング<a class="headerlink" href="#X-のサンプリング" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(X\)</span> のサンプリング<a class="headerlink" href="#X-のサンプリング" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(X\)</span> のサンプリングはそのままではできないです。<span class="math notranslate nohighlight">\(X=HZH\)</span> を使って期待値を推定します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -532,7 +546,7 @@ document.write(`
 </div>
 </section>
 <section id="Y-のサンプリング">
-<h3><span class="math notranslate nohighlight">\(Y\)</span> のサンプリング<a class="headerlink" href="#Y-のサンプリング" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(Y\)</span> のサンプリング<a class="headerlink" href="#Y-のサンプリング" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(Y\)</span> のサンプリングもそのままではできないので、<span class="math notranslate nohighlight">\(Y = SH Z HS^\dagger\)</span> を使って推定します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -564,7 +578,7 @@ document.write(`
 </div>
 </section>
 <section id="全体のサンプリング結果">
-<h3>全体のサンプリング結果<a class="headerlink" href="#全体のサンプリング結果" title="Permalink to this heading">#</a></h3>
+<h3>全体のサンプリング結果<a class="headerlink" href="#全体のサンプリング結果" title="Link to this heading">#</a></h3>
 <p>エネルギー期待値は</p>
 <div class="math notranslate nohighlight">
 \[\langle H \rangle = \langle H_{XX} \rangle + \langle H_{YY} \rangle + \langle H_{ZZ} \rangle\]</div>
@@ -593,7 +607,7 @@ document.write(`
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="01_04_QuantumVolume.html"
@@ -658,6 +672,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -684,8 +699,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>(行列\(C\)の特異値分解の後) &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -377,7 +391,7 @@ document.write(`
 <p># <span class="math notranslate nohighlight">\(x = A^+ b\)</span>に関する量子インスパイアード古典アルゴリズム Part 2</p>
 </div></blockquote>
 <section id="(行列Cの特異値分解の後)">
-<h1>(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)<a class="headerlink" href="#(行列Cの特異値分解の後)" title="Permalink to this heading">#</a></h1>
+<h1>(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)<a class="headerlink" href="#(行列Cの特異値分解の後)" title="Link to this heading">#</a></h1>
 <p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の結果を得た後の部分について実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[178]:
@@ -397,7 +411,7 @@ document.write(`
 </div>
 </div>
 <section id="行列Aとベクトルbを定義する">
-<h2>行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する<a class="headerlink" href="#行列Aとベクトルbを定義する" title="Permalink to this heading">#</a></h2>
+<h2>行列<span class="math notranslate nohighlight">\(A\)</span>とベクトル<span class="math notranslate nohighlight">\(b\)</span>を定義する<a class="headerlink" href="#行列Aとベクトルbを定義する" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[324]:
 </pre></div>
@@ -490,7 +504,7 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </pre></div></div>
 </div>
 <section id="\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．">
-<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{Q}(b)を定義する．" title="Link to this heading">#</a></h3>
 <p>以下のセルで，<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．<span class="math notranslate nohighlight">\(\mathrm{Q}(b)\)</span>は<span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>のみだけなので，<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を使う必要はなく，<code class="docutils literal notranslate"><span class="pre">b</span></code>をそのまま使うだけで十分です．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[327]:
@@ -514,7 +528,7 @@ To use the future default and silence this warning we advise to pass `rcond=None
 </div>
 </section>
 <section id="前のノートブックの復習">
-<h3>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Permalink to this heading">#</a></h3>
+<h3>前のノートブックの復習<a class="headerlink" href="#前のノートブックの復習" title="Link to this heading">#</a></h3>
 <p>前のノートブックで<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までを実装しました．<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(r,c\)</span>を渡すことで，<span class="math notranslate nohighlight">\(R\)</span>を表す行添字<span class="math notranslate nohighlight">\(i_0,i_1,\dots,i_{r-1}\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>が返ってくることを再度確認します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[328]:
@@ -579,12 +593,12 @@ Cの特異値 =
 </div>
 </section>
 <section id="\mathrm{SQ}(x)の\mathrm{Query}(k)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>について<a class="headerlink" href="#\mathrm{SQ}(x)の\mathrm{Query}(k)について" title="Link to this heading">#</a></h3>
 </section>
 </section>
 </section>
 <section id="R_{\ast,k}の構成">
-<h1><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成<a class="headerlink" href="#R_{\ast,k}の構成" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(R_{\ast,k}\)</span>の構成<a class="headerlink" href="#R_{\ast,k}の構成" title="Link to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\SQ(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(k)\)</span>，すなわち<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分について考察します． ベクトル<span class="math notranslate nohighlight">\(x\)</span>の第<span class="math notranslate nohighlight">\(k\)</span>成分は次式のようにして書くことができます．</p>
 <div class="math notranslate nohighlight">
 \[x \approx \tilde{x}  = \frac{1}{\tilde{\sigma}_k}  R_{\ast, k}^\top  w\]</div>
@@ -661,7 +675,7 @@ True
 </div>
 </section>
 <section id="\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定">
-<h1><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定<a class="headerlink" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell = \mathrm{Tr}(A^\dagger (b\tilde{v}^{(\ell) \dagger}))\)</span>の推定<a class="headerlink" href="#\tilde{\lambda}_\ell-=-\mathrm{Tr}(A^\dagger-(b\tilde{v}^{(\ell)-\dagger}))の推定" title="Link to this heading">#</a></h1>
 <p>次に$:nbsphinx-math:<cite>tilde{lambda}</cite>_:nbsphinx-math:<cite>ell`= :nbsphinx-math:</cite>mathrm{Tr}`(A<sup>:nbsphinx-math:</sup>dagger <cite>(b:nbsphinx-math:</cite>tilde{v}``{(<span class="math">\ell</span>) <span class="math">\dagger</span>})) $を推定する関数を実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[331]:
@@ -736,7 +750,7 @@ error:
 </div>
 </section>
 <section id="wを構成する．">
-<h1><span class="math notranslate nohighlight">\(w\)</span>を構成する．<a class="headerlink" href="#wを構成する．" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(w\)</span>を構成する．<a class="headerlink" href="#wを構成する．" title="Link to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\tilde{\lambda}_\ell\)</span>を推定する関数を用いて，</p>
 <div class="math notranslate nohighlight">
 \[w =
@@ -1097,7 +1111,7 @@ relative error = 0.4247833106051156
 </div>
 </div>
 <section id="棄却サンプリングの受理確率の推定">
-<h2>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Permalink to this heading">#</a></h2>
+<h2>棄却サンプリングの受理確率の推定<a class="headerlink" href="#棄却サンプリングの受理確率の推定" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について実装します． <span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>における棄却サンプリングの「受理」する確率は</p>
 <div class="math notranslate nohighlight">
 \[\frac{\norm{\tilde{x}}^2}{\norm{A}_\mathrm{F}^2 \norm{w}^2}\]</div>
@@ -1198,7 +1212,7 @@ relative error = 0.4247833106051156
 </pre></div></div>
 </div>
 <section id="まとめ">
-<h3>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h3>
+<h3>まとめ<a class="headerlink" href="#まとめ" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(x)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Query}(), \mathrm{Sample}(), \mathrm{Norm}()\)</span>について実装しました．最後にクラスを使ってまとめます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[393]:
@@ -1225,18 +1239,18 @@ relative error = 0.4247833106051156
 </div>
 </section>
 <section id="参考文献">
-<h3>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h3>
+<h3>参考文献<a class="headerlink" href="#参考文献" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 </ul>
 </section>
 <section id="補足">
-<h3>補足<a class="headerlink" href="#補足" title="Permalink to this heading">#</a></h3>
+<h3>補足<a class="headerlink" href="#補足" title="Link to this heading">#</a></h3>
 </section>
 </section>
 <section id="サンプルサイズについて">
-<h2>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Permalink to this heading">#</a></h2>
+<h2>サンプルサイズについて<a class="headerlink" href="#サンプルサイズについて" title="Link to this heading">#</a></h2>
 <p>サンプルサイズ<span class="math notranslate nohighlight">\(r,c\)</span>の値を以下のように設定すると，少なくとも<span class="math notranslate nohighlight">\(1-\eta\)</span>以上の確率で<span class="math notranslate nohighlight">\(\lVert \tilde{x} - x \rVert \le \epsilon \lVert A^+b \rVert\)</span>を満たすような<span class="math notranslate nohighlight">\(SQ(\tilde{x})\)</span>を得ることができます(<a class="reference external" href="https://arxiv.org/abs/1811.04909">https://arxiv.org/abs/1811.04909</a> のAlgorithm 1の<strong>Init.</strong>より)．</p>
 <div class="math notranslate nohighlight">
 \[r = 2^{10}\ln\left(\frac{8n}{\eta}\right)\frac{\kappa^4k^2\lVert A\rVert_F^2}{\epsilon^2}
@@ -1301,7 +1315,7 @@ r^2c =  1.0569358486549376e+79
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_02_Quantum_inspired_classical_algorithm_Part1.html"
@@ -1379,6 +1393,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1405,8 +1420,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

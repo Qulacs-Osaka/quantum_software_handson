@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>リチャードソン外挿法と指数関数外挿法を実装してみる &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -371,10 +385,10 @@ document.write(`
 </div>
 </div>
 <section id="リチャードソン外挿法と指数関数外挿法を実装してみる">
-<h1>リチャードソン外挿法と指数関数外挿法を実装してみる<a class="headerlink" href="#リチャードソン外挿法と指数関数外挿法を実装してみる" title="Permalink to this heading">#</a></h1>
+<h1>リチャードソン外挿法と指数関数外挿法を実装してみる<a class="headerlink" href="#リチャードソン外挿法と指数関数外挿法を実装してみる" title="Link to this heading">#</a></h1>
 <p>以下では、VQEで横磁場イジング模型の基底状態を求める際に、各ゲートにDepolarizing noiseが作用する状況を考える。 エラー率を増幅させて、リチャードソン外挿法と指数関数外挿法を実装し、期待値が理想的なものに近づく（＝バイアスが減る）ことを確認する。 さらに、サンプリングから期待値を求めた場合には、エラー補償の結果、分散が增大することも確認する。</p>
 <section id="エラーなしの場合">
-<h2>エラーなしの場合<a class="headerlink" href="#エラーなしの場合" title="Permalink to this heading">#</a></h2>
+<h2>エラーなしの場合<a class="headerlink" href="#エラーなしの場合" title="Link to this heading">#</a></h2>
 <p>１次元横磁場イジング模型（４サイト）の基底状態をVQEで求める。ハミルトニアンは以下の通り。 <span class="math">\begin{align}
 H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 \end{align}</span></p>
@@ -485,7 +499,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 </section>
 <section id="エラーありの場合">
-<h2>エラーありの場合<a class="headerlink" href="#エラーありの場合" title="Permalink to this heading">#</a></h2>
+<h2>エラーありの場合<a class="headerlink" href="#エラーありの場合" title="Link to this heading">#</a></h2>
 <p>エラーがない場合のansatz回路のパラメータを取得し、各ゲートに以下のエラーを作用させます。</p>
 <p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span></p>
 <div class="nbinput nblast docutils container">
@@ -556,7 +570,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <p>エラーの影響により、コスト関数の最小値が理想的な場合から遠ざかっていることが確認できます。</p>
 </section>
 <section id="エラーを変化させた場合">
-<h2>エラーを変化させた場合<a class="headerlink" href="#エラーを変化させた場合" title="Permalink to this heading">#</a></h2>
+<h2>エラーを変化させた場合<a class="headerlink" href="#エラーを変化させた場合" title="Link to this heading">#</a></h2>
 <p>コスト関数の期待値のエラー率依存性を求めてみます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -615,7 +629,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <p>ここで、total error = （全ゲート数）×（エラー率）としました。この値が１程度であれば、エラー補償は機能します。</p>
 </section>
 <section id="外挿法（リチャードソン外挿・指数関数外挿）の実装">
-<h2>外挿法（リチャードソン外挿・指数関数外挿）の実装<a class="headerlink" href="#外挿法（リチャードソン外挿・指数関数外挿）の実装" title="Permalink to this heading">#</a></h2>
+<h2>外挿法（リチャードソン外挿・指数関数外挿）の実装<a class="headerlink" href="#外挿法（リチャードソン外挿・指数関数外挿）の実装" title="Link to this heading">#</a></h2>
 <p>エラー率を增大させて、外挿法を実装してみます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -764,7 +778,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <p>上の例では、指数関数外挿が最も良い結果になっていました。</p>
 </section>
 <section id="サンプリングで期待値を求める場合">
-<h2>サンプリングで期待値を求める場合<a class="headerlink" href="#サンプリングで期待値を求める場合" title="Permalink to this heading">#</a></h2>
+<h2>サンプリングで期待値を求める場合<a class="headerlink" href="#サンプリングで期待値を求める場合" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">get_expectation_value</span></code>で期待値を求める代わりに、<code class="docutils literal notranslate"><span class="pre">sampling()</span></code>を使ってサンプリングから期待値を求めてみます。 その結果を利用して外挿法を実装してみると、エラー補償で分散が增大していることも確認できます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1005,7 +1019,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="04_01_Density_Matrix_and_Error.html"
@@ -1066,6 +1080,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1092,8 +1107,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

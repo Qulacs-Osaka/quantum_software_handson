@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>\(\mathrm{SQ}(A)\)と\(\mathrm{SQ}(b)\)の実装について &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -377,7 +391,7 @@ document.write(`
 <div class="line">高比良宗一 (名城大学情報工学部情報工学科)</div>
 </div>
 <section id="\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について">
-<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について<a class="headerlink" href="#\mathrm{SQ}(A)と\mathrm{SQ}(b)の実装について" title="Link to this heading">#</a></h1>
 <p>このノートブックでは，SQデータ構造を実装します． 最初にセグメント木構造を実装します．次に，それを用いてベクトルに基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．その後に行列に基づくデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を，ベクトルに基づくデータ構造を用いて実装します．</p>
 <div class="math notranslate nohighlight">
 \[%  ![image.png](attachment:image.png)
@@ -396,7 +410,7 @@ document.write(`
 </div>
 </section>
 <section id="セグメント木構造の実装">
-<h1>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Permalink to this heading">#</a></h1>
+<h1>セグメント木構造の実装<a class="headerlink" href="#セグメント木構造の実装" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Segment_tree">セグメント木構造</a>は，次のセルのように実装できます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[126]:
@@ -429,16 +443,16 @@ document.write(`
 </div>
 </section>
 <section id="ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装">
-<h1>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Permalink to this heading">#</a></h1>
+<h1>ベクトルに関するデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span> の実装<a class="headerlink" href="#ベクトルに関するデータ構造-\mathrm{SQ}(v)-の実装" title="Link to this heading">#</a></h1>
 <p>セグメント木構造を用いて，ベクトルに基づいたデータ構造<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装します．簡単のために実ベクトルのみを扱います．</p>
 <section id="定義">
-<h2>定義<a class="headerlink" href="#定義" title="Permalink to this heading">#</a></h2>
+<h2>定義<a class="headerlink" href="#定義" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>の定義は下記の通りです．</p>
 <p>ベクトル<span class="math notranslate nohighlight">\(v \in \mathbb{C}^n\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を次の操作(1-3)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.5や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.1など) - <span class="math notranslate nohighlight">\(\text{Sample}()\)</span>. 確率<span class="math notranslate nohighlight">\(\abs{v_i}^2/\norm{v}^2\)</span>で添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i)\)</span>. ベクトルの第<span class="math notranslate nohighlight">\(i\)</span>成分を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>.
 ベクトルの2ノルム<span class="math notranslate nohighlight">\(\norm{v}\)</span>を出力する</p>
 </section>
 <section id="実装">
-<h2>実装<a class="headerlink" href="#実装" title="Permalink to this heading">#</a></h2>
+<h2>実装<a class="headerlink" href="#実装" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[127]:
 </pre></div>
@@ -499,7 +513,7 @@ document.write(`
 </div>
 </section>
 <section id="確認">
-<h2>確認<a class="headerlink" href="#確認" title="Permalink to this heading">#</a></h2>
+<h2>確認<a class="headerlink" href="#確認" title="Link to this heading">#</a></h2>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Norm}(), \mathrm{Query}(i), \mathrm{Sample}()\)</span>それぞれについて確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[128]:
@@ -535,7 +549,7 @@ height = 4
 </pre></div></div>
 </div>
 <section id="\mathrm{Norm}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#\mathrm{Norm}()について" title="Link to this heading">#</a></h3>
 <p>ベクトルの2ノルムが計算できているかどうか，NumPyの結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[130]:
@@ -559,7 +573,7 @@ numpy.linalg.norm(v) = 1.5647905131720363
 </div>
 </section>
 <section id="\mathrm{Query}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i)について" title="Link to this heading">#</a></h3>
 <p>全ての<span class="math notranslate nohighlight">\(i\)</span>に対して，元々のベクトル<span class="math notranslate nohighlight">\(v\)</span>の<span class="math notranslate nohighlight">\(i\)</span>番目の成分と比較をしてみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[131]:
@@ -603,7 +617,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Sample}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample}()\)</span>について<a class="headerlink" href="#\mathrm{Sample}()について" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SQv.sample()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\mathcal{D}_v (\Pr(i) = |v_i|^2/\norm{v}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[132]:
@@ -657,15 +671,15 @@ error = 0.008922043102418013
 </section>
 </section>
 <section id="行列に基づくデータ構造-\mathrm{SQ}(A)-の実装">
-<h1>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Permalink to this heading">#</a></h1>
+<h1>行列に基づくデータ構造 <span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span> の実装<a class="headerlink" href="#行列に基づくデータ構造-\mathrm{SQ}(A)-の実装" title="Link to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v)\)</span>について実装しました．これを用いて<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装します． 簡単のために実行列のみを扱います．</p>
 <section id="id5">
-<h2>定義<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2>定義<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>行列<span class="math notranslate nohighlight">\(A \in \mathbb{C}^{m \times n}\)</span>に対して，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を次の操作(1-5)が行えるようなデータ構造とする．(<a class="reference external" href="https://dl.acm.org/doi/10.1145/3357713.3384314">2.</a>のDefinition 2.10や<a class="reference external" href="https://quantum-journal.org/papers/q-2022-06-30-754/">3.</a>のDefinition 1.2など) - <span class="math notranslate nohighlight">\(\text{Sample1}()\)</span>. 確率<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>で行添字<span class="math notranslate nohighlight">\(i\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Sample2}(i)\)</span>.
 確率<span class="math notranslate nohighlight">\(\abs{A_{ij}}^2/\norm{A_{i,\ast}}^2\)</span>で列添字<span class="math notranslate nohighlight">\(j\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Query}(i,j)\)</span>. 第<span class="math notranslate nohighlight">\((i,j)\)</span>成分<span class="math notranslate nohighlight">\(A_{ij}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}(i)\)</span>. 第<span class="math notranslate nohighlight">\(i\)</span>行の2ノルム<span class="math notranslate nohighlight">\(\norm{A_{i,\ast}}\)</span>を出力する - <span class="math notranslate nohighlight">\(\text{Norm}()\)</span>. フロべニウスノルム<span class="math notranslate nohighlight">\(\norm{A}_\mathrm{F}\)</span>を出力する</p>
 </section>
 <section id="id6">
-<h2>実装<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2>実装<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>を用いて<span class="math notranslate nohighlight">\(\mathrm{SQ(A)}\)</span>を実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[133]:
@@ -700,7 +714,7 @@ error = 0.008922043102418013
 </div>
 </section>
 <section id="id7">
-<h2>確認<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<h2>確認<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>上のセルの<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>が<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を実装できているか確認します． 各関数<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Sample2}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Query}()\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>, <span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span> (<code class="docutils literal notranslate"><span class="pre">normF</span></code>), それぞれ確認していきます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[134]:
@@ -713,7 +727,7 @@ error = 0.008922043102418013
 </div>
 </div>
 <section id="\mathrm{Sample1}()について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>について<a class="headerlink" href="#\mathrm{Sample1}()について" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">SQA.sample1()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(i) = \norm{A_{i,\ast}}^2/\norm{A}_\mathrm{F}^2\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[135]:
@@ -765,7 +779,7 @@ error = 0.006945032299413305
 </div>
 </section>
 <section id="\mathrm{Sample2}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について<a class="headerlink" href="#\mathrm{Sample2}(i)について" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\mathrm{Sample2}(i)\)</span>について確認します．<span class="math notranslate nohighlight">\(i = 0,1,2,\dots,m-1\)</span>の全てを調査すると図がたくさん表示されるので， 図については<span class="math notranslate nohighlight">\(i=0,1,2\)</span>までを見ます． <code class="docutils literal notranslate"><span class="pre">SQA.sample2()</span></code>を何度も実行して得られた結果と，真の確率分布<span class="math notranslate nohighlight">\(\Pr(j) = |A_{i,j}|^2/\norm{A_{i,\ast}}^2)\)</span>とを比較します．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[136]:
@@ -923,7 +937,7 @@ error = 0.03197284358965613
 </div>
 </section>
 <section id="\mathrm{Query}(i,j)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Query}(i,j)\)</span>について<a class="headerlink" href="#\mathrm{Query}(i,j)について" title="Link to this heading">#</a></h3>
 <p>全ての<span class="math notranslate nohighlight">\(i,j\)</span>に対して，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の<span class="math notranslate nohighlight">\(i,j\)</span>番目の成分と比較をしていきます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[137]:
@@ -1086,7 +1100,7 @@ True
 </div>
 </section>
 <section id="\mathrm{Norm}(i)について">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}(i)\)</span>について<a class="headerlink" href="#\mathrm{Norm}(i)について" title="Link to this heading">#</a></h3>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の各列ベクトル<span class="math notranslate nohighlight">\(A_{0,\ast},\dots,A_{m,\ast}\)</span>の2ノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[138]:
@@ -1116,7 +1130,7 @@ SQ(A).norm(7) = 1.452501744169358       , np.linalg.norm(Ai) = 1.452501744169358
 </div>
 </section>
 <section id="id8">
-<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<h3><span class="math notranslate nohighlight">\(\mathrm{Norm}()\)</span>について<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
 <p>行列のフロべニウスノルムが計算できているかどうか，NumPyの関数を用いた時の結果と比較をして確認してみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[139]:
@@ -1140,11 +1154,11 @@ Frobenius norm 4.481358734534455
 </section>
 </section>
 <section id="まとめ">
-<h1>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h1>
+<h1>まとめ<a class="headerlink" href="#まとめ" title="Link to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(\mathrm{SQ}(v), \mathrm{SQ}(A)\)</span>をそれぞれ<code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>, <code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>で実装しました．</p>
 </section>
 <section id="参考文献">
-<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h1>
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
 <li><p>Nai-Hui Chia, András Gilyén, Tongyang Li, Han-Hsuan Lin, Ewin Tang, and Chunhao Wang. 2020. Sampling-based sublinear low-rank matrix arithmetic framework for dequantizing Quantum machine learning. In Proceedings of the 52nd Annual ACM SIGACT Symposium on Theory of Computing (STOC 2020). Association for Computing Machinery, New York, NY, USA, 387–400. <a class="reference external" href="https://doi.org/10.1145/3357713.3384314">https://doi.org/10.1145/3357713.3384314</a></p></li>
@@ -1162,7 +1176,7 @@ Frobenius norm 4.481358734534455
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="06_02_grover_search.html"
@@ -1247,6 +1261,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1273,8 +1288,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

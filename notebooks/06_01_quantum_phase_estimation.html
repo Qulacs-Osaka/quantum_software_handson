@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>位相推定アルゴリズム &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -412,10 +426,10 @@ document.write(`
 </div>
 </div>
 <section id="位相推定アルゴリズム">
-<h1>位相推定アルゴリズム<a class="headerlink" href="#位相推定アルゴリズム" title="Permalink to this heading">#</a></h1>
+<h1>位相推定アルゴリズム<a class="headerlink" href="#位相推定アルゴリズム" title="Link to this heading">#</a></h1>
 <p>ここでは、簡単のために、計算基底が固有状態となるイジングハミルトニアンに対する位相推定を用いて、位相推定について説明します。（とくにアルゴリズム的な優位性はないように思いますが、位相推定アルゴリズムそのものがIQPという特殊な回路クラスに入るので面白い応用があるかもしれません）</p>
 <section id="ハミルトニアンの定義">
-<h2>ハミルトニアンの定義<a class="headerlink" href="#ハミルトニアンの定義" title="Permalink to this heading">#</a></h2>
+<h2>ハミルトニアンの定義<a class="headerlink" href="#ハミルトニアンの定義" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -501,7 +515,7 @@ document.write(`
 </div>
 </section>
 <section id="ハミルトニアンダイナミクスの定義">
-<h2>ハミルトニアンダイナミクスの定義<a class="headerlink" href="#ハミルトニアンダイナミクスの定義" title="Permalink to this heading">#</a></h2>
+<h2>ハミルトニアンダイナミクスの定義<a class="headerlink" href="#ハミルトニアンダイナミクスの定義" title="Link to this heading">#</a></h2>
 <p>ハミルトニアンダイナミクスを計算してみる：</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -596,7 +610,7 @@ document.write(`
 </div>
 </section>
 <section id="１つの補助量子ビットを導入しアダマールテストを繰り返す">
-<h2>１つの補助量子ビットを導入しアダマールテストを繰り返す<a class="headerlink" href="#１つの補助量子ビットを導入しアダマールテストを繰り返す" title="Permalink to this heading">#</a></h2>
+<h2>１つの補助量子ビットを導入しアダマールテストを繰り返す<a class="headerlink" href="#１つの補助量子ビットを導入しアダマールテストを繰り返す" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -718,7 +732,7 @@ CAUTION: The 15-th Gate you added is skipped.                    This gate does 
 <p>同じエネルギーの状態（縮退したエネルギー固有状態）が得られている。 ただし、収束するのに必要なステップ数は大きい。次に、補助量子ビットの数を増やし、量子位相推定を実行する。位相推定のサブルーチンで利用する制御位相ゲートおよび逆量子フーリエ変換を定義しておく。</p>
 </section>
 <section id="量子位相推定の実装">
-<h2>量子位相推定の実装<a class="headerlink" href="#量子位相推定の実装" title="Permalink to this heading">#</a></h2>
+<h2>量子位相推定の実装<a class="headerlink" href="#量子位相推定の実装" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -1017,7 +1031,7 @@ num_reg_qubits =  8
 </div>
 </section>
 <section id="発展編">
-<h2>発展編<a class="headerlink" href="#発展編" title="Permalink to this heading">#</a></h2>
+<h2>発展編<a class="headerlink" href="#発展編" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>上記の計算を一般のハミルトニアンで実行してみよう。このとき正しいエネルギー固有値が得られるか調べてみよう。</p></li>
 <li><p>上記の実装では、位相推定に必要な補助量子ビットをすべて実際に確保したが、１つの補助量子ビットによって全く同じ回路を実行できる。補助量子ビットが1量子ビット版の量子位相推定を実装せよ。</p></li>
@@ -1034,7 +1048,7 @@ num_reg_qubits =  8
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="05_04_compute_chemical_properties_using_Qamuy.html"
@@ -1095,6 +1109,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1121,8 +1136,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

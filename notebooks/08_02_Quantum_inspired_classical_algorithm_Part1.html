@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>行列\(A\)を定義する &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -379,7 +393,7 @@ document.write(`
 </div></blockquote>
 <p>このノートブックでは，量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(A\)</span>から構成される行列<span class="math notranslate nohighlight">\(C\)</span>を得るまでの部分，及びその特異値分解について実装します．そして<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(w^{(\ell)}\)</span>と特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}\)</span>によって，<span class="math notranslate nohighlight">\(A\)</span>の左右の特異ベクトルと特異値が近似される様子を確認してみます．</p>
 <section id="行列Aを定義する">
-<h1>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Permalink to this heading">#</a></h1>
+<h1>行列<span class="math notranslate nohighlight">\(A\)</span>を定義する<a class="headerlink" href="#行列Aを定義する" title="Link to this heading">#</a></h1>
 <p>低ランク行列<span class="math notranslate nohighlight">\(A\)</span>を生成する関数を定義します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -538,7 +552,7 @@ Aの条件数
 </div>
 </div>
 <section id="\mathrm{SQ}(A)を定義する．">
-<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Permalink to this heading">#</a></h2>
+<h2><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>を定義する．<a class="headerlink" href="#\mathrm{SQ}(A)を定義する．" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">quantum_inspired.py</span></code>に<code class="docutils literal notranslate"><span class="pre">1_データ構造.ipynb</span></code>で実装した<code class="docutils literal notranslate"><span class="pre">SegmentTree</span></code>, <code class="docutils literal notranslate"><span class="pre">VectorBasedDataStructure</span></code>と<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>を記述しています．ここから<code class="docutils literal notranslate"><span class="pre">MatrixBasedDataStructure</span></code>をインポートし，それを用いて行列に基づくデータ構造<span class="math notranslate nohighlight">\(\SQ(A)\)</span>を用意します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
@@ -568,11 +582,11 @@ Aの条件数
 </div>
 </section>
 <section id="Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．">
-<h2>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Permalink to this heading">#</a></h2>
+<h2>Step 1. 行添字のサンプリング: <span class="math notranslate nohighlight">\(R^\mathsf{T} R \approx A^\mathsf{T}A\)</span>を満たすような<span class="math notranslate nohighlight">\(R\)</span>を考える．<a class="headerlink" href="#Step-1.-行添字のサンプリング:-R^\mathsf{T}-R-\approx-A^\mathsf{T}Aを満たすようなRを考える．" title="Link to this heading">#</a></h2>
 </section>
 </section>
 <section id="行添字をサンプルする関数の実装">
-<h1>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Permalink to this heading">#</a></h1>
+<h1>行添字をサンプルする関数の実装<a class="headerlink" href="#行添字をサンプルする関数の実装" title="Link to this heading">#</a></h1>
 <p>Step 1の「確率<span class="math notranslate nohighlight">\(\frac{\norm{A_{i,\ast}}^2 }{\norm{A}_\mathrm{F}^2}\)</span>行添字<span class="math notranslate nohighlight">\(i\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回サンプリングする」という部分について実装します．これは，<span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>の<span class="math notranslate nohighlight">\(\mathrm{Sample1}()\)</span>を<span class="math notranslate nohighlight">\(r\)</span>回用いるだけなので，その通りに書きます．ここでの行添字<span class="math notranslate nohighlight">\(i_0,\dots,i_{r-1}\)</span>は行列<span class="math notranslate nohighlight">\(R\)</span>を表します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
@@ -617,7 +631,7 @@ Aの条件数
 </div>
 </section>
 <section id="A^\top-A-\approx-R^\top-Rの確認">
-<h1><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>の確認<a class="headerlink" href="#A^\top-A-\approx-R^\top-Rの確認" title="Link to this heading">#</a></h1>
 <p>量子インスパイアード古典アルゴリズムでは<span class="math notranslate nohighlight">\(r\times n\)</span>の行列<span class="math notranslate nohighlight">\(R\)</span>を実際には構成しません．しかし，サンプルされた行添字が表す行列<span class="math notranslate nohighlight">\(R\)</span>について，<span class="math notranslate nohighlight">\(A^\mathsf{T}A \approx R^\mathsf{T}R\)</span>であるかどうか気になると思います．そこで，行列<span class="math notranslate nohighlight">\(R\)</span>をサンプルされた行添字から構成する関数<code class="docutils literal notranslate"><span class="pre">construct_R</span></code>を以下のセルで定義し，<span class="math notranslate nohighlight">\(A^\top A\)</span>と<span class="math notranslate nohighlight">\(R^\top R\)</span>を直接計算して<span class="math notranslate nohighlight">\(A^\top A \approx R^\top R\)</span>であることを確認してみます．<code class="docutils literal notranslate"><span class="pre">row_indices</span></code>はサンプルされた行添字です．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
@@ -748,7 +762,7 @@ r=2048 1.6310662494746377e-05 0.0005036592483520502
 </pre></div></div>
 </div>
 <section id="Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．">
-<h2>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Permalink to this heading">#</a></h2>
+<h2>Step 2. 列のサンプリング：<span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>を満たすような<span class="math notranslate nohighlight">\(C\)</span>を構成する．<a class="headerlink" href="#Step-2.-列のサンプリング：CC^\top-\approx-RR^\topを満たすようなCを構成する．" title="Link to this heading">#</a></h2>
 <p>次に，Step2について実装します． ## 列添字をサンプルする関数の実装 Step 2の「等確率で<span class="math notranslate nohighlight">\({0,1,\dots,r-1}\)</span>から数字をサンプリングし結果を<span class="math notranslate nohighlight">\(s\)</span>とする．そして確率<span class="math notranslate nohighlight">\(\frac{R_{s,j}^2}{\norm{R_{s,\ast}}^2} = \frac{A_{i_s,j}^2}{\norm{A_{i_s,\ast}}^2}\)</span>で列添字をサンプリングし，結果を<span class="math notranslate nohighlight">\(j_t\)</span>とする．この操作を<span class="math notranslate nohighlight">\(c\)</span>回行い，サンプリングされた列添字を<span class="math notranslate nohighlight">\(j_0,\dots,j_{c-1}\)</span>とする」の部分について実装します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
@@ -793,7 +807,7 @@ r=2048 1.6310662494746377e-05 0.0005036592483520502
 </section>
 </section>
 <section id="r-\times-cの行列Cを構成する関数の実装">
-<h1><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を構成する関数の実装<a class="headerlink" href="#r-\times-cの行列Cを構成する関数の実装" title="Link to this heading">#</a></h1>
 <p>Step2の「<span class="math notranslate nohighlight">\(r \times c\)</span>の行列<span class="math notranslate nohighlight">\(C\)</span>を第<span class="math notranslate nohighlight">\(t\)</span>列が <span class="math notranslate nohighlight">\(\frac{\norm{R}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}} = \frac{\norm{A}_\mathrm{F}}{\sqrt{c}} \frac{R_{\ast,j_t}}{\norm{R_{\ast,j_t}}}\)</span>」となるように構成する」という部分について実装します． <span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>について注目します．行列<span class="math notranslate nohighlight">\(R\)</span>の<span class="math notranslate nohighlight">\(s\)</span>行目は<span class="math notranslate nohighlight">\(\frac{\norm{A}_\mathrm{F}}{\sqrt{r}} \frac{A_{i_s,\ast}}{\norm{A_{i_s,\ast}}}\)</span>であるので，
 行列<span class="math notranslate nohighlight">\(R\)</span>の第<span class="math notranslate nohighlight">\(j_t\)</span>列<span class="math notranslate nohighlight">\(R_{\ast,j_t}\)</span>は</p>
 <div class="math notranslate nohighlight">
@@ -832,7 +846,7 @@ r=2048 1.6310662494746377e-05 0.0005036592483520502
 </div>
 </section>
 <section id="CC^\top-\approx-RR^\topの確認">
-<h1><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Permalink to this heading">#</a></h1>
+<h1><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>の確認<a class="headerlink" href="#CC^\top-\approx-RR^\topの確認" title="Link to this heading">#</a></h1>
 <p><span class="math notranslate nohighlight">\(CC^\top \approx RR^\top\)</span>であることを前述と時と同様にして確認してみます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
@@ -940,7 +954,7 @@ c=512 5.384591647598512e-05 0.0020146369934081975
 </div>
 </div>
 <section id="Step-3:特異値分解">
-<h2>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Permalink to this heading">#</a></h2>
+<h2>Step 3:特異値分解<a class="headerlink" href="#Step-3:特異値分解" title="Link to this heading">#</a></h2>
 <p>最後に，Step3について考えます．Step3は行列<span class="math notranslate nohighlight">\(C\)</span>を特異値分解をするだけなのであり，この部分はNumPyの関数を使います ．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[62]:
@@ -1019,11 +1033,11 @@ singular values of C =
 </div>
 </section>
 <section id="Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて">
-<h2><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Permalink to this heading">#</a></h2>
+<h2><span class="math notranslate nohighlight">\(C\)</span>の特異値・特異ベクトルと<span class="math notranslate nohighlight">\(A\)</span>の特異値・特異ベクトルについて<a class="headerlink" href="#Cの特異値・特異ベクトルとAの特異値・特異ベクトルについて" title="Link to this heading">#</a></h2>
 </section>
 </section>
 <section id="特異値について">
-<h1>特異値について<a class="headerlink" href="#特異値について" title="Permalink to this heading">#</a></h1>
+<h1>特異値について<a class="headerlink" href="#特異値について" title="Link to this heading">#</a></h1>
 <p>上記のアルゴリズムで得られた<span class="math notranslate nohighlight">\(C\)</span>の特異値<span class="math notranslate nohighlight">\(\tilde{\sigma}_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">S</span></code>)が，行列<span class="math notranslate nohighlight">\(A\)</span>の特異値<span class="math notranslate nohighlight">\(\sigma_\ell\)</span>(<code class="docutils literal notranslate"><span class="pre">exact_S</span></code>)を近似していることを見てみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[63]:
@@ -1229,7 +1243,7 @@ qi_svdを用いた時の特異値計算の時間
 </div>
 </section>
 <section id="右特異ベクトルについて">
-<h1>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Permalink to this heading">#</a></h1>
+<h1>右特異ベクトルについて<a class="headerlink" href="#右特異ベクトルについて" title="Link to this heading">#</a></h1>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の右特異ベクトル<span class="math notranslate nohighlight">\(v^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[v^{(\ell)} \approx \tilde{v}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell}R^\dagger\vec{w}^{(\ell)}\]</div>
@@ -1446,7 +1460,7 @@ SciPy:
 </div>
 </section>
 <section id="左特異ベクトルについて">
-<h1>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Permalink to this heading">#</a></h1>
+<h1>左特異ベクトルについて<a class="headerlink" href="#左特異ベクトルについて" title="Link to this heading">#</a></h1>
 <p>行列<span class="math notranslate nohighlight">\(A\)</span>の左特異ベクトル<span class="math notranslate nohighlight">\(u^{(\ell)}\)</span>は，</p>
 <div class="math notranslate nohighlight">
 \[u^{(\ell)} \approx \tilde{u}^{(\ell)} = \frac{1}{\tilde{\sigma}_\ell^2}A R^\top w^{(\ell)}\]</div>
@@ -1693,11 +1707,11 @@ SciPy:
 </div>
 </div>
 <section id="まとめ">
-<h2>まとめ<a class="headerlink" href="#まとめ" title="Permalink to this heading">#</a></h2>
+<h2>まとめ<a class="headerlink" href="#まとめ" title="Link to this heading">#</a></h2>
 <p>量子インスパイアード古典アルゴリズムにおける，<span class="math notranslate nohighlight">\(C\)</span>の特異値分解までをみてきました．このノートブックでは，特異ベクトルの復元に，行列<span class="math notranslate nohighlight">\(A\)</span>や<span class="math notranslate nohighlight">\(R\)</span>と<span class="math notranslate nohighlight">\(C\)</span>の左特異ベクトルに関する行列-ベクトル積を行なっているため，元々の行列<span class="math notranslate nohighlight">\(A\)</span>の次元に関して多項式の計算量を必要とします．<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>では，このような計算量をかけずにSample, Query, Normそれぞれを実行することについて説明します．</p>
 </section>
 <section id="参考文献">
-<h2>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h2>
+<h2>参考文献<a class="headerlink" href="#参考文献" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
@@ -1722,7 +1736,7 @@ SciPy:
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_01_Data_structure.html"
@@ -1802,6 +1816,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1828,8 +1843,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Qulacsでの混合状態 &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -374,9 +388,9 @@ document.write(`
 </div>
 </div>
 <section id="Qulacsでの混合状態">
-<h1>Qulacsでの混合状態<a class="headerlink" href="#Qulacsでの混合状態" title="Permalink to this heading">#</a></h1>
+<h1>Qulacsでの混合状態<a class="headerlink" href="#Qulacsでの混合状態" title="Link to this heading">#</a></h1>
 <section id="DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い">
-<h2>DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い<a class="headerlink" href="#DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い" title="Permalink to this heading">#</a></h2>
+<h2>DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い<a class="headerlink" href="#DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>量子状態（密度演算子）の準備</p></li>
 <li><p>密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code></p></li>
@@ -386,7 +400,7 @@ document.write(`
 </ul>
 </section>
 <section id="量子状態（密度演算子）の準備">
-<h2>量子状態（密度演算子）の準備<a class="headerlink" href="#量子状態（密度演算子）の準備" title="Permalink to this heading">#</a></h2>
+<h2>量子状態（密度演算子）の準備<a class="headerlink" href="#量子状態（密度演算子）の準備" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -414,7 +428,7 @@ document.write(`
 </div>
 </section>
 <section id="密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">
-<h2>密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code><a class="headerlink" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()" title="Permalink to this heading">#</a></h2>
+<h2>密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code><a class="headerlink" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -448,7 +462,7 @@ document.write(`
 <p>※上の量子状態は、実は純粋状態<span class="math notranslate nohighlight">\(|+\rangle\)</span>である。<span class="math notranslate nohighlight">\(|+\rangle\langle+|\)</span>を表示してみれば一致することが確認できる。</p>
 </section>
 <section id="いくつかのエラー：DepolarizingNoiseなど">
-<h2>いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など<a class="headerlink" href="#いくつかのエラー：DepolarizingNoiseなど" title="Permalink to this heading">#</a></h2>
+<h2>いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など<a class="headerlink" href="#いくつかのエラー：DepolarizingNoiseなど" title="Link to this heading">#</a></h2>
 <p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span> (<span class="math notranslate nohighlight">\(0\le p \le 0.75\)</span>)</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -606,7 +620,7 @@ document.write(`
 <p>確率的に選ばれるため、ノイズが作用した状況のもとで所望の量（期待値など）を求めるためには、同じ計算を何度も実行して平均する必要がある（密度演算子から期待値を計算する場合は、平均操作は不要）。 こちらは、量子ビット数が20前後の大規模なシミュレーションを行なう際に用いる。</p>
 </section>
 <section id="計算基底でのサンプリング：sampling()">
-<h2>計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code><a class="headerlink" href="#計算基底でのサンプリング：sampling()" title="Permalink to this heading">#</a></h2>
+<h2>計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code><a class="headerlink" href="#計算基底でのサンプリング：sampling()" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -817,7 +831,7 @@ document.write(`
 \end{align}</span></p>
 </section>
 <section id="Lindblad方程式のシミュレーション：NoisyEvolution_fast()">
-<h2>Lindblad方程式のシミュレーション：<code class="docutils literal notranslate"><span class="pre">NoisyEvolution_fast()</span></code><a class="headerlink" href="#Lindblad方程式のシミュレーション：NoisyEvolution_fast()" title="Permalink to this heading">#</a></h2>
+<h2>Lindblad方程式のシミュレーション：<code class="docutils literal notranslate"><span class="pre">NoisyEvolution_fast()</span></code><a class="headerlink" href="#Lindblad方程式のシミュレーション：NoisyEvolution_fast()" title="Link to this heading">#</a></h2>
 <p>環境からの影響を取り入れた量子開放系のダイナミクスのシミュレーションを行なう。 方程式は以下の通り。 <span class="math">\begin{align}
 \frac{d}{dt} \rho(t) = -i[H,\rho(t)] +\sum_k \left(L_k \rho(t) L_k^\dagger -\frac{1}{2}L_k^\dagger L_k \rho(t)-\frac{1}{2} \rho(t)L_k^\dagger L_k\right).
 \end{align}</span> ここで、<span class="math notranslate nohighlight">\(\rho(t)\)</span>は時刻<span class="math notranslate nohighlight">\(t\)</span>における系の密度演算子、<span class="math notranslate nohighlight">\(H\)</span>はハミルトニアン、<span class="math notranslate nohighlight">\(L_k\)</span>はリンドブラッド演算子である。 簡単な例として、以下の１量子ビット系の場合を考える。 <span class="math">\begin{align}
@@ -890,14 +904,14 @@ document.write(`
 </div>
 </section>
 <section id="練習">
-<h2>練習<a class="headerlink" href="#練習" title="Permalink to this heading">#</a></h2>
+<h2>練習<a class="headerlink" href="#練習" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>２つの量子状態（純粋状態<span class="math notranslate nohighlight">\(|\psi\rangle=\sqrt{\frac{3}{4}}|0\rangle+\sqrt{\frac{1}{4}}|1\rangle\)</span>、混合状態<span class="math notranslate nohighlight">\(\rho=\frac{3}{4}|0\rangle\langle0|+\frac{1}{4}|1\rangle\langle1|\)</span>）に対して、物理量の期待値XとZを求めてみましょう。</p></li>
 <li><p>２量子ビットの場合で、ノイズが作用した状態（密度演算子）を作成してみましょう。<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>が１量子ビット目と２量子ビット目に作用した状態と、<code class="docutils literal notranslate"><span class="pre">TwoQubitDepolarizingNoise</span></code>が作用した状態が一般に異なることを確認してください。</p></li>
 </ul>
 </section>
 <section id="補足：">
-<h2>補足：<a class="headerlink" href="#補足：" title="Permalink to this heading">#</a></h2>
+<h2>補足：<a class="headerlink" href="#補足：" title="Link to this heading">#</a></h2>
 <p>変分量子アルゴリズムなどでは、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit,</span>&#160; <span class="pre">ParametricQuantumCircuit</span></code>を使いますが、このとき<code class="docutils literal notranslate"><span class="pre">circuit.add_gate(DepolarizingNoise(0,</span> <span class="pre">0.15))</span></code>のように使えばOK。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
@@ -977,7 +991,7 @@ document.write(`
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="03_02_quantum_kernel.html"
@@ -1041,6 +1055,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1067,8 +1082,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

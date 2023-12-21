@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Qulacsの基本的な使い方 &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -123,9 +122,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -135,12 +136,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -291,6 +303,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -300,6 +313,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -390,9 +404,9 @@ document.write(`
 </div>
 </div>
 <section id="Qulacsの基本的な使い方">
-<h1>Qulacsの基本的な使い方<a class="headerlink" href="#Qulacsの基本的な使い方" title="Permalink to this heading">#</a></h1>
+<h1>Qulacsの基本的な使い方<a class="headerlink" href="#Qulacsの基本的な使い方" title="Link to this heading">#</a></h1>
 <section id="QuantumStateクラス：量子状態の取扱">
-<h2>QuantumStateクラス：量子状態の取扱<a class="headerlink" href="#QuantumStateクラス：量子状態の取扱" title="Permalink to this heading">#</a></h2>
+<h2>QuantumStateクラス：量子状態の取扱<a class="headerlink" href="#QuantumStateクラス：量子状態の取扱" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>量子状態の確保</p></li>
 <li><p>初期化：<code class="docutils literal notranslate"><span class="pre">set_zero_state()</span></code></p></li>
@@ -401,7 +415,7 @@ document.write(`
 <li><p>計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code></p></li>
 </ul>
 <section id="量子ビットの確保">
-<h3>量子ビットの確保<a class="headerlink" href="#量子ビットの確保" title="Permalink to this heading">#</a></h3>
+<h3>量子ビットの確保<a class="headerlink" href="#量子ビットの確保" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -423,7 +437,7 @@ document.write(`
 </div>
 </section>
 <section id="状態ベクトルを-array-として書き出し">
-<h3>状態ベクトルを <code class="docutils literal notranslate"><span class="pre">array</span></code> として書き出し<a class="headerlink" href="#状態ベクトルを-array-として書き出し" title="Permalink to this heading">#</a></h3>
+<h3>状態ベクトルを <code class="docutils literal notranslate"><span class="pre">array</span></code> として書き出し<a class="headerlink" href="#状態ベクトルを-array-として書き出し" title="Link to this heading">#</a></h3>
 <p>量子状態を取得し、<code class="docutils literal notranslate"><span class="pre">array</span></code>として格納するには、<code class="docutils literal notranslate"><span class="pre">get_vector()</span></code>を使う。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -502,7 +516,7 @@ document.write(`
 </div>
 </section>
 <section id="特殊な初期状態の指定">
-<h3>特殊な初期状態の指定<a class="headerlink" href="#特殊な初期状態の指定" title="Permalink to this heading">#</a></h3>
+<h3>特殊な初期状態の指定<a class="headerlink" href="#特殊な初期状態の指定" title="Link to this heading">#</a></h3>
 <p>ゼロ状態への初期化以外にも、ビット列を指定した初期化、<code class="docutils literal notranslate"><span class="pre">set_computational_basis()</span></code>、や、ランダムな量子状態の準備、<code class="docutils literal notranslate"><span class="pre">set_Haar_random_state()</span></code>、などの準備を行う関数も用意されている。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -556,7 +570,7 @@ document.write(`
 </div>
 </section>
 <section id="計算基底でのサンプリング">
-<h3>計算基底でのサンプリング<a class="headerlink" href="#計算基底でのサンプリング" title="Permalink to this heading">#</a></h3>
+<h3>計算基底でのサンプリング<a class="headerlink" href="#計算基底でのサンプリング" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">sampling(shots)</span></code> で <code class="docutils literal notranslate"><span class="pre">shots</span></code> 回の計算基底でのサンプリングを実行できる。実行結果はサンプリング結果のビット列を整数化したリストとして得られる。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -602,7 +616,7 @@ document.write(`
 </div>
 </section>
 <section id="状態のコピーと内積">
-<h3>状態のコピーと内積<a class="headerlink" href="#状態のコピーと内積" title="Permalink to this heading">#</a></h3>
+<h3>状態のコピーと内積<a class="headerlink" href="#状態のコピーと内積" title="Link to this heading">#</a></h3>
 <p>qulacsには他にも、量子状態のコピーや、</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -636,7 +650,7 @@ document.write(`
 </section>
 </section>
 <section id="量子演算とその実行">
-<h2>量子演算とその実行<a class="headerlink" href="#量子演算とその実行" title="Permalink to this heading">#</a></h2>
+<h2>量子演算とその実行<a class="headerlink" href="#量子演算とその実行" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>様々な量子演算</p></li>
 <li><p>量子演算による状態の更新：<code class="docutils literal notranslate"><span class="pre">update_quantum_state()</span></code></p></li>
@@ -665,7 +679,7 @@ document.write(`
 <p>他にも、多体のパウリ演算、<code class="docutils literal notranslate"><span class="pre">Pauli</span></code>、多体パウリ演算による回転、<code class="docutils literal notranslate"><span class="pre">PauliRotation</span></code>、IBMQで利用されている<code class="docutils literal notranslate"><span class="pre">U1</span></code>,<code class="docutils literal notranslate"><span class="pre">U2</span></code>,<code class="docutils literal notranslate"><span class="pre">U3</span></code>演算や、測定、<code class="docutils literal notranslate"><span class="pre">Measurement</span></code>、ノイズ（確率的な演算）、 <code class="docutils literal notranslate"><span class="pre">BitFlipNoise</span></code>、<code class="docutils literal notranslate"><span class="pre">DephasingNoise</span></code>、
 <code class="docutils literal notranslate"><span class="pre">IndepenedentXZNoise</span></code>、<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>なども用意されている。これらの事前に定義された演算に対して、量子ビットのインデックスや、回転演算の角度など必要な情報を引数として指定することによってが<code class="docutils literal notranslate"><span class="pre">gate</span></code>が生成される。生成された演算を状態に作用させ状態<code class="docutils literal notranslate"><span class="pre">state</span></code>を更新するときは、<code class="docutils literal notranslate"><span class="pre">gate.update_quantum_state(state)</span></code>が利用できる。</p>
 <section id="量子状態の更新の例">
-<h3>量子状態の更新の例<a class="headerlink" href="#量子状態の更新の例" title="Permalink to this heading">#</a></h3>
+<h3>量子状態の更新の例<a class="headerlink" href="#量子状態の更新の例" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -705,7 +719,7 @@ document.write(`
 </div>
 </section>
 <section id="回転演算">
-<h3>回転演算<a class="headerlink" href="#回転演算" title="Permalink to this heading">#</a></h3>
+<h3>回転演算<a class="headerlink" href="#回転演算" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">RX</span></code>、<code class="docutils literal notranslate"><span class="pre">RY</span></code>、<code class="docutils literal notranslate"><span class="pre">RZ</span></code>などの回転演算は、作用する量子ビットのインデックスと回転角を与えて定義する。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -728,7 +742,7 @@ document.write(`
 </div>
 </section>
 <section id="自分で定義した演算を実行">
-<h3>自分で定義した演算を実行<a class="headerlink" href="#自分で定義した演算を実行" title="Permalink to this heading">#</a></h3>
+<h3>自分で定義した演算を実行<a class="headerlink" href="#自分で定義した演算を実行" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">DenseMatrix</span></code>を用いて、自分で定義した一般の行列から演算を作ることもできる。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -764,7 +778,7 @@ document.write(`
 </section>
 </section>
 <section id="量子回路の構成">
-<h2>量子回路の構成<a class="headerlink" href="#量子回路の構成" title="Permalink to this heading">#</a></h2>
+<h2>量子回路の構成<a class="headerlink" href="#量子回路の構成" title="Link to this heading">#</a></h2>
 <p>上で説明したように、各演算ごとに実行して量子状態を更新することもできるが、複雑な量子回路を構成する場合には、実行する前に量子回路を構成できると便利であろう。qulacsでは、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code>クラスを用いて、演算の集合からなる回路<code class="docutils literal notranslate"><span class="pre">circuit</span></code>を定義することができる。定義した回路をprintすると、構成された回路の詳細データを得ることができる。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -841,7 +855,7 @@ Gaussian  : no
 </div>
 </section>
 <section id="量子回路の可視化">
-<h2>量子回路の可視化<a class="headerlink" href="#量子回路の可視化" title="Permalink to this heading">#</a></h2>
+<h2>量子回路の可視化<a class="headerlink" href="#量子回路の可視化" title="Link to this heading">#</a></h2>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">qulacsvis</span></code>モジュールの<code class="docutils literal notranslate"><span class="pre">circuit_drawer</span></code>関数の引数に量子回路を渡すと可視化できる。</div>
 <div class="line">量子回路だけ渡した場合、ASCIIアートで可視化する。</div>
@@ -887,7 +901,7 @@ Gaussian  : no
 </div>
 </section>
 <section id="Qulacsの計算速度を体感">
-<h2>Qulacsの計算速度を体感<a class="headerlink" href="#Qulacsの計算速度を体感" title="Permalink to this heading">#</a></h2>
+<h2>Qulacsの計算速度を体感<a class="headerlink" href="#Qulacsの計算速度を体感" title="Link to this heading">#</a></h2>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>一通り、導入が終わったので、qulacsの実行速度を計測してみよう。まずは、一量子ビットの実行時間を計測してみる。
 </pre></div>
 </div>
@@ -949,7 +963,7 @@ number of qubit:25 time:0.11182180404663086[sec]
 </div>
 </section>
 <section id="Observable-クラス">
-<h2>Observable クラス<a class="headerlink" href="#Observable-クラス" title="Permalink to this heading">#</a></h2>
+<h2>Observable クラス<a class="headerlink" href="#Observable-クラス" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">add_operator</span></code>で係数とパウリ演算子のタイプ、そして量子ビットのindexを指定して追加</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -1043,7 +1057,7 @@ number of qubit:25 time:0.11182180404663086[sec]
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="../index.html"
@@ -1117,6 +1131,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1143,8 +1158,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

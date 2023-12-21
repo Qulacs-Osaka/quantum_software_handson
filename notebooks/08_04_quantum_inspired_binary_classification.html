@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2クラス問題に対する量子インスパイアード古典アルゴリズム &#8212; Quantum Software Hands on  documentation</title>
   
@@ -19,29 +18,29 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -122,9 +121,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -134,12 +135,23 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current nav bd-sidenav">
@@ -290,6 +302,7 @@
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -299,6 +312,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -367,7 +381,7 @@ document.write(`
 \newcommand{\SQ}{\mathrm{SQ}}\]</div>
 </div></blockquote>
 <section id="2クラス問題に対する量子インスパイアード古典アルゴリズム">
-<h1>2クラス問題に対する量子インスパイアード古典アルゴリズム<a class="headerlink" href="#2クラス問題に対する量子インスパイアード古典アルゴリズム" title="Permalink to this heading">#</a></h1>
+<h1>2クラス問題に対する量子インスパイアード古典アルゴリズム<a class="headerlink" href="#2クラス問題に対する量子インスパイアード古典アルゴリズム" title="Link to this heading">#</a></h1>
 <p>このノートブックでは，2クラス問題について考察します．具体的にはIRISデータセットを例にして，線形識別関数の係数ベクトル<span class="math notranslate nohighlight">\(\theta\)</span>に関する<span class="math notranslate nohighlight">\(\SQ(\theta)\)</span>を考察します．そして，テスト用のデータがどちらのクラスであるかどうか，<span class="math notranslate nohighlight">\(\theta\)</span>をそのまま構成することなく，判別することについて考えます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -387,7 +401,7 @@ document.write(`
 </div>
 </section>
 <section id="データセットを読み込む">
-<h1>データセットを読み込む<a class="headerlink" href="#データセットを読み込む" title="Permalink to this heading">#</a></h1>
+<h1>データセットを読み込む<a class="headerlink" href="#データセットを読み込む" title="Link to this heading">#</a></h1>
 <p>IRISデータセットはPythonのライブラリ<a class="reference external" href="https://scikit-learn.org/stable/">scikit-learn</a>に含まれています． このライブラリにある<code class="docutils literal notranslate"><span class="pre">load_iris</span></code>を使うことで読み込むことができます．次のセルでデータをロードしてみます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -652,7 +666,7 @@ document.write(`
 </div>
 </section>
 <section id="分類問題">
-<h1>分類問題<a class="headerlink" href="#分類問題" title="Permalink to this heading">#</a></h1>
+<h1>分類問題<a class="headerlink" href="#分類問題" title="Link to this heading">#</a></h1>
 <p>scikit-learnに含まれている<code class="docutils literal notranslate"><span class="pre">train_test_split</span></code>を使うと，データを訓練用とテスト用の配列に分割することができます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -808,7 +822,7 @@ document.write(`
 </div>
 </div>
 <section id="擬似逆行列">
-<h2>擬似逆行列<a class="headerlink" href="#擬似逆行列" title="Permalink to this heading">#</a></h2>
+<h2>擬似逆行列<a class="headerlink" href="#擬似逆行列" title="Link to this heading">#</a></h2>
 <p>分類する直線に関するパラメータ<span class="math notranslate nohighlight">\(\theta\)</span>は，<span class="math notranslate nohighlight">\(\theta = A^+ b\)</span>のようにして求めることができます．この<span class="math notranslate nohighlight">\(\theta\)</span>によって，分類する直線は，<span class="math notranslate nohighlight">\(\theta_0 + \theta_1 x + \theta_2 y = 0\)</span>のようにして表されます．</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -830,7 +844,7 @@ array([ 2.64301213,  0.66176535, -1.37653241])
 </div>
 </section>
 <section id="量子インスパイアード古典アルゴリズム">
-<h2>量子インスパイアード古典アルゴリズム<a class="headerlink" href="#量子インスパイアード古典アルゴリズム" title="Permalink to this heading">#</a></h2>
+<h2>量子インスパイアード古典アルゴリズム<a class="headerlink" href="#量子インスパイアード古典アルゴリズム" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\SQ(A)\)</span>を構成し，<code class="docutils literal notranslate"><span class="pre">3_SQ(x).ipynb</span></code>でまとめた<code class="docutils literal notranslate"><span class="pre">SQx</span></code>を用いて，<span class="math notranslate nohighlight">\(\mathrm{SQ}(\theta)\)</span>を定義します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -867,7 +881,7 @@ array([-6.29859579e-05, -1.72154583e-04,  2.36267084e-04])
 </div>
 </section>
 <section id="図を描画する">
-<h2>図を描画する<a class="headerlink" href="#図を描画する" title="Permalink to this heading">#</a></h2>
+<h2>図を描画する<a class="headerlink" href="#図を描画する" title="Link to this heading">#</a></h2>
 <p>上記で求めたNumPyによる解<span class="math notranslate nohighlight">\(\theta\)</span>と，量子インスパイアード古典アルゴリズムによる近似解<span class="math notranslate nohighlight">\(\tilde{\theta}\)</span>について， 直線を引いてみて，その様子を見てみます．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -922,7 +936,7 @@ array([-6.29859579e-05, -1.72154583e-04,  2.36267084e-04])
 </div>
 </div>
 <section id="サンプリング回数を増やした時の様子">
-<h3>サンプリング回数を増やした時の様子<a class="headerlink" href="#サンプリング回数を増やした時の様子" title="Permalink to this heading">#</a></h3>
+<h3>サンプリング回数を増やした時の様子<a class="headerlink" href="#サンプリング回数を増やした時の様子" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -1006,7 +1020,7 @@ array([-6.29859579e-05, -1.72154583e-04,  2.36267084e-04])
 </section>
 </section>
 <section id="予測">
-<h1>予測<a class="headerlink" href="#予測" title="Permalink to this heading">#</a></h1>
+<h1>予測<a class="headerlink" href="#予測" title="Link to this heading">#</a></h1>
 <p>新しいデータ<span class="math notranslate nohighlight">\((x, y)\)</span>が来たときに，どちらのクラス(versicolor(<code class="docutils literal notranslate"><span class="pre">1</span></code>)かvirginica(<code class="docutils literal notranslate"><span class="pre">2</span></code>))に属するかどうかは，<span class="math notranslate nohighlight">\(f(x,y) = \theta_0 + \theta_1 x + \theta_2 y = (\theta_0,\theta_1,\theta_2)^\top (1, x, y)\)</span>の正負によって決定します．</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1161,7 +1175,7 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
 </div>
 </section>
 <section id="参考文献">
-<h1>参考文献<a class="headerlink" href="#参考文献" title="Permalink to this heading">#</a></h1>
+<h1>参考文献<a class="headerlink" href="#参考文献" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>András Gilyén, Seth Lloyd, and Ewin Tang, ‘’Quantum-inspired low-rank stochastic regression with logarithmic dependence on the dimension,’’ arXiv:1811.04909, (2018). https://arxiv.org/abs/1811.04909</p></li>
 <li><p>Ewin Tang. 2019. A quantum-inspired classical algorithm for recommendation systems. In Proceedings of the 51st Annual ACM SIGACT Symposium on Theory of Computing (STOC 2019). Association for Computing Machinery, New York, NY, USA, 217–228. <a class="reference external" href="https://doi.org/10.1145/3313276.3316310">https://doi.org/10.1145/3313276.3316310</a></p></li>
@@ -1186,7 +1200,7 @@ array([2, 2, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 2, 2, 2, 1, 1, 1, 2, 1, 1, 2,
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="08_03_Quantum_inspired_classical_algorithm_Part2.html"
@@ -1247,6 +1261,7 @@ By Qulacs-Osaka
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2021, Qulacs-Osaka.
@@ -1273,8 +1288,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
