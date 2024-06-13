@@ -3,6 +3,8 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD)
 
 [ホームページ](https://qulacs-osaka.github.io/quantum_software_handson/)からウェブサイト版の資料がありますので、合わせてご利用ください。  
+各ノートブック(*.ipynb)のリンクはGitHubのURLになっています。  
+GitHubからcloneしてノートブックを利用する場合は、ディレクトリ `doc/source/notebooks` にあるノートブックを開いてください。  
 「MyBinderで開く」をクリックすると、requirements.txtに記載したパッケージがインストールされた状態で起動します。
 
 - 01\_量子計算の基礎
