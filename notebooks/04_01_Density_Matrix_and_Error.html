@@ -431,6 +431,7 @@ document.write(`
 
 </pre></div></div>
 </div>
+<p>初期状態は<span class="math notranslate nohighlight">\(|0\rangle\langle 0|\)</span>になっている。行列成分の<span class="math notranslate nohighlight">\((0,0)\)</span>成分が1で残りの成分がすべて0になっていることからも分かる。</p>
 </section>
 <section id="密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">
 <h2>密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code><a class="headerlink" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()" title="Link to this heading">#</a></h2>
@@ -529,13 +530,13 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#２量子ビットの場合：depolarizing noiseを作用</span>
-<span class="n">density_matrix2</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">density_matrix_2</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.15</span>
 <span class="n">gate</span> <span class="o">=</span> <span class="n">DepolarizingNoise</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_matrix2</span><span class="p">)</span>
+<span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_matrix_2</span><span class="p">)</span>
 <span class="n">gate</span> <span class="o">=</span> <span class="n">DepolarizingNoise</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_matrix2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix2</span><span class="p">)</span>
+<span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_matrix_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -573,7 +574,7 @@ document.write(`
 <span class="n">Z0</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Z 0&quot;</span><span class="p">)</span>
 <span class="n">expec</span> <span class="o">=</span> <span class="n">Z0</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">expec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zの期待値&quot;</span><span class="p">,</span> <span class="n">expec</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -589,7 +590,7 @@ document.write(`
    (0.575,0) (0.460977,0)
 (0.460977,0)    (0.425,0)
 
-0.1499999999999999
+Zの期待値 0.1499999999999999
 </pre></div></div>
 </div>
 <p>Depolarizing noiseのようなエラーを表す操作を、qulacs上で状態ベクトル（純粋状態）に作用させると、確率的にエラーが作用した状態ベクトルを返す。 例えば、Depolarizing noiseだと、確率<span class="math notranslate nohighlight">\((1-p)\)</span>で入力した状態をそのまま返し、確率<span class="math notranslate nohighlight">\(p/3\)</span>でそれぞれX、Y、Zゲートが作用した状態が確率的に得られる。 実行するたびにランダムに状態ベクトルが選ばれることに注意。</p>
@@ -605,10 +606,10 @@ document.write(`
 <span class="n">gate</span> <span class="o">=</span> <span class="n">DepolarizingNoise</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 
 <span class="c1">#状態ベクトルvecを用意→DepolarizingNoiseを複数回作用させてみる</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
     <span class="n">state</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
     <span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">回目&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -617,9 +618,11 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[0.+0.j 1.+0.j]
-[0.+0.j 1.+0.j]
-[1.+0.j 0.+0.j]
+1回目 [0.+0.j 1.+0.j]
+2回目 [0.+0.j 1.+0.j]
+3回目 [0.+0.j 1.+0.j]
+4回目 [0.+0.j 1.+0.j]
+5回目 [1.+0.j 0.+0.j]
 </pre></div></div>
 </div>
 <p>確率的に選ばれるため、ノイズが作用した状況のもとで所望の量（期待値など）を求めるためには、同じ計算を何度も実行して平均する必要がある（密度演算子から期待値を計算する場合は、平均操作は不要）。 こちらは、量子ビット数が20前後の大規模なシミュレーションを行なう際に用いる。</p>
@@ -636,7 +639,7 @@ document.write(`
 <span class="n">density_matrix</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat2</span><span class="p">)</span>
 <span class="n">noiseless_sampling</span> <span class="o">=</span> <span class="n">density_matrix</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">noiseless_sampling</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリングで得られたビット列&quot;</span><span class="p">,</span><span class="n">noiseless_sampling</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -646,7 +649,7 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1]
+サンプリングで得られたビット列 [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
  *** Density Matrix ***
  * Qubit Count : 1
  * Dimension   : 2
@@ -673,8 +676,9 @@ document.write(`
     <span class="n">estimated_Z_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">noiseless_sampling</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">shots</span>
 
 <span class="c1">#物理量Zの期待値とサンプリングからの平均値を比較してみる</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">estimated_Z_average</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">Z0</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;エラーなしの場合&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリングから推定したZの平均値&quot;</span><span class="p">,</span><span class="n">estimated_Z_average</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zの期待値&quot;</span><span class="p">,</span><span class="n">Z0</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -683,8 +687,9 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.7800000000000005
-0.8
+エラーなしの場合
+サンプリングから推定したZの平均値 0.6400000000000003
+Zの期待値 0.8
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -692,8 +697,8 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ヒストグラムを作成</span>
-<span class="n">n_test</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">n_test</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">noiseless_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_test</span><span class="p">):</span>
@@ -721,7 +726,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_24_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_24_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_25_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_25_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -743,8 +748,9 @@ document.write(`
     <span class="n">estimated_Z_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">noise_sampling</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">shots</span>
 
 <span class="c1">#物理量Zの期待値とサンプリングからの平均値を比較してみる</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">estimated_Z_average</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">Z0</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;エラーがある場合&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリングから推定したZの平均値&quot;</span><span class="p">,</span><span class="n">estimated_Z_average</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zの期待値&quot;</span><span class="p">,</span><span class="n">Z0</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -753,8 +759,9 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.34000000000000014
-0.48
+エラーがある場合
+サンプリングから推定したZの平均値 0.4000000000000002
+Zの期待値 0.48
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -762,8 +769,8 @@ document.write(`
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ヒストグラムを作成</span>
-<span class="n">n_test</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">n_test</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">noisy_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_test</span><span class="p">):</span>
@@ -793,7 +800,7 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_27_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_27_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_28_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_28_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -803,11 +810,11 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#２量子ビットの場合の密度演算子からサンプリング</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">mat3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
-<span class="n">density_matrix2</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat3</span><span class="p">)</span>
-<span class="n">noiseless_sampling2</span> <span class="o">=</span> <span class="n">density_matrix2</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
+<span class="n">density_matrix_2</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat3</span><span class="p">)</span>
+<span class="n">noiseless_sampling_2</span> <span class="o">=</span> <span class="n">density_matrix_2</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">noiseless_sampling2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリングで得られたビット列&quot;</span><span class="p">,</span><span class="n">noiseless_sampling_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -816,7 +823,7 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-[0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 2, 0, 3, 2, 0, 0, 2, 0, 3, 2, 0, 0, 0, 3, 2, 0, 2, 0, 2, 0]
+サンプリングで得られたビット列 [2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 3, 2, 2, 2, 3, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 3, 2, 2, 2, 0]
  *** Density Matrix ***
  * Qubit Count : 2
  * Dimension   : 4
@@ -851,7 +858,7 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#qulacsを使ったLindblad方程式のシミュレーション</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mf">1.5</span>
-<span class="n">element</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">element</span> <span class="o">=</span> <span class="mi">40</span>
 <span class="n">tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">element</span><span class="p">)</span>
 
 <span class="c1">#物理量はXにする</span>
@@ -864,12 +871,12 @@ document.write(`
 <span class="n">hamiltonian</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="s2">&quot;Z 0 &quot;</span><span class="p">)</span>
 
 <span class="c1">#Lindblad演算子を指定</span>
-<span class="n">decay_rate_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">decay_rate_z</span> <span class="o">=</span> <span class="mf">0.3</span>
 <span class="n">c_ops</span> <span class="o">=</span> <span class="p">[</span><span class="n">GeneralQuantumOperator</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
-<span class="n">c_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">decay_rate_z</span><span class="p">,</span> <span class="s2">&quot;Z 0&quot;</span><span class="p">)</span>
+<span class="n">c_ops</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">decay_rate_z</span><span class="p">),</span> <span class="s2">&quot;Z 0&quot;</span><span class="p">)</span>
 
 <span class="c1">#期待値をサンプリングにより求める</span>
-<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">exp_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">exp2_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -882,7 +889,7 @@ document.write(`
         <span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
         <span class="n">exp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
     <span class="n">exp_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
-    <span class="n">exp2_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+    <span class="n">exp2_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">exp</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_samples</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -904,9 +911,10 @@ document.write(`
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_33_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_33_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_34_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_34_0.png" />
 </div>
 </div>
+<p>QulacsではLindbladによる時間発展をモンテカルロ的に実行しているので、何度も実行して平均を取る必要があります。</p>
 </section>
 <section id="練習">
 <h2>練習<a class="headerlink" href="#練習" title="Link to this heading">#</a></h2>

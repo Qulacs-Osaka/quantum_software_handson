@@ -443,19 +443,12 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-&lt;frozen importlib._bootstrap&gt;:228: RuntimeWarning: scipy._lib.messagestream.MessageStream size changed, may indicate binary incompatibility. Expected 56 from C header, got 64 from PyObject
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_6_1.png" src="../_images/notebooks_04_02_Extrapolation_6_1.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_6_0.png" src="../_images/notebooks_04_02_Extrapolation_6_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -479,9 +472,10 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#上で定義したansatz回路のもとで、コスト関数を最小化する。</span>
 <span class="n">params_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 <span class="n">minimized_costfunction</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">get_cost</span><span class="p">,</span> <span class="n">params_initial</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">)</span>
-
+<span class="n">exact_energy</span> <span class="o">=</span> <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">solve_ground_state_eigenvalue_by_power_method</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="c1">#コスト関数の最小値を表示</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値&quot;</span><span class="p">,</span> <span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基底状態のエネルギー&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">exact_energy</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -490,7 +484,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485812115
+VQEで求めたコスト関数の最小値 -5.072893485692576
+基底状態のエネルギー -5.203541892294178
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -558,8 +553,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
 
 <span class="c1">#コスト関数の最小値を表示</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーなし)：&quot;</span><span class="p">,</span> <span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーあり)：&quot;</span><span class="p">,</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -568,8 +563,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485812115
--3.8479591358366707
+VQEで求めたコスト関数の最小値(エラーなし)： -5.072893485692576
+VQEで求めたコスト関数の最小値(エラーあり)： -3.8479582178671157
 </pre></div></div>
 </div>
 <p>エラーの影響により、コスト関数の最小値が理想的な場合から遠ざかっていることが確認できます。</p>
@@ -631,7 +626,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <img alt="../_images/notebooks_04_02_Extrapolation_18_1.png" src="../_images/notebooks_04_02_Extrapolation_18_1.png" />
 </div>
 </div>
-<p>ここで、total error = （全ゲート数）×（エラー率）としました。この値が１程度であれば、エラー補償は機能します。</p>
+<p>ここで、total error = （全ゲート数）×（エラー率）としました。この値が１程度であれば、エラー補償は現実的な測定回数で機能します。</p>
 </section>
 <section id="外挿法（リチャードソン外挿・指数関数外挿）の実装">
 <h2>外挿法（リチャードソン外挿・指数関数外挿）の実装<a class="headerlink" href="#外挿法（リチャードソン外挿・指数関数外挿）の実装" title="Link to this heading">#</a></h2>
@@ -969,9 +964,9 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#実際に得られた標準偏差と、コストの見積もりの比較・線形外挿</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">std_linear_extrapolation</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cost_linear_extrapolation</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#計算して得られた標準偏差の増加分と、コストの見積もりの比較・線形外挿</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;計算して得られた標準偏差の増加分：&quot;</span><span class="p">,</span> <span class="n">std_linear_extrapolation</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;理論式から求めた測定コスト：&quot;</span><span class="p">,</span><span class="n">cost_linear_extrapolation</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -980,17 +975,17 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-5.50027198540011
-5.467073155618908
+計算して得られた標準偏差の増加分： 5.439507209313561
+理論式から求めた測定コスト： 5.467073155618908
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#実際に得られた標準偏差と、コストの見積もりの比較・指数関数外挿</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">std_exponential_extrapolation</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cost_exponential_extrapolation</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#計算して得られた標準偏差の増加分と、コストの見積もりの比較・指数関数外挿</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;計算して得られた標準偏差の増加分：&quot;</span><span class="p">,</span><span class="n">std_exponential_extrapolation</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;理論式から求めた測定コスト：&quot;</span><span class="p">,</span><span class="n">cost_exponential_extrapolation</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -999,11 +994,11 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-10.788841437046047
-16.214287639163235
+計算して得られた標準偏差の増加分： 10.435652032975195
+理論式から求めた測定コスト： 16.214287639163235
 </pre></div></div>
 </div>
-<p>見積もられる測定コストは、リチャードソン外挿・指数関数外挿どちらも同じような値になることが分かりました。</p>
+<p>測定コストの理論式は、リチャードソン外挿だとほぼ同じ値になるのに対し、指数関数外挿は少し大きめの値になっていることが分かりました。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

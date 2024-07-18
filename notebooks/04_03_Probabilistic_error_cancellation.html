@@ -390,6 +390,7 @@ document.write(`
 </div>
 <section id="擬確率法を実装してみる">
 <h1>擬確率法を実装してみる<a class="headerlink" href="#擬確率法を実装してみる" title="Link to this heading">#</a></h1>
+<p>シミュレーション・エラーの入れ方は外挿法のときと共通。</p>
 <section id="エラーなしの場合">
 <h2>エラーなしの場合<a class="headerlink" href="#エラーなしの場合" title="Link to this heading">#</a></h2>
 <p>１次元横磁場イジング模型（４サイト）の基底状態をVQEで求める。解く対象は外挿法のものと共通。 <span class="math">\begin{align}
@@ -441,19 +442,12 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-&lt;frozen importlib._bootstrap&gt;:228: RuntimeWarning: scipy._lib.messagestream.MessageStream size changed, may indicate binary incompatibility. Expected 56 from C header, got 64 from PyObject
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_1.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_1.png" />
+<img alt="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_0.png" src="../_images/notebooks_04_03_Probabilistic_error_cancellation_6_0.png" />
 </div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -476,10 +470,11 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#上で定義したansatz回路のもとで、コスト関数を最小化する。</span>
 <span class="n">params_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="n">minimized_costfunction</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">get_cost</span><span class="p">,</span> <span class="n">params_initial</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;maxiter&#39;</span><span class="p">:</span><span class="mi">50</span><span class="p">,</span> <span class="s2">&quot;gtol&quot;</span><span class="p">:</span> <span class="mf">1e-6</span><span class="p">},</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">)</span>
-
+<span class="n">minimized_costfunction</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">get_cost</span><span class="p">,</span> <span class="n">params_initial</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;BFGS&#39;</span><span class="p">)</span>
+<span class="n">exact_energy</span> <span class="o">=</span> <span class="n">transverse_Ising_hamiltonian</span><span class="o">.</span><span class="n">solve_ground_state_eigenvalue_by_power_method</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="c1">#コスト関数の最小値を表示</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値&quot;</span><span class="p">,</span> <span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">fun</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基底状態のエネルギー&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">exact_energy</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -488,14 +483,16 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485824163
+VQEで求めたコスト関数の最小値 -5.072893485692576
+基底状態のエネルギー -5.203541892294178
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">params_true</span> <span class="o">=</span> <span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">x</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラーがない場合のansatz回路のパラメータを取得</span>
+<span class="n">params_true</span> <span class="o">=</span> <span class="n">minimized_costfunction</span><span class="o">.</span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -555,8 +552,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
 
 <span class="c1">#コスト関数の最小値を表示</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーなし)：&quot;</span><span class="p">,</span> <span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーあり)：&quot;</span><span class="p">,</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -565,8 +562,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--5.072893485824163
--3.847959226687526
+VQEで求めたコスト関数の最小値(エラーなし)： -5.072893485692576
+VQEで求めたコスト関数の最小値(エラーあり)： -3.8479582178671157
 </pre></div></div>
 </div>
 <p>エラーの影響で期待値が変わっていることが確認できます。次にサンプリングにより、期待値を求めます。</p>
@@ -611,7 +608,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラー率を固定して、ヒストグラムを作成</span>
-<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
 <span class="n">n_test</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">no_mitigation_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
@@ -768,17 +765,23 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_cost_sampling_PEC</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#擬確率法でエラーの影響を削減できていることを確認</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">10000</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーなし)：&quot;</span><span class="p">,</span> <span class="n">minimized_costfunction_noiseless</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VQEで求めたコスト関数の最小値(エラーあり)：&quot;</span><span class="p">,</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;エラーを擬確率で削減した結果（統計誤差を含む）&quot;</span><span class="p">,</span> <span class="n">get_cost_sampling_PEC</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
--4.86829448252778
+VQEで求めたコスト関数の最小値(エラーなし)： -5.072893485692576
+VQEで求めたコスト関数の最小値(エラーあり)： -3.8479582178671157
+エラーを擬確率で削減した結果（統計誤差を含む） -5.374169942495543
 </pre></div></div>
 </div>
 </section>
@@ -790,7 +793,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラー率を固定して、ヒストグラムを作成</span>
-<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
 <span class="n">n_test</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">PEC_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_test</span><span class="p">)</span>
@@ -806,8 +809,8 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_noisy_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no mitigation&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mitigated&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">no_mitigation_noisy_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no mitigation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mitigated&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">expec_value</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
@@ -828,7 +831,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#得られたヒストグラムから、それぞれの標準偏差を求めてみる。標準偏差の比から測定コストが求まる。</span>
-<span class="n">std_no_mitigation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">no_mitigation_list</span><span class="p">)</span>
+<span class="n">std_no_mitigation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">no_mitigation_noisy_list</span><span class="p">)</span>
 <span class="n">std_PEC</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">PEC_list</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -846,9 +849,9 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#実際に得られた標準偏差と、コストの見積もりの比較・線形外挿</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">std_PEC</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">total_cost</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#計算して得られた標準偏差の増加分と、コストの見積もりの比較</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;計算して得られた標準偏差の増加分：&quot;</span><span class="p">,</span><span class="n">std_PEC</span><span class="o">/</span><span class="n">std_no_mitigation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;理論式から求めた測定コスト：&quot;</span><span class="p">,</span><span class="n">total_cost</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -857,11 +860,11 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-4.307903590104474
-2.6201800228890098
+計算して得られた標準偏差の増加分： 9.703427076809103
+理論式から求めた測定コスト： 6.911226777901118
 </pre></div></div>
 </div>
-<p>コストは2.6程度で、上のヒストグラムの広がりの比と同じような値であることが分かります。</p>
+<p>測定コストの理論式は、少し小さめの値になっていることが分かりました。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
