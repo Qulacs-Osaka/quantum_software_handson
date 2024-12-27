@@ -16,26 +16,29 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -52,6 +55,7 @@
     <link rel="prev" title="古典コンピュータを使った量子化学計算を実行してみる" href="05_01_conventional_quantum_chemical_calculations.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -67,19 +71,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -87,7 +80,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -95,8 +87,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -112,7 +104,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -142,21 +135,17 @@
     
     
     <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
-    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-dark pst-js-only" alt="Quantum Software Hands on  documentation - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
@@ -210,9 +199,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -309,24 +303,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -474,7 +460,13 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/local/lib/python3.7/dist-
 <section id="H_{qubit}を用意する手順">
 <h2><span class="math notranslate nohighlight">\(H_{qubit}\)</span>を用意する手順<a class="headerlink" href="#H_{qubit}を用意する手順" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(H_{electron}\)</span>から<span class="math notranslate nohighlight">\(H_{qubit}\)</span>への変換法は、複数存在する。 実は、この変換は、今日では、既にオープンソースのソフトウェアを用いて簡単におこなえるようになっている。 そうしたソフトウェアとしては、IBMのQiskitやGoogleのチームが中心に開発しているOpenFermionが挙げられる。 このチュートリアルでは、OpenFermionを使うこととする。</p>
-<p>量子コンピュータ用ハミルトニアンの用意は以下のステップでおこなわれる。 1. 計算する分子の構造や電荷など入力する （通常の量子化学計算と同じ） 2. 平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る 3. 得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する 4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する</p>
+<p>量子コンピュータ用ハミルトニアンの用意は以下のステップでおこなわれる。</p>
+<ol class="arabic simple">
+<li><p>計算する分子の構造や電荷など入力する （通常の量子化学計算と同じ）</p></li>
+<li><p>平均場（Hartree-Fock）計算などを実行し(分子)軌道を得る</p></li>
+<li><p>得られた分子軌道から、第二量子化表現の電子のハミルトニアン<span class="math notranslate nohighlight">\(H_{electron}\)</span>を構築する</p></li>
+<li><p>OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する</p></li>
+</ol>
 <p>この各ステップについて以下で順に見ていきたい。</p>
 <section id="1.-計算する分子の構造や電荷など入力する">
 <h3>1. 計算する分子の構造や電荷など入力する<a class="headerlink" href="#1.-計算する分子の構造や電荷など入力する" title="Link to this heading">#</a></h3>
@@ -644,7 +636,12 @@ Parsing fcidump.rhf
 </section>
 <section id="4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する">
 <h3>4. OpenFermionなどを使って、<span class="math notranslate nohighlight">\(H_{electron}\)</span>を<span class="math notranslate nohighlight">\(H_{qubit}\)</span>に変換する<a class="headerlink" href="#4.-OpenFermionなどを使って、H_{electron}をH_{qubit}に変換する" title="Link to this heading">#</a></h3>
-<p>ここまでで、<span class="math notranslate nohighlight">\(H_{electron}\)</span>が計算できたので、最後に<span class="math notranslate nohighlight">\(H_{qubit}\)</span>への変換をおこなう。 この変換方法はいくつかある。代表的なものを３つあげよう。 1. Jordan-Wigner変換 2. Parity変換 3. Bravyi-Kitaev変換 本演習では、以下で1と3の2つの変換法を見てみる。</p>
+<p>ここまでで、<span class="math notranslate nohighlight">\(H_{electron}\)</span>が計算できたので、最後に<span class="math notranslate nohighlight">\(H_{qubit}\)</span>への変換をおこなう。 この変換方法はいくつかある。代表的なものを３つあげよう。</p>
+<ol class="arabic simple">
+<li><p>Jordan-Wigner変換</p></li>
+<li><p>Parity変換</p></li>
+<li><p>Bravyi-Kitaev変換 本演習では、以下で1と3の2つの変換法を見てみる。</p></li>
+</ol>
 <section id="Jordan-Wigner-変換">
 <h4>Jordan-Wigner 変換<a class="headerlink" href="#Jordan-Wigner-変換" title="Link to this heading">#</a></h4>
 <p>Jordan-Wigner変換は、最も直感的な変換である。 一つ一つの量子ビットをスピン分子軌道に対応させ、0だと、電子が詰まっておらず、1だと電子が詰まっていると考える。例えば、0011 だと、右から1番目の軌道と、右から2番目の軌道に電子が入っている電子状態を示している。</p>
@@ -809,7 +806,8 @@ Parsing fcidump.rhf
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -877,8 +875,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
