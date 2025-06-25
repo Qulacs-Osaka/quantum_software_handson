@@ -28,10 +28,10 @@ GitHubからcloneしてノートブックを利用する場合は、ディレク
 - 02\_量子アルゴリズムの基礎
 
   - 01\_期待値の推定、量子ゲート間の相互変換、任意ユニタリのコンパイルなど
-    <br> [02_01_sample_observable.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/02_01_basics.ipynb)
+    <br> [02_01_basics.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/02_01_basics.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/02_01_basics.ipynb)
   - 02\_量子シミュレーションを題材にした基礎サブルーチンの実装
-    <br> [02_02_parameter_shift_rule.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/02_02_quantum_simulation.ipynb)
+    <br> [02_02_quantum_simulation.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/02_02_quantum_simulation.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson/HEAD?labpath=doc/source/notebooks/02_02_quantum_simulation.ipynb)
 
 - 03\_量子機械学習の基礎
