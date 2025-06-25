@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>期待値の推定 &#8212; Quantum Software Hands on  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02_01_basics';</script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/02_01_basics.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_01_QCL.html">簡単な量子回路学習を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_02_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_01_Density_Matrix_and_Error.html">Qulacsでの混合状態</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_02_Extrapolation.html">リチャードソン外挿法と指数関数外挿法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">擬確率法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_02_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">Qamuyを使った量子コンピュータｘ量子化学計算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/02_01_basics.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>期待値の推定</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">期待値の推定</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#基本的なゲート間の変換をみる">基本的なゲート間の変換をみる</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#CNOT-+-1量子ビットゲートの万能性">CNOT + 1量子ビットゲートの万能性</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#1-量子ビットゲートを-H,-T,-S-だけで表現する">1 量子ビットゲートを H, T, S だけで表現する</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2量子ビットパウリによる回転ゲート">2量子ビットパウリによる回転ゲート</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>qiskit<span class="w"> </span>numpy<span class="w"> </span>qiskit-aer<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>git+https://github.com/quantum-programming/pygridsynth.git<span class="w"> </span>pylatexenc
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Collecting git+https://github.com/quantum-programming/pygridsynth.git
+  Cloning https://github.com/quantum-programming/pygridsynth.git to /tmp/pip-req-build-yed1508h
+  Running command git clone --filter=blob:none --quiet https://github.com/quantum-programming/pygridsynth.git /tmp/pip-req-build-yed1508h
+  Resolved https://github.com/quantum-programming/pygridsynth.git to commit 5868c650ce819227adcd80eaa8d8e065f4001022
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... done
+Requirement already satisfied: qiskit in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.1.0)
+Requirement already satisfied: numpy in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.3.1)
+Requirement already satisfied: qiskit-aer in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (0.17.1)
+Requirement already satisfied: scipy in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (1.16.0)
+Requirement already satisfied: matplotlib in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (3.10.3)
+Requirement already satisfied: pylatexenc in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.10)
+Requirement already satisfied: mpmath in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from pygridsynth==1.1.0) (1.3.0)
+Requirement already satisfied: rustworkx&gt;=0.15.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (0.16.0)
+Requirement already satisfied: dill&gt;=0.3 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (0.4.0)
+Requirement already satisfied: stevedore&gt;=3.0.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (5.4.1)
+Requirement already satisfied: typing-extensions in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (4.14.0)
+Requirement already satisfied: psutil&gt;=5 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit-aer) (7.0.0)
+Requirement already satisfied: python-dateutil&gt;=2.8.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit-aer) (2.9.0.post0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (1.3.2)
+Requirement already satisfied: cycler&gt;=0.10 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (0.12.1)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (4.58.4)
+Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (1.4.8)
+Requirement already satisfied: packaging&gt;=20.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (25.0)
+Requirement already satisfied: pillow&gt;=8 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (11.2.1)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (3.2.3)
+Requirement already satisfied: six&gt;=1.5 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.0-&gt;qiskit-aer) (1.17.0)
+Requirement already satisfied: pbr&gt;=2.0.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from stevedore&gt;=3.0.0-&gt;qiskit) (6.1.1)
+Requirement already satisfied: setuptools in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from pbr&gt;=2.0.0-&gt;stevedore&gt;=3.0.0-&gt;qiskit) (78.1.1)
+</pre></div></div>
+</div>
+<section id="期待値の推定">
+<h1>期待値の推定<a class="headerlink" href="#期待値の推定" title="Link to this heading">#</a></h1>
+<p>ここでは簡単に 1 量子ビットの量子回路で Z 演算子の期待値を推定してみます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer</span><span class="w"> </span><span class="kn">import</span> <span class="n">AerSimulator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">rx</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">save_statevector</span><span class="p">()</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;statevector&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+<span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_statevector</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;exact:&quot;</span><span class="p">,</span> <span class="n">vec</span><span class="o">.</span><span class="n">conj</span><span class="p">()</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">@</span> <span class="n">vec</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;estimated:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.8660254+0.j  0.       -0.5j]
+{&#39;1&#39;: 270, &#39;0&#39;: 730}
+exact: (0.5000000000000002+0j)
+estimated: 0.46
+</pre></div></div>
+</div>
+</section>
+<section id="基本的なゲート間の変換をみる">
+<h1>基本的なゲート間の変換をみる<a class="headerlink" href="#基本的なゲート間の変換をみる" title="Link to this heading">#</a></h1>
+<p>行列成分を1行で簡単にみれるように関数定義しておきます。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit_aer</span><span class="w"> </span><span class="kn">import</span> <span class="n">AerSimulator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">):</span>
+    <span class="n">simulator</span> <span class="o">=</span> <span class="n">AerSimulator</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;unitary&#39;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">get_unitary</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">display_complex_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># Set the figure size to be larger and create two subplots</span>
+
+    <span class="c1"># Plot the angle of the matrix elements with a fixed color scale</span>
+    <span class="n">cax1</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hsv&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Angle&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Plot the absolute value of the matrix elements</span>
+    <span class="n">cax2</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">matshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">matrix</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Absolute Value&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\mathrm{CNOT} = (I\otimes H) \mathrm{CZ} (I\otimes H)\)</span></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+
+<span class="c1"># Create a quantum circuit</span>
+<span class="n">cnot</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cnot</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">cnot</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+
+<span class="c1"># cz</span>
+<span class="n">cnot2</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cnot2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cnot2</span><span class="o">.</span><span class="n">cz</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cnot2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cnot2</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+
+<span class="c1"># Use the AerSimulator to get the unitary matrix</span>
+
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">cnot</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CNOT&quot;</span><span class="p">)</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">cnot2</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CZ&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_7_0.png" src="../_images/notebooks_02_01_basics_7_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_7_1.png" src="../_images/notebooks_02_01_basics_7_1.png" />
+</div>
+</div>
+<p>SWAP &lt;-&gt; CNOT</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<p>CY &lt;-&gt; CNOT</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+<p>Rz &lt;-&gt; Rx</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="CNOT-+-1量子ビットゲートの万能性">
+<h1>CNOT + 1量子ビットゲートの万能性<a class="headerlink" href="#CNOT-+-1量子ビットゲートの万能性" title="Link to this heading">#</a></h1>
+<p>色々理屈をこねて証明することはできるが、qiskit には Isometry という名前で任意のユニタリを実現できる関数が実装されているのでそれを使うと万能性を実感できる。原論文は <a class="reference external" href="https://arxiv.org/abs/1501.06911">https://arxiv.org/abs/1501.06911</a> 。Qiskit の U3 gate は任意の1量子ビットユニタリに対応する。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">unitary_group</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library.generalized_gates</span><span class="w"> </span><span class="kn">import</span> <span class="n">Isometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">transpile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="n">random_unitary</span> <span class="o">=</span> <span class="n">unitary_group</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Isometry</span><span class="p">(</span><span class="n">random_unitary</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">qc</span><span class="o">.</span><span class="n">qubits</span><span class="p">)</span>
+<span class="n">qc_transpiled</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qc_transpiled</span><span class="o">.</span><span class="n">global_phase</span><span class="p">)</span>
+<span class="n">qc_transpiled</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.17734088262078984
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_15_1.png" src="../_images/notebooks_02_01_basics_15_1.png" />
+</div>
+</div>
+<p>実際に回路を実行してみると、以下のようにしっかり実現できていることが確認できる。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qc_transpiled</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc_transpiled</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Unitary of circuit&quot;</span><span class="p">)</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">random_unitary</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Target unitary&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_17_0.png" src="../_images/notebooks_02_01_basics_17_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_17_1.png" src="../_images/notebooks_02_01_basics_17_1.png" />
+</div>
+</div>
+</section>
+<section id="1-量子ビットゲートを-H,-T,-S-だけで表現する">
+<h1>1 量子ビットゲートを H, T, S だけで表現する<a class="headerlink" href="#1-量子ビットゲートを-H,-T,-S-だけで表現する" title="Link to this heading">#</a></h1>
+<p>FTQC では誤り耐性の代償として、離散的なゲートセットのみを実行できる。利用する誤り訂正符号によるが、例えば表面符号では１量子ビットゲートとして利用できるのは H, T, S のみとすることが多い。このような制約下で任意の１量子ビットユニタリを表現する方法を考える。</p>
+<p>と言っても先人の知恵を借りるだけでよい。ここでは <a class="github reference external" href="https://github.com/quantum-programming/pygridsynth">quantum-programming/pygridsynth</a> を利用する。<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygridsynth</span></code> でインストールできる。原論文は <a class="reference external" href="https://arxiv.org/abs/1403.2975">https://arxiv.org/abs/1403.2975</a> であり 彼らは Haskell 実装のみを提供しているが、Python に移植したものが pygridsynth である。pygridsynth は体感 1/2 くらいの確率でうまく行かない。本家はそんなことはない。</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygridsynth</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">HGate</span>
+<span class="c1"># generate string consisting of {T,H,S,W} which corresponds to Rz(theta) with precision epsilon</span>
+<span class="c1"># W corresponds to global phase shift of pi/4</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
+<span class="n">gates</span> <span class="o">=</span> <span class="n">pygridsynth</span><span class="o">.</span><span class="n">gridsynth_gates</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">gate</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">gate</span> <span class="o">==</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">gate</span> <span class="o">==</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">gate</span> <span class="o">==</span> <span class="s1">&#39;W&#39;</span><span class="p">:</span>
+        <span class="n">qc</span><span class="o">.</span><span class="n">global_phase</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+<span class="n">unitary</span> <span class="o">=</span> <span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> <span class="o">-</span> <span class="n">RZGate</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">()))</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Unitary of circuit&quot;</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">RZGate</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">RZGate</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Exact Rz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="2量子ビットパウリによる回転ゲート">
+<h2>2量子ビットパウリによる回転ゲート<a class="headerlink" href="#2量子ビットパウリによる回転ゲート" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(exp(i\theta ZZ)\)</span> のような 2 量子ビットのパウリ演算子による回転ゲートは、CNOT と 1 量子ビットゲートを組み合わせることで実現できることを見ます：</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exp(-i\theta ZZ) gate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">PauliEvolutionGate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.quantum_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">SparsePauliOp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">SparsePauliOp</span><span class="p">(</span><span class="s1">&#39;ZZ&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PauliEvolutionGate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ZZGate(0.5)&quot;</span><span class="p">)</span>
+
+<span class="c1"># exp ZZ gate can be composed of CNOT and CZ gates</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">rz</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">qc</span> <span class="o">=</span> <span class="n">transpile</span><span class="p">(</span><span class="n">qc</span><span class="p">,</span> <span class="n">basis_gates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;u3&#39;</span><span class="p">,</span> <span class="s1">&#39;cx&#39;</span><span class="p">,</span> <span class="s1">&#39;cz&#39;</span><span class="p">])</span>
+<span class="n">qc</span><span class="o">.</span><span class="n">save_unitary</span><span class="p">()</span>
+<span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;CNOT + RZ + CNOT&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_21_0.png" src="../_images/notebooks_02_01_basics_21_0.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_21_1.png" src="../_images/notebooks_02_01_basics_21_1.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(exp(i\theta XX), exp(i\theta YY)\)</span> も同様に実現できます。やってみましょう。</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">期待値の推定</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#基本的なゲート間の変換をみる">基本的なゲート間の変換をみる</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#CNOT-+-1量子ビットゲートの万能性">CNOT + 1量子ビットゲートの万能性</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#1-量子ビットゲートを-H,-T,-S-だけで表現する">1 量子ビットゲートを H, T, S だけで表現する</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2量子ビットパウリによる回転ゲート">2量子ビットパウリによる回転ゲート</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Qulacs-Osaka
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2021, Qulacs-Osaka.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

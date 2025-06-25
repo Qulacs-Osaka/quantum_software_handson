@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
@@ -16,46 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02_02_parameter_shift_rule';</script>
-    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/02_02_parameter_shift_rule.html" />
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="簡単な量子回路学習を実行してみる" href="03_01_QCL.html" />
-    <link rel="prev" title="サンプリングによってオブザーバブルの期待値を推定する" href="02_01_sample_observable.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/02_old/02_02_parameter_shift_rule';</script>
+    <link rel="canonical" href="https://qulacs-osaka.github.io/quantum_software_handson/notebooks/02_old/02_02_parameter_shift_rule.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -71,15 +65,27 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="../search.html"
+      action="../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -87,8 +93,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -104,8 +110,9 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -123,7 +130,7 @@
     
   
 
-<a class="navbar-brand logo" href="../index.html">
+<a class="navbar-brand logo" href="../../index.html">
   
   
   
@@ -134,47 +141,49 @@
       
     
     
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
-    <img src="../_static/mark_type_jp_c.png" class="logo__image only-dark pst-js-only" alt="Quantum Software Hands on  documentation - Home"/>
+    <img src="../../_static/mark_type_jp_c.png" class="logo__image only-light" alt="Quantum Software Hands on  documentation - Home"/>
+    <script>document.write(`<img src="../../_static/mark_type_jp_c.png" class="logo__image only-dark" alt="Quantum Software Hands on  documentation - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
-<li class="toctree-l1"><a class="reference internal" href="01_04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_01_sample_observable.html">サンプリングによってオブザーバブルの期待値を推定する</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">パラメータシフト法による勾配最適化</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_01_QCL.html">簡単な量子回路学習を実行してみる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_02_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_01_Density_Matrix_and_Error.html">Qulacsでの混合状態</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_02_Extrapolation.html">リチャードソン外挿法と指数関数外挿法を実装してみる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_03_Probabilistic_error_cancellation.html">擬確率法を実装してみる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_01_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_02_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_03_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_01_how_to_use_qulacs.html">Qulacsの基本的な使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_02_Ramsay.html">ラムゼイ干渉をプロットする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_03_VariationalGateDecomposition.html">変分法を用いて量子演算を特定の演算で分解する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_04_QuantumVolume.html">ランダム量子回路と量子ボリューム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_01_QCL.html">簡単な量子回路学習を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_02_quantum_kernel.html">量子カーネル法を使ってみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_01_Density_Matrix_and_Error.html">Qulacsでの混合状態</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_02_Extrapolation.html">リチャードソン外挿法と指数関数外挿法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_03_Probabilistic_error_cancellation.html">擬確率法を実装してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_01_conventional_quantum_chemical_calculations.html">古典コンピュータを使った量子化学計算を実行してみる</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_02_fermion_qubit_mapping.html">量子コンピュータ上に量子化学の問題をマッピングする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_03_compute_groud_state_of_molecule_using_vqe.html">量子変分固有値法（VQE)を用いた基底状態計算</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="05_04_compute_chemical_properties_using_Qamuy.html">Qamuyを使った量子コンピュータｘ量子化学計算</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
-<li class="toctree-l1"><a class="reference internal" href="08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_04_compute_chemical_properties_using_Qamuy.html">Qamuyを使った量子コンピュータｘ量子化学計算</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_01_quantum_phase_estimation.html">位相推定アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_02_grover_search.html">グローバー探索量子アルゴリズムをとことん実装する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_01_Data_structure.html"><span class="math notranslate nohighlight">\(\mathrm{SQ}(A)\)</span>と<span class="math notranslate nohighlight">\(\mathrm{SQ}(b)\)</span>の実装について</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_02_Quantum_inspired_classical_algorithm_Part1.html">行列<span class="math notranslate nohighlight">\(A\)</span>を定義する</a></li>
 
 
 
@@ -182,11 +191,11 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_03_Quantum_inspired_classical_algorithm_Part2.html">(行列<span class="math notranslate nohighlight">\(C\)</span>の特異値分解の後)</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_04_quantum_inspired_binary_classification.html">2クラス問題に対する量子インスパイアード古典アルゴリズム</a></li>
 
 
 
@@ -199,14 +208,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -250,7 +254,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/02_02_parameter_shift_rule.ipynb" target="_blank"
+      <li><a href="../../_sources/notebooks/02_old/02_02_parameter_shift_rule.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,16 +307,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -372,11 +384,11 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">Observable</span><span class="p">,</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
-<span class="kn">from</span> <span class="nn">qulacsvis</span> <span class="kn">import</span> <span class="n">circuit_drawer</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qulacs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Observable</span><span class="p">,</span> <span class="n">QuantumState</span><span class="p">,</span> <span class="n">QuantumCircuit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qulacsvis</span><span class="w"> </span><span class="kn">import</span> <span class="n">circuit_drawer</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
 </pre></div>
 </div>
 </div>
@@ -391,7 +403,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qulacs</span> <span class="kn">import</span> <span class="n">ParametricQuantumCircuit</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qulacs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParametricQuantumCircuit</span>
 
 <span class="n">n_qubits</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">depth</span> <span class="o">=</span> <span class="mi">4</span>
@@ -419,7 +431,7 @@
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_4_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_4_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_4_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_4_0.png" />
 </div>
 </div>
 <p>道具として、与えられたパラメータにおけるコスト関数 (この場合はエネルギー期待値) を返す関数を作っておきます。</p>
@@ -427,7 +439,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_cost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_cost</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
         <span class="n">circuit</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
@@ -447,7 +459,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># パラメータシフト法によって、あるパラメータ params における勾配ベクトルを求めるコードを書いてください。</span>
-<span class="k">def</span> <span class="nf">get_gradient_by_parameter_shift</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_gradient_by_parameter_shift</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
     <span class="n">grad_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">tmp_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
@@ -466,7 +478,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="n">grad_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">tmp_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
@@ -517,8 +529,8 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utility</span> <span class="kn">import</span> <span class="n">get_matrix</span>
-<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">eigsh</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">utility</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_matrix</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">eigsh</span>
 <span class="n">eigvals</span> <span class="o">=</span> <span class="n">eigsh</span><span class="p">(</span><span class="n">get_matrix</span><span class="p">(</span><span class="n">hamiltonian</span><span class="p">),</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;SR&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ground state energy is:&quot;</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">eigvals</span><span class="p">))</span>
 </pre></div>
@@ -571,7 +583,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_16_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_16_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_16_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_16_0.png" />
 </div>
 </div>
 <p>最適化できていますね。</p>
@@ -584,7 +596,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_ZZ</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_ZZ</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">J_list</span>
     <span class="n">samples</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">_n_shots</span><span class="p">)</span>
     <span class="n">estimated_energy</span> <span class="o">=</span> <span class="mi">0</span>
@@ -595,8 +607,8 @@ ground state energy is: -2.2830906123847066
             <span class="n">estimated_energy</span> <span class="o">+=</span> <span class="n">J</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">_n_shots</span>
     <span class="k">return</span> <span class="n">estimated_energy</span>
 
-<span class="kn">from</span> <span class="nn">qulacs.gate</span> <span class="kn">import</span> <span class="n">H</span><span class="p">,</span> <span class="n">Sdag</span>
-<span class="k">def</span> <span class="nf">sample_XX</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qulacs.gate</span><span class="w"> </span><span class="kn">import</span> <span class="n">H</span><span class="p">,</span> <span class="n">Sdag</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_XX</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">J_list</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
         <span class="n">H</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -609,7 +621,7 @@ ground state energy is: -2.2830906123847066
             <span class="n">estimated_energy</span> <span class="o">+=</span> <span class="n">J</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">_n_shots</span>
     <span class="k">return</span> <span class="n">estimated_energy</span>
 
-<span class="k">def</span> <span class="nf">sample_YY</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_YY</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">_n_shots</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">J_list</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
         <span class="n">Sdag</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -623,7 +635,7 @@ ground state energy is: -2.2830906123847066
             <span class="n">estimated_energy</span> <span class="o">+=</span> <span class="n">J</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">_n_shots</span>
     <span class="k">return</span> <span class="n">estimated_energy</span>
 
-<span class="k">def</span> <span class="nf">sample_cost</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sample_cost</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
         <span class="n">circuit</span><span class="o">.</span><span class="n">set_parameter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
@@ -659,7 +671,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_22_1.png" src="../_images/notebooks_02_02_parameter_shift_rule_22_1.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_22_1.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_22_1.png" />
 </div>
 </div>
 <p>できているようなので、最適化に移ります。</p>
@@ -670,7 +682,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_gradient_by_finite_diff</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">):</span>
     <span class="n">grad_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">tmp_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
@@ -716,7 +728,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_25_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_25_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_25_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_25_0.png" />
 </div>
 </div>
 <p>全然最適化できていないことがわかります。これは <span class="math notranslate nohighlight">\(\langle H(\theta+\epsilon) \rangle\)</span> と <span class="math notranslate nohighlight">\(\langle H(\theta) \rangle\)</span> の差が統計誤差に負けているためだと考えられます。</p>
@@ -728,7 +740,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_gradient_by_parameter_shift</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sample_gradient_by_parameter_shift</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n_shots</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
     <span class="n">grad_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">tmp_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)):</span>
@@ -777,7 +789,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_29_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_29_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_29_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_29_0.png" />
 </div>
 </div>
 <p>パラメータシフト法が統計ノイズに対して圧倒的にロバストであることが確認できます。</p>
@@ -830,7 +842,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_33_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_33_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_33_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_33_0.png" />
 </div>
 </div>
 <p>全然だめですね。確率的勾配降下法を収束させるためにはステップ幅 <span class="math notranslate nohighlight">\(\alpha\)</span> を小さくしていかないといけないからです。そこで次は <span class="math notranslate nohighlight">\(\alpha = \alpha_0/(\text{number of steps})\)</span> で変化させていきます。</p>
@@ -876,7 +888,7 @@ ground state energy is: -2.2830906123847066
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_02_02_parameter_shift_rule_36_0.png" src="../_images/notebooks_02_02_parameter_shift_rule_36_0.png" />
+<img alt="../../_images/notebooks_02_old_02_02_parameter_shift_rule_36_0.png" src="../../_images/notebooks_02_old_02_02_parameter_shift_rule_36_0.png" />
 </div>
 </div>
 <p>一応上よりは良くなりましたし、無限に続ければ収束しそうな雰囲気です (?)</p>
@@ -895,24 +907,6 @@ ground state energy is: -2.2830906123847066
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="02_01_sample_observable.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">サンプリングによってオブザーバブルの期待値を推定する</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="03_01_QCL.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">簡単な量子回路学習を実行してみる</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -920,8 +914,7 @@ ground state energy is: -2.2830906123847066
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -986,8 +979,8 @@ By Qulacs-Osaka
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
