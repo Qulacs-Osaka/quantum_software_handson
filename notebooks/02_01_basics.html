@@ -625,7 +625,7 @@ estimated: 0.46
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygridsynth</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">HGate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">HGate</span><span class="p">,</span> <span class="n">RZGate</span>
 <span class="c1"># generate string consisting of {T,H,S,W} which corresponds to Rz(theta) with precision epsilon</span>
 <span class="c1"># W corresponds to global phase shift of pi/4</span>
 <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
@@ -645,7 +645,6 @@ estimated: 0.46
 <span class="n">unitary</span> <span class="o">=</span> <span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;error: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">)</span> <span class="o">-</span> <span class="n">RZGate</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">()))</span>
 <span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">get_unitary_from_circuit</span><span class="p">(</span><span class="n">qc</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Unitary of circuit&quot;</span><span class="p">)</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">RZGate</span>
 <span class="n">display_complex_matrix</span><span class="p">(</span><span class="n">RZGate</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span><span class="o">.</span><span class="n">to_matrix</span><span class="p">(),</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Exact Rz&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
