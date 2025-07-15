@@ -14,8 +14,8 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/01_02_Ramsay
    notebooks/01_03_VariationalGateDecomposition
    notebooks/01_04_QuantumVolume
-   notebooks/02_01_sample_observable
-   notebooks/02_02_parameter_shift_rule
+   notebooks/02_01_basics
+   notebooks/02_02_quantum_simulation
    notebooks/03_01_QCL
    notebooks/03_02_quantum_kernel
    notebooks/04_01_Density_Matrix_and_Error
@@ -27,7 +27,7 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/05_04_compute_chemical_properties_using_Qamuy
    notebooks/06_01_quantum_phase_estimation
    notebooks/06_02_grover_search
-   notebooks/07_CreditPortfolioRisk/07_01_CreditPortfolioRiskMeasurement_blank
+   notebooks/07_DerivativePricing/07_01_DerivativePricing_blank
    notebooks/08_01_Data_structure
    notebooks/08_02_Quantum_inspired_classical_algorithm_Part1
    notebooks/08_03_Quantum_inspired_classical_algorithm_Part2
