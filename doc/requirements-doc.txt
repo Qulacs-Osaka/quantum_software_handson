@@ -5,4 +5,3 @@ sphinx-book-theme
 sphinx-sitemap
 ipykernel
 nbsphinx
-quri-parts-oqtopus
