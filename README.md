@@ -99,3 +99,9 @@ GitHubからcloneしてノートブックを利用する場合は、ディレク
   - 04_2クラス問題に対する量子インスパイアード古典アルゴリズム
     <br> [08_04_quantum_inspired_binary_classification.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/08_04_quantum_inspired_binary_classification.ipynb)
     <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/08_04_quantum_inspired_binary_classification.ipynb)
+
+- 09\_量子クラウドの基礎
+  - 01_OQTOPUSの量子クラウドでジョブを実行する
+    <br> [09_01_OQTOPUS.ipynb](https://github.com/Qulacs-Osaka/quantum_software_handson/blob/main/doc/source/notebooks/09_01_OQTOPUS.ipynb)
+    <br> [[MyBinderで開く]](https://mybinder.org/v2/gh/Qulacs-Osaka/quantum_software_handson.git/HEAD?labpath=doc/source/notebooks/09_01_OQTOPUS.ipynb)
+
