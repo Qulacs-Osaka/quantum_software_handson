@@ -32,6 +32,7 @@ Welcome to Quautum Software Hands on's documentation!
    notebooks/08_02_Quantum_inspired_classical_algorithm_Part1
    notebooks/08_03_Quantum_inspired_classical_algorithm_Part2
    notebooks/08_04_quantum_inspired_binary_classification
+   notebooks/09_01_OQTOPUS
 
 
 
