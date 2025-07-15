@@ -3,6 +3,7 @@
 #fortecubeview
 qulacs
 qulacsvis
+quri-parts-oqtopus
 matplotlib
 numpy
 scikit-learn
