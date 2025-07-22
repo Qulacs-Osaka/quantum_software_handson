@@ -359,9 +359,9 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い">DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#量子状態（密度演算子）の準備">量子状態（密度演算子）の準備</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：">密度演算子をnumpyのarrayに変換、あるいはその逆：</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#いくつかのエラー：DepolarizingNoiseなど">いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#計算基底でのサンプリング：sampling()">計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#計算基底でのサンプリング：">計算基底でのサンプリング：</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Lindblad方程式のシミュレーション：NoisyEvolution_fast()">Lindblad方程式のシミュレーション：<code class="docutils literal notranslate"><span class="pre">NoisyEvolution_fast()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#練習">練習</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#補足：">補足：</a></li>
@@ -413,6 +413,7 @@ document.write(`
 </section>
 <section id="量子状態（密度演算子）の準備">
 <h2>量子状態（密度演算子）の準備<a class="headerlink" href="#量子状態（密度演算子）の準備" title="Link to this heading">#</a></h2>
+<p>Qulacs上で密度演算子を準備するには、<code class="docutils literal notranslate"><span class="pre">DensityMatrix</span></code>を使います。 引数は量子ビット数になっていて、量子ビット数<span class="math notranslate nohighlight">\(n\)</span>に対して、<span class="math notranslate nohighlight">\(2^n\times 2^n(=2^{2n})\)</span>の行列が定義されます。 同じ量子ビット数でも、状態ベクトルを使ったシミュレーションに比べて要素数が多いので、量子ビット数が多いときには扱いづらいことに注意。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -420,7 +421,7 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#密度演算子を準備</span>
 <span class="n">n_qubits</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">density_matrix</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Qulacsで密度演算子を定義&quot;</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">density_matrix</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -429,7 +430,8 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
- *** Density Matrix ***
+Qulacsで密度演算子を定義
+  *** Density Matrix ***
  * Qubit Count : 1
  * Dimension   : 2
  * Density matrix :
@@ -440,8 +442,9 @@ document.write(`
 </div>
 <p>初期状態は<span class="math notranslate nohighlight">\(|0\rangle\langle 0|\)</span>になっている。行列成分の<span class="math notranslate nohighlight">\((0,0)\)</span>成分が1で残りの成分がすべて0になっていることからも分かる。</p>
 </section>
-<section id="密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">
-<h2>密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code><a class="headerlink" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()" title="Link to this heading">#</a></h2>
+<section id="密度演算子をnumpyのarrayに変換、あるいはその逆：">
+<h2>密度演算子をnumpyのarrayに変換、あるいはその逆：<a class="headerlink" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：" title="Link to this heading">#</a></h2>
+<p>それぞれ<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code>を使って変換することが可能。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -472,16 +475,53 @@ document.write(`
  [0.5+0.j 0.5+0.j]]
 </pre></div></div>
 </div>
-<p>※上の量子状態は、実は純粋状態<span class="math notranslate nohighlight">\(|+\rangle\)</span>である。<span class="math notranslate nohighlight">\(|+\rangle\langle+|\)</span>を表示してみれば一致することが確認できる。</p>
-</section>
-<section id="いくつかのエラー：DepolarizingNoiseなど">
-<h2>いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など<a class="headerlink" href="#いくつかのエラー：DepolarizingNoiseなど" title="Link to this heading">#</a></h2>
-<p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span> (<span class="math notranslate nohighlight">\(0\le p \le 0.75\)</span>)</p>
+<p>※上の量子状態は、実は純粋状態<span class="math notranslate nohighlight">\(|+\rangle=\frac{1}{\sqrt{2}}(|0\rangle+|1\rangle)\)</span>になっています。<span class="math notranslate nohighlight">\(|+\rangle\langle+|\)</span>を表示してみれば一致することが確認できます。</p>
+<p>すべて0状態へ初期化するには、状態ベクトルの場合と同じく<code class="docutils literal notranslate"><span class="pre">set_zero_state()</span></code>で行います。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">density_matrix</span><span class="o">.</span><span class="n">set_zero_state</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ *** Density Matrix ***
+ * Qubit Count : 1
+ * Dimension   : 2
+ * Density matrix :
+(1,0) (0,0)
+(0,0) (0,0)
+
+</pre></div></div>
+</div>
+</section>
+<section id="いくつかのエラー：DepolarizingNoiseなど">
+<h2>いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など<a class="headerlink" href="#いくつかのエラー：DepolarizingNoiseなど" title="Link to this heading">#</a></h2>
+<p>Qulacsで代表的なノイズを作用させてみます。 まずは、Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span> (<span class="math notranslate nohighlight">\(0\le p \le 0.75\)</span>)。 入力を <span class="math">\begin{equation*}
+\rho=|+\rangle\langle+|=
+\begin{pmatrix}
+0.5 & 0.5\\
+0.5 & 0.5
+\end{pmatrix}
+\end{equation*}</span> のようにして、<span class="math notranslate nohighlight">\(p = 0.15\)</span>で <span class="math">\begin{equation*}
+\mathcal{E}[\rho]=
+\begin{pmatrix}
+0.5 & 0.4\\
+0.4 & 0.5
+\end{pmatrix}
+\end{equation*}</span> となることを確認してみます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#depolarizing noiseを作用</span>
+<span class="n">density_matrix</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.15</span>
 <span class="n">gate</span> <span class="o">=</span> <span class="n">DepolarizingNoise</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
 <span class="n">gate</span><span class="o">.</span><span class="n">update_quantum_state</span><span class="p">(</span><span class="n">density_matrix</span><span class="p">)</span>
@@ -505,7 +545,7 @@ document.write(`
 </div>
 <p>Dephasing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho +p Z\rho Z\)</span> (<span class="math notranslate nohighlight">\(0\le p \le 0.5\)</span>)</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#dephasing noiseを作用</span>
@@ -532,8 +572,9 @@ document.write(`
 
 </pre></div></div>
 </div>
+<p>２量子ビットの場合で、各量子ビットにdepolarizing noiseを作用させます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#２量子ビットの場合：depolarizing noiseを作用</span>
@@ -563,9 +604,9 @@ document.write(`
 
 </pre></div></div>
 </div>
-<p>密度演算子で期待値を求めたい場合は、状態ベクトルの場合と同じく<code class="docutils literal notranslate"><span class="pre">get_expectation_value(state)</span></code>を使えばOK</p>
+<p>密度演算子で期待値を求めたい場合は、状態ベクトルの場合と同じく<code class="docutils literal notranslate"><span class="pre">get_expectation_value(state)</span></code>を使えばOK。 以下の例では、amplitude damping noiseを作用させた後の密度演算子<span class="math notranslate nohighlight">\(\rho\)</span>に対し、パウリ<span class="math notranslate nohighlight">\(Z\)</span>の期待値<span class="math notranslate nohighlight">\({\rm Tr}[\rho Z]\)</span>を求めています。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Amplitude damping noiseを作用させた後、Zの期待値を計算</span>
@@ -600,14 +641,15 @@ document.write(`
 Zの期待値 0.1499999999999999
 </pre></div></div>
 </div>
-<p>Depolarizing noiseのようなエラーを表す操作を、qulacs上で状態ベクトル（純粋状態）に作用させると、確率的にエラーが作用した状態ベクトルを返す。 例えば、Depolarizing noiseだと、確率<span class="math notranslate nohighlight">\((1-p)\)</span>で入力した状態をそのまま返し、確率<span class="math notranslate nohighlight">\(p/3\)</span>でそれぞれX、Y、Zゲートが作用した状態が確率的に得られる。 実行するたびにランダムに状態ベクトルが選ばれることに注意。</p>
+<p>ここまでは、qulacs上で密度演算子にエラーを作用させることを考えました。 一方で、qulacs上で状態ベクトル（純粋状態）に作用させると、確率的にエラーが作用した状態ベクトルを返します。 例えば、Depolarizing noiseだと、確率<span class="math notranslate nohighlight">\((1-p)\)</span>で入力した状態をそのまま返し、確率<span class="math notranslate nohighlight">\(p/3\)</span>でそれぞれX、Y、Zゲートが作用した状態が確率的に得られます。 実行するたびにランダムに状態ベクトルが選ばれることに注意。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#状態ベクトルにDepolarizingNoiseなどを作用させると、確率的に状態ベクトルが得られる</span>
 <span class="n">state</span> <span class="o">=</span> <span class="n">QuantumState</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
 <span class="n">vec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;初期状態&quot;</span><span class="p">,</span><span class="n">state</span><span class="o">.</span><span class="n">get_vector</span><span class="p">())</span>
 
 <span class="n">p</span><span class="o">=</span><span class="mf">0.5</span>
 <span class="n">gate</span> <span class="o">=</span> <span class="n">DepolarizingNoise</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
@@ -625,19 +667,21 @@ Zの期待値 0.1499999999999999
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-1回目 [0.+0.j 1.+0.j]
-2回目 [0.+0.j 1.+0.j]
-3回目 [0.+0.j 1.+0.j]
+初期状態 [1.+0.j 0.+0.j]
+1回目 [ 0.+0.j -1.-0.j]
+2回目 [ 0.-1.j -0.+0.j]
+3回目 [ 0.-1.j -0.+0.j]
 4回目 [0.+0.j 1.+0.j]
-5回目 [1.+0.j 0.+0.j]
+5回目 [0.+0.j 1.+0.j]
 </pre></div></div>
 </div>
-<p>確率的に選ばれるため、ノイズが作用した状況のもとで所望の量（期待値など）を求めるためには、同じ計算を何度も実行して平均する必要がある（密度演算子から期待値を計算する場合は、平均操作は不要）。 こちらは、量子ビット数が20前後の大規模なシミュレーションを行なう際に用いる。</p>
+<p>確率的に選ばれるため、ノイズが作用した状況のもとで所望の量（期待値など）を求めるためには、同じ計算を何度も実行して平均する必要があります（密度演算子から期待値を計算する場合は、平均操作は不要）。 ノイズあり期待値を状態ベクトルで計算する場合は、量子ビット数が大きく取った大規模なシミュレーションを行なう際に用います。</p>
 </section>
-<section id="計算基底でのサンプリング：sampling()">
-<h2>計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code><a class="headerlink" href="#計算基底でのサンプリング：sampling()" title="Link to this heading">#</a></h2>
+<section id="計算基底でのサンプリング：">
+<h2>計算基底でのサンプリング：<a class="headerlink" href="#計算基底でのサンプリング：" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">sampling()</span></code>を用いる。qulacs上で定義した密度演算子に使うことで、測定結果に相当するビット列が得られます。統計誤差を含むシミュレーションをする場合に用います。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#密度演算子からサンプリング</span>
@@ -656,7 +700,7 @@ Zの期待値 0.1499999999999999
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-サンプリングで得られたビット列 [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
+サンプリングで得られたビット列 [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
  *** Density Matrix ***
  * Qubit Count : 1
  * Dimension   : 2
@@ -666,9 +710,9 @@ Zの期待値 0.1499999999999999
 
 </pre></div></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">sampling()</span></code>を用いることで、密度演算子から計算基底におけるサンプリングの結果を得ることが出来る。言い換えると、密度演算子の対角項に応じた確率分布でサンプリングを行なう、ということである。</p>
+<p>0が出る確率が<span class="math notranslate nohighlight">\(\langle 0 |\rho |0\rangle\)</span>で、1が出る確率が<span class="math notranslate nohighlight">\(\langle 1 |\rho |1\rangle\)</span>になります（ボルンの確率規則）。 これらは、密度演算子の対角項の値そのものです。 上の例では、0が出る確率が0.9、1が出る確率が0.1であることを意味します。 以下では、測定結果から期待値を推定することを考えます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#サンプリングにより物理量Zの平均値を求める</span>
@@ -695,12 +739,43 @@ Zの期待値 0.1499999999999999
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 エラーなしの場合
-サンプリングから推定したZの平均値 0.6400000000000003
+サンプリングから推定したZの平均値 0.8600000000000005
 Zの期待値 0.8
 </pre></div></div>
 </div>
+<dl class="simple">
+<dt>上の例では、パウリ<span class="math notranslate nohighlight">\(Z\)</span>の期待値を計算しています。<span class="math notranslate nohighlight">\(Z=|0\rangle\langle 0|- |1\rangle\langle 1|\)</span>であることを使って :nbsphinx-math:<a href="#id3"><span class="problematic" id="id4">`</span></a>begin{equation*}</dt><dd><p>{rm Tr}[rho Z]= langle 0 <a href="#id5"><span class="problematic" id="id6">|</span></a>rho <a href="#id7"><span class="problematic" id="id8">|</span></a>0rangle- langle 1 <a href="#id9"><span class="problematic" id="id10">|</span></a>rho <a href="#id11"><span class="problematic" id="id12">|</span></a>1rangle</p>
+</dd>
+</dl>
+<p>end{equation*}` という関係が導けます。 0が出る確率が<span class="math notranslate nohighlight">\(\langle 0 |\rho |0\rangle\)</span>で、1が出る確率が<span class="math notranslate nohighlight">\(\langle 1 |\rho |1\rangle\)</span>であったことを思い出すと、 サンプリング結果から平均値は <span class="math">\begin{equation*}
+{\rm (平均値)}= \frac{({\rm 0が出た回数})}{({\rm 測定回数})}-\frac{({\rm 1が出た回数})}{({\rm 測定回数})}
+\end{equation*}</span> のようにすれば推定可能です。あるいは、 測定結果がゼロのときは＋１、測定結果が１のときは－１となることから <span class="math">\begin{equation*}
+{\rm (平均値)}= \frac{({\rm すべての測定結果の総和})}{({\rm 測定回数})}
+\end{equation*}</span> のように計算してもOKです。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#binを使って平均値を計算</span>
+<span class="n">estimated_Z_average</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">noiseless_sampling</span><span class="p">:</span>
+    <span class="n">bitcount</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">s</span> <span class="o">&amp;</span> <span class="mb">0b1</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+    <span class="n">estimated_Z_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">shots</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">estimated_Z_average</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.8600000000000005
+</pre></div></div>
+</div>
+<p>このように推定して得られた結果は、統計誤差を含むため、厳密な期待値とは一致しません。 このことを確認するために、何度も平均値を求めてヒストグラムを作成してみます。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ヒストグラムを作成</span>
@@ -719,7 +794,7 @@ Zの期待値 0.8
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">noiseless_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Noiseless&quot;</span><span class="p">)</span>
@@ -733,11 +808,12 @@ Zの期待値 0.8
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_25_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_25_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_32_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_32_0.png" />
 </div>
 </div>
+<p>エラーがある場合についてもヒストグラムを求めてみます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#サンプリングにより物理量の平均値を求める</span>
@@ -767,12 +843,12 @@ Zの期待値 0.8
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 エラーがある場合
-サンプリングから推定したZの平均値 0.4000000000000002
+サンプリングから推定したZの平均値 0.46000000000000024
 Zの期待値 0.48
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#ヒストグラムを作成</span>
@@ -791,7 +867,7 @@ Zの期待値 0.48
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">noiseless_list</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Noiseless&quot;</span><span class="p">)</span>
@@ -807,15 +883,17 @@ Zの期待値 0.48
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_28_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_28_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_36_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_36_0.png" />
 </div>
 </div>
+<p>講義で説明したような図が得られました。期待値の推定は統計誤差を含むこと、ノイズの影響で期待値が変化する（＝バイアスが生じる）ことが確認できます。</p>
+<p>２量子ビットの場合でも、サンプリングから期待値を推定してみます。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#２量子ビットの場合の密度演算子からサンプリング</span>
-<span class="n">shots</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">300</span>
 <span class="n">mat3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]])</span>
 <span class="n">density_matrix_2</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat3</span><span class="p">)</span>
 <span class="n">noiseless_sampling_2</span> <span class="o">=</span> <span class="n">density_matrix_2</span><span class="o">.</span><span class="n">sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">)</span>
@@ -830,7 +908,7 @@ Zの期待値 0.48
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-サンプリングで得られたビット列 [2, 2, 0, 2, 0, 2, 0, 0, 2, 0, 3, 2, 2, 2, 3, 2, 0, 2, 2, 0, 2, 2, 0, 0, 2, 3, 2, 2, 2, 0]
+サンプリングで得られたビット列 [3, 0, 3, 0, 0, 2, 3, 3, 0, 3, 3, 0, 0, 0, 0, 0, 2, 3, 3, 3, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 3, 3, 0, 0, 0, 0, 0, 2, 0, 2, 3, 0, 2, 0, 3, 2, 3, 0, 0, 3, 0, 0, 2, 3, 0, 0, 0, 2, 3, 0, 2, 3, 0, 3, 3, 0, 0, 0, 3, 0, 0, 0, 2, 0, 3, 0, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 3, 2, 0, 3, 0, 2, 3, 3, 0, 2, 3, 2, 3, 0, 3, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 3, 2, 0, 3, 2, 2, 0, 3, 2, 0, 2, 0, 3, 0, 3, 0, 3, 3, 2, 2, 2, 2, 0, 0, 3, 0, 3, 2, 2, 0, 3, 0, 0, 0, 2, 0, 0, 2, 3, 0, 3, 3, 2, 0, 0, 2, 2, 2, 0, 0, 0, 0, 2, 2, 3, 2, 0, 0, 3, 0, 3, 2, 2, 3, 2, 2, 2, 0, 0, 2, 0, 3, 0, 3, 0, 0, 3, 0, 0, 3, 3, 2, 3, 0, 0, 2, 3, 0, 0, 0, 2, 0, 3, 0, 2, 2, 2, 3, 0, 2, 2, 0, 0, 3, 3, 3, 2, 0, 0, 2, 3, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 3, 2, 2, 0, 0, 2, 0, 0, 3, 3, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 3, 2, 2, 0, 2, 2, 3, 2, 3, 0, 0, 2, 0, 3, 2, 0, 0, 0, 0, 0]
  *** Density Matrix ***
  * Qubit Count : 2
  * Dimension   : 4
@@ -842,24 +920,72 @@ Zの期待値 0.48
 
 </pre></div></div>
 </div>
-<p>測定結果はゼロ以上の整数（上の例なら、0, 2, 3のどれか）が得られる。２進数表示したときのビット列が、各量子ビットの測定結果に対応している。 ２量子ビットの場合は以下の通り。 <span class="math">\begin{align}
+<p>測定結果はゼロ以上の整数（上の例なら、0, 2, 3のどれか）が得られます。２進数表示したときのビット列が、各量子ビットの測定結果に対応しています。 ２量子ビットの場合は以下の通り。 <span class="math">\begin{align*}
 0 &\rightarrow 00\\
 1 &\rightarrow 01\\
 2 &\rightarrow 10\\
 3 &\rightarrow 11\\
-\end{align}</span></p>
+\end{align*}</span> pythonで１０進数を２進数に変換するには、<code class="docutils literal notranslate"><span class="pre">bin()</span></code>を使えばOK。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#bin()を使ってサンプリング結果を２進数に変換。0bは２進数を意味します。</span>
+<span class="nb">print</span><span class="p">([</span><span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">noiseless_sampling_2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b11&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b11&#39;, &#39;0b10&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;, &#39;0b0&#39;]
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">bin()</span></code>を使って、<span class="math notranslate nohighlight">\(Z_0Z_1\)</span>の期待値を計算してみます。</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">estimated_ZZ_average</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">noiseless_sampling_2</span><span class="p">:</span>
+    <span class="n">bitcount</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">s</span> <span class="o">&amp;</span> <span class="mb">0b11</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span>
+    <span class="n">estimated_ZZ_average</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">bitcount</span><span class="o">/</span><span class="n">shots</span>
+<span class="n">Z0Z1</span> <span class="o">=</span> <span class="n">Observable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Z0Z1</span><span class="o">.</span><span class="n">add_operator</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;Z 0 Z 1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;サンプリングから推定した平均値&quot;</span><span class="p">,</span><span class="n">estimated_ZZ_average</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ZZの期待値&quot;</span><span class="p">,</span><span class="n">Z0Z1</span><span class="o">.</span><span class="n">get_expectation_value</span><span class="p">(</span><span class="n">density_matrix_2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+サンプリングから推定した平均値 0.4400000000000009
+ZZの期待値 0.4
+</pre></div></div>
+</div>
+<p><span class="math notranslate nohighlight">\(Z_0Z_1\)</span>は、測定結果に対して値を <span class="math">\begin{align*}
+00 &\rightarrow (+1)\\
+01 &\rightarrow (-1)\\
+10 &\rightarrow (-1)\\
+11 &\rightarrow (+1)\\
+\end{align*}</span> のように割り当てて平均値を計算しています。 <span class="math notranslate nohighlight">\(1\)</span>が偶数個だと(+1)、奇数個だと(-1)となっていますが、 この値は、<span class="math notranslate nohighlight">\(Z_0Z_1\)</span>の固有値を意味しています。 この割り当ては、上のセルの<code class="docutils literal notranslate"><span class="pre">bin(s</span> <span class="pre">&amp;</span> <span class="pre">0b11).count(&quot;1&quot;)</span></code>および<code class="docutils literal notranslate"><span class="pre">(-1)**bitcount</span></code>の部分に対応しています。</p>
 </section>
 <section id="Lindblad方程式のシミュレーション：NoisyEvolution_fast()">
 <h2>Lindblad方程式のシミュレーション：<code class="docutils literal notranslate"><span class="pre">NoisyEvolution_fast()</span></code><a class="headerlink" href="#Lindblad方程式のシミュレーション：NoisyEvolution_fast()" title="Link to this heading">#</a></h2>
-<p>環境からの影響を取り入れた量子開放系のダイナミクスのシミュレーションを行なう。 方程式は以下の通り。 <span class="math">\begin{align}
+<p>環境からの影響を取り入れた量子開放系のダイナミクスのシミュレーションを行ないます。 方程式は以下の通りです。 <span class="math">\begin{align}
 \frac{d}{dt} \rho(t) = -i[H,\rho(t)] +\sum_k \left(L_k \rho(t) L_k^\dagger -\frac{1}{2}L_k^\dagger L_k \rho(t)-\frac{1}{2} \rho(t)L_k^\dagger L_k\right).
-\end{align}</span> ここで、<span class="math notranslate nohighlight">\(\rho(t)\)</span>は時刻<span class="math notranslate nohighlight">\(t\)</span>における系の密度演算子、<span class="math notranslate nohighlight">\(H\)</span>はハミルトニアン、<span class="math notranslate nohighlight">\(L_k\)</span>はリンドブラッド演算子である。 簡単な例として、以下の１量子ビット系の場合を考える。 <span class="math">\begin{align}
+\end{align}</span> ここで、<span class="math notranslate nohighlight">\(\rho(t)\)</span>は時刻<span class="math notranslate nohighlight">\(t\)</span>における系の密度演算子、<span class="math notranslate nohighlight">\(H\)</span>はハミルトニアン、<span class="math notranslate nohighlight">\(L_k\)</span>はリンドブラッド演算子です。 簡単な例として、以下の１量子ビット系の場合を考えます。 <span class="math">\begin{align}
 \frac{d}{dt} \rho(t) = -iJ[Z,\rho(t)] +\gamma \left(Z \rho(t) Z -\rho(t)\right).
-\end{align}</span> <span class="math notranslate nohighlight">\(H=JZ\)</span>, <span class="math notranslate nohighlight">\(L_k = \sqrt{\gamma}Z\)</span>として、<span class="math notranslate nohighlight">\(k\)</span>は一つだけの場合をシミュレーションする。 初期状態は<span class="math notranslate nohighlight">\(|+\rangle\)</span>として時間発展した場合、時刻<span class="math notranslate nohighlight">\(t\)</span>における物理量<span class="math notranslate nohighlight">\(X\)</span>の期待値は以下のようになる。 <span class="math">\begin{align}
+\end{align}</span> <span class="math notranslate nohighlight">\(H=JZ\)</span>, <span class="math notranslate nohighlight">\(L_k = \sqrt{\gamma}Z\)</span>として、<span class="math notranslate nohighlight">\(k\)</span>は一つだけの場合をシミュレーションします。 初期状態は<span class="math notranslate nohighlight">\(|+\rangle\)</span>として時間発展した場合、時刻<span class="math notranslate nohighlight">\(t\)</span>における物理量<span class="math notranslate nohighlight">\(X\)</span>の期待値は以下のようになります。 <span class="math">\begin{align}
 \langle X\rangle_t = e^{-2\gamma t} \cos{2Jt}
-\end{align}</span></p>
+\end{align}</span> このことを以下のシミュレーションで実行して、確認してみます。</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#qulacsを使ったLindblad方程式のシミュレーション</span>
@@ -901,7 +1027,7 @@ Zの期待値 0.48
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -918,7 +1044,7 @@ Zの期待値 0.48
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_34_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_34_0.png" />
+<img alt="../_images/notebooks_04_01_Density_Matrix_and_Error_48_0.png" src="../_images/notebooks_04_01_Density_Matrix_and_Error_48_0.png" />
 </div>
 </div>
 <p>QulacsではLindbladによる時間発展をモンテカルロ的に実行しているので、何度も実行して平均を取る必要があります。</p>
@@ -934,7 +1060,7 @@ Zの期待値 0.48
 <h2>補足：<a class="headerlink" href="#補足：" title="Link to this heading">#</a></h2>
 <p>変分量子アルゴリズムなどでは、<code class="docutils literal notranslate"><span class="pre">QuantumCircuit,</span>&#160; <span class="pre">ParametricQuantumCircuit</span></code>を使いますが、このとき<code class="docutils literal notranslate"><span class="pre">circuit.add_gate(DepolarizingNoise(0,</span> <span class="pre">0.15))</span></code>のように使えばOK。</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">qulacs</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantumCircuit</span><span class="p">,</span>  <span class="n">ParametricQuantumCircuit</span>
@@ -964,7 +1090,7 @@ Zの期待値 0.48
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">density_matrix</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mat</span><span class="p">)</span>
@@ -1049,9 +1175,9 @@ Zの期待値 0.48
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い">DensityMatrixクラス：qulacsでの密度演算子（混合状態）の取り扱い</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#量子状態（密度演算子）の準備">量子状態（密度演算子）の準備</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：get_matrix(),-load()">密度演算子をnumpyのarrayに変換、あるいはその逆：<code class="docutils literal notranslate"><span class="pre">get_matrix()</span></code>, <code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#密度演算子をnumpyのarrayに変換、あるいはその逆：">密度演算子をnumpyのarrayに変換、あるいはその逆：</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#いくつかのエラー：DepolarizingNoiseなど">いくつかのエラー：<code class="docutils literal notranslate"><span class="pre">DepolarizingNoise</span></code>など</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#計算基底でのサンプリング：sampling()">計算基底でのサンプリング：<code class="docutils literal notranslate"><span class="pre">sampling()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#計算基底でのサンプリング：">計算基底でのサンプリング：</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Lindblad方程式のシミュレーション：NoisyEvolution_fast()">Lindblad方程式のシミュレーション：<code class="docutils literal notranslate"><span class="pre">NoisyEvolution_fast()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#練習">練習</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#補足：">補足：</a></li>

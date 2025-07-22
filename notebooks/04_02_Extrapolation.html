@@ -398,12 +398,12 @@ document.write(`
 </div>
 <section id="リチャードソン外挿法と指数関数外挿法を実装してみる">
 <h1>リチャードソン外挿法と指数関数外挿法を実装してみる<a class="headerlink" href="#リチャードソン外挿法と指数関数外挿法を実装してみる" title="Link to this heading">#</a></h1>
-<p>以下では、VQEで横磁場イジング模型の基底状態を求める際に、各ゲートにDepolarizing noiseが作用する状況を考える。 エラー率を増幅させて、リチャードソン外挿法と指数関数外挿法を実装し、期待値が理想的なものに近づく（＝バイアスが減る）ことを確認する。 さらに、サンプリングから期待値を求めた場合には、エラー補償の結果、分散が增大することも確認する。</p>
+<p>以下では、VQEで横磁場イジング模型の基底状態を求め、各ゲートにDepolarizing noiseが作用する状況を考えます。 エラー率を増幅させて、リチャードソン外挿法と指数関数外挿法を実装し、期待値が理想的なものに近づく（＝バイアスが減る）ことを確認します。 さらに、サンプリングから期待値を求めた場合には、エラー補償の結果、分散が増大することも確認するのが目的です。</p>
 <section id="エラーなしの場合">
 <h2>エラーなしの場合<a class="headerlink" href="#エラーなしの場合" title="Link to this heading">#</a></h2>
-<p>１次元横磁場イジング模型（４サイト）の基底状態をVQEで求める。ハミルトニアンは以下の通り。 <span class="math">\begin{align}
-H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
-\end{align}</span></p>
+<p>１次元横磁場イジング模型（<span class="math notranslate nohighlight">\(n=4\)</span>サイト）の基底状態をVQEで求めます。ハミルトニアンは以下のように定義されます。 <span class="math">\begin{align}
+H=J\sum_{i=1}^nZ_iZ_{i+1}+h\sum_{i=1}^nX_i
+\end{align}</span> ここでは周期境界条件を仮定し、<span class="math notranslate nohighlight">\(Z_{n+1}=Z_1\)</span>であると約束します。 １次元横磁場イジング模型の基底状態は、パラメータ<span class="math notranslate nohighlight">\(J\)</span>と<span class="math notranslate nohighlight">\(h\)</span>の値によって相転移を示すことが知られています。 このノートブックでは、<span class="math notranslate nohighlight">\(J=h=-1\)</span>のようにパラメータを設定します。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -419,6 +419,7 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
+<p>次に、VQEのために、パラメータ付きのansatz量子回路<span class="math notranslate nohighlight">\(U(\vec{\theta})\)</span>を定義します。各Y回転ゲートのパラメータ<span class="math notranslate nohighlight">\(\vec{\theta}\)</span>はあとで変化させます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -455,9 +456,12 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_6_0.png" src="../_images/notebooks_04_02_Extrapolation_6_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_7_0.png" src="../_images/notebooks_04_02_Extrapolation_7_0.png" />
 </div>
 </div>
+<p>初期状態<span class="math notranslate nohighlight">\(|0^n\rangle\)</span>に、上で定義した量子回路<span class="math notranslate nohighlight">\(U(\vec{\theta})\)</span>を作用させ、ハミルトニアンの期待値を求める関数を定義します。まずはノイズなしの場合を考えているので、状態<span class="math notranslate nohighlight">\(|\psi(\vec{\theta})\rangle= U(\vec{\theta})|0^n\rangle\)</span>を計算し、ハミルトニアンの期待値 <span class="math">\begin{align*}
+\langle\psi(\vec{\theta})| H |\psi(\vec{\theta})\rangle
+\end{align*}</span> を求めます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -472,6 +476,9 @@ H=\sum_{i}(JZ_iZ_{i+1}+hX_i)
 </pre></div>
 </div>
 </div>
+<p><span class="math notranslate nohighlight">\(\vec{\theta}\)</span>を変化させて、ハミルトニアンの期待値（コスト関数）の最小値 <span class="math">\begin{align*}
+\min_{\vec{\theta}}\langle\psi(\vec{\theta})| H |\psi(\vec{\theta})\rangle
+\end{align*}</span> を求めます。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -495,6 +502,8 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
 基底状態のエネルギー -5.203541892294178
 </pre></div></div>
 </div>
+<p>比較のため、べき乗法による計算結果も表示しています。両者は良く一致しており、VQEにより基底状態に近い状態が得られていることが確認できます。</p>
+<p>さらに、<span class="math notranslate nohighlight">\(\min_{\vec{\theta}}\langle\psi(\vec{\theta})| H |\psi(\vec{\theta})\rangle\)</span>となるパラメータの値<span class="math notranslate nohighlight">\(\vec{\theta}\)</span>を以下で取得しておきます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -507,8 +516,9 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
 </section>
 <section id="エラーありの場合">
 <h2>エラーありの場合<a class="headerlink" href="#エラーありの場合" title="Link to this heading">#</a></h2>
-<p>エラーがない場合のansatz回路のパラメータを取得し、各ゲートに以下のエラーを作用させます。</p>
+<p>次にエラーがある場合を考えます。 エラーなしの場合にVQEにより基底状態を計算しましたが、この量子回路にエラーが作用したときに結果がどのように変わるかを調べます。 量子回路はエラーなしの場合と同じにして、CZゲートに以下のエラーを作用させます。</p>
 <p>Depolarizing noise: <span class="math notranslate nohighlight">\(\mathcal{E}[\rho]=(1-p)\rho+\frac{p}{3} (X\rho X+Y\rho Y+Z\rho Z)\)</span></p>
+<p>エラーありの場合は、状態ベクトルではなく、密度演算子を使ってシミュレーションをしています。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -526,7 +536,6 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">circuit_depth</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
             <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_parametric_RY_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
-            <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">DepolarizingNoise</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">error_rate</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
             <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_CZ_gate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">%</span><span class="k">n_qubits</span>)
             <span class="n">noisy_circuit</span><span class="o">.</span><span class="n">add_gate</span><span class="p">(</span><span class="n">DepolarizingNoise</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">error_rate</span><span class="p">))</span>
@@ -537,6 +546,9 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
 </pre></div>
 </div>
 </div>
+<p>エラーあり量子回路を密度演算子に作用させて<span class="math notranslate nohighlight">\(\rho(\vec{\theta})\)</span>を計算し、ハミルトニアンの期待値 <span class="math">\begin{align*}
+{\rm Tr}[\rho(\vec{\theta}) H]
+\end{align*}</span> を求めます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -551,6 +563,7 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
 </pre></div>
 </div>
 </div>
+<p>エラーがない場合のansatz回路とパラメータを同じにして、期待値を計算します。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -571,7 +584,7 @@ VQEで求めたコスト関数の最小値 -5.072893485692576
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 VQEで求めたコスト関数の最小値(エラーなし)： -5.072893485692576
-VQEで求めたコスト関数の最小値(エラーあり)： -3.8479582178671157
+VQEで求めたコスト関数の最小値(エラーあり)： -4.210928860028173
 </pre></div></div>
 </div>
 <p>エラーの影響により、コスト関数の最小値が理想的な場合から遠ざかっていることが確認できます。</p>
@@ -589,8 +602,8 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 
 <span class="c1">#エラー率を少しずつ変化させて、コスト関数を求める。</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span>
-    <span class="n">total_error_rate</span> <span class="o">=</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mf">3.0</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">*</span> <span class="n">circuit_depth</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.002</span>
+    <span class="n">total_error_rate</span> <span class="o">=</span> <span class="n">error_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">n_qubits</span><span class="p">)</span> <span class="o">*</span> <span class="n">circuit_depth</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
     <span class="n">data_cost_depolarizingnoise</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
@@ -608,6 +621,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -623,21 +637,30 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_18_0.png" src="../_images/notebooks_04_02_Extrapolation_18_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_24_0.png" src="../_images/notebooks_04_02_Extrapolation_24_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_18_1.png" src="../_images/notebooks_04_02_Extrapolation_18_1.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_24_1.png" src="../_images/notebooks_04_02_Extrapolation_24_1.png" />
 </div>
 </div>
-<p>ここで、total error = （全ゲート数）×（エラー率）としました。この値が１程度であれば、エラー補償は現実的な測定回数で機能します。</p>
+<p>ここで、total error = （全ゲート数）×（エラー率）としました。この値が１程度であれば、測定コストが大きくなりすぎないため、エラー補償は現実的な測定回数で機能します。</p>
 </section>
 <section id="外挿法（リチャードソン外挿・指数関数外挿）の実装">
 <h2>外挿法（リチャードソン外挿・指数関数外挿）の実装<a class="headerlink" href="#外挿法（リチャードソン外挿・指数関数外挿）の実装" title="Link to this heading">#</a></h2>
-<p>エラー率を增大させて、外挿法を実装してみます。</p>
+<dl class="simple">
+<dt>エラー率を増大させて、外挿法を実装してみます。 まずは線形外挿をやってみます。 エラーの増幅率を<span class="math notranslate nohighlight">\(\alpha(&gt;1)\)</span>、エラー率<span class="math notranslate nohighlight">\(\varepsilon\)</span>のときの期待値を<span class="math notranslate nohighlight">\(\langle H\rangle_\varepsilon\)</span>、エラーを<span class="math notranslate nohighlight">\(\alpha\)</span>倍に増幅したときの期待値を<span class="math notranslate nohighlight">\(\langle H\rangle_{\alpha\varepsilon}\)</span>としたとき、 :nbsphinx-math:<a href="#id6"><span class="problematic" id="id7">`</span></a>begin{align}</dt><dd><p>frac{alpha }{alpha -1} langle Hrangle_varepsilon - frac{1 }{alpha -1} langle Hrangle_{alphavarepsilon}</p>
+</dd>
+</dl>
+<p>end{align}` を求めます。 計算の手順は以下の通りです。</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\langle H\rangle_\varepsilon\)</span>を計算（これはすでに実行した）</p></li>
+<li><p><span class="math notranslate nohighlight">\(\langle H\rangle_{\alpha\varepsilon}\)</span>を計算</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{\alpha }{\alpha -1} \langle H\rangle_\varepsilon - \frac{1 }{\alpha -1} \langle H\rangle_{\alpha\varepsilon}\)</span>を計算</p></li>
+</ol>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -650,7 +673,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.5</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">alpha</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span> <span class="o">*</span> <span class="mf">0.002</span> <span class="o">*</span> <span class="n">alpha</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
     <span class="n">data_cost_depolarizingnoise_alpha</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
@@ -672,6 +695,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -681,9 +705,14 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_22_0.png" src="../_images/notebooks_04_02_Extrapolation_22_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_28_0.png" src="../_images/notebooks_04_02_Extrapolation_28_0.png" />
 </div>
 </div>
+<dl class="simple">
+<dt>次に二次関数で外挿してみます。 エラーの増幅率を<span class="math notranslate nohighlight">\(\alpha_1,\alpha_2(&gt;1)\)</span>としたとき、 :nbsphinx-math:<a href="#id8"><span class="problematic" id="id9">`</span></a>begin{align}</dt><dd><p>frac{alpha_1 }{alpha_1 -1}frac{alpha_2 }{alpha_2 -1} langle Hrangle_varepsilon + frac{1 }{1-alpha_1 } frac{alpha_2 }{alpha_2-alpha_1 } langle Hrangle_{alpha_1varepsilon}+ frac{1 }{1-alpha_2 } frac{alpha_1 }{alpha_1-alpha_2 } langle Hrangle_{alpha_2varepsilon}</p>
+</dd>
+</dl>
+<p>end{align}` を求めます。</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -697,7 +726,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">alpha2</span> <span class="o">=</span> <span class="mf">2.0</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="o">*</span><span class="n">alpha2</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.002</span><span class="o">*</span><span class="n">alpha2</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">noisy_get_cost</span><span class="p">(</span><span class="n">params_true</span><span class="p">)</span>
     <span class="n">data_cost_depolarizingnoise_alpha2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">minimized_costfunction_noise</span><span class="p">)</span>
@@ -724,6 +753,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -733,10 +763,14 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_24_0.png" src="../_images/notebooks_04_02_Extrapolation_24_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_31_0.png" src="../_images/notebooks_04_02_Extrapolation_31_0.png" />
 </div>
 </div>
-<p>１次、２次の多項式で外挿しました。２次で外挿した場合が最もバイアスが小さいことが確認できました。 次に、指数関数外挿も実装します。指数関数外挿とリチャードソン外挿は、測定後のデータ処理の違いのみなので、すでに計算した結果を用います。</p>
+<dl class="simple">
+<dt>１次、２次の多項式で外挿しました。２次で外挿した場合が最もバイアスが小さいことが確認できました。 次に、指数関数外挿も実装します。指数関数外挿とリチャードソン外挿は、測定後のデータ処理の違いのみなので、すでに計算した結果を用います。指数関数外挿の式は以下のようになっています。 :nbsphinx-math:<a href="#id10"><span class="problematic" id="id11">`</span></a>begin{align}</dt><dd><p>left[frac{(langle Hrangle_varepsilon)^alpha}{langle Hrangle_{alphavarepsilon}}right]^{frac{1}{alpha-1}}</p>
+</dd>
+</dl>
+<p>end{align}`</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
@@ -763,6 +797,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#それぞれ外挿した結果を表示</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no error boost&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Richardson_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Quadratic&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Exponential_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exponential&quot;</span><span class="p">)</span>
@@ -770,6 +805,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -779,7 +815,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_27_0.png" src="../_images/notebooks_04_02_Extrapolation_27_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_34_0.png" src="../_images/notebooks_04_02_Extrapolation_34_0.png" />
 </div>
 </div>
 <p>上の例では、指数関数外挿が最も良い結果になっていました。</p>
@@ -838,7 +874,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 
 <span class="c1">#エラーありの期待値（サンプリングで求める）</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.002</span>
     <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">)</span>
@@ -846,7 +882,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 
 <span class="c1">#エラーをα倍だけ増幅させたときの期待値（サンプリングで求める）</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.001</span><span class="o">*</span><span class="n">alpha</span>
+    <span class="n">error_rate</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="mf">0.002</span><span class="o">*</span><span class="n">alpha</span>
     <span class="n">density_state</span> <span class="o">=</span> <span class="n">DensityMatrix</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">)</span>
     <span class="n">noisy_circuit</span> <span class="o">=</span> <span class="n">NoisyCircuit</span><span class="p">(</span><span class="n">error_rate</span><span class="p">)</span>
     <span class="n">minimized_costfunction_noise</span> <span class="o">=</span> <span class="n">get_cost_sampling</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span><span class="n">params_true</span><span class="p">)</span>
@@ -870,17 +906,18 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#厳密な期待値を使った結果と、サンプリングを使った結果をそれぞれグラフに表示させる</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no error boost&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_alpha2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha2=2.0&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
+<span class="c1">#plt.plot(data_noise_strength,data_cost_depolarizingnoise_alpha2, label=f&quot;alpha2=2.0&quot;,linestyle=&quot;dashed&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="c1">#plt.plot(data_noise_strength,data_cost_depolarizingnoise_Richardson_extrapolation, label=f&quot;Quadratic&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_Exponential_extrapolation_alpha2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exponential alpha2&quot;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_sampling1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;no error boost sampling&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_sampling2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;alpha=2.0, sampling&quot;</span><span class="p">)</span>
+<span class="c1">#plt.plot(data_noise_strength,data_cost_depolarizingnoise_sampling2, label=f&quot;alpha=2.0, sampling&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_sampling_linear_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Linear extrapolation sampling&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data_noise_strength</span><span class="p">,</span><span class="n">data_cost_depolarizingnoise_sampling_Exponential_extrapolation</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Exponential extrapolation sampling&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">minimized_costfunction_noiseless</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;total error&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span><span class="o">-</span><span class="mf">2.0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -890,7 +927,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_32_0.png" src="../_images/notebooks_04_02_Extrapolation_32_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_39_0.png" src="../_images/notebooks_04_02_Extrapolation_39_0.png" />
 </div>
 </div>
 <p>測定回数<span class="math notranslate nohighlight">\(3000\times 2\)</span>の場合について計算してみました。点線が期待値そのもの、実線がサンプリングした場合を表しています。error mitigationした結果はエラー率が増大するにつれ、分散が増大していることが確認できます。この分散を抑えるためには、測定回数を増やす必要があります。</p>
@@ -899,7 +936,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#エラー率を固定して、ヒストグラムを作成</span>
-<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">error_rate</span> <span class="o">=</span> <span class="mf">0.04</span>
 <span class="n">n_test</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="n">alpha1</span> <span class="o">=</span> <span class="mf">1.3</span>
@@ -942,7 +979,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/notebooks_04_02_Extrapolation_35_0.png" src="../_images/notebooks_04_02_Extrapolation_35_0.png" />
+<img alt="../_images/notebooks_04_02_Extrapolation_42_0.png" src="../_images/notebooks_04_02_Extrapolation_42_0.png" />
 </div>
 </div>
 <p>エラー率を固定して、ヒストグラムを作成した結果です。 指数関数外挿が最もエラーを抑制できていることが分かります。 一方で、分散もそのぶん増大していることも分かります。</p>
@@ -982,7 +1019,7 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-計算して得られた標準偏差の増加分： 5.439507209313561
+計算して得られた標準偏差の増加分： 5.537282728428462
 理論式から求めた測定コスト： 5.467073155618908
 </pre></div></div>
 </div>
@@ -1001,8 +1038,8 @@ VQEで求めたコスト関数の最小値(エラーあり)： -3.84795821786711
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-計算して得られた標準偏差の増加分： 10.435652032975195
-理論式から求めた測定コスト： 16.214287639163235
+計算して得られた標準偏差の増加分： 13.729151856744801
+理論式から求めた測定コスト： 50.09531384324509
 </pre></div></div>
 </div>
 <p>測定コストの理論式は、リチャードソン外挿だとほぼ同じ値になるのに対し、指数関数外挿は少し大きめの値になっていることが分かりました。</p>
