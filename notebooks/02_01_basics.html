@@ -380,7 +380,7 @@ document.write(`
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>qiskit<span class="w"> </span>numpy<span class="w"> </span>qiskit-aer<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>git+https://github.com/quantum-programming/pygridsynth.git<span class="w"> </span>pylatexenc
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>qiskit<span class="w"> </span>numpy<span class="w"> </span>qiskit-aer<span class="w"> </span>scipy<span class="w"> </span>matplotlib<span class="w"> </span>git+https://github.com/quantum-programming/pygridsynth.git<span class="w"> </span>pylatexenc
 </pre></div>
 </div>
 </div>
@@ -389,36 +389,9 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Collecting git+https://github.com/quantum-programming/pygridsynth.git
-  Cloning https://github.com/quantum-programming/pygridsynth.git to /tmp/pip-req-build-yed1508h
-  Running command git clone --filter=blob:none --quiet https://github.com/quantum-programming/pygridsynth.git /tmp/pip-req-build-yed1508h
-  Resolved https://github.com/quantum-programming/pygridsynth.git to commit 5868c650ce819227adcd80eaa8d8e065f4001022
-  Installing build dependencies ... done
-  Getting requirements to build wheel ... done
-  Preparing metadata (pyproject.toml) ... done
-Requirement already satisfied: qiskit in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.1.0)
-Requirement already satisfied: numpy in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.3.1)
-Requirement already satisfied: qiskit-aer in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (0.17.1)
-Requirement already satisfied: scipy in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (1.16.0)
-Requirement already satisfied: matplotlib in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (3.10.3)
-Requirement already satisfied: pylatexenc in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (2.10)
-Requirement already satisfied: mpmath in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from pygridsynth==1.1.0) (1.3.0)
-Requirement already satisfied: rustworkx&gt;=0.15.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (0.16.0)
-Requirement already satisfied: dill&gt;=0.3 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (0.4.0)
-Requirement already satisfied: stevedore&gt;=3.0.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (5.4.1)
-Requirement already satisfied: typing-extensions in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit) (4.14.0)
-Requirement already satisfied: psutil&gt;=5 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit-aer) (7.0.0)
-Requirement already satisfied: python-dateutil&gt;=2.8.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from qiskit-aer) (2.9.0.post0)
-Requirement already satisfied: contourpy&gt;=1.0.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (1.3.2)
-Requirement already satisfied: cycler&gt;=0.10 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (0.12.1)
-Requirement already satisfied: fonttools&gt;=4.22.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (4.58.4)
-Requirement already satisfied: kiwisolver&gt;=1.3.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (1.4.8)
-Requirement already satisfied: packaging&gt;=20.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (25.0)
-Requirement already satisfied: pillow&gt;=8 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (11.2.1)
-Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from matplotlib) (3.2.3)
-Requirement already satisfied: six&gt;=1.5 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from python-dateutil&gt;=2.8.0-&gt;qiskit-aer) (1.17.0)
-Requirement already satisfied: pbr&gt;=2.0.0 in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from stevedore&gt;=3.0.0-&gt;qiskit) (6.1.1)
-Requirement already satisfied: setuptools in /home/mitarai/miniconda3/envs/benkyokai/lib/python3.11/site-packages (from pbr&gt;=2.0.0-&gt;stevedore&gt;=3.0.0-&gt;qiskit) (78.1.1)
+Using Python 3.11.13 environment at: /Users/mitarai/github-repos/quantum_software_handson/.venv
+Resolved <span class="ansi-bold">24 packages</span> in 368ms
+Audited <span class="ansi-bold">24 packages</span> in 0.11ms
 </pre></div></div>
 </div>
 <section id="期待値の推定">
@@ -453,9 +426,9 @@ Requirement already satisfied: setuptools in /home/mitarai/miniconda3/envs/benky
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 [0.8660254+0.j  0.       -0.5j]
-{&#39;1&#39;: 270, &#39;0&#39;: 730}
+{&#39;1&#39;: 236, &#39;0&#39;: 764}
 exact: (0.5000000000000002+0j)
-estimated: 0.46
+estimated: 0.528
 </pre></div></div>
 </div>
 </section>
@@ -588,7 +561,7 @@ estimated: 0.46
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-0.17734088262078984
+4.290800433229258
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -629,16 +602,24 @@ estimated: 0.46
 <h1>1 量子ビットゲートを H, T, S だけで表現する<a class="headerlink" href="#1-量子ビットゲートを-H,-T,-S-だけで表現する" title="Link to this heading">#</a></h1>
 <p>FTQC では誤り耐性の代償として、離散的なゲートセットのみを実行できる。利用する誤り訂正符号によるが、例えば表面符号では１量子ビットゲートとして利用できるのは H, T, S のみとすることが多い。このような制約下で任意の１量子ビットユニタリを表現する方法を考える。</p>
 <p>と言っても先人の知恵を借りるだけでよい。ここでは <a class="github reference external" href="https://github.com/quantum-programming/pygridsynth">quantum-programming/pygridsynth</a> を利用する。<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygridsynth</span></code> でインストールできる。原論文は <a class="reference external" href="https://arxiv.org/abs/1403.2975">https://arxiv.org/abs/1403.2975</a> であり 彼らは Haskell 実装のみを提供しているが、Python に移植したものが pygridsynth である。pygridsynth は体感 1/2 くらいの確率でうまく行かない。本家はそんなことはない。</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[123]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pygridsynth</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">qiskit.circuit.library</span><span class="w"> </span><span class="kn">import</span> <span class="n">HGate</span><span class="p">,</span> <span class="n">RZGate</span>
-<span class="c1"># generate string consisting of {T,H,S,W} which corresponds to Rz(theta) with precision epsilon</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mpmath</span>
+<span class="n">mpmath</span><span class="o">.</span><span class="n">mp</span><span class="o">.</span><span class="n">dps</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">mpmath</span><span class="o">.</span><span class="n">mpmathify</span><span class="p">(</span><span class="s2">&quot;0.5&quot;</span><span class="p">)</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="n">mpmath</span><span class="o">.</span><span class="n">mpmathify</span><span class="p">(</span><span class="s2">&quot;1e-20&quot;</span><span class="p">)</span>
+<span class="c1"># generate string consisting of {T,H,S,W,X} which corresponds to Rz(theta) with precision epsilon</span>
 <span class="c1"># W corresponds to global phase shift of pi/4</span>
 <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>
 <span class="n">gates</span> <span class="o">=</span> <span class="n">pygridsynth</span><span class="o">.</span><span class="n">gridsynth_gates</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="c1"># replace X with HSSH</span>
+<span class="n">gates</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;HSSH&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">]</span>
+<span class="c1"># join gates into a string</span>
+<span class="n">gates</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">gates</span><span class="p">)</span>
 <span class="n">qc</span> <span class="o">=</span> <span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">gate</span> <span class="ow">in</span> <span class="n">gates</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
@@ -658,11 +639,34 @@ estimated: 0.46
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SHTSHTHTSHTSHTHTSHTHTHTHTHTHTSHTSHTSHTSHTSHTHTSHTHTSHTSHTSHTSHTHTSHTHTHTHTSHTSHTSHTSHTSHTHTSHTHTHTSHTSHTSHTSHTSHTSHTSHTSHTSHTSHTHHSSHSSWWWWWW
+error:  1.0450858614521999e-05
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_19_1.png" src="../_images/notebooks_02_01_basics_19_1.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/notebooks_02_01_basics_19_2.png" src="../_images/notebooks_02_01_basics_19_2.png" />
+</div>
+</div>
 <section id="2量子ビットパウリによる回転ゲート">
 <h2>2量子ビットパウリによる回転ゲート<a class="headerlink" href="#2量子ビットパウリによる回転ゲート" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(exp(i\theta ZZ)\)</span> のような 2 量子ビットのパウリ演算子による回転ゲートは、CNOT と 1 量子ビットゲートを組み合わせることで実現できることを見ます：</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exp(-i\theta ZZ) gate</span>
