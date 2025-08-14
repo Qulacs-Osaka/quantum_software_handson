@@ -601,7 +601,7 @@ estimated: 0.528
 <section id="1-量子ビットゲートを-H,-T,-S-だけで表現する">
 <h1>1 量子ビットゲートを H, T, S だけで表現する<a class="headerlink" href="#1-量子ビットゲートを-H,-T,-S-だけで表現する" title="Link to this heading">#</a></h1>
 <p>FTQC では誤り耐性の代償として、離散的なゲートセットのみを実行できる。利用する誤り訂正符号によるが、例えば表面符号では１量子ビットゲートとして利用できるのは H, T, S のみとすることが多い。このような制約下で任意の１量子ビットユニタリを表現する方法を考える。</p>
-<p>と言っても先人の知恵を借りるだけでよい。ここでは <a class="github reference external" href="https://github.com/quantum-programming/pygridsynth">quantum-programming/pygridsynth</a> を利用する。<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygridsynth</span></code> でインストールできる。原論文は <a class="reference external" href="https://arxiv.org/abs/1403.2975">https://arxiv.org/abs/1403.2975</a> であり 彼らは Haskell 実装のみを提供しているが、Python に移植したものが pygridsynth である。pygridsynth は体感 1/2 くらいの確率でうまく行かない。本家はそんなことはない。</p>
+<p>と言っても先人の知恵を借りるだけでよい。ここでは <a class="github reference external" href="https://github.com/quantum-programming/pygridsynth">quantum-programming/pygridsynth</a> を利用する。<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pygridsynth</span></code> でインストールできる。原論文は <a class="reference external" href="https://arxiv.org/abs/1403.2975">https://arxiv.org/abs/1403.2975</a> であり 彼らは Haskell 実装のみを提供しているが、Python に移植したものが pygridsynth である。</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[123]:
 </pre></div>
